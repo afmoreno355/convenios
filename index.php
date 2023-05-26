@@ -12,13 +12,13 @@ require_once dirname(__FILE__).'/autoload.php';
 
 if( !isset( $_SESSION['user' ] ) )
 {
-           header("location: http://localhost/convenios");
+           header("location: http://dfp.senaedu.edu.co/modulos_gestion/");
 }
 
 $permisos = new Persona(' identificacion ', "'".$_SESSION['user']."'");
 $ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "Indicativa");
 if( $permisos->getIdTipo()!='SA' && $ingreso==false ){   
-       header("location: http://localhost/convenios");
+       header("location: http://dfp.senaedu.edu.co/modulos_gestion");
 }
 elseif ( $permisos->getIdTipo()=='SA') 
 {
@@ -60,7 +60,7 @@ elseif ( $permisos->getIdTipo()=='SA')
     <input type="checkbox" name="chek" id='chequear' onclick='menudes();' style="display: none">
     <div class="menu" id="divmenu" style=" margin-top: 0px;">
         <nav id="nav" class="navDisplay">
-            <a href="http://localhost/convenios/modulos_gestion/inicio.php?CONTENIDO=view/Usuario/Usuario.php"><img src="img/icon/user.webp" style="width: 30px; height: 30px"/> MI USUARIO  </a>
+            <a href="http://dfp.senaedu.edu.co/modulos_gestion/inicio.php?CONTENIDO=view/Usuario/Usuario.php"><img src="img/icon/user.webp" style="width: 30px; height: 30px"/> MI USUARIO  </a>
             <?PHP include_once $require  ?>
             <a id="CERRAR" onclick="validarDatos('','','modalVentana','View/Menu/MenuFormulario.php' , event , 'menua' )"><img src="img/icon/cerrar.ico" style="width: 30px; height: 30px"/>  CERRAR SESION</a>
         </nav>
