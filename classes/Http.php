@@ -21,6 +21,7 @@ class Http {
 
     public static function url() {
         $menu[] = array('URL' => "#Sede", 'DONDE' => 'View/Sede/SedeTabla.php', 'NOMBRE' => 'SEDE');
+        $menu[] = array('URL' => "#Convenio", 'DONDE' => 'View/Convenio/ConvenioTabla.php', 'NOMBRE' => 'CONVENIO');
         return json_encode($menu);  
     }
 

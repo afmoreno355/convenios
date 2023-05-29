@@ -13,7 +13,6 @@ require_once __DIR__.'/autoload.php';
 
 
 $permisos = new Persona(' identificacion ', "'".$_SESSION['user']."'");
-print_r($permisos);
 $ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "eagle");
 
     $require = './Index_A.php';
@@ -72,7 +71,7 @@ $ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "eagle");
     
     <div class="contenido">              
         <div class="tituloDonde">
-            <div>ROL :: <?= !empty( ( $_rol = ConectorBD::ejecutarQuery( " select nombrecargo from cargo where codigocargo = '{$permisos->getIdTipo()}' " , 'eagle_admin' ) ) ) ? $_rol[0][0] : 'SUPER ADMIN' ?></div><br> 
+            <div>ROL :: <?= !empty( ( $_rol = ConectorBD::ejecutarQuery( " select nombrecargo from cargo where codigocargo = '{$permisos->getIdTipo()}' " , 'eagle' ) ) ) ? $_rol[0][0] : 'SUPER ADMIN' ?></div><br> 
             <label style="color: white"><b>USUARIO::<?= $_SESSION['user']?> </b></label> <br>
             <label style="color: white"><b>MODULO > CONVENIOS Y CONTRATOS > <span id="sections" ></span><?PHP if( isset( $sedeGestion ) ) {  echo " > <span id = 'sede_gestion' >$sedeGestion</span>"; } ?> </b></label>  
         </div>

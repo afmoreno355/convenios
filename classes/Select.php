@@ -37,7 +37,7 @@ class Select {
                 return ConectorBD::ejecutarQuery( $query , null ) ;
             break; 
             case 2 :
-                return ConectorBD::ejecutarQuery( $query , 'eagle_admin' ) ;
+                return ConectorBD::ejecutarQuery( $query , 'eagle' ) ;
             break; 
             case 3 :
                 return array( array('1' , 'A DISTANCIA') ,
@@ -63,7 +63,7 @@ class Select {
                 {
                     list( $especial , $programa ) = explode( '<|°|>' , $query );
                     $cadenaSQL = " select nivel_formacion from programas where id_programa  = '$programa' ; " ;
-                    $type = ConectorBD::ejecutarQuery( $cadenaSQL , 'eagle_admin' )[0][0];
+                    $type = ConectorBD::ejecutarQuery( $cadenaSQL , 'eagle' )[0][0];
                 }
 
                 $_numeric = array() ;
