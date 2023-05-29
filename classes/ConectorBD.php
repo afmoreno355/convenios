@@ -41,7 +41,7 @@ class ConectorBD {
     
     public function conectar($bd){
         try {
-            if ($bd == null) $bd = $this->bd;            
+            if ($bd == null) $bd = $this->bd;       
             $this->conexion=new PDO("$this->controlador:host=$this->servidor;port=$this->puerto;dbname=$bd",$this->usuario, $this->clave,array());
         } catch (Exception $exc) {
             //$this->conexion=null;

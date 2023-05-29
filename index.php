@@ -8,22 +8,16 @@ $id_espe = '' ;
 
 foreach ($_POST as $key => $value) ${$key}=  $value;
 
-require_once dirname(__FILE__).'/autoload.php';
+require_once __DIR__.'/autoload.php';
 
-if( !isset( $_SESSION['user' ] ) )
-{
-           header("location: http://dfp.senaedu.edu.co/modulos_gestion/");
-}
+
 
 $permisos = new Persona(' identificacion ', "'".$_SESSION['user']."'");
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "Indicativa");
-if( $permisos->getIdTipo()!='SA' && $ingreso==false ){   
-       header("location: http://dfp.senaedu.edu.co/modulos_gestion");
-}
-elseif ( $permisos->getIdTipo()=='SA') 
-{
+print_r($permisos);
+$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "eagle");
+
     $require = './Index_A.php';
-}
+
 ?>
  <head>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
