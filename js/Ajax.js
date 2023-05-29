@@ -79,3 +79,13 @@ function formFotoDoc( donde , formData, hacer = 'aviso') {
             document.getElementById(donde).innerHTML = respuesta;
         }
     }
+
+
+    function validarDatos(id, postcad, donde, accion, eve = null, tab = null){
+        if(id !== null && postcad !== null && donde !== null && accion !== null ){
+            idexistentesReCa(id, postcad, donde, accion, eve, tab);
+        } 
+        document.getElementById("modales").style.transform='translateX(0%)';      
+        document.getElementById("modales").style.transition="1s"; 
+        document.getElementById("formularioDiv").style.width=""; 
+    }

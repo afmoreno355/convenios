@@ -93,7 +93,7 @@ $ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "eagle");
     
     <script src="js/Http.js?1"> </script>
     <script src="js/encry.js?1"> </script>
-    <script src="js/menu.js?1"> </script>
+    <script src="js/Menu.js?1"> </script>
     <script src="js/Ajax.js?1"> </script>
     <script src="js/Reporte.js?1"> </script>
     <script src="js/sede.js?2"> </script>

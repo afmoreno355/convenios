@@ -101,6 +101,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
                 <td> <?= $object->getEstado() ?></td>
                 <td>
                     <input type="button" id="button" name="<?= $name ?>" onclick="validarDatos(``, `I=<?= $http ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="<?= $accion ?>">
+                    <!--a onclick="sedeGestiones(`<?= $object->getId() ?>`, `Convenio`)" title="Convenio de las direcciones" ><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/></a-->
                 </td>
             </tr>
 <?PHP
