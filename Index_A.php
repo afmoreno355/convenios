@@ -9,7 +9,7 @@ if( !isset( $sedeGestion ) )
 {
 ?>
     <a id="SEDE" onclick="action( event , 'menua' )" class="menua" href="#Sede"><img src="img/icon/todo4.png" style="width: 30px; height: 30px"/>  SEDE</a>
-    <a id="CONVENIOS" onclick="action( event , 'menua' )" class="menua" href="#Convenio"><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/>  CONVENIOS</a>
+    <a id="CONVENIO" onclick="action( event , 'menua' )" class="menua" href="#Convenio"><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/>  CONVENIOS</a>
     <a id="BIENES_SERVICIOS" onclick="action( event , 'menua' )" class="menua" href="#Sede"><img src="img/icon/BIENES.png" style="width: 30px; height: 30px"/>  BI Y SE</a>
     <a id="CONTRATOS" onclick="action( event , 'menua' )" class="menua" href="#Sede"><img src="img/icon/CONTRATO.png" style="width: 30px; height: 30px"/>  CONTRATACION</a>
 <?PHP 
