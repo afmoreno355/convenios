@@ -52,28 +52,38 @@ if ($id == 1 && $permisos)
             <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
             <label style="font-size: 1em; " id="aviso2" class="aviso" ><?= $convenio->getId() ?></label> 
         </div> 
+        
         <div>
             <fieldset>
                 <legend title='ID'>ID</legend>
                 <input type="number" value='<?= $convenio->getId() ?>' required name='id' id="id">
             </fieldset>
+        </div>
+        <div>
             <fieldset>
                 <legend title='NOMBRE'>NOMBRE CONVENIO</legend>
                 <input type="text" value='<?= $convenio->getNombre() ?>' required name='nombre' id="nombre">
             </fieldset>
+        </div>
+        <div>
             <fieldset>
                 <legend title='AREA'>ÁREA</legend>
                 <input type="text" value='<?= $convenio->getArea() ?>' required name='area' id="area">
             </fieldset>
+        </div>
+        <div>
             <fieldset>
                 <legend title='ABOGADO'>ABOGADO</legend>
                 <input type='text'  value='<?= $convenio->getAbogado() ?>'  name='abogado' id='abogado' >
             </fieldset>
+        </div>
+        <div>
             <fieldset>
                 <legend title='TECNICO EXPERTO'>TÉCNICO EXPERTO</legend>
                 <input type='text'  value='<?= $convenio->getTecnicoExperto() ?>'  name='tecnicoExperto' id='tecnicoExperto' >
             </fieldset>
         </div>
+        
         <div>        
             <!--input type="hidden" value="<?= $convenio->getId() ?>" name="id" id="id"-->
             <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
