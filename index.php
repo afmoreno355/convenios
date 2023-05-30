@@ -13,9 +13,14 @@ require_once __DIR__.'/autoload.php';
 
 
 $permisos = new Persona(' identificacion ', "'".$_SESSION['user']."'");
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "eagle");
-
+$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "convenios_contratos");
+if( $permisos->getIdTipo()!='SA' && $ingreso==false ){   
+       header("location: http://dfp.senaedu.edu.co/modulos_gestion");
+}
+elseif ( $permisos->getIdTipo()=='SA') 
+{
     $require = './Index_A.php';
+}
 
 ?>
  <head>
@@ -106,5 +111,6 @@ $ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "eagle");
     <script src="js/Validar.js?1"> </script>
     <script src="js/check.js?1"> </script>
     <script src="js/cerrar.js?1"> </script>
-    
-    
+    <script src="js/Contratacion.js?1"> </script>
+
+
