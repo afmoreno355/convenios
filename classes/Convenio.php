@@ -159,7 +159,6 @@ class Convenio {
                                     (area_competente,
                                      abogado,
                                      tecnico_experto,
-                                     tecnico_economico,
                                      mes,
                                      estado)
                            values ('$this->id',
