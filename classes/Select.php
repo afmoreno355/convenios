@@ -42,6 +42,21 @@ class Select {
             case 3 :
                 return ConectorBD::ejecutarQuery( $query , 'secretaria' ) ;
             break; 
+            case 4 :
+                return array( array('1010','Director(a) Dirección General'), 
+                      array('1012','Jefe Oficina de Control Interno'), 
+                      array('1013','Jefe Oficina de Control Interno Disciplinario'), 
+                      array('1023','Jefe Oficina de Comunicaciones '), 
+                      array('1030','Jefe Oficina de Sistemas'), 
+                      array('1100','Director(a)  Jurídico'), 
+                      array('3030','Director(a)  de Planeación y Direccionamiento Corporativo'), 
+                      array('4040','Director(a)  Administrativa y Financiera'), 
+                      array('5050','Director(a)  de Empleo y Trabajo'), 
+                      array('6060','Director(a)  de Formación Profesional'), 
+                      array('7070','Director(a)  Sistema Nacional de Formación para el Trabajo '), 
+                      array('8080','Director(a)  de Promoción y Relaciones Corporativas'), 
+                      array('2020', 'Secretaría General' ) ) ;
+            break; 
         }
     } 
     public static function validar( $variable /*VARIABLE QUE LLEGA*/ ,

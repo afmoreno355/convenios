@@ -285,7 +285,7 @@ $Ob_A = ConectorBD::ejecutarQuery( "  select * from n_objeto_a, objeto_a where i
                 <legend title='Lugar de Ejecución'>Lugar de Ejecución</legend>
                 <input  required list="municipio"  name='municipios' id='municipios' value="<?=$estudio->getMunicipio()?>" />
                 <datalist id="municipio">
-                    <?= $autoricacion->municipio() ?>
+                    <?= Select::listaopciones( 2 , $estudio->getMunicipio() , 'select id , municipio from municipio;' ) ; ?>
                 </datalist>
             </fieldset>
         </div>
@@ -293,7 +293,7 @@ $Ob_A = ConectorBD::ejecutarQuery( "  select * from n_objeto_a, objeto_a where i
             <fieldset>
                 <legend title='Ordenador del Pago'>Ordenador del Pago</legend>
                 <select required name='generador' id='generador'>
-                        <?= $estudio->lista_select($estudio->getGenerador(),1)?>
+                    <?= Select::listaopciones( 4 , $estudio->getGenerador() ) ; ?>
                 </select>
             </fieldset>
         </div>
@@ -482,7 +482,7 @@ $Ob_A = ConectorBD::ejecutarQuery( "  select * from n_objeto_a, objeto_a where i
                 <legend title='Estudio de la Demanda'>Estudio de la Demanda</legend>
                 <input list="estudiodemandas"  name='estudiodemandas' id='estudiodemanda' value="<?=''?>" onchange="addestudio( this.value )"/>
                 <datalist id="estudiodemandas">
-                    <?= $autoricacion->objeto() ?>
+                    <?= Select::listaopciones( 3 , '' , "select concat(id_contrato,';',objeto_a,';',valor,';',modalidad,';',plazo,';',contratista) , concat(id_contrato,';',objeto_a,';',valor,';',modalidad,';',plazo,';',contratista) from objeto_a" ) ; ?>
                 </datalist>
            </fieldset>
         </div> 

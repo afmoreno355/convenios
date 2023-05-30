@@ -24,6 +24,7 @@ function addform( valor , potcat )
             return ;
             break;
     }
-    idexistentesReCa( '' , potcat , 'formularioAdd' , donde , null , null )
+    idexistentesReCa( '' , potcat , 'formularioAdd' , donde , null , null );
+    cargarLoad( 'formularioAdd' );
 }
 

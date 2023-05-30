@@ -64,8 +64,7 @@ if ($id == 1 && $permisos)
              </fieldset>
         </div>   
     </div>
-    <di id="formularioAdd">
-    </di>
+    <di id="formularioAdd"></di>
 <?PHP
 }
 ?>

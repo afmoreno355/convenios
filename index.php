@@ -16,7 +16,7 @@ if( !isset( $_SESSION['user' ] ) )
 }
 
 $permisos = new Persona(' identificacion ', "'".$_SESSION['user']."'");
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "Indicativa");
+$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "convenios_contratos");
 if( $permisos->getIdTipo()!='SA' && $ingreso==false ){   
        header("location: http://dfp.senaedu.edu.co/modulos_gestion");
 }
