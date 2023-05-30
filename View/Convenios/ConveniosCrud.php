@@ -109,7 +109,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                             {
                                 if ( $menu->Modificar( $id ) ) {
                                     $imagen_src=$imagen['tmp_name'];
-                                    $imagen_ds='/var/www/eagle/adminV2/img/icon/'.$icono.'.png';
+                                    $imagen_ds='/var/www/eagle_admin/adminV2/img/icon/'.$icono.'.png';
                                     if (!copy($imagen_src, $imagen_ds) ){
                                         print_r("*** No se ha cargado la imagen correctamente ***");
                                     }
