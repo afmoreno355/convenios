@@ -13,7 +13,7 @@ require_once __DIR__.'/autoload.php';
 
 
 $permisos = new Persona(' identificacion ', "'".$_SESSION['user']."'");
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "convenios_contratos");
+$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "eagle");
 if( $permisos->getIdTipo()!='SA' && $ingreso==false ){   
        header("location: http://dfp.senaedu.edu.co/modulos_gestion");
 }
