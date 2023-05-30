@@ -113,5 +113,6 @@ elseif ( $permisos->getIdTipo()=='SA')
     <script src="js/Validar.js?1"> </script>
     <script src="js/check.js?1"> </script>
     <script src="js/cerrar.js?1"> </script>
+    <script src="js/Contratacion.js?1"> </script>
     
     
