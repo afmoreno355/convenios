@@ -40,23 +40,24 @@ class Select {
                 return ConectorBD::ejecutarQuery( $query , 'eagle' ) ;
             break; 
             case 3 :
-                return array( array('1' , 'A DISTANCIA') ,
-                              array('2' , 'PRESENCIAL') 
-                    ) ;
+                return ConectorBD::ejecutarQuery( $query , 'secretaria' ) ;
             break; 
             case 4 :
-                $tipo = array() ;
-                if( trim( $query ) == 'ABIERTA' || trim( $query ) == ''  )
-                {
-                     array_push($tipo , array('ABIERTA DE FORMACION' , 'ABIERTA DE FORMACION') ) ;
-                }
-                if( trim( $query ) == 'ESPECIAL' || trim( $query ) == ''  )
-                {
-                     array_push($tipo , array('ESPECIAL EMPRESARIAL' , 'ESPECIAL EMPRESARIAL') ) ;
-                     array_push($tipo , array('ESPECIAL SOCIAL' , 'ESPECIAL SOCIAL') ) ;                
-                }
-                return $tipo;
+                return array( array('1010','Director(a) Dirección General'), 
+                      array('1012','Jefe Oficina de Control Interno'), 
+                      array('1013','Jefe Oficina de Control Interno Disciplinario'), 
+                      array('1023','Jefe Oficina de Comunicaciones '), 
+                      array('1030','Jefe Oficina de Sistemas'), 
+                      array('1100','Director(a)  Jurídico'), 
+                      array('3030','Director(a)  de Planeación y Direccionamiento Corporativo'), 
+                      array('4040','Director(a)  Administrativa y Financiera'), 
+                      array('5050','Director(a)  de Empleo y Trabajo'), 
+                      array('6060','Director(a)  de Formación Profesional'), 
+                      array('7070','Director(a)  Sistema Nacional de Formación para el Trabajo '), 
+                      array('8080','Director(a)  de Promoción y Relaciones Corporativas'), 
+                      array('2020', 'Secretaría General' ) ) ;
             break; 
+<<<<<<< HEAD
             case 5 :
             
                 if( $query != null && $query != '' )
@@ -151,6 +152,8 @@ class Select {
                               array('5trimestre' , 'OFERTA ESPECIAL') 
                     ) ;
             break;
+=======
+>>>>>>> master
         }
     } 
     public static function validar( $variable /*VARIABLE QUE LLEGA*/ ,
