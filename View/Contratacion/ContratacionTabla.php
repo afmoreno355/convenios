@@ -51,7 +51,7 @@ if ( $ingreso === false && $permisos->getIdTipo() !== "SA" && $_SESSION["rol"] !
             ${$key} = $value;
 
             $sedeGestion = $sede_gestion ; 
-            $filtro .= " centro = '$sedeGestion' ";
+            $filtro .= " and centro = '$sedeGestion' ";
         }
         else 
         {

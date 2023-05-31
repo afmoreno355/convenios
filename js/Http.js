@@ -37,5 +37,6 @@ function evaluar( id = '' )
         document.getElementById(nombre).className += " color";
     }
     document.querySelector('#sections').innerHTML = nombre.replace( '_' , ' ' ) ;
-    idexistentesReCa('',`pagina=0${id}`,'tableIntT',donde, null, null);
+    id = ( document.getElementById('sede_gestion') !== null ) ? `?sede_gestion=${document.getElementById('sede_gestion').innerHTML}` : '' ;
+    idexistentesReCa('',`pagina=0`,'tableIntT',donde+id, null, null);
 }
