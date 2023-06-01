@@ -9,7 +9,7 @@
 /**
  * Description of Autorizacion
  *
- * @author FELIP
+ * @author 
  */
 class ConvenioDocumentos {
     //put your code here
@@ -23,10 +23,105 @@ class ConvenioDocumentos {
     private $matrizRiesgos;
     private $disponibilidadPresupuestal;
     private $paa; // Plan Anual
-    private $estado;
-    private $autorizacion;
+    private $proyectoAutorizacion;
     private $fecha;
+
+
+    public getId() {
+        return $this->id ;
+    }
+
+    public setId( $id ) {
+        $this->id = $id ;
+    }
+
+    public getMemorando() {
+        return $this->memorando ;
+    }
     
+    public setId( $memorando ) {
+        $this->memorando = $memorando ;
+    }
+
+    public getEstudiosPrevios() {
+        return $this->estudiosPrevios ;
+    }
+    
+    public setId( $estudiosPrevios ) {
+        $this->estudiosPrevios = $estudiosPrevios ;
+    }
+
+    public getAnexoTecnico() {
+        return $this->anexoTecnico ;
+    }
+    
+    public setAnexoTecnico( $anexoTecnico ) {
+        $this->anexoTecnico = $anexoTecnico ;
+    }
+
+    public getAnalisisSector() {
+        return $this->analisisSector ;
+    }
+    
+    public setAnalisisSector( $analisisSector ) {
+        $this->analisisSector = $analisisSector ;
+    }
+
+    public getSolicitudConceptoTecnico() {
+        return $this->analisisSector ;
+    }
+    
+    public setSolicitudConceptoTecnico( $solicitudConceptoTecnico ) {
+        $this->solicitudConceptoTecnico = $solicitudConceptoTecnico ;
+    }
+
+    public getPropuestaTecnicaEconomica() {
+        return $this->analisisSector ;
+    }
+    
+    public setPropuestaTecnicaEconomica( $propuestaTecnicaEconomica ) {
+        $this->propuestaTecnicaEconomica = $propuestaTecnicaEconomica ;
+    }
+
+    public getMatrizRiesgos() {
+        return $this->analisisSector ;
+    }
+    
+    public setMatrizRiesgos( $matrizRiesgos ) {
+        $this->matrizRiesgos = $matrizRiesgos ;
+    }
+
+    public getDisponibilidadPresupuestal() {
+        return $this->analisisSector ;
+    }
+    
+    public setDisponibilidadPresupuestal( $disponibilidadPresupuestal ) {
+        $this->disponibilidadPresupuestal = $disponibilidadPresupuestal ;
+    }
+
+    public getPaa() {
+        return $this->paa ;
+    }
+    
+    public setPaa( $paa ) {
+        $this->paa = $paa ;
+    }
+
+    public getProyectoAutorizacion() {
+        return $this->proyectoAutorizacion ;
+    }
+    
+    public setProyectoAutorizacion( $proyectoAutorizacion ) {
+        $this->proyectoAutorizacion= $proyectoAutorizacion ;
+    }
+
+    public getFecha() {
+        return $this->fecha ;
+    }
+    
+    public setFecha( $fecha ) {
+        $this->fecha = $fecha ;
+    }
 
     // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     function __construct($campo, $valor) {
@@ -60,119 +155,7 @@ class ConvenioDocumentos {
         $this->revisor_2 = $vector[12];
         $this->contratista = $vector[14];
     }
-   
-    public function getContratista() {
-        return $this->contratista;
-    }
-
-    public function setContratista($contratista): void {
-        $this->contratista = $contratista;
-    }
-
-    function getId_radicado() {
-        return $this->id_radicado;
-    }
-
-    function getCentro() {
-        return $this->centro;
-    }
-
-    function getFecha_sistema() {
-        return $this->fecha_sistema;
-    }
-
-    function getResponsable() {
-        return $this->responsable;
-    }
-
-    function getDoc_1() {
-        return $this->doc_1;
-    }
-
-    function getDoc_2() {
-        return $this->doc_2;
-    }
-
-    function getDoc_3() {
-        return $this->doc_3;
-    }
-
-    function getDoc_4() {
-        return $this->doc_4;
-    }
-
-    function getDoc_5() {
-        return $this->doc_5;
-    }
-
-    function getDoc_6() {
-        return $this->doc_6;
-    }
-
-    function getEstado() {
-        return $this->estado;
-    }
-
-    function getRevisor_1() {
-        return $this->revisor_1;
-    }
-
-    function getRevisor_2() {
-        return $this->revisor_2;
-    }
-
-    function setId_radicado($id_radicado){
-        $this->id_radicado = $id_radicado;
-    }
-
-    function setCentro($centro){
-        $this->centro = $centro;
-    }
-
-    function setFecha_sistema($fecha_sistema){
-        $this->fecha_sistema = $fecha_sistema;
-    }
-
-    function setResponsable($responsable){
-        $this->responsable = $responsable;
-    }
-
-    function setDoc_1($doc_1){
-        $this->doc_1 = $doc_1;
-    }
-
-    function setDoc_2($doc_2){
-        $this->doc_2 = $doc_2;
-    }
-
-    function setDoc_3($doc_3){
-        $this->doc_3 = $doc_3;
-    }
-
-    function setDoc_4($doc_4){
-        $this->doc_4 = $doc_4;
-    }
-
-    function setDoc_5($doc_5){
-        $this->doc_5 = $doc_5;
-    }
-
-    function setDoc_6($doc_6){
-        $this->doc_6 = $doc_6;
-    }
-
-    function setEstado($estado){
-        $this->estado = $estado;
-    }
-
-    function setRevisor_1($revisor_1){
-        $this->revisor_1 = $revisor_1;
-    }
-
-    function setRevisor_2($revisor_2){
-        $this->revisor_2 = $revisor_2;
-    }
-
+ 
            
     // metodo magico
     function __toString() {
