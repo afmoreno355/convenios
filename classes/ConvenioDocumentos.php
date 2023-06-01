@@ -27,99 +27,99 @@ class ConvenioDocumentos {
     private $fecha;
 
 
-    public getId() {
+    public function getId() {
         return $this->id ;
     }
 
-    public setId( $id ) {
+    public function setId( $id ) {
         $this->id = $id ;
     }
 
-    public getMemorando() {
+    public function getMemorando() {
         return $this->memorando ;
     }
     
-    public setId( $memorando ) {
+    public function setId( $memorando ) {
         $this->memorando = $memorando ;
     }
 
-    public getEstudiosPrevios() {
+    public function getEstudiosPrevios() {
         return $this->estudiosPrevios ;
     }
     
-    public setId( $estudiosPrevios ) {
+    public function setId( $estudiosPrevios ) {
         $this->estudiosPrevios = $estudiosPrevios ;
     }
 
-    public getAnexoTecnico() {
+    public function getAnexoTecnico() {
         return $this->anexoTecnico ;
     }
     
-    public setAnexoTecnico( $anexoTecnico ) {
+    public function setAnexoTecnico( $anexoTecnico ) {
         $this->anexoTecnico = $anexoTecnico ;
     }
 
-    public getAnalisisSector() {
+    public function getAnalisisSector() {
         return $this->analisisSector ;
     }
     
-    public setAnalisisSector( $analisisSector ) {
+    public function setAnalisisSector( $analisisSector ) {
         $this->analisisSector = $analisisSector ;
     }
 
-    public getSolicitudConceptoTecnico() {
+    public function getSolicitudConceptoTecnico() {
         return $this->analisisSector ;
     }
     
-    public setSolicitudConceptoTecnico( $solicitudConceptoTecnico ) {
+    public function setSolicitudConceptoTecnico( $solicitudConceptoTecnico ) {
         $this->solicitudConceptoTecnico = $solicitudConceptoTecnico ;
     }
 
-    public getPropuestaTecnicaEconomica() {
+    public function getPropuestaTecnicaEconomica() {
         return $this->analisisSector ;
     }
     
-    public setPropuestaTecnicaEconomica( $propuestaTecnicaEconomica ) {
+    public function setPropuestaTecnicaEconomica( $propuestaTecnicaEconomica ) {
         $this->propuestaTecnicaEconomica = $propuestaTecnicaEconomica ;
     }
 
-    public getMatrizRiesgos() {
+    public function getMatrizRiesgos() {
         return $this->analisisSector ;
     }
     
-    public setMatrizRiesgos( $matrizRiesgos ) {
+    public function setMatrizRiesgos( $matrizRiesgos ) {
         $this->matrizRiesgos = $matrizRiesgos ;
     }
 
-    public getDisponibilidadPresupuestal() {
+    public function getDisponibilidadPresupuestal() {
         return $this->analisisSector ;
     }
     
-    public setDisponibilidadPresupuestal( $disponibilidadPresupuestal ) {
+    public function setDisponibilidadPresupuestal( $disponibilidadPresupuestal ) {
         $this->disponibilidadPresupuestal = $disponibilidadPresupuestal ;
     }
 
-    public getPaa() {
+    public function getPaa() {
         return $this->paa ;
     }
     
-    public setPaa( $paa ) {
+    public function setPaa( $paa ) {
         $this->paa = $paa ;
     }
 
-    public getProyectoAutorizacion() {
+    public function getProyectoAutorizacion() {
         return $this->proyectoAutorizacion ;
     }
     
-    public setProyectoAutorizacion( $proyectoAutorizacion ) {
+    public function setProyectoAutorizacion( $proyectoAutorizacion ) {
         $this->proyectoAutorizacion= $proyectoAutorizacion ;
     }
 
-    public getFecha() {
+    public function getFecha() {
         return $this->fecha ;
     }
     
-    public setFecha( $fecha ) {
+    public function setFecha( $fecha ) {
         $this->fecha = $fecha ;
     }
 
