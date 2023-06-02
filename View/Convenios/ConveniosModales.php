@@ -83,6 +83,24 @@ if ($id == 1 && $permisos)
                 <input type='text'  value='<?= $convenio->getTecnicoExperto() ?>'  name='tecnicoExperto' id='tecnicoExperto' >
             </fieldset>
         </div>
+        <div>
+            <fieldset>
+                <legend title='OBJETO'>OBJETO</legend>
+                <textarea  value='<?= $convenio->getObjeto() ?>'  name='objeto' id='objeto' ></textarea>
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='JUSTIFICACION'>JUSTIFICACIÓN</legend>
+                <textarea   value='<?= $convenio->getJustificacion() ?>'  name='justificacion' id='justificacion' ></textarea>
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='EXPECIFICACIONES TECNICAS'>EXPECIFICACIONES TÉCNICAS</legend>
+                <textarea  value='<?= $convenio->getEspecificacionesTecnicas() ?>'  name='expecificacionesTecnicas' id='expecificacionesTecnicas' ></textarea>
+            </fieldset>
+        </div>
         
         <div>        
             <!--input type="hidden" value="<?= $convenio->getId() ?>" name="id" id="id"-->
