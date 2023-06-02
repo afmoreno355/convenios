@@ -9,11 +9,11 @@
 /**
  * Description of Autorizacion
  *
- * @author FELIP
+ * @author Dibier
  */
-class ConvenioDocumentos {
+class ConvenioEstudiosPrevios {
     //put your code here
-    private $id_radicado;
+    private $id;
     private $centro;
     private $fecha_sistema;
     private $responsable;
