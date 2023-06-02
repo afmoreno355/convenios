@@ -26,6 +26,10 @@ class Convenio {
     private $objeto;
     private $justificacion;
     private $especificacionesTecnicas;
+    // Fecha sistema
+    private $fecha;
+    
+    // Getters and Setters
     
     public function getId() {
         return $this->id;
@@ -65,6 +69,10 @@ class Convenio {
 
     public function getEspecificacionesTecnicas() {
         return $this->especificacionesTecnicas;
+    }
+
+    public function getFecha() {
+        return $this->fecha;
     }
 
     public function setId($id): void {
@@ -107,9 +115,11 @@ class Convenio {
         $this->especificacionesTecnicas = $especificacionesTecnicas;
     }
 
-        
+    public function setFecha($fecha): void {
+        $this->fecha = $fecha;
+    }
 
-        // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
+    // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     function __construct($campo, $valor) {
         if ($campo != NULL) {
             if (is_array($campo)) {
