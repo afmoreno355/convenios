@@ -11,7 +11,7 @@ require_once __DIR__ . "/../../autoload.php";
 
 // filtro se usa para realizar las consultas de busqueda 
 $filtro = "";
-$URL = "View/Convenio/ConvenioModales.php" ;
+$URL = "View/Convenios/ConveniosModales.php" ;
 $year= date('Y', time());
 
 // bucarPalabraClave palabra clave que se busca asociada a ajax
@@ -54,6 +54,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
     // Encripta la información para enviarla
     $http_add = Http::encryptIt("id=1&llave_Primaria=&user={$_SESSION["user"]}&accion=ADICIONAR");
     $http_ayu = Http::encryptIt("id=4&llave_Primaria=&user={$_SESSION["user"]}&accion=AYUDA");
+    $http_com = Http::encryptIt("id=3&llave_Primaria=&user={$_SESSION["user"]}&accion=ADICIONAR");
     
 ?> 
 <!-- Código para los botones-->

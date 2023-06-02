@@ -116,22 +116,59 @@ if ($id == 2 && $permisos)
 {
 ?>
 <h1>2</h1>
-    <div class="carga_Documento">
-        <div class="contenido">  
-            <div class="where_title where_modal" style="width: 100%; height: auto; margin-left: 0px;">
-                <img src="img/icon/borrar.png"/>
-                <lablel>
-                    Se realizara la acción "<?= $accion ?>" al menú <?=$llave_Primaria?> cargado en el modulo de la Dirección de Formación Profesional.
-                </label>
-            </div><br><br>
-            <label style="font-size: 1em; " id="aviso"></label>  
-        </div>  
-        <div>        
-            <input type="hidden" value="<?= $menu->getId() ?>" name="id" id="id">
-            <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
-            <input type="submit" title="ACEPTA <?= $accion ?> EL ITEM ELEGIDO"  value="<?= $accion ?>" name="accionU" id="accionU" onclick="eliminar('aviso')">
-        </div>
-    </div>    
+
+<h2>DOCUMENTOS SOLICITUD</h2>
+
+    <table id="tableIntD" class="tableIntT sombra tableIntTa">
+        <tr>
+            <th>NOMBRE</th>
+            <th>DESCRIPCIÓN</th>
+            <th>ADJUNTO</th>
+        </tr>
+    </table>
+
+<h2>EQUIPO ESTRUCTURADOR</h2>
+
+    <table id="tableIntD" class="tableIntT sombra tableIntTa">
+        <tr>
+            <th>NOMBRE</th>
+            <th>DESCRIPCIÓN</th>
+            <th>ADJUNTO</th>
+        </tr>
+    </table>
+
+<h2>ESTUDIOS PREVIOS</h2>
+
+    <table id="tableIntD" class="tableIntT sombra tableIntTa">
+        <tr>
+            <th>NOMBRE</th>
+            <th>DESCRIPCIÓN</th>
+            <th>ADJUNTO</th>
+        </tr>
+    </table>
+
+<h2>PLAN ANUAL DE ADQUISIONES (PAA)</h2>
+
+    <table id="tableIntD" class="tableIntT sombra tableIntTa">
+        <tr>
+            <th>NOMBRE</th>
+            <th>DESCRIPCIÓN</th>
+            <th>ADJUNTO</th>
+        </tr>
+    </table>
+
+
+<h2>ESTADOS SOLICITUD</h2>
+
+    <table id="tableIntD" class="tableIntT sombra tableIntTa">
+        <tr>
+            <th>NOMBRE</th>
+            <th>DESCRIPCIÓN</th>
+            <th>ADJUNTO</th>
+        </tr>
+    </table>
+
+
 <?PHP
 }
 elseif ($id == 3 && $permisos)
