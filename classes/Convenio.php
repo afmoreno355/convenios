@@ -26,8 +26,90 @@ class Convenio {
     private $objeto;
     private $justificacion;
     private $especificacionesTecnicas;
+    
+    public function getId() {
+        return $this->id;
+    }
 
-    // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
+    public function getNombre() {
+        return $this->nombre;
+    }
+
+    public function getArea() {
+        return $this->area;
+    }
+
+    public function getAbogado() {
+        return $this->abogado;
+    }
+
+    public function getTecnicoExperto() {
+        return $this->tecnicoExperto;
+    }
+
+    public function getMes() {
+        return $this->mes;
+    }
+
+    public function getEstado() {
+        return $this->estado;
+    }
+
+    public function getObjeto() {
+        return $this->objeto;
+    }
+
+    public function getJustificacion() {
+        return $this->justificacion;
+    }
+
+    public function getEspecificacionesTecnicas() {
+        return $this->especificacionesTecnicas;
+    }
+
+    public function setId($id): void {
+        $this->id = $id;
+    }
+
+    public function setNombre($nombre): void {
+        $this->nombre = $nombre;
+    }
+
+    public function setArea($area): void {
+        $this->area = $area;
+    }
+
+    public function setAbogado($abogado): void {
+        $this->abogado = $abogado;
+    }
+
+    public function setTecnicoExperto($tecnicoExperto): void {
+        $this->tecnicoExperto = $tecnicoExperto;
+    }
+
+    public function setMes($mes): void {
+        $this->mes = $mes;
+    }
+
+    public function setEstado($estado): void {
+        $this->estado = $estado;
+    }
+
+    public function setObjeto($objeto): void {
+        $this->objeto = $objeto;
+    }
+
+    public function setJustificacion($justificacion): void {
+        $this->justificacion = $justificacion;
+    }
+
+    public function setEspecificacionesTecnicas($especificacionesTecnicas): void {
+        $this->especificacionesTecnicas = $especificacionesTecnicas;
+    }
+
+        
+
+        // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     function __construct($campo, $valor) {
         if ($campo != NULL) {
             if (is_array($campo)) {
@@ -60,80 +142,6 @@ class Convenio {
         $this->estado = $vector[6];
     }
 
-
-    // get and set
-
-    function getId() {
-        return $this->id;
-    }
-
-    function setId($variable) {
-        $this->id= $variable;
-    }
-
-    function getNombre() {
-        return $this->nombre;
-    }
-
-    function setNombre($variable) {
-        $this->nombre= $variable;
-    }
-
-    function getArea() {
-        return $this->area;
-    }
-
-    function setArea($variable) {
-        $this->id = $area;
-    }
-
-    function getAbogado() {
-        return $this->abogado;
-    }
-
-    function setAbogado($variable) {
-        $this->abogado = $variable;
-    }
-
-    function getTecnicoExperto() {
-        return $this->tecnicoExperto;
-    }
-
-    function setTecnicoExperto($variable) {
-        $this->tecnicoExperto = $variable;
-    }
-
-    function getMes() {
-        return $this->mes;
-    }
-
-    function setMes($variable) {
-        $this->mes = $variable;
-    }
-
-    function getEstado() {
-        return $this->estado;
-    }
-
-    function setEstado($variable) {
-        $this->estado = $variable;
-    }
-
-    function getObjeto() {
-        return $this->objeto ;
-    }
-
-    function setObjeto($variable) {
-        $this->objeto = $variable ;
-    }
-
-    function getJustificacion() {
-        return $this->justificacion ;
-    }
-
-    function setJustificacion($variable) {
-        $this->justificacion = $variable ;
-    }
 
     //datos hace la consulta sql.
     public static function datos($filtro, $pagina, $limit) {
