@@ -13,7 +13,242 @@
  */
 class ConvenioEstudiosPrevios {
     //put your code here
-    private $id;
+    private $id ;
+    private $descripcionNecesidad ;
+    private $justifiacion ;
+    private $analisisCoveniencia ;
+    private $maduracionProyecto ;
+    private $objeto ;
+    private $alcanceObjeto ;
+    private $especificacionesTecnicas ;
+    private $analisisSector ;
+    private $valorTotalAportes ;
+    private $desembolsos ;
+    private $disponibilidadPresupuestal ;
+    private $modalidadSeleccion ;
+    private $criteriosSeleccion ;
+    private $analisisResgo ;
+    private $garantias ;
+    private $limitacionMipymes ;
+    private $plazoEjecucion ;
+    private $lugarEjecucion ;
+    private $obligacionesPartes;
+    private $formaPago ;
+    private $controlVigilanciaContrato ;
+    private $acuerdosComerciales ;
+    private $otrosAspectos ;
+    private $conceptosTecnicos ;
+    private $fecha ;
+    
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getDescripcionNecesidad() {
+        return $this->descripcionNecesidad;
+    }
+
+    public function getJustifiacion() {
+        return $this->justifiacion;
+    }
+
+    public function getAnalisisCoveniencia() {
+        return $this->analisisCoveniencia;
+    }
+
+    public function getMaduracionProyecto() {
+        return $this->maduracionProyecto;
+    }
+
+    public function getObjeto() {
+        return $this->objeto;
+    }
+
+    public function getAlcanceObjeto() {
+        return $this->alcanceObjeto;
+    }
+
+    public function getEspecificacionesTecnicas() {
+        return $this->especificacionesTecnicas;
+    }
+
+    public function getAnalisisSector() {
+        return $this->analisisSector;
+    }
+
+    public function getValorTotalAportes() {
+        return $this->valorTotalAportes;
+    }
+
+    public function getDesembolsos() {
+        return $this->desembolsos;
+    }
+
+    public function getDisponibilidadPresupuestal() {
+        return $this->disponibilidadPresupuestal;
+    }
+
+    public function getModalidadSeleccion() {
+        return $this->modalidadSeleccion;
+    }
+
+    public function getCriteriosSeleccion() {
+        return $this->criteriosSeleccion;
+    }
+
+    public function getAnalisisResgo() {
+        return $this->analisisResgo;
+    }
+
+    public function getGarantias() {
+        return $this->garantias;
+    }
+
+    public function getLimitacionMipymes() {
+        return $this->limitacionMipymes;
+    }
+
+    public function getPlazoEjecucion() {
+        return $this->plazoEjecucion;
+    }
+
+    public function getLugarEjecucion() {
+        return $this->lugarEjecucion;
+    }
+
+    public function getObligacionesPartes() {
+        return $this->obligacionesPartes;
+    }
+
+    public function getFormaPago() {
+        return $this->formaPago;
+    }
+
+    public function getControlVigilanciaContrato() {
+        return $this->controlVigilanciaContrato;
+    }
+
+    public function getAcuerdosComerciales() {
+        return $this->acuerdosComerciales;
+    }
+
+    public function getOtrosAspectos() {
+        return $this->otrosAspectos;
+    }
+
+    public function getConceptosTecnicos() {
+        return $this->conceptosTecnicos;
+    }
+
+    public function getFecha() {
+        return $this->fecha;
+    }
+
+    public function setId($id): void {
+        $this->id = $id;
+    }
+
+    public function setDescripcionNecesidad($descripcionNecesidad): void {
+        $this->descripcionNecesidad = $descripcionNecesidad;
+    }
+
+    public function setJustifiacion($justifiacion): void {
+        $this->justifiacion = $justifiacion;
+    }
+
+    public function setAnalisisCoveniencia($analisisCoveniencia): void {
+        $this->analisisCoveniencia = $analisisCoveniencia;
+    }
+
+    public function setMaduracionProyecto($maduracionProyecto): void {
+        $this->maduracionProyecto = $maduracionProyecto;
+    }
+
+    public function setObjeto($objeto): void {
+        $this->objeto = $objeto;
+    }
+
+    public function setAlcanceObjeto($alcanceObjeto): void {
+        $this->alcanceObjeto = $alcanceObjeto;
+    }
+
+    public function setEspecificacionesTecnicas($especificacionesTecnicas): void {
+        $this->especificacionesTecnicas = $especificacionesTecnicas;
+    }
+
+    public function setAnalisisSector($analisisSector): void {
+        $this->analisisSector = $analisisSector;
+    }
+
+    public function setValorTotalAportes($valorTotalAportes): void {
+        $this->valorTotalAportes = $valorTotalAportes;
+    }
+
+    public function setDesembolsos($desembolsos): void {
+        $this->desembolsos = $desembolsos;
+    }
+
+    public function setDisponibilidadPresupuestal($disponibilidadPresupuestal): void {
+        $this->disponibilidadPresupuestal = $disponibilidadPresupuestal;
+    }
+
+    public function setModalidadSeleccion($modalidadSeleccion): void {
+        $this->modalidadSeleccion = $modalidadSeleccion;
+    }
+
+    public function setCriteriosSeleccion($criteriosSeleccion): void {
+        $this->criteriosSeleccion = $criteriosSeleccion;
+    }
+
+    public function setAnalisisResgo($analisisResgo): void {
+        $this->analisisResgo = $analisisResgo;
+    }
+
+    public function setGarantias($garantias): void {
+        $this->garantias = $garantias;
+    }
+
+    public function setLimitacionMipymes($limitacionMipymes): void {
+        $this->limitacionMipymes = $limitacionMipymes;
+    }
+
+    public function setPlazoEjecucion($plazoEjecucion): void {
+        $this->plazoEjecucion = $plazoEjecucion;
+    }
+
+    public function setLugarEjecucion($lugarEjecucion): void {
+        $this->lugarEjecucion = $lugarEjecucion;
+    }
+
+    public function setObligacionesPartes($obligacionesPartes): void {
+        $this->obligacionesPartes = $obligacionesPartes;
+    }
+
+    public function setFormaPago($formaPago): void {
+        $this->formaPago = $formaPago;
+    }
+
+    public function setControlVigilanciaContrato($controlVigilanciaContrato): void {
+        $this->controlVigilanciaContrato = $controlVigilanciaContrato;
+    }
+
+    public function setAcuerdosComerciales($acuerdosComerciales): void {
+        $this->acuerdosComerciales = $acuerdosComerciales;
+    }
+
+    public function setOtrosAspectos($otrosAspectos): void {
+        $this->otrosAspectos = $otrosAspectos;
+    }
+
+    public function setConceptosTecnicos($conceptosTecnicos): void {
+        $this->conceptosTecnicos = $conceptosTecnicos;
+    }
+
+    public function setFecha($fecha): void {
+        $this->fecha = $fecha;
+    }
+
+    
     
     
 
@@ -50,118 +285,7 @@ class ConvenioEstudiosPrevios {
         $this->contratista = $vector[14];
     }
    
-    public function getContratista() {
-        return $this->contratista;
-    }
-
-    public function setContratista($contratista): void {
-        $this->contratista = $contratista;
-    }
-
-    function getId_radicado() {
-        return $this->id_radicado;
-    }
-
-    function getCentro() {
-        return $this->centro;
-    }
-
-    function getFecha_sistema() {
-        return $this->fecha_sistema;
-    }
-
-    function getResponsable() {
-        return $this->responsable;
-    }
-
-    function getDoc_1() {
-        return $this->doc_1;
-    }
-
-    function getDoc_2() {
-        return $this->doc_2;
-    }
-
-    function getDoc_3() {
-        return $this->doc_3;
-    }
-
-    function getDoc_4() {
-        return $this->doc_4;
-    }
-
-    function getDoc_5() {
-        return $this->doc_5;
-    }
-
-    function getDoc_6() {
-        return $this->doc_6;
-    }
-
-    function getEstado() {
-        return $this->estado;
-    }
-
-    function getRevisor_1() {
-        return $this->revisor_1;
-    }
-
-    function getRevisor_2() {
-        return $this->revisor_2;
-    }
-
-    function setId_radicado($id_radicado){
-        $this->id_radicado = $id_radicado;
-    }
-
-    function setCentro($centro){
-        $this->centro = $centro;
-    }
-
-    function setFecha_sistema($fecha_sistema){
-        $this->fecha_sistema = $fecha_sistema;
-    }
-
-    function setResponsable($responsable){
-        $this->responsable = $responsable;
-    }
-
-    function setDoc_1($doc_1){
-        $this->doc_1 = $doc_1;
-    }
-
-    function setDoc_2($doc_2){
-        $this->doc_2 = $doc_2;
-    }
-
-    function setDoc_3($doc_3){
-        $this->doc_3 = $doc_3;
-    }
-
-    function setDoc_4($doc_4){
-        $this->doc_4 = $doc_4;
-    }
-
-    function setDoc_5($doc_5){
-        $this->doc_5 = $doc_5;
-    }
-
-    function setDoc_6($doc_6){
-        $this->doc_6 = $doc_6;
-    }
-
-    function setEstado($estado){
-        $this->estado = $estado;
-    }
-
-    function setRevisor_1($revisor_1){
-        $this->revisor_1 = $revisor_1;
-    }
-
-    function setRevisor_2($revisor_2){
-        $this->revisor_2 = $revisor_2;
-    }
-
+    
            
     // metodo magico
     function __toString() {
