@@ -38,8 +38,8 @@ class ConvenioDocumentos {
     public function getMemorando() {
         return $this->memorando ;
     }
-    
-    public function setId( $memorando ) {
+
+    public function setMemorando( $memorando ) {
         $this->memorando = $memorando ;
     }
 
@@ -47,7 +47,7 @@ class ConvenioDocumentos {
         return $this->estudiosPrevios ;
     }
     
-    public function setId( $estudiosPrevios ) {
+    public function setEstudosPrevios( $estudiosPrevios ) {
         $this->estudiosPrevios = $estudiosPrevios ;
     }
 

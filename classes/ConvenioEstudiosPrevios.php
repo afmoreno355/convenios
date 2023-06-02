@@ -14,19 +14,7 @@
 class ConvenioEstudiosPrevios {
     //put your code here
     private $id;
-    private $centro;
-    private $fecha_sistema;
-    private $responsable;
-    private $doc_1;
-    private $doc_2;
-    private $doc_3;
-    private $doc_4;
-    private $doc_5;
-    private $doc_6;
-    private $estado;
-    private $revisor_1;
-    private $revisor_2;
-    private $contratista;
+    
     
 
     // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.

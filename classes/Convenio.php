@@ -14,6 +14,7 @@
  */
 class Convenio {
 
+    // Datos de la tabla
     private $id;
     private $nombre;
     private $area;
@@ -21,6 +22,10 @@ class Convenio {
     private $tecnicoExperto;
     private $mes;
     private $estado;
+    // Datos obligatorios de documentos de estudios previos
+    private $objeto;
+    private $justificacion;
+    private $especificacionesTecnicas;
 
     // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     function __construct($campo, $valor) {
@@ -112,6 +117,22 @@ class Convenio {
 
     function setEstado($variable) {
         $this->estado = $variable;
+    }
+
+    function getObjeto() {
+        return $this->objeto ;
+    }
+
+    function setObjeto($variable) {
+        $this->objeto = $variable ;
+    }
+
+    function getJustificacion() {
+        return $this->justificacion ;
+    }
+
+    function setJustificacion($variable) {
+        $this->justificacion = $variable ;
     }
 
     //datos hace la consulta sql.
