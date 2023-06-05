@@ -117,17 +117,14 @@ if ($id == 2 && $permisos)
 ?>
 <h1>2</h1>
 
-<h2>DOCUMENTOS SOLICITUD</h2>
+<?php
+include(__DIR__.'/ConveniosDocumentosTabla.php');
+include(__DIR__.'/ConveniosEstudiosPreviosTabla.php');
+include(__DIR__.'/ConveniosPaaTabla.php');
+include(__DIR__.'/ConveniosEstadosTabla.php');
+?>
 
-    <table id="tableIntD" class="tableIntT sombra tableIntTa">
-        <tr>
-            <th>NOMBRE</th>
-            <th>DESCRIPCIÓN</th>
-            <th>ADJUNTO</th>
-        </tr>
-    </table>
-
-<h2>EQUIPO ESTRUCTURADOR</h2>
+<!--h2>EQUIPO ESTRUCTURADOR</h2>
 
     <table id="tableIntD" class="tableIntT sombra tableIntTa">
         <tr>
@@ -166,7 +163,7 @@ if ($id == 2 && $permisos)
             <th>DESCRIPCIÓN</th>
             <th>ADJUNTO</th>
         </tr>
-    </table>
+    </table-->
 
 
 <?PHP
