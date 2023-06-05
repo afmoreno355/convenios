@@ -117,12 +117,25 @@ if ($id == 2 && $permisos)
 ?>
 <h1>2</h1>
 
+<div class="carga_Documento">
+    <div class="contenido">
+        <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
+            <img src="img/icon/gestionar.png"/>
+            <label class="where">Convenios DFP – Dirección de Formación Profesional</label></div>
+            <br><br> 
+            <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
+            <label style="font-size: 1em; " id="aviso2" class="aviso" ><?= $convenio->getId() ?></label> 
+        </div>
+    </div>
 <?php
 require_once(__DIR__.'/ConveniosDocumentosTabla.php');
 require_once(__DIR__.'/ConveniosEstudiosPreviosTabla.php');
 require_once(__DIR__.'/ConveniosPaaTabla.php');
 require_once(__DIR__.'/ConveniosEstadosTabla.php');
 ?>
+</div>
+
+
 
 <!--h2>EQUIPO ESTRUCTURADOR</h2>
 
