@@ -118,10 +118,10 @@ if ($id == 2 && $permisos)
 <h1>2</h1>
 
 <?php
-include(__DIR__.'/ConveniosDocumentosTabla.php');
-include(__DIR__.'/ConveniosEstudiosPreviosTabla.php');
-include(__DIR__.'/ConveniosPaaTabla.php');
-include(__DIR__.'/ConveniosEstadosTabla.php');
+require_once(__DIR__.'/ConveniosDocumentosTabla.php');
+require_once(__DIR__.'/ConveniosEstudiosPreviosTabla.php');
+require_once(__DIR__.'/ConveniosPaaTabla.php');
+require_once(__DIR__.'/ConveniosEstadosTabla.php');
 ?>
 
 <!--h2>EQUIPO ESTRUCTURADOR</h2>
