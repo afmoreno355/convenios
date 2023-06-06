@@ -128,10 +128,10 @@ if ($id == 2 && $permisos)
         </div>
     </div>
 <?php
-require_once(__DIR__.'/ConveniosDocumentosTabla.php');
-require_once(__DIR__.'/ConveniosEstudiosPreviosTabla.php');
-require_once(__DIR__.'/ConveniosPaaTabla.php');
-require_once(__DIR__.'/ConveniosEstadosTabla.php');
+require_once(__DIR__.'/ConveniosDocumentosSeccion.php');
+require_once(__DIR__.'/ConveniosEstudiosPreviosSeccion.php');
+require_once(__DIR__.'/ConveniosPaaSeccion.php');
+require_once(__DIR__.'/ConveniosEstadosSeccion.php');
 ?>
 </div>
 
