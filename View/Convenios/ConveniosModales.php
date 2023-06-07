@@ -51,13 +51,6 @@ if ($id == 1 && $permisos)
             <label style="font-size: 1em; " >Tabla Convenios</label>  
             <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
             <label style="font-size: 1em; " id="aviso2" class="aviso" ><?= $convenio->getId() ?></label> 
-        </div> 
-        
-        <div>
-            <fieldset>
-                <legend title='ID'>ID</legend>
-                <input type="number" value='<?= $convenio->getId() ?>' required name='id' id="id">
-            </fieldset>
         </div>
         <div>
             <fieldset>
@@ -86,6 +79,12 @@ if ($id == 1 && $permisos)
         <div>
             <fieldset>
                 <legend title='OBJETO'>OBJETO</legend>
+                <textarea  value='<?= $convenio->getObjeto() ?>'  name='objeto' id='objeto' ></textarea>
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='OBJETO'>ALCANCE DEL OBJETO</legend>
                 <textarea  value='<?= $convenio->getObjeto() ?>'  name='objeto' id='objeto' ></textarea>
             </fieldset>
         </div>
