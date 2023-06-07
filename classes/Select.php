@@ -40,117 +40,23 @@ class Select {
                 return ConectorBD::ejecutarQuery( $query , 'eagle_admin' ) ;
             break; 
             case 3 :
-                return array( array('1' , 'A DISTANCIA') ,
-                              array('2' , 'PRESENCIAL') 
-                    ) ;
+                return ConectorBD::ejecutarQuery( $query , 'secretaria' ) ;
             break; 
             case 4 :
-                $tipo = array() ;
-                if( trim( $query ) == 'ABIERTA' || trim( $query ) == ''  )
-                {
-                     array_push($tipo , array('ABIERTA DE FORMACION' , 'ABIERTA DE FORMACION') ) ;
-                }
-                if( trim( $query ) == 'ESPECIAL' || trim( $query ) == ''  )
-                {
-                     array_push($tipo , array('ESPECIAL EMPRESARIAL' , 'ESPECIAL EMPRESARIAL') ) ;
-                     array_push($tipo , array('ESPECIAL SOCIAL' , 'ESPECIAL SOCIAL') ) ;                
-                }
-                return $tipo;
+                return array( array('1010','Director(a) Dirección General'), 
+                      array('1012','Jefe Oficina de Control Interno'), 
+                      array('1013','Jefe Oficina de Control Interno Disciplinario'), 
+                      array('1023','Jefe Oficina de Comunicaciones '), 
+                      array('1030','Jefe Oficina de Sistemas'), 
+                      array('1100','Director(a)  Jurídico'), 
+                      array('3030','Director(a)  de Planeación y Direccionamiento Corporativo'), 
+                      array('4040','Director(a)  Administrativa y Financiera'), 
+                      array('5050','Director(a)  de Empleo y Trabajo'), 
+                      array('6060','Director(a)  de Formación Profesional'), 
+                      array('7070','Director(a)  Sistema Nacional de Formación para el Trabajo '), 
+                      array('8080','Director(a)  de Promoción y Relaciones Corporativas'), 
+                      array('2020', 'Secretaría General' ) ) ;
             break; 
-            case 5 :
-            
-                if( $query != null && $query != '' )
-                {
-                    list( $especial , $programa ) = explode( '<|°|>' , $query );
-                    $cadenaSQL = " select nivel_formacion from programas where id_programa  = '$programa' ; " ;
-                    $type = ConectorBD::ejecutarQuery( $cadenaSQL , 'eagle_admin' )[0][0];
-                }
-
-                $_numeric = array() ;
-                
-                if( !isset( $type ) || ( isset( $type ) && ( $type == 'OPERARIO' || $type == 'AUXILIAR' ) ) )
-                {
-                    array_push( $_numeric , array('15' , '15 APREDICES') ) ;
-                }
-                
-                array_push( $_numeric , array('20' , '20 APREDICES') ) ;
-                array_push( $_numeric , array('25' , '25 APREDICES') ) ;
-                array_push( $_numeric , array('30' , '30 APREDICES') ) ;
-                array_push( $_numeric , array('35' , '35 APREDICES') ) ;
-               
-                if( !isset( $especial ) || ( isset( $especial ) && $type == 'TECNICO' && ( $especial == 2 || $especial == 3 || $especial == 4  )  ) ) 
-                {
-                    array_push( $_numeric , array('40' , '40 APREDICES') ) ;
-                }
-                return $_numeric;
-            break; 
-            case 6 :
-                return array( array('s' , 'SI') ,
-                              array('n' , 'NO') 
-                    ) ;
-            break; 
-            case 7 :
-                date_default_timezone_set('America/Bogota');
-            
-                $month= date('m', time());
-                $months = array() ;
-
-                if( ( $month >= 1 && $month <= 3 && !is_numeric( $query ) ) || ( trim( $query ) != '' && trim( $query ) == 'T' ) || ( is_numeric( $query ) && $query == 1 ) )
-                {
-                     array_push($months , array('1' , 'ENERO') ) ;
-                     array_push($months , array('2' , 'FEBRERO') ) ;
-                     array_push($months , array('3' , 'MARZO') ) ;
-                }
-                if( ( $month >= 4 && $month <= 6 && !is_numeric( $query ) ) || ( trim( $query ) != '' && trim( $query ) == 'T' ) || ( is_numeric( $query ) && $query == 2 ) )
-                {
-                    array_push($months , array('4' , 'ABRIL') ) ;
-                    array_push($months , array('5' , 'MAYO') ) ;
-                    array_push($months , array('6' , 'JUNIO') ) ;
-                }
-                if( ( $month >= 7 && $month <= 9 && !is_numeric( $query ) ) || ( trim( $query ) != '' && trim( $query ) == 'T' ) || ( is_numeric( $query ) && $query == 3 ) )
-                {
-                    array_push($months , array('7' , 'JULIO') ) ;
-                    array_push($months , array('8' , 'AGOSTO') ) ;
-                    array_push($months , array('9' , 'SEPTIEMBRE') ) ;
-
-                }
-                if( ( $month >= 10 && $month <= 12 && !is_numeric( $query ) ) || ( trim( $query ) != '' && trim( $query ) == 'T' ) || ( is_numeric( $query ) && $query == 4 ) )
-                {
-                    array_push($months , array('10' , 'OCTUBRE') ) ;
-                    array_push($months , array('11' , 'NOVIEMBRE') ) ;
-                    array_push($months , array('12' , 'DICIEMBRE') ) ;
-                }
-                     
-                return $months ;
-            break;
-            case 8 :
-                return array( array('MADRUGADA' , 'MADRUGADA') ,
-                              array('DIURNA' , 'DIURNA') , 
-                              array('NOCTURNA' , 'NOCTURNA') ,
-                              array('MIXTA' , 'MIXTA') 
-                    ) ;
-            break; 
-            case 9 :
-                return ConectorBD::ejecutarQuery( $query , 'registro' ) ;
-            break;
-            case 10 :
-                return array( array('si' , 'SI') ,
-                              array('no' , 'NO') 
-                    ) ;
-            break;
-            case 11 :
-                return array( array('A' , 'ACTIVO') ,
-                              array('I' , 'INACTIVO') 
-                    ) ;
-            break;
-            case 12 :
-                return array( array('1trimestre' , 'PRIMER TRIMESTRE') ,
-                              array('2trimestre' , 'SEGUNDO TRIMESTRE') ,
-                              array('3trimestre' , 'TERCER TRIMESTRE') ,
-                              array('4trimestre' , 'CUARTO TRIMESTRE') ,
-                              array('5trimestre' , 'OFERTA ESPECIAL') 
-                    ) ;
-            break;
         }
     } 
     public static function validar( $variable /*VARIABLE QUE LLEGA*/ ,

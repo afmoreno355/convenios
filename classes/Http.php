@@ -21,6 +21,9 @@ class Http {
 
     public static function url() {
         $menu[] = array('URL' => "#Sede", 'DONDE' => 'View/Sede/SedeTabla.php', 'NOMBRE' => 'SEDE');
+        $menu[] = array('URL' => "#Convenios", 'DONDE' => 'View/Convenios/ConveniosTabla.php', 'NOMBRE' => 'CONVENIOS');
+        $menu[] = array('URL' => "#BienesServicios", 'DONDE' => 'View/BienesServicios/BienesServiciosTabla.php', 'NOMBRE' => 'BIENES_Y_SERVICIOS');
+        $menu[] = array('URL' => "#Contratacion", 'DONDE' => 'View/Contratacion/ContratacionTabla.php', 'NOMBRE' => 'CONTRATACION_SECRETARIA');
         return json_encode($menu);  
     }
 

@@ -11,7 +11,7 @@
  *
  * @author Felipe Moreno
  */
-class Bise {
+class Sede {
     //put your code here
     private $cod;
     private $nombre;
@@ -105,11 +105,11 @@ class Bise {
     }
     
     public static function datosobjetos($filtro, $pagina, $limit){
-        $datos= Bise::datos($filtro, $pagina, $limit);
+        $datos= Sede::datos($filtro, $pagina, $limit);
         $lista=array();
         for ($i = 0; $i < count($datos); $i++) {
-            $bise=new Bise($datos[$i], null);
-            $lista[$i]=$bise;
+            $sede=new Sede($datos[$i], null);
+            $lista[$i]=$sede;
         }
         return $lista;
     }

@@ -40,9 +40,9 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
     }
 
     // obj para llenar las tablas
-    $bise = Bise::datosobjetos($filtro , $pagina, 20);
+    $sede = Sede::datosobjetos($filtro , $pagina, 20);
     // numero de paginas para la paginacion
-    $numeroPaginas = ceil(Bise::count($filtro)[0][0] / 20);
+    $numeroPaginas = ceil(Sede::count($filtro)[0][0] / 20);
     // ecrypt codifica lo que enviamos por javascript   
     $var_add = Http::encryptIt("id=1&llave_Primaria=&user={$_SESSION["user"]}&accion=ADICIONAR");
     $var_ayu = Http::encryptIt("id=4&llave_Primaria=&user={$_SESSION["user"]}&accion=AYUDA");
@@ -72,9 +72,9 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
                 <td> <?= $objet->getDepartamento() ?></td>
                 <td> <?= $objet->getNombre() ?></td>
                 <td>
-                   <a onclick="sedeGestiones(`<?= $objet->getCod() ?>`, `Convenio`)" title="Convenio de las direcciones" ><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/></a>
-                   <a onclick="sedeGestiones(`<?= $objet->getCod() ?>`, `Bienes`)" title="Contratacion de bienes y servicios" ><img src="img/icon/BIENES.png" style="width: 30px; height: 30px"/></a>
-                   <a onclick="sedeGestiones(`<?= $objet->getCod() ?>`, `Contrato`)" title="Contratratación secretaria general" ><img src="img/icon/CONTRATO.png" style="width: 45px; height: 30px"/></a>
+                   <a onclick="sedeGestiones(`<?= $objet->getCod() ?>`, `Convenios`)" title="Convenio de las direcciones" ><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/></a>
+                   <a onclick="sedeGestiones(`<?= $objet->getCod() ?>`, `BienesServicios`)" title="Contratacion de bienes y servicios" ><img src="img/icon/BIENES.png" style="width: 30px; height: 30px"/></a>
+                   <a onclick="sedeGestiones(`<?= $objet->getCod() ?>`, `Contratacion`)" title="Contratratación secretaria general" ><img src="img/icon/CONTRATO.png" style="width: 45px; height: 30px"/></a>
                 </td>
             </tr>
 <?PHP
