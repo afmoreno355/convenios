@@ -24,6 +24,7 @@ class Convenio {
     private $estado;
     // Datos obligatorios de documentos de estudios previos
     private $objeto;
+    private $objetoAlcance;
     private $justificacion;
     private $especificacionesTecnicas;
     // Fecha sistema
@@ -61,6 +62,10 @@ class Convenio {
 
     public function getObjeto() {
         return $this->objeto;
+    }
+
+    public function getObjetoAlcance() {
+        return $this->objetoAlcance;
     }
 
     public function getJustificacion() {
@@ -105,6 +110,10 @@ class Convenio {
 
     public function setObjeto($objeto): void {
         $this->objeto = $objeto;
+    }
+
+    public function setObjetoAlcance($objetoAlcance): void {
+        $this->objetoAlcance = $objetoAlcance;
     }
 
     public function setJustificacion($justificacion): void {
