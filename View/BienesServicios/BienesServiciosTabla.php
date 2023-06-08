@@ -40,42 +40,32 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
     }
 
     // obj para llenar las tablas
-    $sede = Sede::datosobjetos($filtro , $pagina, 20);
+    $BienesServicios = BienesServicios::datosobjetos($filtro , $pagina, 20);
     // numero de paginas para la paginacion
-    $numeroPaginas = ceil(Sede::count($filtro)[0][0] / 20);
+    $numeroPaginas = ceil(BienesServicios::count($filtro)[0][0] / 20);
     // ecrypt codifica lo que enviamos por javascript   
     $var_add = Http::encryptIt("id=1&llave_Primaria=&user={$_SESSION["user"]}&accion=ADICIONAR");
     $var_ayu = Http::encryptIt("id=4&llave_Primaria=&user={$_SESSION["user"]}&accion=AYUDA");
 
 ?> 
      <div class="botonMenu" style="font-weight: bolder; font-size: 2em; ">
-        <button type='button' id='button' class="ele" title='Adicionar nuevo'  onclick="validarDatos(``, `I=<?= $var_add ?>`, `modalVentana`, `View/Sede/SedeModales.php`, event, 'ele')"><img src="img/icon/adds.png"/> ADICIONAR<br>RADICADO</button>
-        <button type='button' id='button' class="ele" title='Ayuda'  onclick="validarDatos(``, `I=<?= $var_ayu ?>`, `modalVentana`, `View/Sede/SedeModales.php`, event, 'ele')"><img src="img/icon/ayu.png"/> AYUDA<br>MODULO</button>
+        <button type='button' id='button' class="ele" title='Adicionar nuevo'  onclick="validarDatos(``, `I=<?= $var_add ?>`, `modalVentana`, `View/BienesServicios/BienesServicios.php`, event, 'ele')"><img src="img/icon/adds.png"/> ADICIONAR<br>CONTRATO</button>
+        <button type='button' id='button' class="ele" title='Ayuda'  onclick="validarDatos(``, `I=<?= $var_ayu ?>`, `modalVentana`, `View/BienesServicios/BienesServiciosModales.php`, event, 'ele')"><img src="img/icon/ayu.png"/> AYUDA<br>MÓDULO</button>
     </div>  
     <!-- Inicio de html tablas -->
     <table id="tableIntD" class="tableIntT sombra tableIntTa">
         <tr>
-            <th>CÓDIGO CENTRO</th>
-            <th>NOMBRES REGIONAL</th>
-            <th>NOMBRES CENTRO</th> 
+            <th>ID</th>
+            <th>FECHA</th>
+            <th>AREA</th>
+            <th>ABOGADO</th>
+            <th>ESTADO</th>
             <th>ACCION</th>           
         </tr>
 <?PHP
-    for ($i = 0; $i < count($sede); $i++) {
-        $objet = $sede[$i];
-        $var_mod = Http::encryptIt("id=1&llave_Primaria={$objet->getCod()}&user={$_SESSION["user"]}&accion=MODIFICAR");
-        $var_eli = Http::encryptIt("id=2&llave_Primaria={$objet->getCod()}&user={$_SESSION["user"]}&accion=ELIMINAR");
-        $var_inf = Http::encryptIt("id=3&llave_Primaria={$objet->getCod()}&user={$_SESSION["user"]}&accion=INFORMACION");
-?> 
+    ?> 
             <tr>
-                <td><?= $objet->getCod() ?></td>
-                <td> <?= $objet->getDepartamento() ?></td>
-                <td> <?= $objet->getNombre() ?></td>
-                <td>
-                   <a onclick="sedeGestiones(`<?= $objet->getCod() ?>`, `Convenios`)" title="Convenio de las direcciones" ><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/></a>
-                   <a onclick="sedeGestiones(`<?= $objet->getCod() ?>`, `BienesServicios`)" title="Contratacion de bienes y servicios" ><img src="img/icon/BIENES.png" style="width: 30px; height: 30px"/></a>
-                   <a onclick="sedeGestiones(`<?= $objet->getCod() ?>`, `Contratacion`)" title="Contratratación secretaria general" ><img src="img/icon/CONTRATO.png" style="width: 45px; height: 30px"/></a>
-                </td>
+               <td> <?= $object->getIdbs() ?></td>
             </tr>
 <?PHP
     }
@@ -89,6 +79,3 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
     
     <div id='formDetalle' style="display: none"></div>
     <!-- Fin de Html -->
-<?PHP
-}
-?>

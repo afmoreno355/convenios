@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+Print_r(":D");
 function addform( valor , potcat )
 {
     var donde = '' ;

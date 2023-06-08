@@ -9,23 +9,24 @@
 /**
  * Description of Sede
  *
- * @author Felipe Moreno
+ * @author Cristian Avella
  */
-class Sede {
-    //put your code here
-    private $cod;
-    private $nombre;
-    private $bd;
-    private $imagen;
-    private $departamento;
-    private $id_departamento;
+class BienesServicios {
+    //Datos de la tabla BSorden
+    private $idbs;
+    private $fcreacion;
+    private $idexp;
+    private $idcoor;
+    private $idabo;
+    private $idapoy;
+    private $idest;
     
     function __construct($campo, $valor) {
         if ($campo!=null){
             if (is_array($campo)) {
                 $this->objeto($campo);
             }else{
-                $cadenaSQL="select * from sede , departamento where departamento = id  AND $campo = '$valor' ";
+                $cadenaSQL="select * from sede bsorden ";
                 //print_r($cadenaSQL);
                 $respuesta= ConectorBD::ejecutarQuery($cadenaSQL, 'eagle_admin');
                 if ($respuesta>0 || $valor!=null) $this->objeto ($respuesta[0]);
@@ -34,60 +35,69 @@ class Sede {
     }
 
     private function objeto($vector){
-        $this->cod=$vector[0];
-        $this->nombre=$vector[1];
-        $this->bd=$vector[2];
-        $this->imagen=$vector[3];
-        $this->id_departamento=$vector[4];
-        $this->departamento=$vector[6];
+        $this->idbs=$vector[0];
+        $this->fcreacion=$vector[1];
+        $this->idexp=$vector[2];
+        $this->idcoor=$vector[3];
+        $this->idabo=$vector[4];
+        $this->idapoy=$vector[5];
+        $this->idest=$vestor[6];
     }
     
-    public function getId_departamento() {
-        return $this->id_departamento;
+    public function getIdbs() {
+        return $this->idbs;
     }
 
-    public function setId_departamento($id_departamento): void {
-        $this->id_departamento = $id_departamento;
+    public function setIdbs($getidbs): void {
+        $this->idbs = $getidbs;
     }
 
-    function getDepartamento() {
-        return $this->departamento;
+    function getFcreacion() {
+        return $this->fcreacion;
     }
 
-    function setDepartamento($departamento){
-        $this->departamento = $departamento;
+    function setFcreacion($fcreacion){
+        $this->fcreacion = $fcreacion;
     }
 
-    function getImagen() {
-        return $this->imagen;
+    function getIdexp() {
+        return $this->idexp;
     }
 
-    function setImagen($imagen){
-        $this->imagen = $imagen;
+    function setIdexp($idexp){
+        $this->idexp = $idexp;
     }
 
-    function getBd() {
-        return $this->bd;
+    function getIdcoor() {
+        return $this->idcoor;
     }
 
-    function setBd($bd){
-        $this->bd = $bd;
+    function setIdcoor($idcoor){
+        $this->idcoor = $idcoor;
     }
 
-    function getCod() {
-        return $this->cod;
+    function getIdabo() {
+        return $this->idabo;
+    }
+    
+    function setIdabo($idabo) {
+        $this->idabo = $idabo;
     }
 
-    function getNombre() {
-        return $this->nombre;
+    function getIdapoy() {
+        return $this->idapoy;
     }
 
-    function setCod($cod) {
-        $this->cod = $cod;
+    function seIdapoy($idapoy) {
+        $this->idapoy = $idapoy;
     }
 
-    function setNombre($nombre) {
-        $this->nombre = $nombre;
+    function getIdest() {
+        return $this->idest;
+    }
+    
+    function setIdest($idest) {
+        $this->idest = $idest;
     }
     
     public function __toString() {
