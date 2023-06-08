@@ -65,7 +65,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
 <?PHP
     ?> 
             <tr>
-               
+               <td><?= print_r($numeroPaginas) ?></td>
             </tr>
 <?PHP
     }

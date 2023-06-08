@@ -30,7 +30,10 @@ class BienesServicios {
                 $cadenaSQL="select * from bsorden where  $campo = '$valor' ";
                 print_r($cadenaSQL);
                 $respuesta= ConectorBD::ejecutarQuery($cadenaSQL, 'admin');
-                if ($respuesta>0 || $valor!=null) $this->objeto ($respuesta[0]);
+                //if ($respuesta>0 || $valor!=null) $this->objeto ($respuesta[0]);
+                if(!empty($respuesta)&& count($respuesta)>0){
+                    $this->objeto($respuesta[0]);
+                }
             }
         }
     }
@@ -123,6 +126,7 @@ class BienesServicios {
             $orden=new BienesServicios($datos[$i], null);
             $lista[$i]=$orden;
         }
+        //print_r($lista);
         return $lista;
     }
     
@@ -131,8 +135,9 @@ class BienesServicios {
         if($filtro!=''){
             $cadena.=" and $filtro";
         } 
-        //print_r($cadena);
-        return ConectorBD::ejecutarQuery($cadena, null);        
+        $resultado=ConectorBD::ejecutarQuery($cadena, null);
+        print_r($resultado[0][0]);
+        return $resultado;        
     }
     
     public static function listaopciones(){ 
