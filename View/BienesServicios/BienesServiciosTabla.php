@@ -10,7 +10,7 @@ session_start();
 require_once dirname(__FILE__) . "/../../autoload.php";
 
 // filtro se usa para realizar las consultas de busqueda 
-$filtro = " codigosede  IN ('1010', '1012','1013','1023','1032','1100','2020','3030','4040','5050','7070','8080')";
+$filtro = "";
 $year= date('Y', time());
 
 // bucarPalabraClave palabra clave que se busca asociada a ajax
@@ -65,7 +65,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
 <?PHP
     ?> 
             <tr>
-               <td> <?= $object->getIdbs() ?></td>
+               
             </tr>
 <?PHP
     }

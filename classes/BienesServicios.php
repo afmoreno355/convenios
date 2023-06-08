@@ -9,9 +9,10 @@
 /**
  * Description of Sede
  *
- * @author Cristian Avella
+ * @author Felipe Moreno
  */
 class BienesServicios {
+   
     //Datos de la tabla BSorden
     private $idbs;
     private $fcreacion;
@@ -26,14 +27,14 @@ class BienesServicios {
             if (is_array($campo)) {
                 $this->objeto($campo);
             }else{
-                $cadenaSQL="select * from sede bsorden ";
-                //print_r($cadenaSQL);
-                $respuesta= ConectorBD::ejecutarQuery($cadenaSQL, 'eagle_admin');
+                $cadenaSQL="select * from bsorden where  $campo = '$valor' ";
+                print_r($cadenaSQL);
+                $respuesta= ConectorBD::ejecutarQuery($cadenaSQL, 'admin');
                 if ($respuesta>0 || $valor!=null) $this->objeto ($respuesta[0]);
             }
         }
     }
-
+    
     private function objeto($vector){
         $this->idbs=$vector[0];
         $this->fcreacion=$vector[1];
@@ -41,7 +42,7 @@ class BienesServicios {
         $this->idcoor=$vector[3];
         $this->idabo=$vector[4];
         $this->idapoy=$vector[5];
-        $this->idest=$vestor[6];
+        $this->idest=$vector[6];
     }
     
     public function getIdbs() {
@@ -105,31 +106,33 @@ class BienesServicios {
     }
    
     public static function datos($filtro, $pagina, $limit){
-        $cadenaSQL="select * from sede , departamento where departamento=id ";
+        $cadenaSQL="select * from bsorden";
          if($filtro!=''){
             $cadenaSQL.=" and $filtro";
         } 
-        $cadenaSQL.=" order by codigosede asc offset $pagina limit $limit ";
+        $cadenaSQL.=" ORDER BY idbs ASC offset $pagina limit $limit ";
         //print_r($cadenaSQL);
-        return ConectorBD::ejecutarQuery($cadenaSQL, 'eagle_admin');          
+        return ConectorBD::ejecutarQuery($cadenaSQL, null);          
     }
     
     public static function datosobjetos($filtro, $pagina, $limit){
-        $datos= Sede::datos($filtro, $pagina, $limit);
+        $datos= BienesServicios::datos($filtro, $pagina, $limit);
+        //print_r($datos);
         $lista=array();
         for ($i = 0; $i < count($datos); $i++) {
-            $sede=new Sede($datos[$i], null);
-            $lista[$i]=$sede;
+            $orden=new BienesServicios($datos[$i], null);
+            $lista[$i]=$orden;
         }
         return $lista;
     }
     
      public static function count($filtro) {
-        $cadena='select count(*) from sede , departamento where departamento=id '; 
+        $cadena='select count(*) from bsorden ';
         if($filtro!=''){
             $cadena.=" and $filtro";
         } 
-        return ConectorBD::ejecutarQuery($cadena, 'eagle_admin');        
+        //print_r($cadena);
+        return ConectorBD::ejecutarQuery($cadena, null);        
     }
     
     public static function listaopciones(){ 
