@@ -143,6 +143,9 @@ AS SELECT s.id_solicitud AS id,
     s.abogado,
     s.tecnico_experto,
     s.mes_publicacion AS mes,
+	p.objeto,
+	p.alcance_objeto,
     e.estado
    FROM solicitudes s
-     JOIN estado_solicitudes e ON s.id_estado = e.id_estado;
+     JOIN estado_solicitudes e ON s.id_estado = e.id_estado
+	 JOIN estudios_previos p ON s.id_estudios_previos = p.id_estudios_previos;

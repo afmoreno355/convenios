@@ -25,8 +25,8 @@ class Convenio {
     // Datos obligatorios de documentos de estudios previos
     private $objeto;
     private $objetoAlcance;
-    private $justificacion;
     private $especificacionesTecnicas;
+    private $justificacion;
     // Fecha sistema
     private $fecha;
     
@@ -134,15 +134,20 @@ class Convenio {
             if (is_array($campo)) {
                 $this->cargarObjetoDeVector($campo);
             } else {
-                $cadenaSQL = "select id,
-                                     nombre,
-                                     area,
-                                     abogado,
-                                     tecnico_experto,
-                                     mes,
-                                     estado
-                              from convenios where $campo = $valor";
-                $resultado = ConectorBD::ejecutarQuery($cadenaSQL, ' convenios ');
+                $sql = "select id_solicitud,
+                               nombre,
+                               codigo_area,
+                               abogado,
+                               tecnico_experto,
+                               mes_publicacion,
+                               estado,
+                               objeto,
+                               alcance,
+                               especificaciones_tecnicas,
+                               justificacion,
+                               fecha_sistema
+                        from solicitudes where $campo = $valor";
+                $resultado = ConectorBD::ejecutarQuery($sql, ' convenios ');
                 if ( !empty($resultado) && count($resultado) > 0) {
                     $this->cargarObjetoDeVector($resultado[0]);
                 }
@@ -159,6 +164,9 @@ class Convenio {
         $this->tecnicoExperto = $vector[4];
         $this->mes = $vector[5];
         $this->estado = $vector[6];
+        $this->objeto = $vector[7];
+        $this->alcance = $vector[8];
+        $this->
     }
 
 
@@ -207,15 +215,14 @@ class Convenio {
                                     (area_competente,
                                      abogado,
                                      tecnico_experto,
-                                     mes,
-                                     estado)
-                           values ('$this->id',
-                                   '$this->area',
+                                     mes_publicacion,
+                                     fecha_registro)
+                           values ('$this->area',
                                    '$this->abogado',
-                                   '$this->tecnico_experto',
-                                   '$this->tecnico_economico',
+                                   '$this->tecnicoExperto',
                                    '$this->mes',
-                                   '$this->estado')";
+                                   '$this->fecha')";
+        $sqlObjeto="insert into objeto"
         //print_r($sql);
         if (ConectorBD::ejecutarQuery($sql, null)) {
             //Historico de las acciones en el sistemas de informacion
