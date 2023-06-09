@@ -9,7 +9,7 @@
 /**
  * Description of Sede
  *
- * @author Felipe Moreno
+ * @author Cristian Avella
  */
 class BienesServicios {
    
@@ -26,14 +26,13 @@ class BienesServicios {
         if ($campo!=null){
             if (is_array($campo)) {
                 $this->objeto($campo);
+                print_r($valor);
             }else{
                 $cadenaSQL="select * from bsorden where  $campo = '$valor' ";
                 print_r($cadenaSQL);
                 $respuesta= ConectorBD::ejecutarQuery($cadenaSQL, 'admin');
-                //if ($respuesta>0 || $valor!=null) $this->objeto ($respuesta[0]);
-                if(!empty($respuesta)&& count($respuesta)>0){
-                    $this->objeto($respuesta[0]);
-                }
+                if ($respuesta>0 || $valor!=null) $this->objeto ($respuesta[0]);
+                
             }
         }
     }
@@ -65,6 +64,7 @@ class BienesServicios {
     }
 
     function getIdexp() {
+        print_(":D");
         return $this->idexp;
     }
 
@@ -135,9 +135,7 @@ class BienesServicios {
         if($filtro!=''){
             $cadena.=" and $filtro";
         } 
-        $resultado=ConectorBD::ejecutarQuery($cadena, null);
-        print_r($resultado[0][0]);
-        return $resultado;        
+        return $resultado=ConectorBD::ejecutarQuery($cadena, null);
     }
     
     public static function listaopciones(){ 
