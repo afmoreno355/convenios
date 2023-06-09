@@ -219,19 +219,34 @@ class Convenio {
 
 
     public function Adicionar() {
-        $sql="insert into solicitudes 
-                                    (area_competente,
-                                     abogado,
-                                     tecnico_experto,
-                                     mes_publicacion,
-                                     fecha_registro)
-                           values ('$this->area',
-                                   '$this->abogado',
-                                   '$this->tecnicoExperto',
-                                   '$this->mes',
-                                   '$this->fecha')";
+        $sql="insert into solicitudes (
+                                    nombre,
+                                    codigo_area,
+                                    abogado,
+                                    tecnico_experto,
+                                    mes_publicacion,
+                                    estado,
+                                    objeto,
+                                    alcance,
+                                    especificaciones_tecnicas,
+                                    justificacion,
+                                    fecha_sistema
+                                    )
+                               values (
+                                    '$this->nombre',
+                                    '$this->codigoArea',
+                                    '$this->abogado',
+                                    '$this->tecnicoExperto',
+                                    '$this->mes',
+                                    '$this->estado',
+                                    '$this->objeto',
+                                    '$this->alcance',
+                                    '$this->especificacionesTecnicas',
+                                    '$this->justificacion',
+                                    '$this->fecha'
+                                   )";
         //print_r($sql);
-        if (ConectorBD::ejecutarQuery($sql, null)) {
+        if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
             $nuevo_query = str_replace("'", "|", $sql);
             $historico = new Historico(null, null);
