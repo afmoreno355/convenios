@@ -20,17 +20,17 @@ CREATE SEQUENCE public.solicitudes_id_solicitud_seq
 
 CREATE TABLE public.solicitudes (
 	id_solicitud serial4 NOT NULL,
+	nombre varchar NULL,
 	codigo_area int4 NULL,
+	mes_publicacion varchar NULL,
+	estado varchar NULL,
 	abogado varchar NULL,
 	tecnico_experto varchar NULL,
 	objeto text NULL,
 	alcance text NULL,
 	especificaciones_tecnicas text NULL,
-	fecha_sistema date NULL,
-	estado varchar NULL,
 	justificacion text NULL,
-	nombre varchar NULL,
-	mes_publicacion varchar NULL,
+	fecha_sistema date NULL,
 	CONSTRAINT solicitudes_pk PRIMARY KEY (id_solicitud)
 );
 
