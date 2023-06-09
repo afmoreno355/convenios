@@ -166,7 +166,9 @@ class Convenio {
         $this->estado = $vector[6];
         $this->objeto = $vector[7];
         $this->alcance = $vector[8];
-        $this->
+        $this->especificacionesTecnicas = $vector[9];
+        $this->justificacion = $vector[10];
+        $this->fecha = $vector[11];
     }
 
 
