@@ -6,7 +6,7 @@
 
 function sedeGestiones(sede , donde = 'Convenio' )
 {
-    document.getElementById('formDetalle').innerHTML = `<form method='post' action='http://localhost/www/convenios/#${donde}' onsubmit='${window.open('about:blank','print_popup','scrollbars=no,status=no,toolbar=no,directories=no,location=no,menubar=no')}' target='print_popup'  >`
+    document.getElementById('formDetalle').innerHTML = `<form method='post' action='/convenios/#${donde}' onsubmit='${window.open('about:blank','print_popup','scrollbars=no,status=no,toolbar=no,directories=no,location=no,menubar=no')}' target='print_popup'  >`
             + "<input type='hidden' value='" + sede + "' id='sedeGestion' name='sedeGestion' required/>"
             + "<input type='submit' value='accion' id='accionForm' name='accionForm'/> "
             + "</form>";
