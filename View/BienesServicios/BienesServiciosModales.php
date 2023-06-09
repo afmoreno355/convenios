@@ -44,27 +44,78 @@ if ($id == 1 && $permisos)
 {
     $add = $I ;
 ?>
+    <h1>1</h1>
     <div class="carga_Documento">
         <div class="contenido">  
             <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
-                <img src="img/icon/gestionar.png"/><label class="where">Módulo Convenios y Contratos – Dirección de Formación Profesional</label></div>
+                <img src="img/icon/gestionar.png"/><label class="where">Administrador DFP – Dirección de Formación Profesional</label></div>
             <br><br>
-            <label style="font-size: 1em; " >Tabla Agregar</label>  
+            <label style="font-size: 1em; " >Tabla Bienes y Servisios</label>  
             <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
-        </div> 
+            
+        </div>
         <div>
             <fieldset>
-                <legend title='FORMULARIO DEL MÓDULO QUE DESEA DILIGENCIAR'>FORMULARIO DEL MÓDULO</legend>
-                <select required name=formulario id="formulario" onchange="addform( this.value , 'I=<?= $add ?>' )">
-                    <option value="">Selección de Formulario</option>
-                    <option value="1">Convenios</option>
-                    <option value="2">Bienes y Servicios</option>
-                    <option value="3">Contratacion Secretaria</option>
-                </select>
-             </fieldset>
-        </div>   
+                <legend title='NOMBRE'>ID CONTRATO</legend>
+                <input type="text" value= '' required name='idcontrato' id="idcontrato">
+                
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='AREA'>ÁREA</legend>
+                <input type="text" value= '' required name='area' id="area">
+                
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='ABOGADO'>ABOGADO</legend>
+                <input type="text" value= '' required name='abogado' id="abogado">
+                
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='TECNICO EXPERTO'>TÉCNICO EXPERTO</legend>
+                <input type="text" value= '' required name='texperto' id="texperto">
+               
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='APOOYO PROFESIONAL'>APOOYO PROFESIONAL</legend>
+                <input type="text" value= '' required name='appro' id="appro">
+               
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='TIPO'>TIPO</legend>
+                <input type="text" value= '' required name='tiopo' id="tipo">
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='VPAA'>VERSIÓN PAA</legend>
+                <input type="text" value= '' required name='vpaa' id="tipo">
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='Adicional'>ADICIONAL?</legend>
+                
+            </fieldset>
+        </div>
+        
+        <div>     
+            
+            <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
+            <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
+            <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "Convenios" )'>
+            <input type="reset" name="limpiarU"  value="LIMPIAR"/>
+        </div>
     </div>
-    <di id="formularioAdd"></di>
 <?PHP
 }
 ?>
