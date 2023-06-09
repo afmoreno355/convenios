@@ -17,14 +17,14 @@ class Convenio {
     // Datos de la tabla
     private $id;
     private $nombre;
-    private $area;
+    private $codigoArea;
     private $abogado;
     private $tecnicoExperto;
     private $mes;
     private $estado;
     // Datos obligatorios de documentos de estudios previos
     private $objeto;
-    private $objetoAlcance;
+    private $alcance;
     private $especificacionesTecnicas;
     private $justificacion;
     // Fecha sistema
@@ -40,8 +40,8 @@ class Convenio {
         return $this->nombre;
     }
 
-    public function getArea() {
-        return $this->area;
+    public function getCodigoArea() {
+        return $this->codigoArea;
     }
 
     public function getAbogado() {
@@ -64,16 +64,16 @@ class Convenio {
         return $this->objeto;
     }
 
-    public function getObjetoAlcance() {
-        return $this->objetoAlcance;
-    }
-
-    public function getJustificacion() {
-        return $this->justificacion;
+    public function getAlcance() {
+        return $this->alcance;
     }
 
     public function getEspecificacionesTecnicas() {
         return $this->especificacionesTecnicas;
+    }
+
+    public function getJustificacion() {
+        return $this->justificacion;
     }
 
     public function getFecha() {
@@ -88,8 +88,8 @@ class Convenio {
         $this->nombre = $nombre;
     }
 
-    public function setArea($area): void {
-        $this->area = $area;
+    public function setCodigoArea($codigoArea): void {
+        $this->codigoArea = $codigoArea;
     }
 
     public function setAbogado($abogado): void {
@@ -112,22 +112,23 @@ class Convenio {
         $this->objeto = $objeto;
     }
 
-    public function setObjetoAlcance($objetoAlcance): void {
-        $this->objetoAlcance = $objetoAlcance;
-    }
-
-    public function setJustificacion($justificacion): void {
-        $this->justificacion = $justificacion;
+    public function setAlcance($alcance): void {
+        $this->alcance = $alcance;
     }
 
     public function setEspecificacionesTecnicas($especificacionesTecnicas): void {
         $this->especificacionesTecnicas = $especificacionesTecnicas;
     }
 
+    public function setJustificacion($justificacion): void {
+        $this->justificacion = $justificacion;
+    }
+
     public function setFecha($fecha): void {
         $this->fecha = $fecha;
     }
 
+        
     // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     function __construct($campo, $valor) {
         if ($campo != NULL) {
@@ -159,7 +160,7 @@ class Convenio {
     private function cargarObjetoDeVector($vector) {
         $this->id = $vector[0];
         $this->nombre = $vector[1];
-        $this->area = $vector[2];
+        $this->codigoArea = $vector[2];
         $this->abogado = $vector[3];
         $this->tecnicoExperto = $vector[4];
         $this->mes = $vector[5];
@@ -174,22 +175,27 @@ class Convenio {
 
     //datos hace la consulta sql.
     public static function datos($filtro, $pagina, $limit) {
-        $cadenaSQL = "select id,
-                             nombre,
-                             area,
-                             abogado,
-                             tecnico_experto,
-                             mes,
-                             estado
-                      from convenios ";
+        $sql = "select id_solicitud,
+                       nombre,
+                       codigo_area,
+                       abogado,
+                       tecnico_experto,
+                       mes_publicacion,
+                       estado,
+                       objeto,
+                       alcance,
+                       especificaciones_tecnicas,
+                       justificacion,
+                       fecha_sistema
+                from solicitudes ";
         if ($filtro != null) {
-            $cadenaSQL .= " where " . $filtro;
+            $sql .= " where " . $filtro;
         }
-        $cadenaSQL .= ' order by id asc' ;
+        $sql .= ' order by id_solicitud asc ' ;
         if ($pagina != null && $limit != null) {
-            $cadenaSQL .= " offset $pagina limit $limit ";
+            $sql .= " offset $pagina limit $limit ";
         }
-        return ConectorBD::ejecutarQuery($cadenaSQL, ' convenios ');
+        return ConectorBD::ejecutarQuery($sql, ' convenios ');
     }
 
     //convierte los array de datos en objetos enviando las posiciones al constructor 
@@ -199,21 +205,21 @@ class Convenio {
         for ($i = 0; $i < count($datos); $i++) {
             $clase = new self($datos[$i], null);
             $listas[$i] = $clase;
-        }
+        }/** */
         return $listas;
     }
 
     public static function count($filtro) {
-        $cadena = 'select count(*) from convenios';
+        $sql = 'select count(*) from solicitudes';
         if ($filtro != null) {
-            $cadena.= " where " . $filtro;
+            $sql.= " where " . $filtro;
         }
-        return ConectorBD::ejecutarQuery($cadena, ' convenios ');
+        return ConectorBD::ejecutarQuery($sql, ' convenios ');
     }
 
 
     public function Adicionar() {
-        $sqlSolicitud="insert into solicitudes 
+        $sql="insert into solicitudes 
                                     (area_competente,
                                      abogado,
                                      tecnico_experto,
@@ -224,7 +230,6 @@ class Convenio {
                                    '$this->tecnicoExperto',
                                    '$this->mes',
                                    '$this->fecha')";
-        $sqlObjeto="insert into objeto"
         //print_r($sql);
         if (ConectorBD::ejecutarQuery($sql, null)) {
             //Historico de las acciones en el sistemas de informacion

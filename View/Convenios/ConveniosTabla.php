@@ -40,7 +40,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
        
     // evalua si existe bucarPalabraClave y nos crea la cadena de busqueda
     if ($bucarPalabraClave != "") {
-       $filtro.=" (id = ". strtoupper($bucarPalabraClave)." or
+       $filtro.=" (id_solicitud = ". strtoupper($bucarPalabraClave)." or
                    nombre like '%". strtoupper($bucarPalabraClave)."%' or
                    mes like '%". strtoupper($bucarPalabraClave)."%')";
     }
