@@ -38,7 +38,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" && $_SESSION["rol"] !=
 $llave_Primaria_Contructor = ( $llave_Primaria == "" ) ? "null" : "'$llave_Primaria'";
 
 // llamamos la clase y verificamos si ya existe info de este dato que llega
-$convenio = new Convenio( ' id ' , $llave_Primaria_Contructor);
+$convenio = new Convenio( ' id_solicitud ' , $llave_Primaria_Contructor);
 if ($id == 1 && $permisos)
 {
 ?>
@@ -61,7 +61,7 @@ if ($id == 1 && $permisos)
         <div>
             <fieldset>
                 <legend title='AREA'>ÁREA</legend>
-                <input type="text" value='<?= $convenio->getArea() ?>' required name='area' id="area">
+                <input type="text" value='<?= $convenio->getCodigoArea() ?>' required name='area' id="area">
             </fieldset>
         </div>
         <div>
@@ -101,11 +101,11 @@ if ($id == 1 && $permisos)
             </fieldset>
         </div>
         
-        <div>        
+        <div>     
             <!--input type="hidden" value="<?= $convenio->getId() ?>" name="id" id="id"-->
             <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
             <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-            <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso" )'>
+            <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "Convenios" )'>
             <input type="reset" name="limpiarU"  value="LIMPIAR"/>
         </div>
     </div>
