@@ -85,7 +85,7 @@ if ($id == 1 && $permisos)
         <div>
             <fieldset>
                 <legend title='ALCANCE'>ALCANCE DEL OBJETO</legend>
-                <textarea  value='<?= $convenio->getObjeto() ?>'  name='objeto' id='objeto' ></textarea>
+                <textarea  value='<?= $convenio->getObjeto() ?>'  name='alcance' id='objeto' ></textarea>
             </fieldset>
         </div>
         <div>
