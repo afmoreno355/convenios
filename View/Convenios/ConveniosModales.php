@@ -85,7 +85,7 @@ if ($id == 1 && $permisos)
         <div>
             <fieldset>
                 <legend title='ALCANCE'>ALCANCE DEL OBJETO</legend>
-                <textarea  value='<?= $convenio->getObjeto() ?>'  name='alcance' id='objeto' ></textarea>
+                <textarea  value='<?= $convenio->getObjeto() ?>'  name='alcance' id='alcance' ></textarea>
             </fieldset>
         </div>
         <div>
@@ -101,7 +101,7 @@ if ($id == 1 && $permisos)
             </fieldset>
         </div>        
         <div>     
-            <!--input type="hidden" value="<?= $convenio->getId() ?>" name="id" id="id"-->
+            <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
             <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
             <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
             <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "Convenios" )'>
