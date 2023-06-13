@@ -82,7 +82,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
         $sql = "select e.estado_completado
                         from estado_solicitudes e inner join solicitudes s
                         on e.id_estado = s.id_estado where s.id_solicitud = $id";
-        $completado = ConectorBD::ejecutarQuery($sql, ' convenios ')[0][0];
+        $completado = false; //ConectorBD::ejecutarQuery($sql, ' convenios ')[0][0];
         if ( $completado ) {
             $accion = "DETALLE";
             $name = 3;

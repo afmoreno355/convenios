@@ -252,9 +252,9 @@ class Convenio {
             $historico = new Historico(null, null);
             $historico->setIdentificacion($_SESSION["user"]);
             $historico->setTipo_historico("ADICIONAR");
-            $historico->setHistorico(strtoupper($nuevo_query));
+            $historico->setHistorico(strtoupper($sql));
             $historico->setFecha("now()");
-            $historico->setTabla("MENU");
+            $historico->setTabla("convenios.solicitudes");
             $historico->grabar();
             return true;
         } else {
