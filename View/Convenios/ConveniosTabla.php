@@ -95,7 +95,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
             <tr>
                 <td> <?= $object->getId() ?></td>
                 <td> <?= $object->getNombre() ?></td>
-                <td> <?= $object->getArea() ?></td>
+                <td> <?= $object->getCodigoArea() ?></td>
                 <td> <?= $object->getAbogado() ?></td>
                 <td> <?= $object->getTecnicoExperto() ?> </td>
                 <td> <?= $object->getMes() ?> </td>
