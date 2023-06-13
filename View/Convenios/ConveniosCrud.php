@@ -40,7 +40,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
     //header("Location: index");
 } elseif ($_SESSION["token1"] === $_COOKIE["token1"] && $_SESSION["token2"] === $_COOKIE["token2"] && password_verify(md5($token1 . $token2), $session->getToken3())) {
     if (isset($accion)) {
-        if( $id != '' )
+        if( $idSolicitud != '' )
         {
             $campo = ' id_solicitud ' ;
             $valor = "'$idSolicitud'" ;
@@ -52,7 +52,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
            $valor = null ; 
         }
         $convenio = new Convenio( $campo, $valor ) ;
-        if ($accion == "ADICIONAR" || $accion == "MODIFICAR") 
+        if ($accion == "ADICIONAR" || $accion == "COMPLETAR") 
         {
 
             if (
@@ -90,8 +90,9 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         }
         elseif ($accion == "ELIMINAR")
         {
-            $menu->setId($id);
-            if ($menu->borrar()) 
+            print_r($idSolicitud);
+            $convenio->setId($idSolicitud);
+            if ($convenio->Borrar()) 
             {
                 print_r("** EL MENÚ FUE ELIMINADO **");
             } 

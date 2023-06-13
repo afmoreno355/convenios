@@ -42,7 +42,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
     if ($bucarPalabraClave != "") {
        $filtro.=" (id_solicitud = ". strtoupper($bucarPalabraClave)." or
                    nombre like '%". strtoupper($bucarPalabraClave)."%' or
-                   mes like '%". strtoupper($bucarPalabraClave)."%')";
+                   mes_publicacion like '%". strtoupper($bucarPalabraClave)."%')";
     }
 
         // obj para llenar las tablas
@@ -54,7 +54,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
     // Encripta la información para enviarla
     $http_add = Http::encryptIt("id=1&llave_Primaria=&user={$_SESSION["user"]}&accion=ADICIONAR");
     $http_ayu = Http::encryptIt("id=4&llave_Primaria=&user={$_SESSION["user"]}&accion=AYUDA");
-    $http_com = Http::encryptIt("id=3&llave_Primaria=&user={$_SESSION["user"]}&accion=ADICIONAR");
+    
     
 ?> 
 <!-- Código para los botones-->
@@ -78,10 +78,10 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
 <?PHP
     for ($i = 0; $i < count($convenio); $i++) {
         $object = $convenio[$i];
-        $id = $object->getId();
+        $idSolicitud = $object->getId();
         $sql = "select e.estado_completado
                         from estado_solicitudes e inner join solicitudes s
-                        on e.id_estado = s.id_estado where s.id_solicitud = $id";
+                        on e.id_estado = s.id_estado where s.id_solicitud = $idSolicitud";
         $completado = false; //ConectorBD::ejecutarQuery($sql, ' convenios ')[0][0];
         if ( $completado ) {
             $accion = "DETALLE";
@@ -90,7 +90,8 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
             $accion = "COMPLETAR";
             $name = 1;
         }
-        $http = Http::encryptIt("id=2&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=$accion");
+        $http_com = Http::encryptIt("id=2&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=COMPLETAR");
+        $http_eli = Http::encryptIt("id=3&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=ELIMINAR");
 ?> 
             <tr>
                 <td> <?= $object->getId() ?></td>
@@ -101,14 +102,16 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
                 <td> <?= $object->getMes() ?> </td>
                 <td> <?= $object->getEstado() ?></td>
                 <td>
-                    <input type="button" id="button" name="<?= $name ?>" onclick="validarDatos(``, `I=<?= $http ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="<?= $accion ?>">
+                    <input type="button" id="button" name="1" onclick="validarDatos(``, `I=<?= $http_com ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="COMPLETAR">
+                    
+                    <input type="button" id="button" name="3" onclick="validarDatos(``, `I=<?= $http_eli ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="ELIMINAR">
                     <!--a onclick="sedeGestiones(`<?= $object->getId() ?>`, `Convenio`)" title="Convenio de las direcciones" ><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/></a-->
                 </td>
             </tr>
 <?PHP
     }
 ?>
-        <input type="hidden" id="donde" value="Convenio">
+        <input type="hidden" id="donde" value="Convenios">
         <input type="hidden" id="id_espe" value="">
         <input type="hidden" id="numeroPaginas" value="<?= $numeroPaginas ?>">
         <input type="hidden" id="sedeGestion" value="">

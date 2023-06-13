@@ -293,9 +293,9 @@ class Convenio {
     }
     
     public function Borrar() {
-        $sql="delete from menu where id = '$this->id' ";
+        $sql="delete from solicitudes where id_solicitud = '$this->id' ";
         print_r($sql);
-        if (ConectorBD::ejecutarQuery($sql, null)) {
+        if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             
             //Historico de las acciones en el sistemas de informacion
             $nuevo_query = str_replace("'", "|", $sql);
@@ -304,7 +304,7 @@ class Convenio {
             $historico->setTipo_historico("ELIMINAR");
             $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
-            $historico->setTabla("MENU");
+            $historico->setTabla("convenios.solicitudes");
             $historico->grabar();
             return true;
         } 

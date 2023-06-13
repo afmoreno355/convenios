@@ -138,51 +138,6 @@ require_once(__DIR__.'/ConveniosPaaSeccion.php');
 require_once(__DIR__.'/ConveniosEstadosSeccion.php');
 ?>
 </div>
-
-
-
-<!--h2>EQUIPO ESTRUCTURADOR</h2>
-
-    <table id="tableIntD" class="tableIntT sombra tableIntTa">
-        <tr>
-            <th>NOMBRE</th>
-            <th>DESCRIPCIÓN</th>
-            <th>ADJUNTO</th>
-        </tr>
-    </table>
-
-<h2>ESTUDIOS PREVIOS</h2>
-
-    <table id="tableIntD" class="tableIntT sombra tableIntTa">
-        <tr>
-            <th>NOMBRE</th>
-            <th>DESCRIPCIÓN</th>
-            <th>ADJUNTO</th>
-        </tr>
-    </table>
-
-<h2>PLAN ANUAL DE ADQUISIONES (PAA)</h2>
-
-    <table id="tableIntD" class="tableIntT sombra tableIntTa">
-        <tr>
-            <th>NOMBRE</th>
-            <th>DESCRIPCIÓN</th>
-            <th>ADJUNTO</th>
-        </tr>
-    </table>
-
-
-<h2>ESTADOS SOLICITUD</h2>
-
-    <table id="tableIntD" class="tableIntT sombra tableIntTa">
-        <tr>
-            <th>NOMBRE</th>
-            <th>DESCRIPCIÓN</th>
-            <th>ADJUNTO</th>
-        </tr>
-    </table-->
-
-
 <?PHP
 }
 elseif ($id == 3 && $permisos)
@@ -192,34 +147,19 @@ elseif ($id == 3 && $permisos)
     <div class="carga_Documento">
         <div class="contenido">  
             <div class="where_title where_modal" style="width: 100%; height: auto; margin-left: 0px;">
-                <img src="img/icon/estado.png"/>
+                <img src="img/icon/borrar.png"/>
                 <lablel>
-                    Administrador DFP – Dirección de Formación Profesional
+                    Se realizara la acción "<?= $accion ?>" al menú <?=$llave_Primaria?> cargado en el modulo de la Dirección de Formación Profesional.
                 </label>
             </div><br><br>
             <label style="font-size: 1em; " id="aviso"></label>  
+        </div>  
+        <div>        
+            <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
+            <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
+            <input type="submit" title="ACEPTA <?= $accion ?> EL ITEM ELEGIDO"  value="<?= $accion ?>" name="accionU" id="accionU" onclick="eliminar('aviso')">
         </div>
-        <div class="nuevaseccion" >
-            <fieldset>
-                <section>
-                    <h3>ID DE MENÚ: </h3> 
-                    <p> <?= $menu->getId() ?></p>
-                </section>
-                <section>
-                    <h3>NOMBRE DE MENÚ: </h3> 
-                    <p> <?= $menu->getNombre() ?></p>
-                </section>
-                <section>
-                    <h3>PNOMBRE DE MENÚ: </h3> 
-                    <p> <?= $menu->getPnombre() ?></p>
-                </section>
-                <section>
-                    <h3>ÍCONO DE MENÚ: </h3> 
-                    <img width="100" src="img/icon/<?= $menu->getIcono() ?>.png" alt="<?= $menu->getIcono() ?>" />
-                </section>
-            </fieldset>
-        </div>
-    </div>
+    </div> 
 <?PHP
 }
 elseif ($id == 4 && $permisos ) {
