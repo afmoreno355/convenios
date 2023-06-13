@@ -243,7 +243,7 @@ class Convenio {
                                     '$this->alcance',
                                     '$this->especificacionesTecnicas',
                                     '$this->justificacion',
-                                    '$this->fecha'
+                                    now()
                                    )";
         //print_r($sql);
         if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
@@ -252,14 +252,13 @@ class Convenio {
             $historico = new Historico(null, null);
             $historico->setIdentificacion($_SESSION["user"]);
             $historico->setTipo_historico("ADICIONAR");
-            $historico->setHistorico(strtoupper($sql));
+            $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
-            $historico->setTabla("convenios.solicitudes");
-            $historico->grabar();
+            /*$historico->setTabla("convenios.solicitudes");
+            $historico->grabar();/** */
             return true;
-        } else {
-            return false;
-        }
+        } /** */
+        return false;
     }
     
     public function Modificar( $id ) {
@@ -282,6 +281,14 @@ class Convenio {
             return true;
         } else {
             return false;
+        }/** */
+    }
+
+    public function AdicionarModificar( $id ) {
+        if ( $id == 0 ) {
+            return $this->Adicionar() ;
+        } else {
+            return $this->Modificar( $id ) ;
         }
     }
     

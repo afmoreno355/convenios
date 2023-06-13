@@ -61,7 +61,13 @@ if ($id == 1 && $permisos)
         <div>
             <fieldset>
                 <legend title='AREA'>ÁREA</legend>
-                <input type="text" value='<?= $convenio->getCodigoArea() ?>' required name='area' id="area">
+                <input type="number" value='<?= $convenio->getCodigoArea() ?>' required name='area' id="area">
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='MES'>MES DE PUBLICACIÓN</legend>
+                <input type="text" value='<?= $convenio->getMes() ?>' required name='mes' id="mes">
             </fieldset>
         </div>
         <div>
@@ -85,13 +91,13 @@ if ($id == 1 && $permisos)
         <div>
             <fieldset>
                 <legend title='ALCANCE'>ALCANCE DEL OBJETO</legend>
-                <textarea  value='<?= $convenio->getObjeto() ?>'  name='alcance' id='alcance' ></textarea>
+                <textarea  value='<?= $convenio->getAlcance() ?>'  name='alcance' id='alcance' ></textarea>
             </fieldset>
         </div>
         <div>
             <fieldset>
                 <legend title='EXPECIFICACIONES TECNICAS'>EXPECIFICACIONES TÉCNICAS</legend>
-                <textarea  value='<?= $convenio->getEspecificacionesTecnicas() ?>'  name='expecificacionesTecnicas' id='expecificacionesTecnicas' ></textarea>
+                <textarea  value='<?= $convenio->getEspecificacionesTecnicas() ?>'  name='especificacionesTecnicas' id='especificacionesTecnicas' ></textarea>
             </fieldset>
         </div>
         <div>

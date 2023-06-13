@@ -42,96 +42,50 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
     if (isset($accion)) {
         if( $id != '' )
         {
-            $campo = ' id ' ;
-            $valor = "'$id'" ;
+            $campo = ' id_solicitud ' ;
+            $valor = "'$idSolicitud'" ;
         }
         else
         {
+           $idSolicitud = 0 ;
            $campo = null ;
            $valor = null ; 
         }
-        $menu = new Menu( $campo, $valor );
+        $convenio = new Convenio( $campo, $valor ) ;
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR") 
         {
 
             if (
+                 Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID SOLICITUD' ) &&
                  Select::validar( $nombre , 'TEXT' , 250 , 'NOMBRE' ) &&
-                 Select::validar( $pnombre , 'TEXT' , 250 , 'PNOMBRE' ) &&
-                 Select::validar( $icono, 'TEXT' , 250 , 'ÍCONO' )
+                 Select::validar( $area , 'NUMERIC' , null , 'CÓDIGO DE ÁREA' ) &&
+                 Select::validar( $mes , 'TEXT' , 250 , 'MES DE PUBLICCIÓN') &&
+                 Select::validar( $abogado, 'TEXT' , 250 , 'ABOGADO' ) &&
+                 Select::validar( $tecnicoExperto, 'TEXT', 250, 'TÉCNICO EXPERTO' ) &&
+                 Select::validar( $objeto, 'TEXT', 15000, 'OBJETO') &&
+                 Select::validar( $alcance, 'TEXT', 15000, 'ALCANCE OBJETO' ) &&
+                 Select::validar( $especificacionesTecnicas, 'TEXT', 15000, 'ESPECIFICACIONES TÉCNICAS' ) &&
+                 Select::validar( $justificacion, 'TEXT', 15000, 'JUSTIFICACIÓN')
                 )
             {
-                $menu->setNombre( $nombre ) ;
-                $menu->setPnombre( $pnombre ) ;
-                $menu->setIcono( $icono ) ;
-                $imagen = $_FILES['imagen'] ;
+                $convenio->setNombre( $nombre ) ;
+                $convenio->setCodigoArea( $area );
+                $convenio->setMes( $mes ) ;
+                $convenio->setEstado('NEGOCIACIÓN') ;
+                $convenio->setAbogado( $abogado ) ;
+                $convenio->setTecnicoExperto( $tecnicoExperto ) ;
+                $convenio->setObjeto( $objeto ) ;
+                $convenio->setAlcance( $alcance ) ;
+                $convenio->setEspecificacionesTecnicas( $especificacionesTecnicas );
+                $convenio->setJustificacion( $justificacion ) ;
 
-                if ($accion == "ADICIONAR") 
+
+                if ( $convenio->AdicionarModificar( $idSolicitud ) ) 
                 {
-                    if ( isset( $imagen ) && $imagen['name'] != '' )
-                    {
-                        if ( Select::validar( $imagen, 'FILE', null, 'IMAGEN', 'PNG' ) )
-                        {
-                            if ( $menu->Adicionar() ) {
-                                $imagen_src=$imagen['tmp_name'];
-                                $imagen_ds = __DIR__.'/../../img/icon/'.$icono.'.png';
-                                if (!copy($imagen_src, $imagen_ds) ){
-                                    print_r("*** No se ha cargado la imagen correctamente ***");
-                                }
-                                $menuNuevo = new Menu(' nombre ', "'$nombre'");
-                                $id = $menuNuevo->getId();            
-                                print_r("Se ha cargado en el modulo, Menú adicionado <|> id menú $id");
-                            } else {
-                                print_r("** ERROR INESPERADO VUELVE A INTENTAR **");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if ( $menu->Adicionar() )
-                        {
-                            $menuNuevo = new Menu(' nombre ', "'$nombre'");
-                            $id = $menuNuevo->getId();
-                            print_r("Se ha cargado en el modulo, Menú adicionado <|> id menú $id");
-                        }
-                        else
-                        {
-                            print_r("** ERROR INESPERADO VUELVE A INTENTAR **");
-                        }
-                    }
-                }
-                elseif ($accion == "MODIFICAR") 
-                {
-                    if ( Select::validar( $id, 'NUMERIC', null, 'ID' ) )
-                    {
-                        if ( isset( $imagen ) && $imagen['name'] != '' )
-                        {
-                            if ( Select::validar( $imagen, 'FILE', null, 'IMAGEN', 'PNG' ) )
-                            {
-                                if ( $menu->Modificar( $id ) ) {
-                                    $imagen_src=$imagen['tmp_name'];
-                                    $imagen_ds='/var/www/eagle_admin/adminV2/img/icon/'.$icono.'.png';
-                                    if (!copy($imagen_src, $imagen_ds) ){
-                                        print_r("*** No se ha cargado la imagen correctamente ***");
-                                    }
-                                    print_r("Se ha cargado en el modulo, Menú modificado <|> id menú $id");
-                                } else {
-                                    print_r("** ERROR INESPERADO VUELVE A INTENTAR **");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if ( $menu->Modificar( $id ) )
-                            {
-                                print_r("Se ha cargado en el modulo, Menú modificado <|> id menú $id");
-                            }
-                            else
-                            {
-                                print_r("** ERROR INESPERADO VUELVE A INTENTAR **");
-                            }
-                        }
-                    }
-                }   
+                    print_r( "Se ha cargado la solicitud en el módulo convenios <|> nombre convenio $nombre " ) ;
+                } else {
+                    print_r("ERROR INESPERADO, VUELVE A INTENTAR");
+                }  
             }
         }
         elseif ($accion == "ELIMINAR")
