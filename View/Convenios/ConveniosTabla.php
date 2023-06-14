@@ -52,7 +52,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
     // ecrypt codifica lo que enviamos por javascript
 
     // Encripta la información para enviarla
-    $http_inf = Http::encryptIt("id=1&llave_Primaria=&user={$_SESSION["user"]}&accion=ADICIONAR");
+    $http_add = Http::encryptIt("id=1&llave_Primaria=&user={$_SESSION["user"]}&accion=ADICIONAR");
     $http_ayu = Http::encryptIt("id=5&llave_Primaria=&user={$_SESSION["user"]}&accion=AYUDA");
     
     
