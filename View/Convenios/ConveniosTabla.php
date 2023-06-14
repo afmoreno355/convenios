@@ -52,8 +52,8 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
     // ecrypt codifica lo que enviamos por javascript
 
     // Encripta la información para enviarla
-    $http_add = Http::encryptIt("id=1&llave_Primaria=&user={$_SESSION["user"]}&accion=ADICIONAR");
-    $http_ayu = Http::encryptIt("id=4&llave_Primaria=&user={$_SESSION["user"]}&accion=AYUDA");
+    $http_inf = Http::encryptIt("id=1&llave_Primaria=&user={$_SESSION["user"]}&accion=ADICIONAR");
+    $http_ayu = Http::encryptIt("id=5&llave_Primaria=&user={$_SESSION["user"]}&accion=AYUDA");
     
     
 ?> 
@@ -92,6 +92,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
         }
         $http_com = Http::encryptIt("id=2&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=COMPLETAR");
         $http_eli = Http::encryptIt("id=3&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=ELIMINAR");
+        $http_inf = Http::encryptIt("id=4&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=ELIMINAR");
 ?> 
             <tr>
                 <td> <?= $object->getId() ?></td>
@@ -105,6 +106,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
                     <input type="button" id="button" name="1" onclick="validarDatos(``, `I=<?= $http_com ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="COMPLETAR">
                     
                     <input type="button" id="button" name="3" onclick="validarDatos(``, `I=<?= $http_eli ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="ELIMINAR">
+                    <input type="button" id="button" name="2" onclick="validarDatos(``, `I=<?= $http_inf ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="INFORMACIÓN">
                     <!--a onclick="sedeGestiones(`<?= $object->getId() ?>`, `Convenio`)" title="Convenio de las direcciones" ><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/></a-->
                 </td>
             </tr>
