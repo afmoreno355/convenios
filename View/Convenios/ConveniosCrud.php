@@ -55,6 +55,8 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         if ($accion == "ADICIONAR" || $accion == "COMPLETAR") 
         {
 
+            print_r(":)");
+
             if (
                  Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID SOLICITUD' ) &&
                  Select::validar( $nombre , 'TEXT' , 250 , 'NOMBRE' ) &&

@@ -69,6 +69,6 @@
             <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
             <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "Convenios" )'>
             <input type="reset" name="limpiarU"  value="LIMPIAR"/>
-            <p><?=$_SESSION['user']?></p>
+            <p><?=$accion?></p>
         </div>
     </div>

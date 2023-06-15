@@ -22,7 +22,6 @@ function envioNuevo( id  , postcad , donde , accion , nuevo , si )
 
 function cargar( respuesta = 'aviso' , donde = document.getElementById('donde').value , formulario = '#modalesV' ) 
 {
-    
     formValue = true;
     i = 0;
 

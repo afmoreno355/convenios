@@ -42,7 +42,7 @@ $convenio = new Convenio( ' id_solicitud ' , $llave_Primaria_Contructor);
 if ($id == 1 && $permisos)
 {
 ?>
-<h1>1</h1>
+<!--Modal 1-->
     <div class="carga_Documento">
         <div class="contenido">  
             <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
@@ -119,7 +119,7 @@ if ($id == 1 && $permisos)
 if ($id == 2 && $permisos)
 {
 ?>
-<h1>2</h1>
+<!--Modal 2-->
 
 <div class="carga_Documento">
     <div class="contenido">
@@ -144,7 +144,7 @@ require_once(__DIR__.'/ConveniosEstadosSeccionCompletar.php');
 elseif ($id == 3 && $permisos)
 {
 ?>
-<h1>3</h1>
+<!--Modal 3-->
     <div class="carga_Documento">
         <div class="contenido">  
             <div class="where_title where_modal" style="width: 100%; height: auto; margin-left: 0px;">
@@ -165,7 +165,7 @@ elseif ($id == 3 && $permisos)
 }
 elseif ($id == 4 && $permisos ) {
     ?>
-    <h1>4</h1>
+    <!--Modal 4-->
     <div class="carga_Documento">
     <div class="contenido">
         <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
@@ -188,7 +188,7 @@ require_once(__DIR__.'/ConveniosEstadosSeccionMostrar.php');
 }
 elseif ($id == 5 && $permisos ) {
     ?>
-    <h1>5</h1>
+    <!--Modal 5-->
     <div class="carga_Documento">
          <div class="contenido">  
             <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
