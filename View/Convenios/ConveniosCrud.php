@@ -52,11 +52,9 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
            $valor = null ; 
         }
         $convenio = new Convenio( $campo, $valor ) ;
-        if ($accion == "ADICIONAR" || $accion == "COMPLETAR") 
+        if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
-
             print_r(":)");
-
             if (
                  Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID SOLICITUD' ) &&
                  Select::validar( $nombre , 'TEXT' , 250 , 'NOMBRE' ) &&

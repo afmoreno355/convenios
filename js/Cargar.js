@@ -27,6 +27,7 @@ function cargar( respuesta = 'aviso' , donde = document.getElementById('donde').
 
     const form = document.querySelector(formulario);
     const formData = new FormData(form);
+
     form.addEventListener('submit', function (e) {
         e.preventDefault();
     });
@@ -43,6 +44,7 @@ function cargar( respuesta = 'aviso' , donde = document.getElementById('donde').
             i = i+1;
         }
     }
+    
     if( formValue === true )
     {
         document.getElementById(respuesta).innerHTML = "";
