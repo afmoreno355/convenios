@@ -44,7 +44,7 @@ function cargar( respuesta = 'aviso' , donde = document.getElementById('donde').
             i = i+1;
         }
     }
-    
+
     if( formValue === true )
     {
         document.getElementById(respuesta).innerHTML = "";

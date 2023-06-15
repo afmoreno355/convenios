@@ -120,25 +120,13 @@ if ($id == 2 && $permisos)
 {
 ?>
 <!--Modal 2-->
-
-<div class="carga_Documento">
-    <div class="contenido">
-        <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
-            <img src="img/icon/gestionar.png"/>
-            <label class="where">Convenios DFP – Dirección de Formación Profesional</label></div>
-            <br><br> 
-            <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
-            <label style="font-size: 1em; " id="aviso2" class="aviso" ><?= $convenio->getId() ?></label> 
-        </div>
-    </div>
 <?php
-require_once(__DIR__.'/ConveniosSolicitudSeccionCompletar.php');
-require_once(__DIR__.'/ConveniosDocumentosSeccionCompletar.php');
-require_once(__DIR__.'/ConveniosEstudiosPreviosSeccionCompletar.php');
-require_once(__DIR__.'/ConveniosPaaSeccionCompletar.php');
-require_once(__DIR__.'/ConveniosEstadosSeccionCompletar.php');
+    require_once(__DIR__.'/ConveniosSolicitudSeccionCompletar.php');
+    require_once(__DIR__.'/ConveniosDocumentosSeccionCompletar.php');
+    require_once(__DIR__.'/ConveniosEstudiosPreviosSeccionCompletar.php');
+    require_once(__DIR__.'/ConveniosPaaSeccionCompletar.php');
+    require_once(__DIR__.'/ConveniosEstadosSeccionCompletar.php');
 ?>
-</div>
 <?PHP
 }
 elseif ($id == 3 && $permisos)
@@ -177,11 +165,11 @@ elseif ($id == 4 && $permisos ) {
         </div>
     </div>
 <?php
-require_once(__DIR__.'/ConveniosSolicitudSeccionMostrar.php');
-require_once(__DIR__.'/ConveniosDocumentosSeccionMostrar.php');
-require_once(__DIR__.'/ConveniosEstudiosPreviosSeccionMostrar.php');
-require_once(__DIR__.'/ConveniosPaaSeccionMostrar.php');
-require_once(__DIR__.'/ConveniosEstadosSeccionMostrar.php');
+    require_once(__DIR__.'/ConveniosSolicitudSeccionMostrar.php');
+    require_once(__DIR__.'/ConveniosDocumentosSeccionMostrar.php');
+    require_once(__DIR__.'/ConveniosEstudiosPreviosSeccionMostrar.php');
+    require_once(__DIR__.'/ConveniosPaaSeccionMostrar.php');
+    require_once(__DIR__.'/ConveniosEstadosSeccionMostrar.php');
 ?>
 </div>
 <?PHP

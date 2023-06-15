@@ -1,1 +1,106 @@
-function _0x26dd(_0x4212a6,_0x39c1a1){var _0x20b20c=_0x20b2();return _0x26dd=function(_0x26ddbd,_0x599e65){_0x26ddbd=_0x26ddbd-0xef;var _0x151d72=_0x20b20c[_0x26ddbd];return _0x151d72;},_0x26dd(_0x4212a6,_0x39c1a1);}(function(_0x2cae62,_0x3d1ca5){var _0x3a6fa2=_0x26dd,_0x13e23c=_0x2cae62();while(!![]){try{var _0x5490bb=-parseInt(_0x3a6fa2(0xf6))/0x1+-parseInt(_0x3a6fa2(0xfc))/0x2*(-parseInt(_0x3a6fa2(0xf8))/0x3)+-parseInt(_0x3a6fa2(0x101))/0x4+-parseInt(_0x3a6fa2(0xf2))/0x5+parseInt(_0x3a6fa2(0xf1))/0x6+-parseInt(_0x3a6fa2(0x103))/0x7+parseInt(_0x3a6fa2(0xff))/0x8*(parseInt(_0x3a6fa2(0xfb))/0x9);if(_0x5490bb===_0x3d1ca5)break;else _0x13e23c['push'](_0x13e23c['shift']());}catch(_0x59a9c9){_0x13e23c['push'](_0x13e23c['shift']());}}}(_0x20b2,0xd9ed1));function valido(_0x1203d7){var _0xe05147=_0x26dd;if(_0x1203d7[_0xe05147(0xf9)]!==''||_0x1203d7[_0xe05147(0x104)]===_0xe05147(0x102)||_0x1203d7['required']===![]){if(_0x1203d7[_0xe05147(0xf9)]!==undefined)switch(_0x1203d7[_0xe05147(0x104)]){case'number':return Number['isInteger'](parseInt(_0x1203d7['value']))?!![]:![];break;case _0xe05147(0xf3):return!![];break;case _0xe05147(0x102):return!![];break;case _0xe05147(0xf7):return!![];break;case'fieldset':return!![];break;case _0xe05147(0x100):return!![];break;case _0xe05147(0xfe):return!![];break;case _0xe05147(0xf5):return!![];break;case _0xe05147(0xf0):return!![];break;case'button':return!![];break;case _0xe05147(0xef):return!![];break;case _0xe05147(0xf4):return!![];break;case _0xe05147(0xfa):return _0x1203d7[_0xe05147(0xf9)]!==''?!![]:![];break;case _0xe05147(0xfd):return _0x1203d7[_0xe05147(0xf9)]!==''?!![]:![];break;default:return![];break;}else return!![];}return![];}function _0x20b2(){var _0x460963=['type','color','radio','7684584LIFUSN','3805265rfohsc','text','checkbox','fieldset','1157643DJLojc','submit','1567491CToons','value','select-one','12168YfojXB','4cmGdxt','textarea','date','19216ahDUGI','file','5585188vbWssN','hidden','9559508VzeTfy'];_0x20b2=function(){return _0x460963;};return _0x20b2();}
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+function valido(form)
+{
+   if( form.value !== '' || form.type === 'hidden' || form.required ===  false)
+   {
+        if( form.value !== undefined )
+        {
+            switch (form.type)
+            {
+                case 'number' : 
+                    if( Number.isInteger(parseInt(form.value) ) )
+                    {
+                        return true;   
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                break ;
+                case 'text' :
+                    return true;  
+                break ;
+                case 'checkbox' :
+                    return true;  
+                break ;
+                case 'hidden' :
+                    return true;  
+                break ;
+                case 'reset' :
+                    return true;
+                case 'submit' :
+                    return true;  
+                break ;
+                case 'fieldset' :
+                    return true;  
+                break ;
+                case 'password' :
+                    return true;  
+                break ;
+                case 'file' : 
+                    return true;  
+                break ;
+                case 'date' : 
+                    return true;  
+                break ;
+                case 'fieldset' : 
+                    return true;  
+                break ;
+                case 'radio' : 
+                    return true;  
+                break ;
+                case 'button' : 
+                    return true;  
+                break ;
+                case 'email' : 
+                    var valor = form.value.split('@');
+                    if( valor.length >= 2 )
+                    {
+                        return true; 
+                    }
+                    else
+                    {
+                       return false;  
+                    }
+                break ;
+                case 'color' : 
+                    return true;  
+                break ;
+                case 'select-one' : 
+                    if( form.value !== '' )
+                    {
+                        return true;   
+                    }
+                    else
+                    {
+                        return false;
+                    }  
+                break ;
+                case 'textarea' : 
+                    if( form.value !== '' )
+                    {
+                        return true;   
+                    }
+                    else
+                    {
+                        return false;
+                    }  
+                break ;
+                default :
+                    return false;
+                break;   
+            }
+        }
+        else 
+        {
+            return true ; 
+        }
+   }   
+   return false;
+} 

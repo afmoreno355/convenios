@@ -262,13 +262,27 @@ class Convenio {
     }
     
     public function Modificar( $id ) {
-        $sql="update menu set
+        $sql="update solicitudes set
              nombre = '$this->nombre',
              pnombre = '$this->pnombre',
              icono = '$this->icono'
                where id = '$id' ";
-        print_r($sql);
-        /**if (ConectorBD::ejecutarQuery($sql, null)) {
+
+        $sql = "update solicitudes set
+                        nombre = '$this->nombre',
+                        codigo_area = '$this->codigoArea',
+                        abogado = '$this->abogado',
+                        tecnico_experto = '$this->tecnicoExperto',
+                        mes_publicacion = '$this->mes',
+                        estado = '$this->estado',
+                        objeto = '$this->objeto',
+                        alcance = '$this->alcance',
+                        especificaciones_tecnicas = '$this->especificacionesTecnicas',
+                        justificacion = '$this->justificacion',
+                        fecha_sistema = now()
+                where id_solicitud = $id ";
+        //print_r($sql);
+        if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
             $nuevo_query = str_replace("'", "|", $sql);
             $historico = new Historico(null, null);
@@ -276,7 +290,7 @@ class Convenio {
             $historico->setTipo_historico("MODIFICAR");
             $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
-            $historico->setTabla("MENU");
+            $historico->setTabla("SOLICITUDES");
             $historico->grabar();
             return true;
         }/** */

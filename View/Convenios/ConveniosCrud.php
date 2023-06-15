@@ -54,7 +54,6 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         $convenio = new Convenio( $campo, $valor ) ;
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
-            print_r(":)");
             if (
                  Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID SOLICITUD' ) &&
                  Select::validar( $nombre , 'TEXT' , 250 , 'NOMBRE' ) &&
@@ -64,7 +63,6 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                  Select::validar( $tecnicoExperto, 'TEXT', 250, 'TÉCNICO EXPERTO' ) &&
                  Select::validar( $objeto, 'TEXT', 15000, 'OBJETO') &&
                  Select::validar( $alcance, 'TEXT', 15000, 'ALCANCE OBJETO' ) &&
-                 Select::validar( $especificacionesTecnicas, 'TEXT', 15000, 'ESPECIFICACIONES TÉCNICAS' ) &&
                  Select::validar( $justificacion, 'TEXT', 15000, 'JUSTIFICACIÓN')
                 )
             {
@@ -76,7 +74,6 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenio->setTecnicoExperto( $tecnicoExperto ) ;
                 $convenio->setObjeto( $objeto ) ;
                 $convenio->setAlcance( $alcance ) ;
-                $convenio->setEspecificacionesTecnicas( $especificacionesTecnicas );
                 $convenio->setJustificacion( $justificacion ) ;
 
 
