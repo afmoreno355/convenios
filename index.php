@@ -8,15 +8,12 @@ $id_espe = '' ;
 
 foreach ($_POST as $key => $value) ${$key}=  $value;
 
-require_once dirname(__FILE__).'/autoload.php';
+require_once __DIR__.'/autoload.php';
 
-if( !isset( $_SESSION['user' ] ) )
-{
-           header("location: http://dfp.senaedu.edu.co/modulos_gestion/");
-}
+
 
 $permisos = new Persona(' identificacion ', "'".$_SESSION['user']."'");
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "convenios_contratos");
+$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), "eagle_admin");
 if( $permisos->getIdTipo()!='SA' && $ingreso==false ){   
        header("location: http://dfp.senaedu.edu.co/modulos_gestion");
 }
@@ -24,6 +21,7 @@ elseif ( $permisos->getIdTipo()=='SA')
 {
     $require = './Index_A.php';
 }
+
 ?>
  <head>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
@@ -100,7 +98,7 @@ elseif ( $permisos->getIdTipo()=='SA')
     
     <script src="js/Http.js?1"> </script>
     <script src="js/encry.js?1"> </script>
-    <script src="js/menu.js?1"> </script>
+    <script src="js/Menu.js?1"> </script>
     <script src="js/Ajax.js?1"> </script>
     <script src="js/Reporte.js?1"> </script>
     <script src="js/sede.js?2"> </script>
@@ -114,5 +112,5 @@ elseif ( $permisos->getIdTipo()=='SA')
     <script src="js/check.js?1"> </script>
     <script src="js/cerrar.js?1"> </script>
     <script src="js/Contratacion.js?1"> </script>
-    
-    
+
+

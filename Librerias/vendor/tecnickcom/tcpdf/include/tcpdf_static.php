@@ -2380,7 +2380,7 @@ class TCPDF_STATIC {
 		// - Old Imperial English Sizes
 		'EN_EMPEROR'             => array( 3456.000,  5184.000), // = ( 1219 x 1829 ) mm  = ( 48.00 x 72.00 ) in
 		'EN_ANTIQUARIAN'         => array( 2232.000,  3816.000), // = (  787 x 1346 ) mm  = ( 31.00 x 53.00 ) in
-		'EN_GRAND_EAGLE'         => array( 2070.000,  3024.000), // = (  730 x 1067 ) mm  = ( 28.75 x 42.00 ) in
+		'EN_GRAND_eagle_admin'         => array( 2070.000,  3024.000), // = (  730 x 1067 ) mm  = ( 28.75 x 42.00 ) in
 		'EN_DOUBLE_ELEPHANT'     => array( 1926.000,  2880.000), // = (  679 x 1016 ) mm  = ( 26.75 x 40.00 ) in
 		'EN_ATLAS'               => array( 1872.000,  2448.000), // = (  660 x 864  ) mm  = ( 26.00 x 34.00 ) in
 		'EN_COLOMBIER'           => array( 1692.000,  2484.000), // = (  597 x 876  ) mm  = ( 23.50 x 34.50 ) in
