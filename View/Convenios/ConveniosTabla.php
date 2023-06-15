@@ -93,7 +93,6 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
         $http_com = Http::encryptIt("id=2&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=MODIFICAR");
         $http_eli = Http::encryptIt("id=3&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=ELIMINAR");
         $http_inf = Http::encryptIt("id=4&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=INFORMACION");
-    print_r($http_com);
 ?> 
             <tr>
                 <td> <?= $object->getId() ?></td>
@@ -105,7 +104,6 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
                 <td> <?= $object->getEstado() ?></td>
                 <td>
                     <input type="button" id="button" name="1" onclick="validarDatos(``, `I=<?= $http_com ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="MODIFICAR">
-                    
                     <input type="button" id="button" name="3" onclick="validarDatos(``, `I=<?= $http_eli ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="ELIMINAR">
                     <input type="button" id="button" name="2" onclick="validarDatos(``, `I=<?= $http_inf ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="INFORMACIÓN">
                     <!--a onclick="sedeGestiones(`<?= $object->getId() ?>`, `Convenio`)" title="Convenio de las direcciones" ><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/></a-->

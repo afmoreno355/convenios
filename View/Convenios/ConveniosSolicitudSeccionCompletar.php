@@ -42,25 +42,19 @@
         <div>
             <fieldset>
                 <legend title='OBJETO'>OBJETO</legend>
-                <textarea  value='<?= $convenio->getObjeto() ?>'  name='objeto' id='objeto' ></textarea>
+                <textarea name='objeto' id='objeto' ><?= $convenio->getObjeto() ?></textarea>
             </fieldset>
         </div>
         <div>
             <fieldset>
                 <legend title='ALCANCE'>ALCANCE DEL OBJETO</legend>
-                <textarea  value='<?= $convenio->getAlcance() ?>'  name='alcance' id='alcance' ></textarea>
-            </fieldset>
-        </div>
-        <div>
-            <fieldset>
-                <legend title='EXPECIFICACIONES TECNICAS'>EXPECIFICACIONES TÉCNICAS</legend>
-                <textarea  value='<?= $convenio->getEspecificacionesTecnicas() ?>'  name='especificacionesTecnicas' id='especificacionesTecnicas' ></textarea>
+                <textarea name='alcance' id='alcance' ><?= $convenio->getAlcance() ?></textarea>
             </fieldset>
         </div>
         <div>
             <fieldset>
                 <legend title='JUSTIFICACION'>JUSTIFICACIÓN</legend>
-                <textarea   value='<?= $convenio->getJustificacion() ?>'  name='justificacion' id='justificacion' ></textarea>
+                <textarea name='justificacion' id='justificacion' ><?= $convenio->getJustificacion() ?></textarea>
             </fieldset>
         </div>        
         <div>     
@@ -69,6 +63,5 @@
             <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
             <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "Convenios" )'>
             <input type="reset" name="limpiarU"  value="LIMPIAR"/>
-            <p><?=$accion?></p>
         </div>
     </div>
