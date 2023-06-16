@@ -129,8 +129,22 @@ class ConvenioDocumentos {
             if (is_array($campo)) {
                 $this->cargarObjetoDeVector($campo);
             } else {
-                $cadenaSQL = "select * from  radicado , idoneidad where radicado.id_radicado = idoneidad.id_radicado and $campo = $valor";
-                $resultado = ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria');
+                $sql = "select 
+                            id_documentos,
+                            id_solicitud,
+                            memorando,
+                            estudios_previos,
+                            anexo_tecnico,
+                            analisis_tecnico,
+                            concepto_tecnico,
+                            propuesta_tecnica_economica,
+                            matriz_riesgos,
+                            certificado_disponibilidad_presupuestal,
+                            certificado_paa,
+                            proyecto_autorizacion,
+                            fecha_sistema
+                        form documentaciones where $campo = $valor";
+                $resultado = ConectorBD::ejecutarQuery($sql, ' convenios ');
                 if (count($resultado) > 0) {
                     $this->cargarObjetoDeVector($resultado[0]);
                 }
@@ -140,9 +154,9 @@ class ConvenioDocumentos {
 
     //organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
     private function cargarObjetoDeVector($vector) {
-        $this->id_radicado = $vector[0];
-        $this->centro = $vector[1];
-        $this->fecha_sistema = $vector[2];
+        $this->id = $vector[0];
+        $this->idSolicitud = $vector[1];
+        $this->estudioPrevios = $vector[2];
         $this->responsable = $vector[3];
         $this->doc_1 = $vector[4];
         $this->doc_2 = $vector[5];

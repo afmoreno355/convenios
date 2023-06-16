@@ -281,7 +281,7 @@ class Convenio {
                         justificacion = '$this->justificacion',
                         fecha_sistema = now()
                 where id_solicitud = $id ";
-        //print_r($sql);
+        // print_r($sql);
         if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
             $nuevo_query = str_replace("'", "|", $sql);
