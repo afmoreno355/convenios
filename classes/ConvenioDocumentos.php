@@ -14,6 +14,7 @@
 class ConvenioDocumentos {
     //put your code here
     private $id;
+    private $idSolicitud;
     private $memorando;
     private $estudiosPrevios;
     private $anexoTecnico;
@@ -27,100 +28,110 @@ class ConvenioDocumentos {
     private $fecha;
 
 
+    // Getters and Setters
+    
     public function getId() {
-        return $this->id ;
+        return $this->id;
     }
 
-    public function setId( $id ) {
-        $this->id = $id ;
+    public function getIdSolicitud() {
+        return $this->idSolicitud;
     }
 
     public function getMemorando() {
-        return $this->memorando ;
-    }
-
-    public function setMemorando( $memorando ) {
-        $this->memorando = $memorando ;
+        return $this->memorando;
     }
 
     public function getEstudiosPrevios() {
-        return $this->estudiosPrevios ;
-    }
-    
-    public function setEstudosPrevios( $estudiosPrevios ) {
-        $this->estudiosPrevios = $estudiosPrevios ;
+        return $this->estudiosPrevios;
     }
 
     public function getAnexoTecnico() {
-        return $this->anexoTecnico ;
-    }
-    
-    public function setAnexoTecnico( $anexoTecnico ) {
-        $this->anexoTecnico = $anexoTecnico ;
+        return $this->anexoTecnico;
     }
 
     public function getAnalisisSector() {
-        return $this->analisisSector ;
-    }
-    
-    public function setAnalisisSector( $analisisSector ) {
-        $this->analisisSector = $analisisSector ;
+        return $this->analisisSector;
     }
 
     public function getSolicitudConceptoTecnico() {
-        return $this->analisisSector ;
-    }
-    
-    public function setSolicitudConceptoTecnico( $solicitudConceptoTecnico ) {
-        $this->solicitudConceptoTecnico = $solicitudConceptoTecnico ;
+        return $this->solicitudConceptoTecnico;
     }
 
     public function getPropuestaTecnicaEconomica() {
-        return $this->analisisSector ;
-    }
-    
-    public function setPropuestaTecnicaEconomica( $propuestaTecnicaEconomica ) {
-        $this->propuestaTecnicaEconomica = $propuestaTecnicaEconomica ;
+        return $this->propuestaTecnicaEconomica;
     }
 
     public function getMatrizRiesgos() {
-        return $this->analisisSector ;
-    }
-    
-    public function setMatrizRiesgos( $matrizRiesgos ) {
-        $this->matrizRiesgos = $matrizRiesgos ;
+        return $this->matrizRiesgos;
     }
 
     public function getDisponibilidadPresupuestal() {
-        return $this->analisisSector ;
-    }
-    
-    public function setDisponibilidadPresupuestal( $disponibilidadPresupuestal ) {
-        $this->disponibilidadPresupuestal = $disponibilidadPresupuestal ;
+        return $this->disponibilidadPresupuestal;
     }
 
     public function getPaa() {
-        return $this->paa ;
-    }
-    
-    public function setPaa( $paa ) {
-        $this->paa = $paa ;
+        return $this->paa;
     }
 
     public function getProyectoAutorizacion() {
-        return $this->proyectoAutorizacion ;
-    }
-    
-    public function setProyectoAutorizacion( $proyectoAutorizacion ) {
-        $this->proyectoAutorizacion= $proyectoAutorizacion ;
+        return $this->proyectoAutorizacion;
     }
 
     public function getFecha() {
-        return $this->fecha ;
+        return $this->fecha;
     }
-    
-    public function setFecha( $fecha ) {
-        $this->fecha = $fecha ;
+
+    public function setId($id): void {
+        $this->id = $id;
+    }
+
+    public function setIdSolicitud($idSolicitud): void {
+        $this->idSolicitud = $idSolicitud;
+    }
+
+    public function setMemorando($memorando): void {
+        $this->memorando = $memorando;
+    }
+
+    public function setEstudiosPrevios($estudiosPrevios): void {
+        $this->estudiosPrevios = $estudiosPrevios;
+    }
+
+    public function setAnexoTecnico($anexoTecnico): void {
+        $this->anexoTecnico = $anexoTecnico;
+    }
+
+    public function setAnalisisSector($analisisSector): void {
+        $this->analisisSector = $analisisSector;
+    }
+
+    public function setSolicitudConceptoTecnico($solicitudConceptoTecnico): void {
+        $this->solicitudConceptoTecnico = $solicitudConceptoTecnico;
+    }
+
+    public function setPropuestaTecnicaEconomica($propuestaTecnicaEconomica): void {
+        $this->propuestaTecnicaEconomica = $propuestaTecnicaEconomica;
+    }
+
+    public function setMatrizRiesgos($matrizRiesgos): void {
+        $this->matrizRiesgos = $matrizRiesgos;
+    }
+
+    public function setDisponibilidadPresupuestal($disponibilidadPresupuestal): void {
+        $this->disponibilidadPresupuestal = $disponibilidadPresupuestal;
+    }
+
+    public function setPaa($paa): void {
+        $this->paa = $paa;
+    }
+
+    public function setProyectoAutorizacion($proyectoAutorizacion): void {
+        $this->proyectoAutorizacion = $proyectoAutorizacion;
+    }
+
+    public function setFecha($fecha): void {
+        $this->fecha = $fecha;
     }
 
     // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
