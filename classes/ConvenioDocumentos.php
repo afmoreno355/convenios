@@ -165,21 +165,6 @@ class ConvenioDocumentos {
 
     //organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
     private function cargarObjetoDeVector($vector) {
-        /**
-         * private $id;
-    private $idSolicitud;
-    private $memorando;
-    private $estudiosPrevios;
-    private $anexoTecnico;
-    private $analisisSector;
-    private $solicitudConceptoTecnico;
-    private $propuestaTecnicaEconomica;
-    private $matrizRiesgos;
-    private $disponibilidadPresupuestal;
-    private $paa; // Plan Anual
-    private $proyectoAutorizacion;
-    private $fecha;
-         */
         $this->id = $vector[0];
         $this->idSolicitud = $vector[1];
         $this->memorando = $vector[2];
@@ -203,15 +188,15 @@ class ConvenioDocumentos {
 
     //datos hace la consulta sql.
     public static function datos($filtro, $pagina, $limit) {
-        $cadenaSQL = "select * from  radicado , idoneidad ";
+        $sql = "select * from  documentaciones";
         if ($filtro != null) {
-            $cadenaSQL .= " where " . $filtro;
+            $sql .= " where " . $filtro;
         }
-        $cadenaSQL .= " order by radicado.id_radicado desc ";
+        $sql .= " order by documentaciones.id_documentacion desc ";
         if ($pagina != null && $limit != null) {
-            $cadenaSQL .= " offset $pagina limit $limit ";
+            $sql .= " offset $pagina limit $limit ";
         }
-        return ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria');
+        return ConectorBD::ejecutarQuery($sql, ' convenios ');
     }
 
     //convierte los array de datos en objetos enviando las posiciones al constructor 
@@ -228,21 +213,46 @@ class ConvenioDocumentos {
     // nos debuelve la cantidad de filas que existen en la tabla para hacer la paginacion.
     public static function count($filtro) {
         $filtro = ( $filtro != "") ? " where $filtro " : "";
-        return ConectorBD::ejecutarQuery("select count(*) from  radicado, idoneidad  $filtro", 'secretaria');
+        return ConectorBD::ejecutarQuery("select count(*) from  documentaciones  $filtro", ' convenios ');
     }   
     
     // guardar elementos en la base de datos
-    public function grabar() {
-        $cadenaSQL = "insert into radicado(centro,fecha_sistema,responsable,doc_1,doc_2,doc_3,doc_4,doc_5,doc_6,estado) values('$this->centro','$this->fecha_sistema','$this->responsable','$this->doc_1','$this->doc_2','$this->doc_3','$this->doc_4','$this->doc_5','$this->doc_6','$this->estado');";
-        if (ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria')) {
+    public function adicionar() {
+        $sql = "insert into documentaciones (
+                            id_solicitud,
+                            memorando,
+                            estudios_previos,
+                            anexo_tecnico,
+                            analisis_sector,
+                            concepto_tecnico,
+                            propuesta_tecnica_economica,
+                            matriz_riesgos,
+                            certificado_disponibilidad_presupuestal,
+                            certificado_paa,
+                            proyecto_autorizacion,
+                            fecha_sistema
+                            ) values (
+                            '$this->idSolicitud',
+                            '$this->memorando',
+                            '$this->estudiosPrevios',
+                            '$this->anexoTecnico',
+                            '$this->analisisSector',
+                            '$this->solicitudConceptoTecnico',
+                            '$this->propuestaTecnicaEconomica',
+                            '$this->matrizRiesgos',
+                            '$this->disponibilidadPresupuestal',
+                            '$this->paa',
+                            '$this->proyectoAutorizacion',
+                            now()
+                            ) ";
+        if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
-            $nuevo_query = str_replace("'", "|", $cadenaSQL);
             $historico = new Historico(null, null);
             $historico->setIdentificacion($_SESSION["user"]);
-            $historico->setTipo_historico("GRABAR");
-            $historico->setHistorico(strtoupper($nuevo_query));
+            $historico->setTipo_historico("ADICIONAR");
+            $historico->setHistorico(strtoupper(str_replace("'", "|", $sql)));
             $historico->setFecha("now()");
-            $historico->setTabla("SECRETARIA");
+            $historico->setTabla("DOCUMENTACIONES");
             $historico->grabar();
             return true;
         } else {
@@ -251,37 +261,17 @@ class ConvenioDocumentos {
     }
 
     // borrar elementos en la base de datos
-    public function borrar() {
-        $this->unlink($this->id_radicado);  
-        $cadenaSQL = "delete from  radicado where id_radicado = '$this->id_radicado'";
-        if (ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria')) {
+    public function borrar() {  
+        $sql = "delete from documentaciones where id_documentacion = '$this->id'";
+        if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
-            $nuevo_query = str_replace("'", "|", $cadenaSQL);
+            $sqlFormatted = strtoupper(str_replace("'", "|", $sql));
             $historico = new Historico(null, null);
             $historico->setIdentificacion($_SESSION["user"]);
             $historico->setTipo_historico("ELIMINAR");
-            $historico->setHistorico(strtoupper($nuevo_query));
+            $historico->setHistorico($sqlFormatted);
             $historico->setFecha("now()");
-            $historico->setTabla("SECRETARIA");
-            $historico->grabar();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // asignar elementos en la base de datos
-    public function asignar() {
-        $cadenaSQL = " update radicado set revisor_1 = '$this->revisor_1' , revisor_2= '$this->revisor_2' where id_radicado = '$this->id_radicado'";
-        if (ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria')) {
-            //Historico de las acciones en el sistemas de informacion
-            $nuevo_query = str_replace("'", "|", $cadenaSQL);
-            $historico = new Historico(null, null);
-            $historico->setIdentificacion($_SESSION["user"]);
-            $historico->setTipo_historico("ASIGNAR");
-            $historico->setHistorico(strtoupper($nuevo_query));
-            $historico->setFecha("now()");
-            $historico->setTabla("SECRETARIA");
+            $historico->setTabla("DOCUMENTACIONES");
             $historico->grabar();
             return true;
         } else {
@@ -289,37 +279,31 @@ class ConvenioDocumentos {
         }
     }
     
-    public function estado() {
-        $cadenaSQL = "UPDATE RADICADO SET ESTADO='$this->estado' WHERE id_radicado = '$this->id_radicado'";
-        if (ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria')) {
-            //Historico de las acciones en el sistemas de informacion
-            $nuevo_query = str_replace("'", "|", $cadenaSQL);
-            $historico = new Historico(null, null);
-            $historico->setIdentificacion($_SESSION["user"]);
-            $historico->setTipo_historico("ESTADO");
-            $historico->setHistorico(strtoupper($nuevo_query));
-            $historico->setFecha("now()");
-            $historico->setTabla("SECRETARIA");
-            $historico->grabar();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     // modificar elementos en la base de datos, identificador es el codigo o llave primaria a modificar 
-    public function modificar($identificador) {
+    public function modificar($id) {
        // $this->unlink($identificador);  
-        $cadenaSQL = "update  radicado set doc_1 = '$this->doc_1',doc_2 = '$this->doc_2', doc_3 = '$this->doc_3', doc_4 = '$this->doc_4', doc_5 = '$this->doc_5', doc_6 = '$this->doc_6' where id_radicado = '$identificador'";
-        if (ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria')) {
+        $sql = "update documentaciones set
+                    memorando = '$this->memorando',
+                    estudios_rpevios = '$this->estudiosPrevios',
+                    anexo_tecnico = '$this->anexoTecnico',
+                    analisis_sector = '$this->analisisSector',
+                    concepto_tecnico = '$this->conceptoTecnico',
+                    propuesta_tecnica_economica = '$this->propuestaTecnicaEconomica',
+                    matriz_riesgos = '$this->matrizRiesgos',
+                    certificado_disponibilidad_presupuestal = '$this->disponibilidadPresupuestal',
+                    certificado_paa = '$this->paa',
+                    proyecto_autorizacion = '$this->proyectoAutorizacion',
+                    fecha_sistema = now()
+                    where id_documentación = '$id' ";
+        if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
-            $nuevo_query = str_replace("'", "|", $cadenaSQL);
+            $sqlFormatted = strtoupper(str_replace("'", "|", $cadenaSQL));
             $historico = new Historico(null, null);
             $historico->setIdentificacion($_SESSION["user"]);
             $historico->setTipo_historico("MODIFICAR");
-            $historico->setHistorico(strtoupper($nuevo_query));
+            $historico->setHistorico($sqlFormatted);
             $historico->setFecha("now()");
-            $historico->setTabla("SECRETARIA");
+            $historico->setTabla("DOCUMENTACIONES");
             $historico->grabar();
             return true;
         } else {
