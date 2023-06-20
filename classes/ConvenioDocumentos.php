@@ -141,12 +141,12 @@ class ConvenioDocumentos {
                 $this->cargarObjetoDeVector($campo);
             } else {
                 $sql = "select 
-                            id_documentos,
+                            id_documentacion,
                             id_solicitud,
                             memorando,
                             estudios_previos,
                             anexo_tecnico,
-                            analisis_tecnico,
+                            analisis_sector,
                             concepto_tecnico,
                             propuesta_tecnica_economica,
                             matriz_riesgos,
@@ -165,20 +165,34 @@ class ConvenioDocumentos {
 
     //organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
     private function cargarObjetoDeVector($vector) {
+        /**
+         * private $id;
+    private $idSolicitud;
+    private $memorando;
+    private $estudiosPrevios;
+    private $anexoTecnico;
+    private $analisisSector;
+    private $solicitudConceptoTecnico;
+    private $propuestaTecnicaEconomica;
+    private $matrizRiesgos;
+    private $disponibilidadPresupuestal;
+    private $paa; // Plan Anual
+    private $proyectoAutorizacion;
+    private $fecha;
+         */
         $this->id = $vector[0];
         $this->idSolicitud = $vector[1];
-        $this->estudioPrevios = $vector[2];
-        $this->responsable = $vector[3];
-        $this->doc_1 = $vector[4];
-        $this->doc_2 = $vector[5];
-        $this->doc_3 = $vector[6];
-        $this->doc_4 = $vector[7];
-        $this->doc_5 = $vector[8];
-        $this->doc_6 = $vector[9];
-        $this->estado = $vector[10];
-        $this->revisor_1 = $vector[11];
-        $this->revisor_2 = $vector[12];
-        $this->contratista = $vector[14];
+        $this->memorando = $vector[2];
+        $this->estudiosPrevios = $vector[3];
+        $this->anexoTecnico = $vector[4];
+        $this->analisisSector = $vector[5];
+        $this->solicitudConceptoTecnico = $vector[6];
+        $this->propuestaTecnicaEconomica = $vector[7];
+        $this->matrizRiesgos = $vector[8];
+        $this->disponibilidadPresupuestal = $vector[9];
+        $this->paa = $vector[10];
+        $this->proyectoAutorizacion = $vector[11];
+        $this->fecha = $vector[12];
     }
  
            
