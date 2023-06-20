@@ -9,7 +9,7 @@
 /**
  * Description of Autorizacion
  *
- * @author 
+ * @author Dibier 
  */
 class ConvenioDocumentos {
     //put your code here
