@@ -25,7 +25,6 @@ class Convenio {
     // Datos obligatorios de documentos de estudios previos
     private $objeto;
     private $alcance;
-    private $especificacionesTecnicas;
     private $justificacion;
     // Fecha sistema
     private $fecha;
@@ -66,10 +65,6 @@ class Convenio {
 
     public function getAlcance() {
         return $this->alcance;
-    }
-
-    public function getEspecificacionesTecnicas() {
-        return $this->especificacionesTecnicas;
     }
 
     public function getJustificacion() {
@@ -116,10 +111,6 @@ class Convenio {
         $this->alcance = $alcance;
     }
 
-    public function setEspecificacionesTecnicas($especificacionesTecnicas): void {
-        $this->especificacionesTecnicas = $especificacionesTecnicas;
-    }
-
     public function setJustificacion($justificacion): void {
         $this->justificacion = $justificacion;
     }
@@ -144,7 +135,6 @@ class Convenio {
                                estado,
                                objeto,
                                alcance,
-                               especificaciones_tecnicas,
                                justificacion,
                                fecha_sistema
                         from solicitudes where $campo = $valor";
@@ -167,9 +157,8 @@ class Convenio {
         $this->estado = $vector[6];
         $this->objeto = $vector[7];
         $this->alcance = $vector[8];
-        $this->especificacionesTecnicas = $vector[9];
-        $this->justificacion = $vector[10];
-        $this->fecha = $vector[11];
+        $this->justificacion = $vector[9];
+        $this->fecha = $vector[10];
     }
 
 
@@ -184,7 +173,6 @@ class Convenio {
                        estado,
                        objeto,
                        alcance,
-                       especificaciones_tecnicas,
                        justificacion,
                        fecha_sistema
                 from solicitudes ";
@@ -228,7 +216,6 @@ class Convenio {
                                     estado,
                                     objeto,
                                     alcance,
-                                    especificaciones_tecnicas,
                                     justificacion,
                                     fecha_sistema
                                     )
@@ -241,7 +228,6 @@ class Convenio {
                                     '$this->estado',
                                     '$this->objeto',
                                     '$this->alcance',
-                                    '$this->especificacionesTecnicas',
                                     '$this->justificacion',
                                     now()
                                    )";
@@ -262,12 +248,6 @@ class Convenio {
     }
     
     public function Modificar( $id ) {
-        $sql="update solicitudes set
-             nombre = '$this->nombre',
-             pnombre = '$this->pnombre',
-             icono = '$this->icono'
-               where id = '$id' ";
-
         $sql = "update solicitudes set
                         nombre = '$this->nombre',
                         codigo_area = '$this->codigoArea',
@@ -277,7 +257,6 @@ class Convenio {
                         estado = '$this->estado',
                         objeto = '$this->objeto',
                         alcance = '$this->alcance',
-                        especificaciones_tecnicas = '$this->especificacionesTecnicas',
                         justificacion = '$this->justificacion',
                         fecha_sistema = now()
                 where id_solicitud = $id ";

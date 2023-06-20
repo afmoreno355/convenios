@@ -64,7 +64,7 @@ CREATE TABLE public.documentaciones (
 	memorando varchar NULL,
 	estudios_previos varchar NULL,
 	anexo_tecnico varchar NULL,
-	analisis_tecnico varchar NULL,
+	analisis_sector varchar NULL,
 	concepto_tecnico varchar NULL,
 	propuesta_tecnica_economica varchar NULL,
 	matriz_riesgos varchar NULL,
