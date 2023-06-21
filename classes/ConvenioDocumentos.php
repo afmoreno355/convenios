@@ -310,4 +310,32 @@ class ConvenioDocumentos {
             return false;
         }
     }
+
+    public function adicionarDocumento($documento, $nombre) {
+
+        $cargarDocumento = isset( $documento ) && $documento['name'] != '';
+        $fechaActual = date("d_m_Y_h_i_s");
+        $destino = __DIR__.'/../archivos/convenios/'.$this->id.'/'.$nombre.'_'.$fechaActual.'.pdf'; // La carpeta debe tener permisos
+        
+        if ( $cargarDocumento ) {
+            if (
+                Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
+                mkdir(dirname($destino), 0777, true) &&
+                copy($documento['tmp_name'], $destino)
+               )
+               {
+                $historico = new Historico(null, null);
+                $historico->setIdentificacion($_SESSION["user"]);
+                $historico->setTipo_historico("AGREGAR_DOCUMENTO");
+                $historico->setFecha("now()");
+                $historico->grabar();
+               } else {
+                print_r(" No se ha cargado el documento correctamente. ");
+               }
+        }
+    }
+
+
 }
+
+
