@@ -47,16 +47,16 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         }
         else
         {
-           $idSolicitud = 0 ;
+           $idSolicitud= 0 ;
            $campo = null ;
            $valor = null ; 
         }
-        $convenio = new Convenio( $campo, $valor ) ;
+        $convenio = new ConvenioDocumentos( $campo, $valor ) ;
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
             $maximoLetras = 250;
             if (
-                 Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID SOLICITUD' ) &&
+                 Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID DOCUMENTACIÓN' ) &&
                  Select::validar( $nombre , 'TEXT' , 250 , 'NOMBRE' ) &&
                  Select::validar( $area , 'NUMERIC' , null , 'CÓDIGO DE ÁREA' ) &&
                  Select::validar( $mes , 'TEXT' , 250 , 'MES DE PUBLICCIÓN') &&

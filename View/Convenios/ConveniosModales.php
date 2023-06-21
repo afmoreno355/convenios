@@ -96,12 +96,6 @@ if ($id == 1 && $permisos)
         </div>
         <div>
             <fieldset>
-                <legend title='EXPECIFICACIONES TECNICAS'>EXPECIFICACIONES TÉCNICAS</legend>
-                <textarea  value='<?= $convenio->getEspecificacionesTecnicas() ?>'  name='especificacionesTecnicas' id='especificacionesTecnicas' ></textarea>
-            </fieldset>
-        </div>
-        <div>
-            <fieldset>
                 <legend title='JUSTIFICACION'>JUSTIFICACIÓN</legend>
                 <textarea   value='<?= $convenio->getJustificacion() ?>'  name='justificacion' id='justificacion' ></textarea>
             </fieldset>
@@ -150,7 +144,7 @@ elseif ($id == 3 && $permisos)
             <div class="where_title where_modal" style="width: 100%; height: auto; margin-left: 0px;">
                 <img src="img/icon/borrar.png"/>
                 <lablel>
-                    Se realizara la acción "<?= $accion ?>" al menú <?=$llave_Primaria?> cargado en el modulo de la Dirección de Formación Profesional.
+                    Se realizara la acción "<?= $accion ?>" al convenio <?=$llave_Primaria?> cargado en el modulo de la Dirección de Formación Profesional.
                 </label>
             </div><br><br>
             <label style="font-size: 1em; " id="aviso"></label>  
