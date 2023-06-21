@@ -20,7 +20,7 @@ function envioNuevo( id  , postcad , donde , accion , nuevo , si )
 }
 
 
-function cargar( respuesta = 'aviso' , donde = document.getElementById('donde').value , carpeta = donde,  formulario = '#modalesV' ) 
+function cargar( respuesta = 'aviso' , donde = document.getElementById('donde').value , formulario = '#modalesV' ) 
 {
     formValue = true;
     i = 0;
@@ -51,13 +51,13 @@ function cargar( respuesta = 'aviso' , donde = document.getElementById('donde').
         
         if( document.getElementById('barra_estado') !== null)
         {
-            barra_progreso( form  , respuesta , `View/${carpeta}/${donde}Crud.php` ) ;
+            barra_progreso( form  , respuesta , `View/${donde}/${donde}Crud.php` ) ;
             reloadInfo( respuesta , form ) ;
         }
         else
         {
             cargarLoad(respuesta);
-            formFotoDoc(`View/${carpeta}/${donde}Crud.php`, formData, respuesta);
+            formFotoDoc(`View/${donde}/${donde}Crud.php`, formData, respuesta);
             reloadInfo( respuesta , form ) ;
         }
     }
