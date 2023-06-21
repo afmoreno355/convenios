@@ -54,6 +54,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         $convenio = new Convenio( $campo, $valor ) ;
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
+            $maximoLetras = 250;
             if (
                  Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID SOLICITUD' ) &&
                  Select::validar( $nombre , 'TEXT' , 250 , 'NOMBRE' ) &&
@@ -61,9 +62,9 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                  Select::validar( $mes , 'TEXT' , 250 , 'MES DE PUBLICCIÓN') &&
                  Select::validar( $abogado, 'TEXT' , 250 , 'ABOGADO' ) &&
                  Select::validar( $tecnicoExperto, 'TEXT', 250, 'TÉCNICO EXPERTO' ) &&
-                 Select::validar( $objeto, 'TEXT', 15000, 'OBJETO') &&
-                 Select::validar( $alcance, 'TEXT', 15000, 'ALCANCE OBJETO' ) &&
-                 Select::validar( $justificacion, 'TEXT', 15000, 'JUSTIFICACIÓN')
+                 Select::validar( $objeto, 'TEXT', $maximoLetras, 'OBJETO') &&
+                 Select::validar( $alcance, 'TEXT', $maximoLetras, 'ALCANCE OBJETO' ) &&
+                 Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')
                 )
             {
                 $convenio->setNombre( $nombre ) ;

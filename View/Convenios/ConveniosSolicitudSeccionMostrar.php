@@ -38,10 +38,6 @@
             <p><?=$convenio->getAlcance() ?></p>
         </section>
         <section>
-            <h6>ESPECIFICACIONES TÉCNICAS</h6>
-            <p><?= $convenio->getEspecificacionesTecnicas() ?></p>
-        </section>
-        <section>
             <h6>JUSTIFIACIÓN</h6>
             <p><?= $convenio->getJustificacion() ?></p>
         </section>
