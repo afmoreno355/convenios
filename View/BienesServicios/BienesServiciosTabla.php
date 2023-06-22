@@ -63,15 +63,22 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
             <th>ACCION</th>           
         </tr>
 <?PHP
+/*for ($i = 0; $i < count($BienesServicios); $i++) {
+            $objet = $BienesServicios[$i];
+            $var_mod = Http::encryptIt("id=1&llave_Primaria={$objet->getId()}&user={$_SESSION["user"]}&accion=MODIFICAR");
+            $var_eli = Http::encryptIt("id=2&llave_Primaria={$objet->getId()}&user={$_SESSION["user"]}&accion=ELIMINAR");
+            $var_blo = Http::encryptIt("id=5&llave_Primaria={$objet->getId()}&user={$_SESSION["user"]}&accion=BLOQUEAR");
+            $var_inf = Http::encryptIt("id=3&llave_Primaria={$objet->getId()}&user={$_SESSION["user"]}&accion=INFORMACION");*/
     ?> 
             <tr>
                <td><?= print_r($numeroPaginas) ?></td>
-               
+               <td><?= print_r(count($BienesServicios)) ?></td>
+              
                
             </tr>
-<?PHP
-    }
-?>
+            <?PHP
+//}
+    ?>
         <input type="hidden" id="donde" value="Sede">
         <input type="hidden" id="id_espe" value="">
         <input type="hidden" id="numeroPaginas" value="<?= $numeroPaginas ?>">
@@ -81,3 +88,6 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
     
     <div id='formDetalle' style="display: none"></div>
     <!-- Fin de Html -->
+    <?PHP
+}
+?>

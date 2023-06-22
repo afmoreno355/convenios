@@ -48,67 +48,61 @@ class BienesServicios {
     }
     
     public function getIdbs() {
-        print_r(":D");
         return $this->idbs;
     }
 
-    public function setIdbs($getidbs): void {
-        $this->idbs = $getidbs;
-    }
-
-    function getFcreacion() {
+    public function getFcreacion() {
         return $this->fcreacion;
     }
 
-    function setFcreacion($fcreacion){
-        $this->fcreacion = $fcreacion;
-    }
-
-    function getIdexp() {
-        print_(":D");
+    public function getIdexp() {
         return $this->idexp;
     }
 
-    function setIdexp($idexp){
-        $this->idexp = $idexp;
-    }
-
-    function getIdcoor() {
+    public function getIdcoor() {
         return $this->idcoor;
     }
 
-    function setIdcoor($idcoor){
-        $this->idcoor = $idcoor;
-    }
-
-    function getIdabo() {
+    public function getIdabo() {
         return $this->idabo;
     }
-    
-    function setIdabo($idabo) {
-        $this->idabo = $idabo;
-    }
 
-    function getIdapoy() {
+    public function getIdapoy() {
         return $this->idapoy;
     }
 
-    function seIdapoy($idapoy) {
+    public function getIdest() {
+        return $this->idest;
+    }
+
+    public function setIdbs($idbs): void {
+        $this->idbs = $idbs;
+    }
+
+    public function setFcreacion($fcreacion): void {
+        $this->fcreacion = $fcreacion;
+    }
+
+    public function setIdexp($idexp): void {
+        $this->idexp = $idexp;
+    }
+
+    public function setIdcoor($idcoor): void {
+        $this->idcoor = $idcoor;
+    }
+
+    public function setIdabo($idabo): void {
+        $this->idabo = $idabo;
+    }
+
+    public function setIdapoy($idapoy): void {
         $this->idapoy = $idapoy;
     }
 
-    function getIdest() {
-        return $this->idest;
-    }
-    
-    function setIdest($idest) {
+    public function setIdest($idest): void {
         $this->idest = $idest;
     }
-    
-    public function __toString() {
-        return $this->nombre;
-    }
-   
+
     public static function datos($filtro, $pagina, $limit){
         $cadenaSQL="select * from bsorden";
          if($filtro!=''){
@@ -149,8 +143,3 @@ class BienesServicios {
     } 
     
   }
-
-  
-  
-  
-
