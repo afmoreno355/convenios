@@ -37,6 +37,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
             $v1_A = null;
             $v2_A = null;
         }
+        
         $BienesServicios = new cargo($v1_A, $v2_A);
         print_r($accion);
         Print_r("+**+");

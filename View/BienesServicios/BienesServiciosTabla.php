@@ -39,6 +39,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
        $filtro.=" ( codigosede like '%". strtoupper($bucarPalabraClave)."%' or  nombresede like '%". strtoupper($bucarPalabraClave)."%' or  nom_departamento like '%". strtoupper($bucarPalabraClave)."%' )";
     }
 
+    
     // obj para llenar las tablas
     $BienesServicios = BienesServicios::datosobjetos($filtro , $pagina, 20);
     // numero de paginas para la paginacion
