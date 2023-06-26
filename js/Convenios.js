@@ -8,8 +8,8 @@
 /**
  * Adaptación de la función cargar() en Cargar.js 
  */
-function conveniosCargar( respuesta = 'aviso' , donde = document.getElementById('donde').value , carpeta = donde , formulario = '#modalesV' ) 
-{
+ function conveniosCargar( respuesta = 'aviso' , donde = document.getElementById('donde').value , carpeta = donde , formulario = '#modalesV' ) 
+ {
     formValue = true;
     i = 0;
 
@@ -49,4 +49,21 @@ function conveniosCargar( respuesta = 'aviso' , donde = document.getElementById(
             reloadInfo( respuesta , form ) ;
         }
     }
+}
+
+
+function conveniosFormFotoDoc( donde , formData, hacer = 'aviso') {
+    var xhr = new XMLHttpRequest();
+    
+   
+    xhr.open('POST', donde, true);
+    console.log(formData.values());
+    xhr.onload = function (evento) {
+        if (xhr.status == 200) {
+            console.log(xhr.status);
+        } else {
+            console.log("Error "+xhr.status+" obtenido")
+        }
+    }; 
+    xhr.send(formData);
 }

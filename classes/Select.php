@@ -70,7 +70,7 @@ class Select {
         switch (strtoupper( $tipo ) )
         {
             case 'TEXT' ;
-                if( $variable  != '' )// && strlen( $variable ) <= $tamanio )
+                if( $variable  != '' && strlen( $variable ) <= $tamanio )
                 {
                     return true;
                 }

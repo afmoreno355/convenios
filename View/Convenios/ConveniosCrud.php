@@ -54,17 +54,18 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         $convenio = new Convenio( $campo, $valor ) ;
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
-            $maximoLetras = 250;
+            $maximoLetras = INF;
+            print_r($idSolicitud);
             if (
                  Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID SOLICITUD' ) &&
                  Select::validar( $nombre , 'TEXT' , 250 , 'NOMBRE' ) &&
                  Select::validar( $area , 'NUMERIC' , null , 'CÓDIGO DE ÁREA' ) &&
                  Select::validar( $mes , 'TEXT' , 250 , 'MES DE PUBLICCIÓN') &&
                  Select::validar( $abogado, 'TEXT' , 250 , 'ABOGADO' ) &&
-                 Select::validar( $tecnicoExperto, 'TEXT', 250, 'TÉCNICO EXPERTO' ) &&
-                 Select::validar( $objeto, 'TEXT', $maximoLetras, 'OBJETO') &&
-                 Select::validar( $alcance, 'TEXT', $maximoLetras, 'ALCANCE OBJETO' ) &&
-                 Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')
+                 Select::validar( $tecnicoExperto, 'TEXT', 250, 'TÉCNICO EXPERTO' ) //&&
+                 //Select::validar( $objeto, 'TEXT', $maximoLetras, 'OBJETO') &&
+                 //Select::validar( $alcance, 'TEXT', $maximoLetras, 'ALCANCE OBJETO' ) &&
+                 //Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')
                 )
             {
                 $convenio->setNombre( $nombre ) ;
@@ -73,8 +74,11 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenio->setEstado('NEGOCIACIÓN') ;
                 $convenio->setAbogado( $abogado ) ;
                 $convenio->setTecnicoExperto( $tecnicoExperto ) ;
+                echo "<input type=hidden value='$objeto'/>" ;
                 $convenio->setObjeto( $objeto ) ;
+                echo "<input type=hidden value='$alcance'/>" ;
                 $convenio->setAlcance( $alcance ) ;
+                echo "<input type=hidden value='$justificacion'/>" ;
                 $convenio->setJustificacion( $justificacion ) ;
 
 
