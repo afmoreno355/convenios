@@ -74,7 +74,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
             <tr>
                <td><?= print_r($numeroPaginas) ?></td>
                <td><?= print_r(count($BienesServicios)) ?></td>
-              
+              <td><?= $objet->getIdbs() ?></td>
                
             </tr>
             <?PHP

@@ -43,16 +43,16 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         Print_r("+**+");
 
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR") {
-            if (Select::validar($codigocargo, 'TEXT', 3, 'CODIGOCARGO') &&
-                    Select::validar($nombrecargo, 'TEXT', 200, 'NOMBRECARGO') &&
-                    Select::validar($detalle, 'TEXT', 250, 'DETALLE')
+            if (Select::validar($idbs, 'TEXT', 3, 'IDBS') &&
+                    Select::validar($fcreacion , 'DATE', 30, 'FCREACION') &&
+                    Select::validar($idexp, 'TEXT', 10, 'IDEXPERTO')
             ) {
-                $BienesServicios->setCodigocargo(str_replace($nombreTilde, $nombreSinTilde, strtoupper($codigocargo)));
-                $BienesServicios->setNombrecargo(str_replace($nombreTilde, $nombreSinTilde, strtoupper($nombrecargo)));
-                $BienesServicios->setDetalle(str_replace($nombreTilde, $nombreSinTilde, strtoupper($detalle)));
+                $BienesServicios->setIdbs(str_replace($nombreTilde, $nombreSinTilde, strtoupper($idbs)));
+                $BienesServicios->setFcreacion(str_replace($nombreTilde, $nombreSinTilde, strtoupper($fcreacion)));
+                $BienesServicios->setIdexp(str_replace($nombreTilde, $nombreSinTilde, strtoupper($idexp)));
                 if ($accion == "ADICIONAR") {
                     if ($BienesServicios->Adicionar()) {
-                        $id = ConectorBD::ejecutarQuery("select id from cargo where codigocargo = '{$cargo->getCodigocargo()}'; ", null)[0][0];
+                        $id = ConectorBD::ejecutarQuery("select id from cargo where codigocargo = '{$BienesServicios->getIdbs()}'; ", null)[0][0];
                         print_r("Se ha creado el contrato con el id: $id");
                     } else {
                         print_r("** ERROR INESPERADO VUELVE A INTENTAR **");
@@ -66,7 +66,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 }
             }
         } elseif ($accion == "ELIMINAR") {
-            $BienesServicios->setId($id);
+            $BienesServicios->setIdbs($id);
             if ($BienesServicios->borrar()) {
                 print_r("** EL CONTRATO FUE ELIMINADO. **");
             } else {
