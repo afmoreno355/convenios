@@ -34,7 +34,7 @@
         <div>
             <fieldset>
                 <legend title='CONCEPTO TÉCNICO'>CONCEPTO TÉCNICO</legend>
-                <input type='file'  value=''  name='conceptoTecnico' id='conceptoTecnico' >
+                <input type='file'  value=''  name='solicitudConceptoTecnico' id='solicitudConceptoTecnico' >
             </fieldset>
         </div>
 

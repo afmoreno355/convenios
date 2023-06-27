@@ -51,31 +51,32 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
            $campo = null ;
            $valor = null ; 
         }
-        $convenio = new ConvenioDocumentos( $campo, $valor ) ;
+        $convenioDocumentos = new ConvenioDocumentos( $campo, $valor ) ;
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
             $maximoLetras = 250;
             if (
-                 Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID DOCUMENTACIÓN' ) &&
-                 Select::validar( $nombre , 'TEXT' , 250 , 'NOMBRE' ) &&
+                 Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID DOCUMENTACIÓN' )/* &&
+                 Select::validar( $memorando , 'TEXT' , 250 , 'NOMBRE' ) &&
                  Select::validar( $area , 'NUMERIC' , null , 'CÓDIGO DE ÁREA' ) &&
                  Select::validar( $mes , 'TEXT' , 250 , 'MES DE PUBLICCIÓN') &&
                  Select::validar( $abogado, 'TEXT' , 250 , 'ABOGADO' ) &&
                  Select::validar( $tecnicoExperto, 'TEXT', 250, 'TÉCNICO EXPERTO' ) &&
                  Select::validar( $objeto, 'TEXT', $maximoLetras, 'OBJETO') &&
                  Select::validar( $alcance, 'TEXT', $maximoLetras, 'ALCANCE OBJETO' ) &&
-                 Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')
+                 Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')*/
                 )
             {
-                $convenio->setNombre( $nombre ) ;
-                $convenio->setCodigoArea( $area );
-                $convenio->setMes( $mes ) ;
-                $convenio->setEstado('NEGOCIACIÓN') ;
-                $convenio->setAbogado( $abogado ) ;
-                $convenio->setTecnicoExperto( $tecnicoExperto ) ;
-                $convenio->setObjeto( $objeto ) ;
-                $convenio->setAlcance( $alcance ) ;
-                $convenio->setJustificacion( $justificacion ) ;
+                $convenioDocumentos->setMemorando( $memorando ) ;
+                $convenioDocumentos->setEstudiosPrevios( $estudiosPrevios ) ;
+                $convenioDocumentos->setAnexoTecnico( $anexoTecnico ) ;
+                $convenioDocumentos->setAnalisisSector( $analisisSector ) ;
+                $convenioDocumentos->setSolicitudConceptoTecnico( $solicutudConceptoTecnico ) ;
+                $convenioDocumentos->setPropuestaTecnicaEconomica( $propuestaTecnicaEconomica ) ;
+                $convenioDocumentos->setMatrizRiesgos( $matrizRiesgos ) ;
+                $convenioDocumentos->setDisponibilidadPresupuestal( $disponibilidadPresupuestal ) ;
+                $convenioDocumentos->setPaa( $paa ) ;
+                $convenioDocumentos->setProyectoAutorizacion($proyectoAutorizacion) ;
 
 
                 if ( $convenio->AdicionarModificar( $idSolicitud ) ) 
