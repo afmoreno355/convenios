@@ -79,7 +79,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenioDocumentos->setProyectoAutorizacion($proyectoAutorizacion) ;
 
 
-                if ( $convenio->AdicionarModificar( $idSolicitud ) ) 
+                if ( $convenioDocumentos->AdicionarModificar( $idSolicitud ) ) 
                 {
                     print_r( "Se ha cargado la solicitud en el módulo convenios <|> nombre convenio $nombre " ) ;
                 } else {
@@ -90,8 +90,8 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         elseif ($accion == "ELIMINAR")
         {
             print_r($idSolicitud);
-            $convenio->setId($idSolicitud);
-            if ($convenio->Borrar()) 
+            $convenioDocumentos->setIdSolicitud($idSolicitud);
+            if ($convenio->Borrar())
             {
                 print_r("EL CONVENIO FUE ELIMINADO");
             } 
