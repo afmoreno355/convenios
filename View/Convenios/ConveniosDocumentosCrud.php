@@ -91,7 +91,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         {
             print_r($idSolicitud);
             $convenioDocumentos->setIdSolicitud($idSolicitud);
-            if ($convenio->Borrar())
+            if ($convenioDocumentos->Borrar())
             {
                 print_r("EL CONVENIO FUE ELIMINADO");
             } 

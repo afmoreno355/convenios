@@ -335,6 +335,13 @@ class ConvenioDocumentos {
         }
     }
 
+    public function adicionarModificar($id) {
+        if ($id == 0) {
+            return $this->adicionar();
+        }
+        return $this->modificar($id);
+    }
+
 
 }
 
