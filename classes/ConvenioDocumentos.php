@@ -154,11 +154,12 @@ class ConvenioDocumentos {
                             certificado_paa,
                             proyecto_autorizacion,
                             fecha_sistema
-                        form documentaciones where $campo = $valor";
+                        from documentaciones where $campo = $valor";
+                        //print_r($sql);
                 $resultado = ConectorBD::ejecutarQuery($sql, ' convenios ');
                 if (count($resultado) > 0) {
                     $this->cargarObjetoDeVector($resultado[0]);
-                }
+                }/** */
             }
         }
     }
@@ -192,7 +193,7 @@ class ConvenioDocumentos {
         if ($filtro != null) {
             $sql .= " where " . $filtro;
         }
-        $sql .= " order by documentaciones.id_documentacion desc ";
+        $sql .= " order by documentaciones.id_solicitud desc ";
         if ($pagina != null && $limit != null) {
             $sql .= " offset $pagina limit $limit ";
         }
@@ -335,11 +336,13 @@ class ConvenioDocumentos {
         }
     }
 
-    public function adicionarModificar($id) {
-        if ($id == 0) {
-            return $this->adicionar();
+    public function adicionarModificar($idSolicitud) {
+        $documentacion = $this->__construct(' id_solicitud ', $idSolicitud);
+        $adicionar = $documentacion->getId() == null;
+        if ($adicionar) {
+            return $this->adicionar( $idSolicitud );
         }
-        return $this->modificar($id);
+        return $this->modificar($idSolicitud);
     }
 
 

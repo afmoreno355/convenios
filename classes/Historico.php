@@ -113,7 +113,7 @@ class Historico {
         {
             $cadenaSQL .= " offset $pagina limit $limit ";
         }      
-        return ConectorBD::ejecutarQuery($cadenaSQL, 'eagle_admin'); 
+        return ConectorBD::ejecutarQuery($cadenaSQL, 'eagle'); 
     }
 
     //convierte los array de datos en objetos enviando las posiciones al constructor 

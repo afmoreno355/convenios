@@ -52,6 +52,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
            $valor = null ; 
         }
         $convenioDocumentos = new ConvenioDocumentos( $campo, $valor ) ;
+
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
             $maximoLetras = 250;
@@ -76,15 +77,15 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenioDocumentos->setMatrizRiesgos( $matrizRiesgos ) ;
                 $convenioDocumentos->setDisponibilidadPresupuestal( $disponibilidadPresupuestal ) ;
                 $convenioDocumentos->setPaa( $paa ) ;
-                $convenioDocumentos->setProyectoAutorizacion($proyectoAutorizacion) ;
+                $convenioDocumentos->setProyectoAutorizacion( $proyectoAutorizacion ) ;
 
 
-                if ( $convenioDocumentos->AdicionarModificar( $idSolicitud ) ) 
+                if ( $convenioDocumentos->adicionarModificar( $idSolicitud ) ) 
                 {
                     print_r( "Se ha cargado la solicitud en el módulo convenios <|> nombre convenio $nombre " ) ;
                 } else {
                     print_r("ERROR INESPERADO, VUELVE A INTENTAR");
-                }  
+                } /** */
             }
         }
         elseif ($accion == "ELIMINAR")
