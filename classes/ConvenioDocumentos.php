@@ -298,7 +298,7 @@ class ConvenioDocumentos {
                     proyecto_autorizacion = '$this->proyectoAutorizacion',
                     fecha_sistema = now()
                     where id_solicitud= '$idSolicitud' ";
-        print_r($sql);
+        //print_r($sql);
         if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
             $sqlFormatted = strtoupper(str_replace("'", "|", $cadenaSQL));
@@ -343,7 +343,6 @@ class ConvenioDocumentos {
 
     public function adicionarDocumentacion() {
         $documentoAdiconados = true;
-
         return true;
     }
 
