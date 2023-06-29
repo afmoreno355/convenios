@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/convenios/View/Contratacion/ContratacionModales.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/convenios/classes/Select.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/convenios/View/Sede/SedeModales.php</file>
             <file>file:/Applications/XAMPP/xamppfiles/htdocs/convenios/View/BienesServicios/BienesServiciosTabla.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/convenios/classes/Sede.php</file>
             <file>file:/Applications/XAMPP/xamppfiles/htdocs/convenios/classes/BienesServicios.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/convenios/View/BienesServicios/BienesServiciosModales.php</file>
         </group>
     </open-files>
 </project-private>

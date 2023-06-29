@@ -37,7 +37,7 @@ class Select {
                 return ConectorBD::ejecutarQuery( $query , null ) ;
             break; 
             case 2 :
-                return ConectorBD::ejecutarQuery( $query , 'eagle_admin' ) ;
+                return ConectorBD::ejecutarQuery( $query , 'admin' ) ;
             break; 
             case 3 :
                 return ConectorBD::ejecutarQuery( $query , 'secretaria' ) ;

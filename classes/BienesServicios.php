@@ -26,7 +26,7 @@ class BienesServicios {
         if ($campo!=null){
             if (is_array($campo)) {
                 $this->objeto($campo);
-                print_r($valor);
+                //print_r($campo);
             }else{
                 $cadenaSQL="select * from bsorden where  $campo = '$valor' ";
                 print_r($cadenaSQL);

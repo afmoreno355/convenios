@@ -44,6 +44,7 @@ if ($id == 1 && $permisos)
 {
     $add = $I ;
 ?>
+    <h1>1</h1>
     <div class="carga_Documento">
         <div class="contenido">  
             <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
@@ -63,10 +64,13 @@ if ($id == 1 && $permisos)
         <div>
             <fieldset>
                 <legend title='AREA'>ÁREA</legend>
-                <input  required list="area"  name='areas' id='areas' />
-                <datalist id="area">
-                    <?= Select::listaopciones( 2 , '' , "select codigosede , concat(codigosede, ' ', nombresede) from sede;" ) ; ?>
-                </datalist>
+                <select required name=area id="area" onchange="addform( this.value , 'I=<?= $add ?>' )">
+                    <option value="">Seleccione el área</option>
+                    <option value="1">Coordinación</option>
+                    <option value="2">Dirección de Relaciones corporativas</option>
+                    <option value="3">Despacho de la Dirección General</option>
+                    <option value="4">Regionales</option>
+                    <option value="5">Otros</option>
             </fieldset>
         </div>
         <div>
