@@ -241,7 +241,7 @@ class Convenio {
             $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
             $historico->setTabla("SOLICITUDES");
-            $historico->grabar();
+            //$historico->grabar();
             return true;
         } /** */
         return false;

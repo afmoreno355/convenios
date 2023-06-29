@@ -284,11 +284,10 @@ class ConvenioDocumentos {
     }
     
     // modificar elementos en la base de datos, identificador es el codigo o llave primaria a modificar 
-    public function modificar($id) {
-       // $this->unlink($identificador);  
+    public function modificar($idSolicitud) { 
         $sql = "update documentaciones set
                     memorando = '$this->memorando',
-                    estudios_rpevios = '$this->estudiosPrevios',
+                    estudios_previos = '$this->estudiosPrevios',
                     anexo_tecnico = '$this->anexoTecnico',
                     analisis_sector = '$this->analisisSector',
                     concepto_tecnico = '$this->conceptoTecnico',
@@ -298,7 +297,8 @@ class ConvenioDocumentos {
                     certificado_paa = '$this->paa',
                     proyecto_autorizacion = '$this->proyectoAutorizacion',
                     fecha_sistema = now()
-                    where id_documentación = '$id' ";
+                    where id_solicitud= '$idSolicitud' ";
+        print_r($sql);
         if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
             $sqlFormatted = strtoupper(str_replace("'", "|", $cadenaSQL));
@@ -310,9 +310,8 @@ class ConvenioDocumentos {
             $historico->setTabla("DOCUMENTACIONES");
             $historico->grabar();
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function adicionarDocumento($documento, $nombre) {
@@ -348,8 +347,8 @@ class ConvenioDocumentos {
         }
         if ($documentacion->getId() == null) {
             return $this->adicionar($idSolicitud);
-        }
-        return true;
+        } 
+        return $this->modificar($idSolicitud);
     }
 
 
