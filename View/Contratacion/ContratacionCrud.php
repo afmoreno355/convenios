@@ -474,10 +474,10 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         if ($accion == "ASIGNAR") {
             require './../Mail/Mail.php';
             $autorizacion->setId_radicado($id);
-            if(  !empty( ConectorBD::ejecutarQuery("select * from persona where identificacion='$responsableJ' and ( idtipo = 'RA' OR idtipo = 'RM' ) ", 'eagle_admin' ) ) )
+            if(  !empty( ConectorBD::ejecutarQuery("select * from persona where identificacion='$responsableJ' and ( idtipo = 'RA' OR idtipo = 'RM' ) ", null ) ) )
             {
                $autorizacion->setRevisor_1($responsableJ); 
-               if(  !empty( ConectorBD::ejecutarQuery("select * from persona where identificacion='$responsableT' and ( idtipo = 'RS' OR idtipo = 'RM' ) ", 'eagle_admin' ) ) )
+               if(  !empty( ConectorBD::ejecutarQuery("select * from persona where identificacion='$responsableT' and ( idtipo = 'RS' OR idtipo = 'RM' ) ", null ) ) )
                {
                    $autorizacion->setRevisor_2($responsableT);
                    if ($autorizacion->asignar()) {

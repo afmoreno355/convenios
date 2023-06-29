@@ -27,7 +27,7 @@ class Sede {
             }else{
                 $cadenaSQL="select * from sede , departamento where departamento = id  AND $campo = '$valor' ";
                 //print_r($cadenaSQL);
-                $respuesta= ConectorBD::ejecutarQuery($cadenaSQL, 'eagle_admin');
+                $respuesta= ConectorBD::ejecutarQuery($cadenaSQL, null);
                 if ($respuesta>0 || $valor!=null) $this->objeto ($respuesta[0]);
             }
         }
@@ -101,7 +101,7 @@ class Sede {
         } 
         $cadenaSQL.=" order by codigosede asc offset $pagina limit $limit ";
         //print_r($cadenaSQL);
-        return ConectorBD::ejecutarQuery($cadenaSQL, 'eagle_admin');          
+        return ConectorBD::ejecutarQuery($cadenaSQL, null);          
     }
     
     public static function datosobjetos($filtro, $pagina, $limit){
@@ -119,7 +119,7 @@ class Sede {
         if($filtro!=''){
             $cadena.=" and $filtro";
         } 
-        return ConectorBD::ejecutarQuery($cadena, 'eagle_admin');        
+        return ConectorBD::ejecutarQuery($cadena, null);        
     }
     
     public static function listaopciones(){ 

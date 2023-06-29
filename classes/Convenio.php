@@ -240,7 +240,7 @@ class Convenio {
             $historico->setTipo_historico("ADICIONAR");
             $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
-            $historico->setTabla("convenios.solicitudes");
+            $historico->setTabla("SOLICITUDES");
             $historico->grabar();
             return true;
         } /** */

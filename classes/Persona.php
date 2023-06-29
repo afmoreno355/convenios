@@ -33,7 +33,7 @@ class Persona {
                 $this->cargarObjetoDeVector($campo);
             } else {
                 $cadenaSQL = "select * from persona where $campo=$valor";
-                $resultado = ConectorBD::ejecutarQuery($cadenaSQL, 'eagle_admin');
+                $resultado = ConectorBD::ejecutarQuery($cadenaSQL, null);
                 if (count($resultado) > 0)
                     $this->cargarObjetoDeVector($resultado[0]);
             }
@@ -169,7 +169,7 @@ class Persona {
         if ($limit != null) {
             $cadenaSQL .= " order by identificacion asc offset $pagina limit $limit ";
         }
-        return ConectorBD::ejecutarQuery($cadenaSQL, 'eagle_admin');
+        return ConectorBD::ejecutarQuery($cadenaSQL, null);
     }
 
     public static function datosobjetos($filtro, $pagina, $limit) {
@@ -182,7 +182,7 @@ class Persona {
         return $lista;
     }
     public static function count($filtro) {
-        return ConectorBD::ejecutarQuery("select count(*) from persona where identificacion<>'1085264553' " . $filtro, 'eagle_admin');
+        return ConectorBD::ejecutarQuery("select count(*) from persona where identificacion<>'1085264553' " . $filtro, null);
     }
     public static function lista( $PERSONA , $TIPO = ''  , $DEPENDENCIA = '' ) {
         if ( $TIPO == 'JURIDICO' ) 

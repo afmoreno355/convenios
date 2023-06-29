@@ -218,8 +218,11 @@ class ConvenioDocumentos {
     }   
     
     // guardar elementos en la base de datos
-    public function adicionar() {
-        $sql = "insert into documentaciones (
+    public function adicionar($idSolicitud) {
+        $sql = "insert into documentaciones (id_solicitud, fecha_sistema) values ('$idSolicitud', now())";
+        
+        
+        /*"insert into documentaciones (
                             id_solicitud,
                             memorando,
                             estudios_previos,
@@ -245,7 +248,8 @@ class ConvenioDocumentos {
                             '$this->paa',
                             '$this->proyectoAutorizacion',
                             now()
-                            ) ";
+                            ) ";/** */
+        //print_r($sql);
         if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
             $historico = new Historico(null, null);
@@ -256,9 +260,8 @@ class ConvenioDocumentos {
             $historico->setTabla("DOCUMENTACIONES");
             $historico->grabar();
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     // borrar elementos en la base de datos
@@ -337,12 +340,16 @@ class ConvenioDocumentos {
     }
 
     public function adicionarModificar($idSolicitud) {
-        $documentacion = $this->__construct(' id_solicitud ', $idSolicitud);
-        $adicionar = $documentacion->getId() == null;
-        if ($adicionar) {
-            return $this->adicionar( $idSolicitud );
+        $documentacion = new $this(' id_solicitud ', $idSolicitud);
+        if ($documentacion->getId() == null) {
+            print_r("null");
+        } else {
+            print_r("not null") ;
         }
-        return $this->modificar($idSolicitud);
+        if ($documentacion->getId() == null) {
+            return $this->adicionar($idSolicitud);
+        }
+        return true;
     }
 
 

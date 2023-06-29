@@ -76,7 +76,7 @@ elseif ( $permisos->getIdTipo()=='SA')
     
     <div class="contenido">              
         <div class="tituloDonde">
-            <div>ROL :: <?= !empty( ( $_rol = ConectorBD::ejecutarQuery( " select nombrecargo from cargo where codigocargo = '{$permisos->getIdTipo()}' " , 'eagle_admin' ) ) ) ? $_rol[0][0] : 'SUPER ADMIN' ?></div><br> 
+            <div>ROL :: <?= !empty( ( $_rol = ConectorBD::ejecutarQuery( " select nombrecargo from cargo where codigocargo = '{$permisos->getIdTipo()}' " , null ) ) ) ? $_rol[0][0] : 'SUPER ADMIN' ?></div><br> 
             <label style="color: white"><b>USUARIO::<?= $_SESSION['user']?> </b></label> <br>
             <label style="color: white"><b>MODULO > CONVENIOS Y CONTRATOS > <span id="sections" ></span><?PHP if( isset( $sedeGestion ) ) {  echo " > <span id = 'sede_gestion' >$sedeGestion</span>"; } ?> </b></label>  
         </div>
