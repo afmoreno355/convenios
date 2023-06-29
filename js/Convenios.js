@@ -8,11 +8,10 @@
 /**
  * Adaptación de la función cargar() en Cargar.js 
  */
- function conveniosCargar( respuesta = 'aviso' , donde = document.getElementById('donde').value , carpeta = donde , formulario = '#modalesV' ) 
+ function conveniosCargar( respuesta = "aviso" , donde = document.getElementById("donde").value , carpeta = donde , formulario = "#modalesV" ) 
  {
     formValue = true;
     i = 0;
-
     const form = document.querySelector(formulario);
     const formData = new FormData(form);
 

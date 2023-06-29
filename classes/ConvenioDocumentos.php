@@ -299,7 +299,10 @@ class ConvenioDocumentos {
                     fecha_sistema = now()
                     where id_solicitud= '$idSolicitud' ";
         //print_r($sql);
-        if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
+        if (
+            $this->adicionarDocumentacion() and
+            ConectorBD::ejecutarQuery($sql, ' convenios ')
+        ) {
             //Historico de las acciones en el sistemas de informacion
             $sqlFormatted = strtoupper(str_replace("'", "|", $cadenaSQL));
             $historico = new Historico(null, null);
@@ -315,12 +318,16 @@ class ConvenioDocumentos {
     }
 
     public function adicionarDocumento($documento, $nombre) {
-
+        /**if (isset($doucumento)) {
+            print_r(":)");
+        } else {
+            print_r(":(");
+        }/** */
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
         $fechaActual = date("d_m_Y_h_i_s");
         $destino = __DIR__.'/../archivos/convenios/'.$this->idSolicitud.'/'.$nombre.'_'.$fechaActual.'.pdf'; // La carpeta debe tener permisos
-        
         if ( $cargarDocumento ) {
+            print_r(":)");
             if (
                 Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
                 mkdir(dirname($destino), 0777, true) &&
@@ -334,7 +341,7 @@ class ConvenioDocumentos {
                 $historico->grabar();
                 return true;
                } else {
-                print_r(" No se ha cargado el documento correctamente. ");
+                print_r(" No se ha cargado el documento $nombre correctamente. ");
                 return false;
                }
         }
@@ -342,23 +349,18 @@ class ConvenioDocumentos {
     }
 
     public function adicionarDocumentacion() {
-        $documentoAdiconados = true;
-        return true;
+        $documentacionAdiconada = true;
+        $documentacionAdiconada = $documentacionAdiconada and $this->adicionarDocumento($this->memorando, 'MEMORANDO');
+        return $documentacionAdiconada;
     }
 
     public function adicionarModificar($idSolicitud) {
         $documentacion = new $this(' id_solicitud ', $idSolicitud);
         if ($documentacion->getId() == null) {
-            print_r("null");
-        } else {
-            print_r("not null") ;
-        }
-        if ($documentacion->getId() == null) {
             return $this->adicionar($idSolicitud);
         } 
         return $this->modificar($idSolicitud);
     }
-
 
 }
 

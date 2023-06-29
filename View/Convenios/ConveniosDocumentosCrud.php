@@ -69,6 +69,11 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 )
             {
                 $convenioDocumentos->setMemorando( $memorando ) ;
+                if (isset($memorando)) {
+                    print_r(":)");
+                } else {
+                    print_r(":(");
+                }
                 $convenioDocumentos->setEstudiosPrevios( $estudiosPrevios ) ;
                 $convenioDocumentos->setAnexoTecnico( $anexoTecnico ) ;
                 $convenioDocumentos->setAnalisisSector( $analisisSector ) ;
