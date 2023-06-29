@@ -332,10 +332,19 @@ class ConvenioDocumentos {
                 $historico->setTipo_historico("AGREGAR_DOCUMENTO");
                 $historico->setFecha("now()");
                 $historico->grabar();
+                return true;
                } else {
                 print_r(" No se ha cargado el documento correctamente. ");
+                return false;
                }
         }
+        return true;
+    }
+
+    public function adicionarDocumentacion() {
+        $documentoAdiconados = true;
+
+        return true;
     }
 
     public function adicionarModificar($idSolicitud) {
