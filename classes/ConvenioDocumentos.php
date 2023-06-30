@@ -325,7 +325,7 @@ class ConvenioDocumentos {
         }/** */
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
         $fechaActual = date("d_m_Y_h_i_s");
-        $destino = __DIR__.'/../archivos/convenios/'.$this->idSolicitud.'/'.$nombre.'_'.$fechaActual.'.pdf'; // La carpeta debe tener permisos
+        $destino = __DIR__.'/../archivos/convenios/'.$this->idSolicitud.'/'.$nombre.'_'.$this->getIdSolicitud.'_'.$fechaActual.'.pdf'; // La carpeta debe tener permisos
         if ( $cargarDocumento ) {
             print_r(":)");
             if (
