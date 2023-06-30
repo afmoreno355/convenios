@@ -68,12 +68,6 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                  //Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')
                 )
             {
-
-                if (isset($_FILES)) {
-                    print_r($_FILES);
-                } else {
-                    print_r(":(");
-                }
                 $convenio->setNombre( $nombre ) ;
                 $convenio->setCodigoArea( $area );
                 $convenio->setMes( $mes ) ;
