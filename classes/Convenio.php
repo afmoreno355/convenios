@@ -193,7 +193,7 @@ class Convenio {
         for ($i = 0; $i < count($datos); $i++) {
             $clase = new self($datos[$i], null);
             $listas[$i] = $clase;
-        }/** */
+        }
         return $listas;
     }
 
@@ -240,7 +240,7 @@ class Convenio {
             $historico->setTipo_historico("ADICIONAR");
             $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
-            $historico->setTabla("SOLICITUDES");
+            $historico->setTabla("convenio.solicitudes");
             //$historico->grabar();
             return true;
         } /** */
@@ -269,7 +269,7 @@ class Convenio {
             $historico->setTipo_historico("MODIFICAR");
             $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
-            $historico->setTabla("SOLICITUDES");
+            $historico->setTabla("convenio.solicitudes");
             $historico->grabar();
             return true;
         }/** */

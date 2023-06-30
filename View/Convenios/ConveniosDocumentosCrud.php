@@ -68,21 +68,16 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                  Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')*/
                 )
             {
-                $convenioDocumentos->setMemorando( $memorando ) ;
-                if (isset($memorando)) {
-                    print_r(":)");
-                } else {
-                    print_r(":(");
-                }
-                $convenioDocumentos->setEstudiosPrevios( $estudiosPrevios ) ;
-                $convenioDocumentos->setAnexoTecnico( $anexoTecnico ) ;
-                $convenioDocumentos->setAnalisisSector( $analisisSector ) ;
-                $convenioDocumentos->setSolicitudConceptoTecnico( $solicutudConceptoTecnico ) ;
-                $convenioDocumentos->setPropuestaTecnicaEconomica( $propuestaTecnicaEconomica ) ;
-                $convenioDocumentos->setMatrizRiesgos( $matrizRiesgos ) ;
-                $convenioDocumentos->setDisponibilidadPresupuestal( $disponibilidadPresupuestal ) ;
-                $convenioDocumentos->setPaa( $paa ) ;
-                $convenioDocumentos->setProyectoAutorizacion( $proyectoAutorizacion ) ;
+                $convenioDocumentos->setMemorando( $_FILES['memorando'] ) ;
+                $convenioDocumentos->setEstudiosPrevios( $_FILES['estudiosPrevios'] ) ;
+                $convenioDocumentos->setAnexoTecnico( $_FILES['anexoTecnico'] ) ;
+                $convenioDocumentos->setAnalisisSector( $_FILES['analisisSector'] ) ;
+                $convenioDocumentos->setSolicitudConceptoTecnico( $_FILES['solicutudConceptoTecnico'] ) ;
+                $convenioDocumentos->setPropuestaTecnicaEconomica( $_FILES['propuestaTecnicaEconomica'] ) ;
+                $convenioDocumentos->setMatrizRiesgos( $_FILES['matrizRiesgos'] ) ;
+                $convenioDocumentos->setDisponibilidadPresupuestal( $_FILES['disponibilidadPresupuestal'] ) ;
+                $convenioDocumentos->setPaa( $_FILES['paa'] ) ;
+                $convenioDocumentos->setProyectoAutorizacion( $_FILES['proyectoAutorizacion'] ) ;
 
 
                 if ( $convenioDocumentos->adicionarModificar( $idSolicitud ) ) 
