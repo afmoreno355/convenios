@@ -348,9 +348,16 @@ class ConvenioDocumentos {
     }
 
     public function adicionarDocumentacion() {
-        $documentacionAdiconada = true;
-        $documentacionAdiconada = $documentacionAdiconada and $this->adicionarDocumento($this->memorando, 'MEMORANDO');
-        return $documentacionAdiconada;
+        return  $this->adicionarDocumento($this->memorando, 'MEMORANDO') &&
+                $this->adicionarDocumento($this->estudiosPrevios, 'ESTUDIOS PREVIOS') &&
+                $this->adicionarDocumento($this->anexoTecnico, 'ANEXO TÉCNICO') &&
+                $this->adicionarDocumento($this->analisisSector, 'ANÁLISIS DEL SECTOR') &&
+                $this->adicionarDocumento($this->conceptoTecnico, 'CONCEPTO TÉCNICO') &&
+                $this->adicionarDocumento($this->propuestaTecnicaEconomica, 'PROPUESTA TÉCNICA ECONÓMICA') &&
+                $this->adicionarDocumento($this->matrizRiesgos, 'MATRIZ DE RIESGOS') &&
+                $this->adicionarDocumento($this->certificadoDisponibilidadPresupuestal, 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL') &&
+                $this->adicionarDocumento($this->paa, 'CERTIFICADO PAA') &&
+                $this->adiciionarDocumento($this->proyectoAutorizacion, 'PROYECTO DE AUTORIZACIÓN');
     }
 
     public function adicionarModificar($idSolicitud) {
