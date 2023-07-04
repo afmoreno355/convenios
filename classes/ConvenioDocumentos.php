@@ -318,16 +318,10 @@ class ConvenioDocumentos {
     }
 
     public function adicionarDocumento($documento, $nombre) {
-        /**if (isset($doucumento)) {
-            print_r(":)");
-        } else {
-            print_r(":(");
-        }/** */
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
         $fechaActual = date("d_m_Y_h_i_s");
         $destino = __DIR__.'/../archivos/convenios/'.$this->idSolicitud.'/'.$nombre.'_'.$fechaActual.'.pdf'; // La carpeta debe tener permisos
         if ( $cargarDocumento ) {
-            print_r(":)");
             if (
                 Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
                 mkdir(dirname($destino), 0777, true) &&
