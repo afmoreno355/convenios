@@ -34,7 +34,7 @@ class Select {
         switch ( $id )
         {
             case 1 :
-                return ConectorBD::ejecutarQuery( $query , null ) ;
+                return ConectorBD::ejecutarQuery( $query , 'eagle_admin' ) ;
             break; 
             case 2 :
                 return ConectorBD::ejecutarQuery( $query , null ) ;

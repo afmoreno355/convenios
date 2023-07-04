@@ -56,7 +56,8 @@
                 <legend title='JUSTIFICACION'>JUSTIFICACIÓN</legend>
                 <textarea name='justificacion' id='justificacion' ><?= $convenio->getJustificacion() ?></textarea>
             </fieldset>
-        </div>        
+        </div>
+
         <div>     
             <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
             <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
