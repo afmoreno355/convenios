@@ -352,7 +352,7 @@ class ConvenioDocumentos {
                 $this->adicionarDocumento($this->matrizRiesgos, 'MATRIZ DE RIESGOS') &&
                 $this->adicionarDocumento($this->certificadoDisponibilidadPresupuestal, 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL') &&
                 $this->adicionarDocumento($this->paa, 'CERTIFICADO PAA') &&
-                $this->adiciionarDocumento($this->proyectoAutorizacion, 'PROYECTO DE AUTORIZACIÓN');
+                $this->adicionarDocumento($this->proyectoAutorizacion, 'PROYECTO DE AUTORIZACIÓN');/** */
     }
 
     public function adicionarModificar($idSolicitud) {
