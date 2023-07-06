@@ -328,6 +328,40 @@ class ConvenioDocumentos {
                 copy($documento['tmp_name'], $destino)
                )
                {
+                $sql = 'update documentaciones set';
+                switch ($nombre) {
+                    case 'MEMORANDO':
+                        $sql .= ' memorando ';
+                        break;
+                    case 'ESTUDIOS PREVIOS':
+                        $sql .= ' estudios_previos ';
+                        break;
+                    case 'ANEXO TÉCNICO':
+                        $sql .= ' anexo_tecnico ';
+                        break;
+                    case 'ANÁLISIS DEL SECTOR':
+                        $sql .= ' analisis_sector ';
+                        break;
+                    case 'CONCEPTO TÉCNICO':
+                        $sql .= ' concepto_tecnico ';
+                        break;
+                    case 'PROPUESTA TÉCNICA ECONÓMICA':
+                        $sql .= ' propuesta_tecnica_economica ';
+                        break;
+                    case 'MATRIZ DE RIESGOS':
+                        $sql .= ' matriz_riesgos ';
+                        break;
+                    case 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL':
+                        $sql .= ' certificado_disponibilidad_presupuestal ';
+                        break;
+                    case 'CERTIFICADO PAA':
+                        $sql .= ' certificado_paa ';
+                        break;
+                    case 'PROYECTO DE AUTORIZACIÓN':
+                        $sql .= ' proyecto_autorizacion ';
+                }
+                $sql .= " = $destino, fecha_sistema = now() where id_solicitud = $this->idSolicitud";
+                ConectorBD::ejecutarQuery($sql, ' convenios ');
                 $historico = new Historico(null, null);
                 $historico->setIdentificacion($_SESSION["user"]);
                 $historico->setTipo_historico("AGREGAR_DOCUMENTO");
@@ -359,7 +393,7 @@ class ConvenioDocumentos {
         $documentacion = new $this(' id_solicitud ', $idSolicitud);
         if ($documentacion->getId() == null) {
             return $this->adicionar($idSolicitud);
-        } 
+        }
         return $this->modificar($idSolicitud);
     }
 
