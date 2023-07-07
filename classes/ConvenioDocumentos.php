@@ -285,36 +285,7 @@ class ConvenioDocumentos {
     
     // modificar elementos en la base de datos, identificador es el codigo o llave primaria a modificar 
     public function modificar($idSolicitud) { 
-        $sql = "update documentaciones set
-                    memorando = '$this->memorando',
-                    estudios_previos = '$this->estudiosPrevios',
-                    anexo_tecnico = '$this->anexoTecnico',
-                    analisis_sector = '$this->analisisSector',
-                    concepto_tecnico = '$this->conceptoTecnico',
-                    propuesta_tecnica_economica = '$this->propuestaTecnicaEconomica',
-                    matriz_riesgos = '$this->matrizRiesgos',
-                    certificado_disponibilidad_presupuestal = '$this->disponibilidadPresupuestal',
-                    certificado_paa = '$this->paa',
-                    proyecto_autorizacion = '$this->proyectoAutorizacion',
-                    fecha_sistema = now()
-                    where id_solicitud= '$idSolicitud' ";
-        //print_r($sql);
-        if (
-            $this->adicionarDocumentacion() and
-            ConectorBD::ejecutarQuery($sql, ' convenios ')
-        ) {
-            //Historico de las acciones en el sistemas de informacion
-            $sqlFormatted = strtoupper(str_replace("'", "|", $cadenaSQL));
-            $historico = new Historico(null, null);
-            $historico->setIdentificacion($_SESSION["user"]);
-            $historico->setTipo_historico("MODIFICAR");
-            $historico->setHistorico($sqlFormatted);
-            $historico->setFecha("now()");
-            $historico->setTabla("DOCUMENTACIONES");
-            $historico->grabar();
-            return true;
-        }
-        return false;
+        return $this->adcionarDocumentacion;
     }
 
     public function adicionarDocumento($documento, $nombre) {
@@ -360,7 +331,8 @@ class ConvenioDocumentos {
                     case 'PROYECTO DE AUTORIZACIÓN':
                         $sql .= ' proyecto_autorizacion ';
                 }
-                $sql .= " = $destino, fecha_sistema = now() where id_solicitud = $this->idSolicitud";
+                $sql .= " = '$destino', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
+                print_r($sql);
                 ConectorBD::ejecutarQuery($sql, ' convenios ');
                 $historico = new Historico(null, null);
                 $historico->setIdentificacion($_SESSION["user"]);
@@ -381,10 +353,10 @@ class ConvenioDocumentos {
                 $this->adicionarDocumento($this->estudiosPrevios, 'ESTUDIOS PREVIOS') &&
                 $this->adicionarDocumento($this->anexoTecnico, 'ANEXO TÉCNICO') &&
                 $this->adicionarDocumento($this->analisisSector, 'ANÁLISIS DEL SECTOR') &&
-                $this->adicionarDocumento($this->conceptoTecnico, 'CONCEPTO TÉCNICO') &&
+                $this->adicionarDocumento($this->solicitudConceptoTecnico, 'CONCEPTO TÉCNICO') &&
                 $this->adicionarDocumento($this->propuestaTecnicaEconomica, 'PROPUESTA TÉCNICA ECONÓMICA') &&
                 $this->adicionarDocumento($this->matrizRiesgos, 'MATRIZ DE RIESGOS') &&
-                $this->adicionarDocumento($this->certificadoDisponibilidadPresupuestal, 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL') &&
+                $this->adicionarDocumento($this->disponibilidadPresupuestal, 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL') &&
                 $this->adicionarDocumento($this->paa, 'CERTIFICADO PAA') &&
                 $this->adicionarDocumento($this->proyectoAutorizacion, 'PROYECTO DE AUTORIZACIÓN');/** */
     }
@@ -394,7 +366,7 @@ class ConvenioDocumentos {
         if ($documentacion->getId() == null) {
             return $this->adicionar($idSolicitud);
         }
-        return $this->modificar($idSolicitud);
+        return $this->adicionarDocumentacion();
     }
 
 }

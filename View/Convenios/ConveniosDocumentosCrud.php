@@ -71,7 +71,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenioDocumentos->setEstudiosPrevios( $_FILES['estudiosPrevios'] ) ;
                 $convenioDocumentos->setAnexoTecnico( $_FILES['anexoTecnico'] ) ;
                 $convenioDocumentos->setAnalisisSector( $_FILES['analisisSector'] ) ;
-                $convenioDocumentos->setSolicitudConceptoTecnico( $_FILES['solicutudConceptoTecnico'] ) ;
+                $convenioDocumentos->setSolicitudConceptoTecnico( $_FILES['solicitudConceptoTecnico'] ) ;
                 $convenioDocumentos->setPropuestaTecnicaEconomica( $_FILES['propuestaTecnicaEconomica'] ) ;
                 $convenioDocumentos->setMatrizRiesgos( $_FILES['matrizRiesgos'] ) ;
                 $convenioDocumentos->setDisponibilidadPresupuestal( $_FILES['disponibilidadPresupuestal'] ) ;
