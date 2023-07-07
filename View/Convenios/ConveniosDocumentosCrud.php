@@ -68,7 +68,6 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 )
             {
                 $convenioDocumentos->setMemorando( $_FILES['memorando'] ) ;
-                print_r($_FILES['memorando']['tmp_name']);
                 $convenioDocumentos->setEstudiosPrevios( $_FILES['estudiosPrevios'] ) ;
                 $convenioDocumentos->setAnexoTecnico( $_FILES['anexoTecnico'] ) ;
                 $convenioDocumentos->setAnalisisSector( $_FILES['analisisSector'] ) ;
@@ -77,12 +76,12 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenioDocumentos->setMatrizRiesgos( $_FILES['matrizRiesgos'] ) ;
                 $convenioDocumentos->setDisponibilidadPresupuestal( $_FILES['disponibilidadPresupuestal'] ) ;
                 $convenioDocumentos->setPaa( $_FILES['paa'] ) ;
-                $convenioDocumentos->setProyectoAutorizacion( $_FILES['proyectoAutorizacion'] ) ;
+                $convenioDocumentos->setProyectoAutorizacion( $_FILES['proyectoAutorizacion'] ) ;/** */
 
 
-                if ( $convenioDocumentos->AdicionarModificar( $idSolicitud ) ) 
+                if ( $convenioDocumentos->adicionarModificar( $idSolicitud ) ) 
                 {
-                    print_r( "Se ha cargado la solicitud en el módulo convenios <|> nombre convenio $nombre " ) ;
+                    print_r( "Se ha cargado la solicitud en el módulo convenios <|> nombre convenio $nombre " );
                 } else {
                     print_r("ERROR INESPERADO, VUELVE A INTENTAR");
                 }  
