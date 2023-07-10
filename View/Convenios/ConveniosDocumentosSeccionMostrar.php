@@ -17,67 +17,55 @@ print_r($direcciones);
         </section>
         <section>
             <p>ESTUDIOS PREVIOS</p>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
+            <a href="<?= $rutas['estudios_previos'] ?>" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>
         <section>
             <p>ANEXO TÉCNICO</p>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
+            <a href="<?= $rutas['anexo_tecnico'] ?>" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>
         <section>
             <p>ANÁLISIS DEL SECTOR</p>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
+            <a href="<?= $rutas['analisis_sector']?>" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>
         <section>
-            <h6>Anexo Técnico</h6>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
+            <p>SOLICITUD DE CONCEPTO TÉCNICO</p>
+            <a href="<?= $rutas['concepto_tecnico']?>" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>
         <section>
-            <h6>Concepto Técnico</h6>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
+            <p>PROPUESTA TÉCNICA ECONÓMICA</p>
+            <a href="<?= $rutas['propuesta_tecnica_economica']?>" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>
         <section>
-            <h6>Anexo Técnico</h6>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
+            <p>MATRIZ DE RIESGOS</p>
+            <a href="<?= $rutas['matriz_riesgos']?>" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>
         <section>
-            <h6>Propuesta Técnica Económica</h6>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
+            <p>CERTIFICADO DISPONIBILIDAD PRESUPUESTAL</p>
+            <a href="<?= $rutas['certificado_disponibilidad_presupuestal']?>" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>
         <section>
-            <h6>Matriz de Riesgos</h6>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
+            <p>CERTIFICADO PAA</p>
+            <a href="<?= $rutas['certificado_paa']?>" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>
         <section>
-            <h6>Disponibilidad Presupuestal</h6>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
-        </section>
-        <section>
-            <h6>Plan Anual de Adqusiciones</h6>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
-        </section>
-        <section>
-            <h6>Proyecto de Autorización</h6>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
+            <p>PROYECTO DE AUTORIZACIÓN</p>
+            <a href="<?= $rutas['proyecto_autorizacion']?>" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>
