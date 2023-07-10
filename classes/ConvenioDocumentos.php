@@ -200,6 +200,13 @@ class ConvenioDocumentos {
         return ConectorBD::ejecutarQuery($sql, ' convenios ');
     }
 
+
+    public static function rutasDocumentos($id) {
+        $sql = " select * from  documentaciones where id_solicitud = '$id' ";
+        print_r($sql);
+        return ConectorBD::ejecutarQuery($sql, ' convenios ');
+    }
+
     //convierte los array de datos en objetos enviando las posiciones al constructor 
     public static function datosobjetos($filtro, $pagina, $limit) {
         $datos = self::datos($filtro, $pagina, $limit);

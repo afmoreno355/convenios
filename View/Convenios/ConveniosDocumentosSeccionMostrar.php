@@ -1,9 +1,17 @@
+
+<?php
+
+$direcciones = ConvenioDocumentos::rutasDocumentos($convenio->getId());
+print_r($direcciones);
+
+?>
+
 <h2>DOCUMENTOS SOLICITUD</h2>
 <div class="carga_Documento">
     <div class="nuevaseccion" ><fieldset>  
         <section>
             <p>MEMORANDO</p>
-            <a href="archivos/convenios/28/MEMORANDO_28_05072023035229.pdf" target="_blank">
+            <a href="#" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>
