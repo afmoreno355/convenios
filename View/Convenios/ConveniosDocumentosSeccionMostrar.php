@@ -1,7 +1,7 @@
 
 <?php
 
-$direcciones = ConvenioDocumentos::rutasDocumentos($convenio->getId());
+$rutas = ConvenioDocumentos::rutasDocumentos($convenio->getId());
 print_r($direcciones);
 
 ?>
@@ -11,7 +11,7 @@ print_r($direcciones);
     <div class="nuevaseccion" ><fieldset>  
         <section>
             <p>MEMORANDO</p>
-            <a href="#" target="_blank">
+            <a href="<?= $rutas['memorando']?>" target="_blank">
                 <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
             </a>
         </section>

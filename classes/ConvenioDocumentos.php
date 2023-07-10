@@ -200,13 +200,6 @@ class ConvenioDocumentos {
         return ConectorBD::ejecutarQuery($sql, ' convenios ');
     }
 
-
-    public static function rutasDocumentos($id) {
-        $sql = " select * from  documentaciones where id_solicitud = '$id' ";
-        print_r($sql);
-        return ConectorBD::ejecutarQuery($sql, ' convenios ');
-    }
-
     //convierte los array de datos en objetos enviando las posiciones al constructor 
     public static function datosobjetos($filtro, $pagina, $limit) {
         $datos = self::datos($filtro, $pagina, $limit);
@@ -217,12 +210,18 @@ class ConvenioDocumentos {
         }
         return $listas;
     }
-
+    
     // nos debuelve la cantidad de filas que existen en la tabla para hacer la paginacion.
     public static function count($filtro) {
         $filtro = ( $filtro != "") ? " where $filtro " : "";
         return ConectorBD::ejecutarQuery("select count(*) from  documentaciones  $filtro", ' convenios ');
-    }   
+    }
+    
+    // retorna rutas de documentos
+    public static function rutasDocumentos($id) {
+        $sql = " select * from  documentaciones where id_solicitud = '$id' ";
+        return ConectorBD::ejecutarQuery($sql, ' convenios ')[0];
+    }
     
     // guardar elementos en la base de datos
     public function adicionar($idSolicitud) {
@@ -292,13 +291,14 @@ class ConvenioDocumentos {
     
     // modificar elementos en la base de datos, identificador es el codigo o llave primaria a modificar 
     public function modificar($idSolicitud) { 
-        return $this->adcionarDocumentacion;
+        return $this->adcionarDocumentacion();
     }
 
     public function adicionarDocumento($documento, $nombre) {
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
         $fechaActual = date("dmYhis");
-        $destino = __DIR__.'/../archivos/convenios/'.$this->idSolicitud.'/'.$nombre.'_'.$this->idSolicitud.'_'.$fechaActual.'.pdf'; // La carpeta debe tener permisos
+        $ruta = "archivos/convenios/$this->idSolicitud/$nombre"."_$this->idSolicitud"."_$fechaActual.pdf";
+        $destino = __DIR__."/../$ruta"; // La carpeta debe tener permisos
         if ( $cargarDocumento ) {
             mkdir(dirname($destino), 0777, true);
             if (
@@ -338,7 +338,7 @@ class ConvenioDocumentos {
                     case 'PROYECTO DE AUTORIZACIÓN':
                         $sql .= ' proyecto_autorizacion ';
                 }
-                $sql .= " = '$destino', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
+                $sql .= " = '$ruta', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
                 print_r($sql);
                 ConectorBD::ejecutarQuery($sql, ' convenios ');
                 $historico = new Historico(null, null);
