@@ -21,57 +21,93 @@ print_r($direcciones);
         </section>
         <section>
             <p>ESTUDIOS PREVIOS</p>
-            <a href="<?= $rutas['estudios_previos'] ?>" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
+            <?php if ($rutas['estudios_previos'] != '') { ?> 
+                <a href="<?= $rutas['estudios_previos']?>" target="_blank">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>
         </section>
         <section>
             <p>ANEXO TÉCNICO</p>
-            <a href="<?= $rutas['anexo_tecnico'] ?>" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
+            <?php if ($rutas['anexo_tecnico'] != '') { ?> 
+                <a href="<?= $rutas['anexo_tecnico']?>" target="_blank">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>
         </section>
         <section>
             <p>ANÁLISIS DEL SECTOR</p>
-            <a href="<?= $rutas['analisis_sector']?>" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
+            <?php if ($rutas['analisis_sector'] != '') { ?> 
+                <a href="<?= $rutas['analisis_sector']?>" target="_blank">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>
         </section>
         <section>
             <p>SOLICITUD DE CONCEPTO TÉCNICO</p>
-            <a href="<?= $rutas['concepto_tecnico']?>" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
+            <?php if ($rutas['concepto_tecnico'] != '') { ?> 
+                <a href="<?= $rutas['concepto_tecnico']?>" target="_blank">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>
         </section>
         <section>
             <p>PROPUESTA TÉCNICA ECONÓMICA</p>
-            <a href="<?= $rutas['propuesta_tecnica_economica']?>" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
+            <?php if ($rutas['propuesta_tecnica_economica'] != '') { ?> 
+                <a href="<?= $rutas['propuesta_tecnica_economica']?>" target="_blank">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>
         </section>
         <section>
             <p>MATRIZ DE RIESGOS</p>
-            <a href="<?= $rutas['matriz_riesgos']?>" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
+            <?php if ($rutas['matriz_riesgos'] != '') { ?> 
+                <a href="<?= $rutas['matriz_riesgos']?>" target="_blank">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>
         </section>
         <section>
             <p>CERTIFICADO DISPONIBILIDAD PRESUPUESTAL</p>
-            <a href="<?= $rutas['certificado_disponibilidad_presupuestal']?>" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
+            <?php if ($rutas['certificado_disponibilidad_presupuestal'] != '') { ?> 
+                <a href="<?= $rutas['certificado_disponibilidad_presupuestal']?>" target="_blank">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>
         </section>
         <section>
             <p>CERTIFICADO PAA</p>
-            <a href="<?= $rutas['certificado_paa']?>" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
+            <?php if ($rutas['certificado_paa'] != '') { ?> 
+                <a href="<?= $rutas['certificado_paa']?>" target="_blank">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>
         </section>
         <section>
             <p>PROYECTO DE AUTORIZACIÓN</p>
-            <a href="<?= $rutas['proyecto_autorizacion']?>" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
+            <?php if ($rutas['proyecto_autorizacion'] != '') { ?> 
+                <a href="<?= $rutas['proyecto_autorizacion']?>" target="_blank">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>
         </section>
     </fieldset></div>
 </div>
