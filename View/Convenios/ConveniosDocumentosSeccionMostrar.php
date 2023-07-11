@@ -11,9 +11,13 @@ print_r($direcciones);
     <div class="nuevaseccion" ><fieldset>  
         <section>
             <p>MEMORANDO</p>
-            <a href="<?= $rutas['memorando']?>" target="_blank">
-                <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-            </a>
+            <?php if ($rutas['memorando'] != '') { ?> 
+                <a href="<?= $rutas['memorando']?>" target="_blank">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>            
         </section>
         <section>
             <p>ESTUDIOS PREVIOS</p>
