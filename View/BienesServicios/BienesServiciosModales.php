@@ -51,29 +51,51 @@ if ($id == 1 && $permisos)
             <br><br>
             <label style="font-size: 1em; " >Tabla Bienes y Servisios</label>  
             <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
-            
         </div>
         <div>
             <fieldset>
-                <legend title='ID DEL CONTRATO'>ID CONTRATO</legend>
-                <input type="text" value= '' required name='idcontrato' id="idcontrato">
-                
+                <legend title='CONSECUTIVO'>CONSECUTIVO</legend>
+                <input type="text" value= '' required name='CONSECUTIVO' id="CONSECUTIVO">
             </fieldset>
         </div>
         <div>
             <fieldset>
-                <legend title='AREA'>ÁREA</legend>
-                <input  required list="area"  name='areas' id='areas' />
-                <datalist id="area">
-                    <?= Select::listaopciones( 2 , '' , "select codigosede , concat(codigosede, ' ', nombresede) from sede;" ) ; ?>
+                <legend title='GRUPO'>GRUPO</legend>
+                <input  required list="coordinacion"  name='coordinaciones' id='coordinaciones' />
+                <datalist id="coordinacion">
+                    <?= Select::listaopciones( 1 , '' , "select codigosede , concat(codigosede, ' ', nombresede) from sede;" ) ; ?>
+                </datalist>
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='MES PUBLICACION'>MES PUBLICACIÓN</legend>
+                <input  required list="mesp"  name='mespublicacion' id='mespublicacion' />
+                <datalist id="mesp">
+                    <?= Select::listaopciones( 1 , '' , "select idmes , concat(idmes, ' ', nombre) from bsmes;" ) ; ?>
+                </datalist>
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend title='MES PRESENTACION OFERTAS'>MES PRESENTACIÓN OFERTAS</legend>
+                <input  required list="mespo"  name='mespresentacion' id='mespresentacion' />
+                <datalist id="mespo">
+                    <?= Select::listaopciones( 1 , '' , "select idmes , concat(idmes, ' ', nombre) from bsmes;" ) ; ?>
                 </datalist>
             </fieldset>
         </div>
         <div>
             <fieldset>
                 <legend title='ABOGADO'>ABOGADO</legend>
-                <input type="text" value= '' required name='abogado' id="abogado">
-                
+                <input  required list="abogados"  name='abogado' id='abogado' />
+                <datalist id="abogados">
+                    <option value="Chocolate">
+                    <option value="Coconut">
+                    <option value="Mint">
+                    <option value="Strawberry">
+                    <option value="Vanilla">
+                </datalist>
             </fieldset>
         </div>
         <div>
@@ -85,15 +107,18 @@ if ($id == 1 && $permisos)
         </div>
         <div>
             <fieldset>
-                <legend title='APOOYO PROFESIONAL'>APOOYO PROFESIONAL</legend>
+                <legend title='APOYO PROFESIONAL'>APOYO PROFESIONAL</legend>
                 <input type="text" value= '' required name='appro' id="appro">
                
             </fieldset>
         </div>
         <div>
             <fieldset>
-                <legend title='TIPO'>TIPO</legend>
-                <input type="text" value= '' required name='tiopo' id="tipo">
+                <legend title='Modalidad'>MODALIDAD</legend>
+                <input list="Modalidad" name="Modalidad_selec" id="Modalidad_selec">
+                <datalist id="Modalidad">
+                    <?= Select::listaopciones( 1 , '' , "select id, concat(id,' ',nombre) from bsmodalidad;" ) ; ?>
+                </datalist>
             </fieldset>
         </div>
         <div>
@@ -104,11 +129,17 @@ if ($id == 1 && $permisos)
         </div>
         <div>
             <fieldset>
-                <legend title='Adicional'>OBJETO</legend>
+                <legend title='Valor'>VALOR</legend>
+                <input type="num" value= '' required name='valor' id="valor">
                 
             </fieldset>
         </div>
-        
+        <div>
+            <fieldset>
+                <legend title='Objeto'>OBJETO</legend>
+                <textarea id="objeto" required name="objeto" rows="10" cols="20" value= ''></textarea>
+            </fieldset>
+        </div>
         <div>     
             
             <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
