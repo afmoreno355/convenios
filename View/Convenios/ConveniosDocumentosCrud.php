@@ -67,6 +67,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                  Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')*/
                 )
             {
+                ConvenioDocumentos::zipDocumentos($idSolicitud);
                 $convenioDocumentos->setMemorando( $_FILES['memorando'] ) ;
                 $convenioDocumentos->setEstudiosPrevios( $_FILES['estudiosPrevios'] ) ;
                 $convenioDocumentos->setAnexoTecnico( $_FILES['anexoTecnico'] ) ;

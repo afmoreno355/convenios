@@ -219,8 +219,25 @@ class ConvenioDocumentos {
     
     // retorna rutas de documentos
     public static function rutasDocumentos($id) {
+
         $sql = " select * from  documentaciones where id_solicitud = '$id' ";
         return ConectorBD::ejecutarQuery($sql, ' convenios ')[0];
+    }
+
+    // crea zip para descargar documentos
+    public static function zipDocumentos($id) {
+
+        $zip = new ZipArchive();
+        $zipRuta = __DIR__ . '/../archivos/convenios/' . $id . '/CONVENIO_' . $id . '.zip';
+
+        if(!$zip->open($zipRuta, ZipArchive::CREATE)) {
+
+            print_r(" NO ES POSIBLE ABRIR EL ARCHIVO ZIP ");
+        } else {
+
+            $zip->addFile(__DIR__ . '/../archivos/convenios/8/MEMORANDO_8_13072023124522.pdf', 'mem.pdf');
+            $zip->close();
+        }
     }
     
     // guardar elementos en la base de datos
