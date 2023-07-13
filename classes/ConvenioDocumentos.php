@@ -235,7 +235,12 @@ class ConvenioDocumentos {
             print_r(" NO ES POSIBLE ABRIR EL ARCHIVO ZIP ");
         } else {
 
-            $zip->addFile(__DIR__ . '/../archivos/convenios/8/MEMORANDO_8_13072023124522.pdf', 'mem.pdf');
+            $sql = " select * from  documentaciones where id_solicitud = '$id' ";
+            $rutas = ConectorBD::ejecutarQuery($sql, ' convenios ')[0];
+
+            if($rutas['memorando'] != '') {
+                $zip->addFile(__DIR__ . '/../' . $rutas['memorando'], 'MEMORANDO_' . $id . '.pdf');
+            }
             $zip->close();
         }
     }
