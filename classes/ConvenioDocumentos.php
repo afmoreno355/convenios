@@ -238,8 +238,12 @@ class ConvenioDocumentos {
             $sql = " select * from  documentaciones where id_solicitud = '$id' ";
             $rutas = ConectorBD::ejecutarQuery($sql, ' convenios ')[0];
 
-            if($rutas['memorando'] != '') {
-                $zip->addFile(__DIR__ . '/../' . $rutas['memorando'], 'MEMORANDO_' . $id . '.pdf');
+             foreach($rutas as $direccion) {
+
+                if($direccion != '') {
+                    
+                    $zip->addFile(__DIR__ . '/../' . $direccion, basename($direccion));
+                }
             }
             $zip->close();
         }
