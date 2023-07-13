@@ -339,7 +339,7 @@ class ConvenioDocumentos {
                         $sql .= ' proyecto_autorizacion ';
                 }
                 $sql .= " = '$ruta', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
-                print_r($sql);
+                //print_r($sql);
                 ConectorBD::ejecutarQuery($sql, ' convenios ');
                 $historico = new Historico(null, null);
                 $historico->setIdentificacion($_SESSION["user"]);

@@ -8,7 +8,8 @@ print_r($direcciones);
 
 <h2>DOCUMENTOS SOLICITUD</h2>
 <div class="carga_Documento">
-    <div class="nuevaseccion" ><fieldset>  
+    <div class="nuevaseccion" >
+    <fieldset>  
         <section>
             <p>MEMORANDO</p>
             <?php if ($rutas['memorando'] != '') { ?> 
@@ -109,5 +110,7 @@ print_r($direcciones);
                 <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
             <?php } ?>
         </section>
-    </fieldset></div>
+    </fieldset>
+    <a href="View/Convenios/ConvenioDocumentosDescargar.php?file=MEMORANDO_28_12072023094411.pdf" download="CONVENIO_28.pdf">Descargar documentos</a>
+    </div>
 </div>
