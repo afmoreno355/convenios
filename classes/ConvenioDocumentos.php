@@ -225,7 +225,7 @@ class ConvenioDocumentos {
     }
 
     // crea zip para descargar documentos
-    public static function zipDocumentos($id) {
+    public function zipDocumentos($id) {
 
         $zip = new ZipArchive();
         $zipRuta = __DIR__ . '/../archivos/convenios/' . $id . '/CONVENIO_' . $id . '.zip';
@@ -236,17 +236,39 @@ class ConvenioDocumentos {
         } else {
 
             $sql = " select * from  documentaciones where id_solicitud = '$id' ";
-            $rutas = ConectorBD::ejecutarQuery($sql, ' convenios ')[0];
+            $rutas = ConvenioDocumentos::rutasDocumentos($id);
 
-             foreach($rutas as $direccion) {
+             foreach($rutas as $ruta) {
 
-                if($direccion != '') {
+                if($ruta != '') {
                     
-                    $zip->addFile(__DIR__ . '/../' . $direccion, basename($direccion));
+                    $zip->addFile(__DIR__ . '/../' . $ruta, basename($ruta));
                 }
             }
             $zip->close();
         }
+    }
+
+    public static function descargarDocumentosZip($id) {
+
+        $this->zipDocumentos($id);
+        $zipRuta = __DIR__ . '/../archivos/convenios/' . $id . '/CONVENIO_' . $id . '.zip';
+
+        if(file_exists($zipRuta)) {
+
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($zipRuta) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($zipRuta));
+
+            readfile($zipRuta);
+
+            return true;
+        }
+        return false;
     }
     
     // guardar elementos en la base de datos

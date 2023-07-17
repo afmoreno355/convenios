@@ -100,5 +100,15 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 print_r("EL CONVENIO NO SE PUDO ELIMINAR");
             }
         }
+        elseif ($accion == "DESCARGAR")
+        {
+            if ($convenioDocumentos -> descargarDocumentosZip($idSolicitud)) {
+
+                print_r("Se ha descargado el archivo ZIP de documentos");
+            } else {
+
+                print_r("NO SE PUDO DESCARGAR LA DOCUMENTACIÓN");
+            }
+        }
     }
 }

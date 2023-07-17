@@ -1,8 +1,10 @@
 <?php
-        if(!empty($_GET['file'])) {
+    if(isset($_GET['idConvenio'])) {
+        $idConvenio = $_GET['idConvenio'];
+        ConvenioDocumentos::zipDocumentos($idConvenio);
 
-            $zipNombre = basename($_GET['file']);
-            $direccion = "archivos/convenios/28/" . $zipNombre;
+            $zipNombre = 'CONVENIO_' . $idConvenio . '.zip';
+            $direccion = __DIR__ . "/../../archivos/convenios/" . "/" . $zipNombre;
 
             if(!empty($zip) and file_exists($direccion)) {
 
@@ -13,4 +15,4 @@
                 echo " NO ES POSIBLE DESCARGAR LOS DOCUMENTOS ";
             }
         }
-    ?>
+?>

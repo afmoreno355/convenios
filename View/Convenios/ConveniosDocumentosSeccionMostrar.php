@@ -111,6 +111,6 @@ print_r($direcciones);
             <?php } ?>
         </section>
     </fieldset>
-    <a href="View/Convenios/ConvenioDocumentosDescargar.php?file=MEMORANDO_28_12072023094411.pdf" download="CONVENIO_28.pdf">Descargar documentos</a>
+    <a href="View/Convenios/ConveniosDocumentosDescargar.php?idConvenio=<?= $convenio->getId() ?>">Descargar documentos</a>
     </div>
 </div>
