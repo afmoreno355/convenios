@@ -240,27 +240,27 @@ class Convenio {
             $historico->setTipo_historico("ADICIONAR");
             $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
-            $historico->setTabla("convenio.solicitudes");
+            $historico->setTabla("convenios solicitudes");
             //$historico->grabar();
             return true;
-        } /** */
+        }
         return false;
     }
     
-    public function Modificar( $id ) {
+    public function Modificar($id) {
         $sql = "update solicitudes set
-                        nombre = '$this->nombre',
-                        codigo_area = '$this->codigoArea',
-                        abogado = '$this->abogado',
-                        tecnico_experto = '$this->tecnicoExperto',
-                        mes_publicacion = '$this->mes',
-                        estado = '$this->estado',
-                        objeto = '$this->objeto',
-                        alcance = '$this->alcance',
-                        justificacion = '$this->justificacion',
-                        fecha_sistema = now()
+                  nombre = '$this->nombre',
+                  codigo_area = '$this->codigoArea',
+                  abogado = '$this->abogado',
+                  tecnico_experto = '$this->tecnicoExperto',
+                  mes_publicacion = '$this->mes',
+                  estado = '$this->estado',
+                  objeto = '$this->objeto',
+                  alcance = '$this->alcance',
+                  justificacion = '$this->justificacion',
+                  fecha_sistema = now()
                 where id_solicitud = $id ";
-        // print_r($sql);
+        
         if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
             $nuevo_query = str_replace("'", "|", $sql);
@@ -269,7 +269,7 @@ class Convenio {
             $historico->setTipo_historico("MODIFICAR");
             $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
-            $historico->setTabla("convenio.solicitudes");
+            $historico->setTabla("convenios solicitudes");
             $historico->grabar();
             return true;
         }/** */
@@ -303,8 +303,6 @@ class Convenio {
         } 
         return false;
     }
-
-
 
 }
 

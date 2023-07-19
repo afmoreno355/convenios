@@ -21,7 +21,7 @@ class ConectorBD {
     public $conexion;
     
     function __construct() {
-        $archivo = dirname(__FILE__) . "/../configuracion.ini";
+        $archivo = __DIR__ . "/../configuracion.ini";
         if (!file_exists($archivo)) {
             echo "ERROR!: No se encontró el archivo $archivo";
             die();
@@ -59,14 +59,14 @@ class ConectorBD {
         $conector->conectar($bd);
         $sentencia=$conector->conexion->prepare($cadenaSQL);
         if (!$sentencia->execute()){ //si hay error en el SQL devuelve falso
-            //echo "Error al ejecutar en $bd: $cadenaSQL. ";
+            echo "Error al ejecutar en $bd: $cadenaSQL. ";
             $conector->desconectar();
-            return(false);
+            return false;
         } else {
             $resultado=$sentencia->fetchAll();
             $sentencia->closeCursor();
             $conector->desconectar();
-            return($resultado);
+            return $resultado;
         }
     }
     

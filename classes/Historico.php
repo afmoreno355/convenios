@@ -135,12 +135,12 @@ class Historico {
 
     // guardar elementos en la base de datos
     public function grabar() {
+        
         $cadenaSQL = "insert into historico(historico,identificacion,tabla,tipo_historico,fecha)  values('".strtoupper($this->historico)."','$this->identificacion','".strtoupper($this->tabla)."','$this->tipo_historico','now()')";
-        if (ConectorBD::ejecutarQuery($cadenaSQL,null)) {
+        if (ConectorBD::ejecutarQuery($cadenaSQL, ' eagle_admin ')) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     // borrar elementos en la base de datos

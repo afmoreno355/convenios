@@ -140,21 +140,21 @@ class ConvenioDocumentos {
             if (is_array($campo)) {
                 $this->cargarObjetoDeVector($campo);
             } else {
-                $sql = "select 
-                            id_documentacion,
-                            id_solicitud,
-                            memorando,
-                            estudios_previos,
-                            anexo_tecnico,
-                            analisis_sector,
-                            concepto_tecnico,
-                            propuesta_tecnica_economica,
-                            matriz_riesgos,
-                            certificado_disponibilidad_presupuestal,
-                            certificado_paa,
-                            proyecto_autorizacion,
-                            fecha_sistema
-                        from documentaciones where $campo = $valor";
+                $sql = "select
+                    id_documentacion,
+                    id_solicitud,
+                    memorando,
+                    estudios_previos,
+                    anexo_tecnico,
+                    analisis_sector,
+                    concepto_tecnico,
+                    propuesta_tecnica_economica,
+                    matriz_riesgos,
+                    certificado_disponibilidad_presupuestal,
+                    certificado_paa,
+                    proyecto_autorizacion,
+                    fecha_sistema
+                from documentaciones where $campo = $valor";
                         //print_r($sql);
                 $resultado = ConectorBD::ejecutarQuery($sql, ' convenios ');
                 if (count($resultado) > 0) {
@@ -272,39 +272,17 @@ class ConvenioDocumentos {
     }
     
     // guardar elementos en la base de datos
-    public function adicionar($idSolicitud) {
-        $sql = "insert into documentaciones (id_solicitud, fecha_sistema) values ('$idSolicitud', now())";
+    public function registrarDocumentacion($idSolicitud) {
         
-        
-        /*"insert into documentaciones (
-                            id_solicitud,
-                            memorando,
-                            estudios_previos,
-                            anexo_tecnico,
-                            analisis_sector,
-                            concepto_tecnico,
-                            propuesta_tecnica_economica,
-                            matriz_riesgos,
-                            certificado_disponibilidad_presupuestal,
-                            certificado_paa,
-                            proyecto_autorizacion,
-                            fecha_sistema
-                            ) values (
-                            '$this->idSolicitud',
-                            '$this->memorando',
-                            '$this->estudiosPrevios',
-                            '$this->anexoTecnico',
-                            '$this->analisisSector',
-                            '$this->solicitudConceptoTecnico',
-                            '$this->propuestaTecnicaEconomica',
-                            '$this->matrizRiesgos',
-                            '$this->disponibilidadPresupuestal',
-                            '$this->paa',
-                            '$this->proyectoAutorizacion',
-                            now()
-                            ) ";/** */
-        //print_r($sql);
-        if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
+        $sql = "insert into documentaciones (
+            id_solicitud,
+            fecha_sistema
+        ) values (
+            '$idSolicitud',
+            now()
+        )";
+
+        if(ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
             $historico = new Historico(null, null);
             $historico->setIdentificacion($_SESSION["user"]);
@@ -404,22 +382,24 @@ class ConvenioDocumentos {
     }
 
     public function adicionarDocumentacion() {
-        return  $this->adicionarDocumento($this->memorando, 'MEMORANDO') &&
-                $this->adicionarDocumento($this->estudiosPrevios, 'ESTUDIOS PREVIOS') &&
-                $this->adicionarDocumento($this->anexoTecnico, 'ANEXO TÉCNICO') &&
-                $this->adicionarDocumento($this->analisisSector, 'ANÁLISIS DEL SECTOR') &&
-                $this->adicionarDocumento($this->solicitudConceptoTecnico, 'CONCEPTO TÉCNICO') &&
-                $this->adicionarDocumento($this->propuestaTecnicaEconomica, 'PROPUESTA TÉCNICA ECONÓMICA') &&
-                $this->adicionarDocumento($this->matrizRiesgos, 'MATRIZ DE RIESGOS') &&
-                $this->adicionarDocumento($this->disponibilidadPresupuestal, 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL') &&
-                $this->adicionarDocumento($this->paa, 'CERTIFICADO PAA') &&
-                $this->adicionarDocumento($this->proyectoAutorizacion, 'PROYECTO DE AUTORIZACIÓN');/** */
+        return
+            $this->adicionarDocumento($this->memorando, 'MEMORANDO') &&
+            $this->adicionarDocumento($this->estudiosPrevios, 'ESTUDIOS PREVIOS') &&
+            $this->adicionarDocumento($this->anexoTecnico, 'ANEXO TÉCNICO') &&
+            $this->adicionarDocumento($this->analisisSector, 'ANÁLISIS DEL SECTOR') &&
+            $this->adicionarDocumento($this->solicitudConceptoTecnico, 'CONCEPTO TÉCNICO') &&
+            $this->adicionarDocumento($this->propuestaTecnicaEconomica, 'PROPUESTA TÉCNICA ECONÓMICA') &&
+            $this->adicionarDocumento($this->matrizRiesgos, 'MATRIZ DE RIESGOS') &&
+            $this->adicionarDocumento($this->disponibilidadPresupuestal, 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL') &&
+            $this->adicionarDocumento($this->paa, 'CERTIFICADO PAA') &&
+            $this->adicionarDocumento($this->proyectoAutorizacion, 'PROYECTO DE AUTORIZACIÓN');
+
     }
 
     public function adicionarModificar($idSolicitud) {
-        $documentacion = new $this(' id_solicitud ', $idSolicitud);
+        $documentacion = new ConvenioDocumentos(' id_solicitud ', $idSolicitud);
         if ($documentacion->getId() == null) {
-            return $this->adicionar($idSolicitud);
+            $this->registrarDocumentacion($idSolicitud);
         }
         return $this->adicionarDocumentacion();
     }

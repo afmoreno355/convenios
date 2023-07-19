@@ -19,11 +19,6 @@ $nombreSinTilde_Nuevo = array("A", "E", "I", "O", "U", "N", "", "", "A", "E", "I
 
 date_default_timezone_set("America/Bogota");
 $fecha = date("YmdHis");
-/*$fecha_indicativas = date("Y-m-d H:i:s");
-$fecha_indicativa_comp = date("Y-m-d");
-$anio_indicativa = date("Y");
-$acceso_Tipo_Usuario = ConectorBD::ejecutarQuery( " select validar from indicativa  WHERE cod_centro = '{$_SESSION['sede']}' and vigencia ='$anio_indicativa' and id_modalidad = '3' group by validar ; " ,  null ) ;
-/** */
 
 // variable variable trae las variables que trae POST
 foreach ($_POST as $key => $value)
