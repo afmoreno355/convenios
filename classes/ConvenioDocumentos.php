@@ -344,7 +344,7 @@ class ConvenioDocumentos {
 
     public function adicionarDocumento($documento, $nombre) {
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
-        $fechaActual = date("dmYhis");
+        $fechaActual = date("d-m-Y_h:i:s");
         $ruta = "archivos/convenios/$this->idSolicitud/$nombre"."_$this->idSolicitud"."_$fechaActual.pdf";
         $destino = __DIR__."/../$ruta"; // La carpeta debe tener permisos
         if ( $cargarDocumento ) {
