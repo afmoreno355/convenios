@@ -127,7 +127,7 @@ if ($id == 2 && $permisos)
     </div>
 <?php
 require_once(__DIR__.'/ConveniosSolicitudSeccionCompletar.php');
-require_once(__DIR__.'/ConveniosDocumentosSeccionCompletar.php');
+require_once(__DIR__.'/../ConveniosDocumentos/ConveniosDocumentosSeccionCompletar.php');
 require_once(__DIR__.'/ConveniosEstudiosPreviosSeccionCompletar.php');
 require_once(__DIR__.'/ConveniosPaaSeccionCompletar.php');
 require_once(__DIR__.'/ConveniosEstadosSeccionCompletar.php');
@@ -171,8 +171,8 @@ elseif ($id == 4 && $permisos ) {
         </div>
     </div>
 <?php
-    require_once(__DIR__.'/ConveniosSolicitudSeccionMostrar.php');
-    require_once(__DIR__.'/ConveniosDocumentosSeccionMostrar.php');
+    require_once(__DIR__.'/ConveniosVista.php');
+    require_once(__DIR__.'/../ConveniosDocumentos/ConveniosDocumentosVista.php');
     /**require_once(__DIR__.'/ConveniosEstudiosPreviosSeccionMostrar.php');
     require_once(__DIR__.'/ConveniosPaaSeccionMostrar.php');
     require_once(__DIR__.'/ConveniosEstadosSeccionMostrar.php');/** */

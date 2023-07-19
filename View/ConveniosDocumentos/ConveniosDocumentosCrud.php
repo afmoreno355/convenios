@@ -19,11 +19,6 @@ $nombreSinTilde_Nuevo = array("A", "E", "I", "O", "U", "N", "", "", "A", "E", "I
 
 date_default_timezone_set("America/Bogota");
 $fecha = date("YmdHis");
-/*$fecha_indicativas = date("Y-m-d H:i:s");
-$fecha_indicativa_comp = date("Y-m-d");
-$anio_indicativa = date("Y");
-$acceso_Tipo_Usuario = ConectorBD::ejecutarQuery( " select validar from indicativa  WHERE cod_centro = '{$_SESSION['sede']}' and vigencia ='$anio_indicativa' and id_modalidad = '3' group by validar ; " ,  null ) ;
-/** */
 
 // variable variable trae las variables que trae POST
 foreach ($_POST as $key => $value)
@@ -36,8 +31,9 @@ $token1 = $session->getToken1();
 $token2 = $session->getToken2();
 
 if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOKIE["token2"]) {
+    
     print_r("NO TIENE PERMISO PARA REALIZAR ESTA ACCION");
-    //header("Location: index");
+    
 } elseif ($_SESSION["token1"] === $_COOKIE["token1"] && $_SESSION["token2"] === $_COOKIE["token2"] && password_verify(md5($token1 . $token2), $session->getToken3())) {
     if (isset($accion)) {
         if( $idSolicitud != '' )
@@ -67,7 +63,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                  Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')*/
                 )
             {
-                ConvenioDocumentos::zipDocumentos($idSolicitud);
+                //ConvenioDocumentos::zipDocumentos($idSolicitud);
                 $convenioDocumentos->setMemorando( $_FILES['memorando'] ) ;
                 $convenioDocumentos->setEstudiosPrevios( $_FILES['estudiosPrevios'] ) ;
                 $convenioDocumentos->setAnexoTecnico( $_FILES['anexoTecnico'] ) ;

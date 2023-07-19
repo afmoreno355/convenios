@@ -111,6 +111,10 @@ print_r($direcciones);
             <?php } ?>
         </section>
     </fieldset>
-    <a href="View/Convenios/ConveniosDocumentosDescargar.php?idConvenio=<?= $convenio->getId() ?>">Descargar documentos</a>
-    </div>
+
+    <?php
+    $URL = "View/ConveniosDocumentos/ConveniosDocumentosCrud.php" ;
+    $http_desc = Http::encryptIt("idConvenio = {$convenio->getId()}&user={$_SESSION["user"]}&accion=DESCARGAR");
+    ?>
+    <input type="button" id="button" name="3" onclick="validarDatos(``, `I=<?= $http_desc ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="DESCARGAR">
 </div>
