@@ -283,7 +283,7 @@ class ConvenioDocumentos {
         )";
 
         if(ConectorBD::ejecutarQuery($sql, ' convenios ')) {
-            //Historico de las acciones en el sistemas de informacion
+
             $historico = new Historico(null, null);
             $historico->setIdentificacion($_SESSION["user"]);
             $historico->setTipo_historico("ADICIONAR");
@@ -291,6 +291,7 @@ class ConvenioDocumentos {
             $historico->setFecha("now()");
             $historico->setTabla("DOCUMENTACIONES");
             $historico->grabar();
+
             return true;
         }
         return false;
@@ -314,11 +315,7 @@ class ConvenioDocumentos {
             return false;
         }
     }
-    
-    // modificar elementos en la base de datos, identificador es el codigo o llave primaria a modificar 
-    public function modificar($idSolicitud) { 
-        return $this->adcionarDocumentacion();
-    }
+
 
     public function adicionarDocumento($documento, $nombre) {
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
@@ -326,7 +323,9 @@ class ConvenioDocumentos {
         $ruta = "archivos/convenios/$this->idSolicitud/$nombre"."_$this->idSolicitud"."_$fechaActual.pdf";
         $destino = __DIR__."/../$ruta"; // La carpeta debe tener permisos
         if ( $cargarDocumento ) {
-            mkdir(dirname($destino), 0777, true);
+
+            //mkdir(dirname($destino), 0777, true);
+            
             if (
                 Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
                 copy($documento['tmp_name'], $destino)
@@ -401,6 +400,10 @@ class ConvenioDocumentos {
         if ($documentacion->getId() == null) {
             $this->registrarDocumentacion($idSolicitud);
         }
+
+        $destino = __DIR__ . "/../archivos/convenios/$idSolicitud";
+        mkdir($destino, 0777, true);
+        
         return $this->adicionarDocumentacion();
     }
 

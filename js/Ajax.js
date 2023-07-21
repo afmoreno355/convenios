@@ -35,6 +35,8 @@ function formFotoDoc( donde , formData, hacer = 'aviso') {
     xhr.send(formData);
 }
 
+// Cuado se solicita una información
+// idexistentesReCa = 
  function idexistentesReCa(id, postcad, donde = 'aviso' , accion , evt , tadId ) {
         var xhr=new XMLHttpRequest();
         xhr.onreadystatechange=function (){

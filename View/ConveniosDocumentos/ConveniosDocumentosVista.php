@@ -117,4 +117,6 @@ print_r($direcciones);
     $http_desc = Http::encryptIt("idConvenio = {$convenio->getId()}&user={$_SESSION["user"]}&accion=DESCARGAR");
     ?>
     <input type="button" id="button" name="3" onclick="validarDatos(``, `I=<?= $http_desc ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="DESCARGAR">
+
+    <!-- Poner un tipo hipervínculo en vez de un botón <a></a>-->
 </div>
