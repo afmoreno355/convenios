@@ -48,19 +48,12 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
            $valor = null ; 
         }
         $convenioDocumentos = new ConvenioDocumentos( $campo, $valor ) ;
+
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
             $maximoLetras = 250;
             if (
-                 Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID DOCUMENTACIÓN' )/* &&
-                 Select::validar( $memorando , 'TEXT' , 250 , 'NOMBRE' ) &&
-                 Select::validar( $area , 'NUMERIC' , null , 'CÓDIGO DE ÁREA' ) &&
-                 Select::validar( $mes , 'TEXT' , 250 , 'MES DE PUBLICCIÓN') &&
-                 Select::validar( $abogado, 'TEXT' , 250 , 'ABOGADO' ) &&
-                 Select::validar( $tecnicoExperto, 'TEXT', 250, 'TÉCNICO EXPERTO' ) &&
-                 Select::validar( $objeto, 'TEXT', $maximoLetras, 'OBJETO') &&
-                 Select::validar( $alcance, 'TEXT', $maximoLetras, 'ALCANCE OBJETO' ) &&
-                 Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')*/
+                 Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID DOCUMENTACIÓN' )
                 )
             {
                 //ConvenioDocumentos::zipDocumentos($idSolicitud);
@@ -73,8 +66,8 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenioDocumentos->setMatrizRiesgos( $_FILES['matrizRiesgos'] ) ;
                 $convenioDocumentos->setDisponibilidadPresupuestal( $_FILES['disponibilidadPresupuestal'] ) ;
                 $convenioDocumentos->setPaa( $_FILES['paa'] ) ;
-                $convenioDocumentos->setProyectoAutorizacion( $_FILES['proyectoAutorizacion'] ) ;/** */
-
+                $convenioDocumentos->setProyectoAutorizacion( $_FILES['proyectoAutorizacion'] ) ;
+                $convenioDocumentos->setRuta( '/archivos/convenios/' . $idSolicitud ); // Ruta relativa al servidor
 
                 if ( $convenioDocumentos->adicionarModificar( $idSolicitud ) ) 
                 {
