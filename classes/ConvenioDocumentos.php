@@ -332,13 +332,13 @@ class ConvenioDocumentos {
 
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
         $fecha = date("d-m-Y_h:i:s");
-        $direccion = $this->ruta . "/$nombre"."_$this->idSolicitud"."_$fecha.pdf";
+        $direccion = $this->ruta . "/$nombre" . "_$this->idSolicitud"."_$fecha" . ".pdf";
 
         if ($cargarDocumento) {
             
             if (
                 Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
-                copy($documento['tmp_name'], __DIR__ . "/..$direccion")
+                copy($documento['tmp_name'], __DIR__ . "/../..$direccion")
                )
                {
                 $sql = 'update documentaciones set';
@@ -374,7 +374,7 @@ class ConvenioDocumentos {
                         $sql .= ' proyecto_autorizacion ';
                 }
 
-                $sql .= " = '/convenios$direccion', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
+                $sql .= " = '$direccion', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
 
                 ConectorBD::ejecutarQuery($sql, ' convenios ');
                 $historico = new Historico(null, null);

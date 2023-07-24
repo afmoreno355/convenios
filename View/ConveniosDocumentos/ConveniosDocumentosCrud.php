@@ -67,7 +67,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenioDocumentos->setDisponibilidadPresupuestal( $_FILES['disponibilidadPresupuestal'] ) ;
                 $convenioDocumentos->setPaa( $_FILES['paa'] ) ;
                 $convenioDocumentos->setProyectoAutorizacion( $_FILES['proyectoAutorizacion'] ) ;
-                $convenioDocumentos->setRuta( '/archivos/convenios/' . $idSolicitud ); // Ruta relativa al servidor
+                $convenioDocumentos->setRuta( '/convenios/archivos/convenios/' . $idSolicitud ); // Ruta relativa al servidor
 
                 if ( $convenioDocumentos->adicionarModificar( $idSolicitud ) ) 
                 {
