@@ -69,11 +69,8 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenio->setEstado('NEGOCIACIÓN') ;
                 $convenio->setAbogado( $abogado ) ;
                 $convenio->setTecnicoExperto( $tecnicoExperto ) ;
-                echo "<input type=hidden value='$objeto'/>" ;
                 $convenio->setObjeto( $objeto ) ;
-                echo "<input type=hidden value='$alcance'/>" ;
                 $convenio->setAlcance( $alcance ) ;
-                echo "<input type=hidden value='$justificacion'/>" ;
                 $convenio->setJustificacion( $justificacion ) ;
 
 
@@ -82,7 +79,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                     print_r( "Se ha cargado la solicitud en el módulo convenios <|> nombre convenio $nombre " ) ;
                 } else {
                     print_r("ERROR INESPERADO, VUELVE A INTENTAR");
-                }  
+                }
             }
         }
         elseif ($accion == "ELIMINAR")

@@ -208,29 +208,28 @@ class Convenio {
 
     public function Adicionar() {
         $sql="insert into solicitudes (
-                                    nombre,
-                                    codigo_area,
-                                    abogado,
-                                    tecnico_experto,
-                                    mes_publicacion,
-                                    estado,
-                                    objeto,
-                                    alcance,
-                                    justificacion,
-                                    fecha_sistema
-                                    )
-                               values (
-                                    '$this->nombre',
-                                    '$this->codigoArea',
-                                    '$this->abogado',
-                                    '$this->tecnicoExperto',
-                                    '$this->mes',
-                                    '$this->estado',
-                                    '$this->objeto',
-                                    '$this->alcance',
-                                    '$this->justificacion',
-                                    now()
-                                   )";
+            nombre,
+            codigo_area,
+            abogado,
+            tecnico_experto,
+            mes_publicacion,
+            estado,
+            objeto,
+            alcance,
+            justificacion,
+            fecha_sistema
+        ) values (
+            '$this->nombre',
+            '$this->codigoArea',
+            '$this->abogado',
+            '$this->tecnicoExperto',
+            '$this->mes',
+            '$this->estado',
+            '$this->objeto',
+            '$this->alcance',
+            '$this->justificacion',
+            now()
+        )";
         //print_r($sql);
         if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
@@ -241,25 +240,26 @@ class Convenio {
             $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
             $historico->setTabla("convenios solicitudes");
-            //$historico->grabar();
+            $historico->grabar();
             return true;
         }
         return false;
     }
     
     public function Modificar($id) {
+        
         $sql = "update solicitudes set
-                  nombre = '$this->nombre',
-                  codigo_area = '$this->codigoArea',
-                  abogado = '$this->abogado',
-                  tecnico_experto = '$this->tecnicoExperto',
-                  mes_publicacion = '$this->mes',
-                  estado = '$this->estado',
-                  objeto = '$this->objeto',
-                  alcance = '$this->alcance',
-                  justificacion = '$this->justificacion',
-                  fecha_sistema = now()
-                where id_solicitud = $id ";
+            nombre = '$this->nombre',
+            codigo_area = '$this->codigoArea',
+            abogado = '$this->abogado',
+            tecnico_experto = '$this->tecnicoExperto',
+            mes_publicacion = '$this->mes',
+            estado = '$this->estado',
+            objeto = '$this->objeto',
+            alcance = '$this->alcance',
+            justificacion = '$this->justificacion',
+            fecha_sistema = now()
+            where id_solicitud = $id ";
         
         if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion

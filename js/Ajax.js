@@ -36,7 +36,8 @@ function formFotoDoc( donde , formData, hacer = 'aviso') {
 }
 
 // Cuado se solicita una información
-// idexistentesReCa = 
+// idexistentesReCa = traer la llave principal de un dato.
+// postcad = 
  function idexistentesReCa(id, postcad, donde = 'aviso' , accion , evt , tadId ) {
         var xhr=new XMLHttpRequest();
         xhr.onreadystatechange=function (){

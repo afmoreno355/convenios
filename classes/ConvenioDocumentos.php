@@ -27,6 +27,9 @@ class ConvenioDocumentos {
     private $proyectoAutorizacion;
     private $fecha;
 
+    // ruta directorio convenios
+    private $ruta;
+
 
     // Getters and Setters
     
@@ -82,6 +85,10 @@ class ConvenioDocumentos {
         return $this->fecha;
     }
 
+    public function getRuta() {
+        return $this->ruta;
+    }
+
     public function setId($id): void {
         $this->id = $id;
     }
@@ -134,6 +141,10 @@ class ConvenioDocumentos {
         $this->fecha = $fecha;
     }
 
+    public function setRuta($ruta): void {
+        $this->ruta = $ruta;
+    }
+
     // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     function __construct($campo, $valor) {
         if ($campo != NULL) {
@@ -155,16 +166,16 @@ class ConvenioDocumentos {
                     proyecto_autorizacion,
                     fecha_sistema
                 from documentaciones where $campo = $valor";
-                        //print_r($sql);
+                
                 $resultado = ConectorBD::ejecutarQuery($sql, ' convenios ');
                 if (count($resultado) > 0) {
                     $this->cargarObjetoDeVector($resultado[0]);
-                }/** */
+                }
             }
         }
     }
 
-    //organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
+    // organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
     private function cargarObjetoDeVector($vector) {
         $this->id = $vector[0];
         $this->idSolicitud = $vector[1];
@@ -238,7 +249,7 @@ class ConvenioDocumentos {
             $sql = " select * from  documentaciones where id_solicitud = '$id' ";
             $rutas = ConvenioDocumentos::rutasDocumentos($id);
 
-             foreach($rutas as $ruta) {
+            foreach($rutas as $ruta) {
 
                 if($ruta != '') {
                     
@@ -323,8 +334,6 @@ class ConvenioDocumentos {
         $ruta = "archivos/convenios/$this->idSolicitud/$nombre"."_$this->idSolicitud"."_$fechaActual.pdf";
         $destino = __DIR__."/../$ruta"; // La carpeta debe tener permisos
         if ( $cargarDocumento ) {
-
-            //mkdir(dirname($destino), 0777, true);
             
             if (
                 Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
@@ -363,8 +372,9 @@ class ConvenioDocumentos {
                     case 'PROYECTO DE AUTORIZACIÓN':
                         $sql .= ' proyecto_autorizacion ';
                 }
+
                 $sql .= " = '$ruta', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
-                //print_r($sql);
+
                 ConectorBD::ejecutarQuery($sql, ' convenios ');
                 $historico = new Historico(null, null);
                 $historico->setIdentificacion($_SESSION["user"]);
@@ -401,9 +411,10 @@ class ConvenioDocumentos {
             $this->registrarDocumentacion($idSolicitud);
         }
 
+        // crea directorio
         $destino = __DIR__ . "/../archivos/convenios/$idSolicitud";
         mkdir($destino, 0777, true);
-        
+
         return $this->adicionarDocumentacion();
     }
 
