@@ -238,5 +238,11 @@ elseif ($id == 5 && $permisos ) {
          </div>
     </div>
 <?PHP
+} elseif ($id == 6 && $permisos) {
+?>
+
+    <p>Descargar</p>
+
+<?php
 }
 ?>
