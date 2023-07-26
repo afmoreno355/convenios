@@ -236,34 +236,15 @@ class ConvenioDocumentos {
     }
 
     // crea zip para descargar documentos
-    public function zipDocumentos($id) {
+    public static function crearZipDocumentos($id, $rutaDirectorioConvenios) {
 
-        $zip = new ZipArchive();
-        $zipRuta = __DIR__ . '/../archivos/convenios/' . $id . '/CONVENIO_' . $id . '.zip';
-
-        if(!$zip->open($zipRuta, ZipArchive::CREATE)) {
-
-            print_r(" NO ES POSIBLE ABRIR EL ARCHIVO ZIP ");
-        } else {
-
-            $sql = " select * from  documentaciones where id_solicitud = '$id' ";
-            $rutas = ConvenioDocumentos::rutasDocumentos($id);
-
-            foreach($rutas as $ruta) {
-
-                if($ruta != '') {
-                    
-                    $zip->addFile(__DIR__ . '/../' . $ruta, basename($ruta));
-                }
-            }
-            $zip->close();
-        }
+       print_r(":)");
     }
 
-    public static function descargarDocumentosZip($id) {
+    public static function descargarZipDocumentos($id, $rutaDirectorioConvenios) {
 
-        $this->zipDocumentos($id);
-        $zipRuta = __DIR__ . '/../archivos/convenios/' . $id . '/CONVENIO_' . $id . '.zip';
+        ConvenioDocumentos::crearZipDocumentos($id, $rutaDirectorioConvenios);
+        $zipRuta = __DIR__ . '/../..' . $rutaDirectorioConvenios . "/$id/CONVENIO_$id.zip";
 
         if(file_exists($zipRuta)) {
 

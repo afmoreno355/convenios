@@ -63,6 +63,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')
             )
             {
+
                 $convenio->setNombre( $nombre ) ;
                 $convenio->setCodigoArea( $area );
                 $convenio->setMes( $mes ) ;
@@ -73,6 +74,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenio->setAlcance( $alcance ) ;
                 $convenio->setJustificacion( $justificacion ) ;
 
+                ConvenioDocumentos::crearZipDocumentos($idSolicitud, '/convenios/archivos/convenios');
 
                 if ( $convenio->AdicionarModificar( $idSolicitud ) ) 
                 {

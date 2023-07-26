@@ -2,8 +2,6 @@
 <?php
 
 $rutas = ConvenioDocumentos::rutasDocumentos($convenio->getId());
-print_r($direcciones);
-
 ?>
 
 <h2>DOCUMENTOS SOLICITUD</h2>
@@ -110,13 +108,30 @@ print_r($direcciones);
                 <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
             <?php } ?>
         </section>
-    </fieldset>
 
-    <?php
+        <section>
+            <p>Descargar</p>
+            <?php if (true) {?> 
+                <a href="View/ConveniosDocumentos/ConveniosDocumentosDescargar.php?idConvenio=<?= $convenio->getId()?>">
+                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
+                </a>
+            <?php } else { ?>
+                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
+            <?php } ?>
+        </section>
+
+        <?php
     $URL = "View/ConveniosDocumentos/ConveniosDocumentosCrud.php" ;
     $http_desc = Http::encryptIt("idConvenio = {$convenio->getId()}&user={$_SESSION["user"]}&accion=DESCARGAR");
+    $urlZip = "archivos/convenios/" . $convenio->getId() . "/CONVENIO_" . $convenio-getId() . ".zip";
     ?>
-    <input type="button" id="button" name="3" onclick="validarDatos(``, `I=<?= $http_desc ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="DESCARGAR">
-
+    <section>
+    <input type="button" id="button"  onclick="validarDatos(``, `I=<?= $http_desc ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="DESCARGAR">
     <!-- Poner un tipo hipervínculo en vez de un botón <a></a>-->
+    <a href="<?= $urlZip ?>" >Descargar documentos</a>
+    Será que si está poniendo algo?
+            </section>
+    </fieldset>
+
+
 </div>
