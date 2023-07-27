@@ -1,6 +1,6 @@
 <h2>DOCUMENTOS SOLICITUD</h2>
     <div class="carga_Documento">
-    <div>
+        <div>
             <fieldset>
                 <legend title='MEMORANDO'>MEMORANDO</legend>
                 <input type='file' name='memorando' id='memorando' >

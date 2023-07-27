@@ -118,6 +118,14 @@ $rutas = ConvenioDocumentos::rutasDocumentos($convenio->getId());
             <?php } else { ?>
                 <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
             <?php } ?>
+
+        <div>     
+            <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
+            <input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion">
+            <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
+            <input type="submit" value='<?= "DESCARGAR" ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "ConveniosDocumentos")'>
+            <input type="reset" name="limpiarU"  value="LIMPIAR"/>
+        </div>
         </section>
 
         <?php

@@ -48,15 +48,15 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
            $valor = null ; 
         }
         $convenioDocumentos = new ConvenioDocumentos( $campo, $valor ) ;
+        $convenioDocumentos->setRuta( "archivos/convenios/$idSolicitud" ); // ruta relativa al directorio raiz index.php
 
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
-            $maximoLetras = 250;
+
             if (
                  Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID DOCUMENTACIÓN' )
                 )
             {
-                //ConvenioDocumentos::zipDocumentos($idSolicitud);
                 $convenioDocumentos->setMemorando( $_FILES['memorando'] ) ;
                 $convenioDocumentos->setEstudiosPrevios( $_FILES['estudiosPrevios'] ) ;
                 $convenioDocumentos->setAnexoTecnico( $_FILES['anexoTecnico'] ) ;
@@ -67,7 +67,6 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenioDocumentos->setDisponibilidadPresupuestal( $_FILES['disponibilidadPresupuestal'] ) ;
                 $convenioDocumentos->setPaa( $_FILES['paa'] ) ;
                 $convenioDocumentos->setProyectoAutorizacion( $_FILES['proyectoAutorizacion'] ) ;
-                $convenioDocumentos->setRuta( '/convenios/archivos/convenios/' . $idSolicitud ); // Ruta relativa al servidor
 
                 if ( $convenioDocumentos->adicionarModificar( $idSolicitud ) ) 
                 {
@@ -76,9 +75,8 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                     print_r("ERROR INESPERADO, VUELVE A INTENTAR");
                 }  
             }
-        }
-        elseif ($accion == "ELIMINAR")
-        {
+        } elseif ($accion == "ELIMINAR") {
+
             $convenioDocumentos->setIdSolicitud($idSolicitud);
             if ($convenioDocumentos->borrar())
             {
@@ -91,7 +89,12 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         }
         elseif ($accion == "DESCARGAR")
         {
-            if ($convenioDocumentos -> descargarDocumentosZip($idSolicitud)) {
+
+            if (true) {
+
+                $convenioDocumentos->descargarZipDocumentos();
+
+                
 
                 print_r("Se ha descargado el archivo ZIP de documentos");
             } else {

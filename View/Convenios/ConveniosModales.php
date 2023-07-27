@@ -42,7 +42,7 @@ $convenio = new Convenio( ' id_solicitud ' , $llave_Primaria_Contructor);
 if ($id == 1 && $permisos)
 {
 ?>
-<!--Modal 1-->
+<!--Modal 1 adicionar-->
     <div class="carga_Documento">
         <div class="contenido">  
             <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
@@ -113,7 +113,7 @@ if ($id == 1 && $permisos)
 if ($id == 2 && $permisos)
 {
 ?>
-<!--Modal 2-->
+<!--Modal 2 modificar-->
 
 <div class="carga_Documento">
     <div class="contenido">
@@ -138,7 +138,7 @@ require_once(__DIR__.'/ConveniosEstadosSeccionCompletar.php');
 elseif ($id == 3 && $permisos)
 {
 ?>
-<!--Modal 3-->
+<!--Modal 3 eliminar-->
     <div class="carga_Documento">
         <div class="contenido">  
             <div class="where_title where_modal" style="width: 100%; height: auto; margin-left: 0px;">
@@ -159,7 +159,7 @@ elseif ($id == 3 && $permisos)
 }
 elseif ($id == 4 && $permisos ) {
     ?>
-    <!--Modal 4-->
+    <!--Modal 4 información-->
     <div class="carga_Documento">
     <div class="contenido">
         <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
@@ -182,7 +182,7 @@ elseif ($id == 4 && $permisos ) {
 }
 elseif ($id == 5 && $permisos ) {
     ?>
-    <!--Modal 5-->
+    <!--Modal 5 ayuda-->
     <div class="carga_Documento">
          <div class="contenido">  
             <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
@@ -239,9 +239,13 @@ elseif ($id == 5 && $permisos ) {
     </div>
 <?PHP
 } elseif ($id == 6 && $permisos) {
-?>
 
-    <p>Descargar</p>
+?>
+    <!--Modal 6 Descargar-->
+<?php
+    $rutaConvenio = '/archivos/convenios/' . $convenio->getId() . '/CONVENIO_' . $convenio->getId() . '.zip';
+?>
+    <a href="View/ConveniosDocumentos/ConveniosDocumentosDescargar.php?file=<?= $rutaConvenio ?>&idConvenio=<?= $convenio->getId() ?>">Descargar</a>
 
 <?php
 }

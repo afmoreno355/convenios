@@ -236,31 +236,49 @@ class ConvenioDocumentos {
     }
 
     // crea zip para descargar documentos
-    public static function crearZipDocumentos($id, $rutaDirectorioConvenios) {
+    public function crearZipDocumentos() {
 
-       print_r(":)");
+        $zip = new ZipArchive;
+        $id = $this->idSolicitud;
+        $rutaConvenio = $this->ruta;
+        $zipRuta = __DIR__ . "/../$rutaConvenio/CONVENIO_$id.zip";
+
+        if($zip->open($zipRuta, ZipArchive::CREATE) === TRUE) {
+
+            $rutas = self::rutasDocumentos($id);
+
+            foreach($rutas as $ruta) {
+
+                if($ruta != '' and file_exists(__DIR__ . "/../$ruta")) {
+                    $zip->addFile(__DIR__ . "/../$ruta", basename($ruta));
+                }                
+            }
+            
+            $zip->close();
+        } else {
+
+            print_r(" NO SE PUDO CREAR EL ARCHIVO ZIP ");
+        }
     }
 
-    public static function descargarZipDocumentos($id, $rutaDirectorioConvenios) {
+    public function descargarZipDocumentos() {
 
-        ConvenioDocumentos::crearZipDocumentos($id, $rutaDirectorioConvenios);
-        $zipRuta = __DIR__ . '/../..' . $rutaDirectorioConvenios . "/$id/CONVENIO_$id.zip";
-
-        if(file_exists($zipRuta)) {
-
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($zipRuta) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($zipRuta));
-
-            readfile($zipRuta);
-
-            return true;
+        $file_path = __DIR__ . '/../archivos/convenios/59/ESTUDIOS PREVIOS_59_27-07-2023_10:16:04.pdf';
+        $file_name = 'example.pdf';
+        
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . $file_name . '"');
+        
+        
+        if(is_readable($file_path)) {
+            print_r("es readable");
+        } else {
+            print_r("no es readable");
         }
-        return false;
+        
+        
+
+        return true;
     }
     
     // guardar elementos en la base de datos
@@ -313,13 +331,15 @@ class ConvenioDocumentos {
 
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
         $fecha = date("d-m-Y_h:i:s");
-        $direccion = $this->ruta . "/$nombre" . "_$this->idSolicitud"."_$fecha" . ".pdf";
+        $id = $this->idSolicitud;
+        $rutaConvenio = $this->ruta;
+        $rutaDocumento = "$rutaConvenio/$nombre" . "_$id" . "_$fecha.pdf";
 
         if ($cargarDocumento) {
             
             if (
                 Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
-                copy($documento['tmp_name'], __DIR__ . "/../..$direccion")
+                copy($documento['tmp_name'], __DIR__ . "/../$rutaDocumento")
                )
                {
                 $sql = 'update documentaciones set';
@@ -355,7 +375,7 @@ class ConvenioDocumentos {
                         $sql .= ' proyecto_autorizacion ';
                 }
 
-                $sql .= " = '$direccion', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
+                $sql .= " = '$rutaDocumento', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
 
                 ConectorBD::ejecutarQuery($sql, ' convenios ');
                 $historico = new Historico(null, null);
