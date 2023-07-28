@@ -266,12 +266,11 @@ class ConvenioDocumentos {
         $file_path = __DIR__ . '/../archivos/convenios/59/ESTUDIOS PREVIOS_59_27-07-2023_10:16:04.pdf';
         $file_name = 'example.pdf';
         
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="' . $file_name . '"');
+
         
         
         if(is_readable($file_path)) {
-            print_r("es readable");
+            readfile($file_path);
         } else {
             print_r("no es readable");
         }
