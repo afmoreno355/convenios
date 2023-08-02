@@ -11,6 +11,8 @@ require_once __DIR__ . "/../../autoload.php";
 if( !isset($_SESSION["user"]) )
 {
     session_start();
+} else {
+    print_r("NO HA INICIADO SESIÓN");
 }
 
 $nombreTilde = array("á", "é", "í", "ó", "ú", "ñ", ".", "", "Á", "É", "Í", "Ó", "Ú", "Ñ", ".", "");
@@ -21,8 +23,9 @@ date_default_timezone_set("America/Bogota");
 $fecha = date("YmdHis");
 
 // variable variable trae las variables que trae POST
-foreach ($_POST as $key => $value)
-    ${$key} = $value;
+foreach ($_POST as $key => $value) ${$key} = $value;
+foreach (Http::decryptIt(array_keys($_POST)[0]) as $key => $value) ${$key} = $value;
+
 
 
 $session = new Sesion(" identificacion ", "'{$_SESSION["user"]}'");
@@ -35,6 +38,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
     print_r("NO TIENE PERMISO PARA REALIZAR ESTA ACCION");
     
 } elseif ($_SESSION["token1"] === $_COOKIE["token1"] && $_SESSION["token2"] === $_COOKIE["token2"] && password_verify(md5($token1 . $token2), $session->getToken3())) {
+    
     if (isset($accion)) {
         if( $idSolicitud != '' )
         {
@@ -90,17 +94,13 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         elseif ($accion == "DESCARGAR")
         {
 
-            if (true) {
-
-                $convenioDocumentos->descargarZipDocumentos();
-
-                
-
+            if ($convenioDocumentos->descargarZipDocumentos()) {
                 print_r("Se ha descargado el archivo ZIP de documentos");
             } else {
-
                 print_r("NO SE PUDO DESCARGAR LA DOCUMENTACIÓN");
             }
         }
+    } else {
+        print_r("NO SE HA DETECTADO ACCIÓN EN EL POST");
     }
 }

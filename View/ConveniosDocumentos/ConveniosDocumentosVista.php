@@ -121,13 +121,13 @@ $rutas = ConvenioDocumentos::rutasDocumentos($convenio->getId());
         <div>
             <?php
             $URL = "View/ConveniosDocumentos/ConveniosDocumentosCrud.php" ;
-            $http_desc = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=DESCARGAR");
-            //$urlZip = "archivos/convenios/" . $convenio->getId() . "/CONVENIO_" . $convenio-getId() . ".zip";
+            $http_des = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=DESCARGAR");
+            $zipRuta =  "archivos/convenios/" . $convenio->getId() . "/CONVENIO_" . $convenio->getId() . ".zip";
             ?>   
             <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
             <input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion">
             <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-            <input type="button" value='<?= "DESCARGAR" ?>' name='accionU' id='accionU' onclick='descargarConvenio(``, I=`<?= $http_desc ?>`, `formDetalle`, `<?= $URL ?>`, event, `ele`, `CONVENIO`)'>
+            <input type="button" value='<?= "DESCARGAR" ?>' name='accionU' id='accionU' onclick='descargarConvenio(I=`<?= $http_des ?>`, `formDetalle`, `<?= $URL ?>`, `<?= $zipRuta ?>`, `<?= basename($zipRuta) ?>`)'>
             <!--input type="reset" name="limpiarU"  value="LIMPIAR"/-->
         </div>
         </section>

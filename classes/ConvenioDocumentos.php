@@ -236,24 +236,26 @@ class ConvenioDocumentos {
     }
 
     // crea zip para descargar documentos
-    public static function crearZipDocumentos($id, $rutaDirectorioConvenios) {
+    public function crearZipDocumentos() {
+
+        $rutaDocumento = $this->ruta;
+        $id = $this->idSolicitud;
+        $zipRuta = __DIR__ . "/../$rutaDocumento/CONVENIO_$id.zip";
 
         $zip = new ZipArchive();
-        $zipRuta = __DIR__ . '/../..' . $rutaDirectorioConvenios . "/$id/CONVENIO_$id". '.zip';//__DIR__ . '/../..' . $this->ruta . '/CONVENIO_' . $id . '.zip';
-        print_r($zipRuta);
+
         if(!$zip->open($zipRuta, ZipArchive::CREATE)) {
 
             print_r(" NO ES POSIBLE ABRIR EL ARCHIVO ZIP ");
         } else {
 
-            $sql = " select * from  documentaciones where id_solicitud = '$id' ";
-            $rutas = ConvenioDocumentos::rutasDocumentos($id);
+            $rutas = self::rutasDocumentos($id);
 
             foreach($rutas as $ruta) {
 
                 if($ruta != '') {
                     
-                    $zip->addFile(__DIR__ . '/../..' . $ruta, basename($ruta));
+                    $zip->addFile(__DIR__ . '/../' . $ruta, basename($ruta));
                 }
             }
 
@@ -261,10 +263,14 @@ class ConvenioDocumentos {
         }
     }
 
-    public static function descargarZipDocumentos($id, $rutaDirectorioConvenios) {
+    public function descargarZipDocumentos() {
 
-        ConvenioDocumentos::crearZipDocumentos($id, $rutaDirectorioConvenios);
-        $zipRuta = __DIR__ . '/../..' . $rutaDirectorioConvenios . "/$id/CONVENIO_$id.zip";
+        $this->crearZipDocumentos();
+
+        $rutaDocumento = $this->ruta;
+        $id = $this->idSolicitud;
+        $zipRuta = __DIR__ . "/../$rutaDocumento/CONVENIO_$id.zip";
+        print_r($zipRuta);
 
         if(file_exists($zipRuta)) {
 
@@ -339,7 +345,7 @@ class ConvenioDocumentos {
             
             if (
                 Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
-                copy($documento['tmp_name'], __DIR__ . "/../..$direccion")
+                copy($documento['tmp_name'], __DIR__ . "/../$direccion")
                )
                {
                 $sql = 'update documentaciones set';
