@@ -236,48 +236,51 @@ class ConvenioDocumentos {
     }
 
     // crea zip para descargar documentos
-    public function crearZipDocumentos() {
+    public static function crearZipDocumentos($id, $rutaDirectorioConvenios) {
 
-        $zip = new ZipArchive;
-        $id = $this->idSolicitud;
-        $rutaConvenio = $this->ruta;
-        $zipRuta = __DIR__ . "/../$rutaConvenio/CONVENIO_$id.zip";
+        $zip = new ZipArchive();
+        $zipRuta = __DIR__ . '/../..' . $rutaDirectorioConvenios . "/$id/CONVENIO_$id". '.zip';//__DIR__ . '/../..' . $this->ruta . '/CONVENIO_' . $id . '.zip';
+        print_r($zipRuta);
+        if(!$zip->open($zipRuta, ZipArchive::CREATE)) {
 
-        if($zip->open($zipRuta, ZipArchive::CREATE) === TRUE) {
+            print_r(" NO ES POSIBLE ABRIR EL ARCHIVO ZIP ");
+        } else {
 
-            $rutas = self::rutasDocumentos($id);
+            $sql = " select * from  documentaciones where id_solicitud = '$id' ";
+            $rutas = ConvenioDocumentos::rutasDocumentos($id);
 
             foreach($rutas as $ruta) {
 
-                if($ruta != '' and file_exists(__DIR__ . "/../$ruta")) {
-                    $zip->addFile(__DIR__ . "/../$ruta", basename($ruta));
-                }                
+                if($ruta != '') {
+                    
+                    $zip->addFile(__DIR__ . '/../..' . $ruta, basename($ruta));
+                }
             }
-            
-            $zip->close();
-        } else {
 
-            print_r(" NO SE PUDO CREAR EL ARCHIVO ZIP ");
+            $zip->close();
         }
     }
 
-    public function descargarZipDocumentos() {
+    public static function descargarZipDocumentos($id, $rutaDirectorioConvenios) {
 
-        $file_path = __DIR__ . '/../archivos/convenios/59/ESTUDIOS PREVIOS_59_27-07-2023_10:16:04.pdf';
-        $file_name = 'example.pdf';
-        
+        ConvenioDocumentos::crearZipDocumentos($id, $rutaDirectorioConvenios);
+        $zipRuta = __DIR__ . '/../..' . $rutaDirectorioConvenios . "/$id/CONVENIO_$id.zip";
 
-        
-        
-        if(is_readable($file_path)) {
-            readfile($file_path);
-        } else {
-            print_r("no es readable");
+        if(file_exists($zipRuta)) {
+
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($zipRuta) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($zipRuta));
+
+            readfile($zipRuta);
+
+            return true;
         }
-        
-        
-
-        return true;
+        return false;
     }
     
     // guardar elementos en la base de datos
@@ -330,15 +333,13 @@ class ConvenioDocumentos {
 
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
         $fecha = date("d-m-Y_h:i:s");
-        $id = $this->idSolicitud;
-        $rutaConvenio = $this->ruta;
-        $rutaDocumento = "$rutaConvenio/$nombre" . "_$id" . "_$fecha.pdf";
+        $direccion = $this->ruta . "/$nombre" . "_$this->idSolicitud"."_$fecha" . ".pdf";
 
         if ($cargarDocumento) {
             
             if (
                 Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
-                copy($documento['tmp_name'], __DIR__ . "/../$rutaDocumento")
+                copy($documento['tmp_name'], __DIR__ . "/../..$direccion")
                )
                {
                 $sql = 'update documentaciones set';
@@ -374,7 +375,7 @@ class ConvenioDocumentos {
                         $sql .= ' proyecto_autorizacion ';
                 }
 
-                $sql .= " = '$rutaDocumento', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
+                $sql .= " = '$direccion', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
 
                 ConectorBD::ejecutarQuery($sql, ' convenios ');
                 $historico = new Historico(null, null);

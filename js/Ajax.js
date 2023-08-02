@@ -37,7 +37,11 @@ function formFotoDoc( donde , formData, hacer = 'aviso') {
 
 // Cuado se solicita una información
 // idexistentesReCa = traer la llave principal de un dato.
-// postcad = 
+// postcad = datos del post
+// accion = url servicio
+// función respuestas (donde, respuesta) despliega la información
+// de la respuesta en los elementos html de la clase donde
+// función action(evt, tadId) 
  function idexistentesReCa(id, postcad, donde = 'aviso' , accion , evt , tadId ) {
         var xhr=new XMLHttpRequest();
         xhr.onreadystatechange=function (){
@@ -68,6 +72,7 @@ function formFotoDoc( donde , formData, hacer = 'aviso') {
         evt.currentTarget.className += " color";
         }
     }
+    
     function respuestas( donde = 'aviso' , respuesta )
     {
         if( ( datos = respuesta.split('<|>') ).length >= 2)
