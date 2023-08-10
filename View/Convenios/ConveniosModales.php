@@ -114,11 +114,7 @@ if ($id == 2 && $permisos)
 {
 ?>
 <!--Modal 2 modificar-->
-
-<script>
-    alert(":OOooo");
-</script>
-<div class="carga_Documento">
+<div class="carga_Documento" onload="tabConvenios2()">
     <div class="contenido">
         <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
             <img src="img/icon/gestionar.png"/>
@@ -131,9 +127,10 @@ if ($id == 2 && $permisos)
 <ul class="convenios-tabs">
     <li class="convenios-tab activo">Modificar datos</li>
     <li class="convenios-tab">Adicionar documentos</li>
+    <li class="convenios-tab">Estudios Previos</li>
 </ul>
 
-<div class="convenios-contenedor">
+<div class="convenios-contenedor activo">
     <div class="convenios-bloque activo">
         <?php
             require_once(__DIR__.'/ConveniosSolicitudSeccionCompletar.php');
@@ -141,12 +138,12 @@ if ($id == 2 && $permisos)
     </div>
     <div class="convenios-bloque activo">
         <?php
-        require_once(__DIR__.'/../ConveniosDocumentos/ConveniosDocumentosSeccionCompletar.php');
+            require_once(__DIR__.'/../ConveniosDocumentos/ConveniosDocumentosSeccionCompletar.php');
         ?>
     </div>
     <div class="convenios-bloque activo">
         <?php
-        require_once(__DIR__.'/ConveniosEstudiosPreviosSeccionCompletar.php');
+            require_once(__DIR__.'/../ConveniosEstudiosPrevios/ConveniosEstudiosPreviosSeccionCompletar.php');
         ?>
     </div>
 </div>

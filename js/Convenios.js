@@ -45,19 +45,17 @@ function xhrConvenio(postcad, donde, accion, evt, tadId) {
 function tabConvenios() {
     const tabs = document.querySelectorAll('.convenios-tab');
     const bloques = document.querySelectorAll('.convenios-bloque');
-    tabs.forEach((tab, i) => {
+    tabs.forEach((cadaTab, i) => {
         tabs[i].addEventListener('click', () => {
-            tabs.forEach((tab, i) => {
+            tabs.forEach((cadaTab, i) => {
                 tabs[i].classList.remove('activo');
-                bloques[i].classList.remove('activo');                
+                bloques[i].classList.remove('activo');             
             });
             tabs[i].classList.add('activo');
             bloques[i].classList.add('activo');
         });
     });    
 }
-
-
 
 function validarDatosConvenios(id, postcad, donde, accion, eve = null, tab = null){
     if(id !== null && postcad !== null && donde !== null && accion !== null ){
@@ -98,3 +96,14 @@ function respuestas2( donde = 'aviso' , respuesta )
     }
 }
 
+
+
+window.addEventListener("load", (event) => {
+
+    let elemento = document.getElementById('formularioDiv');
+    elemento.addEventListener('loadstart', (e) => {
+        alert("Hola mundo");
+    })
+
+    console.log(elemento);
+});
