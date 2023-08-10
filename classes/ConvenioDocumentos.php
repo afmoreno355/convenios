@@ -281,8 +281,10 @@ class ConvenioDocumentos {
             header('Cache-Control: must-revalidate');
             header('Pragma: public');
             header('Content-Length: ' . filesize($zipRuta));
-
+            // Descarga zip temporal
             readfile($zipRuta);
+            sleep(5);
+            unlink($zipRuta);
 
             return true;
         }
