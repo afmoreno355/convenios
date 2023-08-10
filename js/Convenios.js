@@ -41,6 +41,32 @@ function xhrConvenio(postcad, donde, accion, evt, tadId) {
     xhr.send(postcad); 
     action2( evt, tadId ) ;
 }
+
+function tabConvenios() {
+    const tabs = document.querySelectorAll('.convenios-tab');
+    const bloques = document.querySelectorAll('.convenios-bloque');
+    tabs.forEach((tab, i) => {
+        tabs[i].addEventListener('click', () => {
+            tabs.forEach((tab, i) => {
+                tabs[i].classList.remove('activo');
+                bloques[i].classList.remove('activo');                
+            });
+            tabs[i].classList.add('activo');
+            bloques[i].classList.add('activo');
+        });
+    });    
+}
+
+
+
+function validarDatosConvenios(id, postcad, donde, accion, eve = null, tab = null){
+    if(id !== null && postcad !== null && donde !== null && accion !== null ){
+        idexistentesReCa(id, postcad, donde, accion, eve, tab);
+    } 
+    document.getElementById("modales").style.transform='translateX(0%)';      
+    document.getElementById("modales").style.transition="1s"; 
+    document.getElementById("formularioDiv").style.width="";
+}
  
 function action2( evt = null , tadId = null )
 {
@@ -71,3 +97,4 @@ function respuestas2( donde = 'aviso' , respuesta )
         document.getElementById(donde).innerHTML = respuesta;
     }
 }
+

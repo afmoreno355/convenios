@@ -115,6 +115,9 @@ if ($id == 2 && $permisos)
 ?>
 <!--Modal 2 modificar-->
 
+<script>
+    alert(":OOooo");
+</script>
 <div class="carga_Documento">
     <div class="contenido">
         <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
@@ -125,14 +128,36 @@ if ($id == 2 && $permisos)
             <label style="font-size: 1em; " id="aviso2" class="aviso" ><?= $convenio->getId() ?></label> 
         </div>
     </div>
-<?php
-require_once(__DIR__.'/ConveniosSolicitudSeccionCompletar.php');
-require_once(__DIR__.'/../ConveniosDocumentos/ConveniosDocumentosSeccionCompletar.php');
-require_once(__DIR__.'/ConveniosEstudiosPreviosSeccionCompletar.php');
-require_once(__DIR__.'/ConveniosPaaSeccionCompletar.php');
-require_once(__DIR__.'/ConveniosEstadosSeccionCompletar.php');
-?>
+<ul class="convenios-tabs">
+    <li class="convenios-tab activo">Modificar datos</li>
+    <li class="convenios-tab">Adicionar documentos</li>
+</ul>
+
+<div class="convenios-contenedor">
+    <div class="convenios-bloque activo">
+        <?php
+            require_once(__DIR__.'/ConveniosSolicitudSeccionCompletar.php');
+        ?>
+    </div>
+    <div class="convenios-bloque activo">
+        <?php
+        require_once(__DIR__.'/../ConveniosDocumentos/ConveniosDocumentosSeccionCompletar.php');
+        ?>
+    </div>
+    <div class="convenios-bloque activo">
+        <?php
+        require_once(__DIR__.'/ConveniosEstudiosPreviosSeccionCompletar.php');
+        ?>
+    </div>
 </div>
+
+//require_once(__DIR__.'/ConveniosPaaSeccionCompletar.php');
+//require_once(__DIR__.'/ConveniosEstadosSeccionCompletar.php');
+
+</div>
+<script>
+    alert(":OOooo");
+</script>
 <?PHP
 }
 elseif ($id == 3 && $permisos)

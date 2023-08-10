@@ -74,7 +74,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
 
                 if ( $convenioDocumentos->adicionarModificar( $idSolicitud ) ) 
                 {
-                    print_r( "Se ha cargado la solicitud en el módulo convenios <|> nombre convenio $nombre " );
+                    print_r( "Se ha cargado la solicitud en el módulo convenios" );
                 } else {
                     print_r("ERROR INESPERADO, VUELVE A INTENTAR");
                 }  

@@ -1,0 +1,33 @@
+.convenios-tabs {
+    background-color: brown;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    margin: 1em;
+    padding: 1em;
+}
+.convenios-tab {
+    background-color: blue;
+    transition: all .5s ease;
+}
+
+.convenios-tab.activo {
+    background-color: rgb(19, 9, 131);
+    color: white;
+}
+
+/*.convenios-contenedor {
+    position: relative;
+}*/
+
+.convenios-bloque {
+    /*position: absolute;*/
+    opacity: 0;
+    transition: all .5s ease
+}
+
+.convenios-bloque.activo {
+    opacity: 1;
+}

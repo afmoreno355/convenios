@@ -104,10 +104,10 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
                 <td> <?= $object->getMes() ?> </td>
                 <td> <?= $object->getEstado() ?></td>
                 <td>
-                    <input type="button" id="button" name="1" onclick="validarDatos(``, `I=<?= $http_mod ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="MODIFICAR">
-                    <input type="button" id="button" name="2" onclick="validarDatos(``, `I=<?= $http_eli ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="ELIMINAR">
-                    <input type="button" id="button" name="2" onclick="validarDatos(``, `I=<?= $http_inf ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="INFORMACIÓN">
-                    <input type="button" id="button" name="1" onclick="validarDatos(``, `I=<?= $http_des ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="DESCARGAR">
+                    <input type="button" id="button" name="1" onclick="validarDatosConvenios(``, `I=<?= $http_mod ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="MODIFICAR">
+                    <input type="button" id="button" name="2" onclick="validarDatosConvenios(``, `I=<?= $http_eli ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="ELIMINAR">
+                    <input type="button" id="button" name="2" onclick="validarDatosConvenios(``, `I=<?= $http_inf ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="INFORMACIÓN">
+                    <input type="button" id="button" name="1" onclick="validarDatosConvenios(``, `I=<?= $http_des ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="DESCARGAR">
                     <!--a onclick="sedeGestiones(`<?= $object->getId() ?>`, `Convenio`)" title="Convenio de las direcciones" ><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/></a-->
                 </td>
             </tr>

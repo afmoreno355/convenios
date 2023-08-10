@@ -38,6 +38,7 @@ elseif ( $permisos->getIdTipo()=='SA')
         <link rel="stylesheet" href="css/tituloPag.css">
         <link rel="stylesheet" href="css/tablaCompras.css">
         <link rel="stylesheet" href="css/estado.css">
+        <link rel="stylesheet" href="css/convenios.css">
         <link rel="icon" type="image/png" href="img/logo/sena.png" />  
         <title>CONVENIOS Y CONTRATOS</title>        
         <meta charset="UTF-8">

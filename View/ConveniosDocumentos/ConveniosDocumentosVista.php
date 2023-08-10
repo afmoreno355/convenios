@@ -108,16 +108,7 @@ $rutas = ConvenioDocumentos::rutasDocumentos($convenio->getId());
             <?php } ?>
         </section>
 
-        <section>
-            <p>Descargar</p>
-            <?php if (true) {?> 
-                <a href="View/ConveniosDocumentos/ConveniosDocumentosDescargar.php?idConvenio=<?= $convenio->getId()?>">
-                    <img src="img/icon/pdf.png" class="zoom" width=70" height=70"/>
-                </a>
-            <?php } else { ?>
-                <img src="img/icon/pdfg.png" class="zoom" width=70" height=70" />
-            <?php } ?>
-
+    
         <div>
             <?php
             $URL = "View/ConveniosDocumentos/ConveniosDocumentosCrud.php" ;
@@ -127,10 +118,9 @@ $rutas = ConvenioDocumentos::rutasDocumentos($convenio->getId());
             <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
             <input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion">
             <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-            <input type="button" value='<?= "DESCARGAR" ?>' name='accionU' id='accionU' onclick='descargarConvenio(I=`<?= $http_des ?>`, `formDetalle`, `<?= $URL ?>`, `<?= $zipRuta ?>`, `<?= basename($zipRuta) ?>`)'>
-            <!--input type="reset" name="limpiarU"  value="LIMPIAR"/-->
+            <input type="button" value='<?= "DESCARGAR ZIP" ?>' name='accionU' id='accionU' onclick='descargarConvenio(I=`<?= $http_des ?>`, `formDetalle`, `<?= $URL ?>`, `<?= $zipRuta ?>`, `<?= basename($zipRuta) ?>`)'>
         </div>
-        </section>
+        
     </fieldset>
 
 

@@ -57,10 +57,10 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 Select::validar( $area , 'NUMERIC' , null , 'CÓDIGO DE ÁREA' ) &&
                 Select::validar( $mes , 'TEXT' , 250 , 'MES DE PUBLICCIÓN') &&
                 Select::validar( $abogado, 'TEXT' , 250 , 'ABOGADO' ) &&
-                Select::validar( $tecnicoExperto, 'TEXT', 250, 'TÉCNICO EXPERTO' ) &&
-                Select::validar( $objeto, 'TEXT', $maximoLetras, 'OBJETO') &&
-                Select::validar( $alcance, 'TEXT', $maximoLetras, 'ALCANCE OBJETO' ) &&
-                Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')
+                Select::validar( $tecnicoExperto, 'TEXT', 250, 'TÉCNICO EXPERTO' ) //&&
+                //Select::validar( $objeto, 'TEXT', $maximoLetras, 'OBJETO') &&
+                //Select::validar( $alcance, 'TEXT', $maximoLetras, 'ALCANCE OBJETO' ) &&
+                //Select::validar( $justificacion, 'TEXT', $maximoLetras, 'JUSTIFICACIÓN')
             )
             {
 
@@ -69,12 +69,14 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 $convenio->setMes( $mes ) ;
                 $convenio->setEstado('NEGOCIACIÓN') ;
                 $convenio->setAbogado( $abogado ) ;
+                print_r("<script>console.log($tecnicoExperto)</script>");
                 $convenio->setTecnicoExperto( $tecnicoExperto ) ;
+                print_r("<script>console.log($objeto)</script>");
                 $convenio->setObjeto( $objeto ) ;
+                print_r("<script>console.log($alcance)</script>");
                 $convenio->setAlcance( $alcance ) ;
+                print_r("<script>console.log($justificacion)</script>");
                 $convenio->setJustificacion( $justificacion ) ;
-
-                ConvenioDocumentos::crearZipDocumentos($idSolicitud, '/convenios/archivos/convenios');
 
                 if ( $convenio->AdicionarModificar( $idSolicitud ) ) 
                 {
