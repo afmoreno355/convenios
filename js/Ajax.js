@@ -36,7 +36,7 @@ function formFotoDoc( donde , formData, hacer = 'aviso') {
 }
 
 // Cuado se solicita una información
-// idexistentesReCa = traer la llave principal de un dato.
+// idexistentesReCa = hace un llamado post
 // postcad = datos del post
 // accion = url servicio
 // función respuestas (donde, respuesta) despliega la información

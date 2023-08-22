@@ -23,8 +23,14 @@ date_default_timezone_set("America/Bogota");
 $fecha = date("YmdHis");
 
 // variable variable trae las variables que trae POST
-foreach ($_POST as $key => $value) ${$key} = $value;
-foreach (Http::decryptIt(array_keys($_POST)[0]) as $key => $value) ${$key} = $value;
+foreach ($_POST as $key => $value)
+    ${$key} = $value;
+// desencripta las variables
+$I = array_keys($_POST)[0];
+$nuevo_POST = Http::decryptIt($I);
+// evalua las nuevas variables que vienen ya desencriptadas
+foreach ($nuevo_POST as $key => $value)
+   ${$key} = $value;
 
 
 
