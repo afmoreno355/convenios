@@ -114,47 +114,27 @@ if ($id == 2 && $permisos)
 {
 ?>
 <!--Modal 2 modificar-->
-<div class="carga_Documento" onload="tabConvenios2()">
-    <div class="contenido">
-        <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
-            <img src="img/icon/gestionar.png"/>
-            <label class="where">Convenios DFP – Dirección de Formación Profesional</label></div>
-            <br><br> 
+<div class="carga_Documento">
+        <div class="contenido">  
+            <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
+                <img src="img/icon/gestionar.png"/><label class="where">Módulo Convenios y Contratos – Dirección de Formación Profesional</label></div>
+            <br><br>
+            <label style="font-size: 1em; " >Tabla Agregar</label>  
             <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
-            <label style="font-size: 1em; " id="aviso2" class="aviso" ><?= $convenio->getId() ?></label> 
-        </div>
+        </div> 
+        <div>
+            <fieldset>
+                <legend title='FORMULARIO DEL MÓDULO QUE DESEA DILIGENCIAR'>FORMULARIO DEL MÓDULO</legend>
+                <select required name=formulario id="formulario" onchange="adicionarTabContenido(this.value , 'I=<?= $I ?>' )">
+                    <option value="">Selección de Formulario</option>
+                    <option value="1">Datos de la Solicitud</option>
+                    <option value="2">Documentos de la Solicitud</option>
+                    <option value="3">Estudios Previos</option>
+                </select>
+             </fieldset>
+        </div>   
     </div>
-<ul class="convenios-tabs">
-    <li class="convenios-tab activo">Modificar datos</li>
-    <li class="convenios-tab">Adicionar documentos</li>
-    <li class="convenios-tab">Estudios Previos</li>
-</ul>
-
-<div class="convenios-contenedor activo">
-    <div class="convenios-bloque activo">
-        <?php
-            require_once(__DIR__.'/ConveniosSolicitudSeccionCompletar.php');
-        ?>
-    </div>
-    <div class="convenios-bloque activo">
-        <?php
-            require_once(__DIR__.'/../ConveniosDocumentos/ConveniosDocumentosSeccionCompletar.php');
-        ?>
-    </div>
-    <div class="convenios-bloque activo">
-        <?php
-            require_once(__DIR__.'/../ConveniosEstudiosPrevios/ConveniosEstudiosPreviosSeccionCompletar.php');
-        ?>
-    </div>
-</div>
-
-//require_once(__DIR__.'/ConveniosPaaSeccionCompletar.php');
-//require_once(__DIR__.'/ConveniosEstadosSeccionCompletar.php');
-
-</div>
-<script>
-    alert(":OOooo");
-</script>
+    <di id="formularioAdd"></di>
 <?PHP
 }
 elseif ($id == 3 && $permisos)

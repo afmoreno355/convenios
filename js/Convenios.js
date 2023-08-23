@@ -98,7 +98,7 @@ function respuestas2( donde = 'aviso' , respuesta )
 
 
 
-window.addEventListener("load", (event) => {
+/*window.addEventListener("load", (event) => {
 
     let elemento = document.getElementById('formularioDiv');
     elemento.addEventListener('loadstart', (e) => {
@@ -106,4 +106,32 @@ window.addEventListener("load", (event) => {
     })
 
     console.log(elemento);
-});
+});/** */
+
+
+function adicionarTabContenido(valor , potcat)
+{
+    let  donde = '' ;
+    valor = parseInt(valor);
+    switch (valor) 
+    {
+        case 1:
+            donde = 'View/Convenios/ConveniosModales.php' ;
+            break;
+        case 2:
+            donde = 'View/ConveniosDocumentos/ConveniosDocumentosModales.php' ;
+            break;
+        case 3:
+            donde = 'View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosModales.php' ;
+            break;
+        case 4:
+            donde = 'View/Contratacion/ContratacionModales.php' ;
+            break;
+            
+        default:
+            return ;
+            break;
+    }
+    idexistentesReCa( '' , potcat , 'formularioAdd' , donde , null , null );
+    cargarLoad( 'formularioAdd' );
+}
