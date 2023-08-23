@@ -116,7 +116,7 @@ function adicionarTabContenido(valor , potcat)
     switch (valor) 
     {
         case 1:
-            donde = 'View/Convenios/ConveniosModales.php' ;
+            donde = 'View/ConveniosSolicitud/ConveniosSolicitudModales.php' ;
             break;
         case 2:
             donde = 'View/ConveniosDocumentos/ConveniosDocumentosModales.php' ;
