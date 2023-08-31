@@ -1,149 +1,124 @@
-<h2>ESTUDIOS PREVIOS</h2>
+<?php
 
-<div class="carga_Documento">
-    <div>
-        <fieldset>
-            <legend title='DESCRIPCIÓN DE LA NECESIDAD'>DESCRIPCIÓN DE LA NECESIDAD</legend>
-            <textarea name='descripcionNecesidad' id='descripcionNecesidad'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='JUSTIFIACIÓN'>JUSTIFICACIÓN</legend>
-            <textarea name='justificacion' id='justificacion'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='ANÁLISIS DE CONVENIENCIA'>ANÁLISIS DE CONVENIENCIA</legend>
-            <textarea name='analisisConveniencia' id='analisisConveniencia'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='MADURACIÓN DEL PROYECTO'>MADURACIÓN DEL PROYECTO</legend>
-            <textarea name='maduracionProyecto' id='maduracionProyecto'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='OBJETO'>OBJETO</legend>
-            <textarea name='objeto' id='objeto' ><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='ALCANCE DEL OBJETO'>ALCANCE DEL OBJETO</legend>
-            <textarea name='alcanceObjeto' id='alcanceObjeto'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='ESPECIFICACIONES TÉCNICAS'>ESPECIFICACIONES TÉCNICAS</legend>
-            <textarea name='especificacionesTecnicas' id='especificacionesTecnicas'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='ANÁLISIS DEL SECTOR'>ANÁLISIS DEL SECTOR</legend>
-            <textarea name='analisisSector' id='analisisSector'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='VALOR TOTAL APORTES'>VALOR TOTAL APORTES</legend>
-            <textarea name='valorTotalAportes' id='valorTotalAportes'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='DISPONIBILIDAD PRESUPUESTAL'>DISPONIBILIDAD PRESUPUESTAL</legend>
-            <textarea name='disponibilidadPresupuestal' id='disponibilidadPresupuestal'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='MODALIDAD DE SELECCIÓN'>MODALIDAD DE SELECCIÓN</legend>
-            <textarea name='modalidadSeleccion' id='modalidadSeleccion'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='CRITERIOS DE SELECCIÓN'>CRITERIOS DE SELECCIÓN</legend>
-            <textarea name='criteriosSeleccion' id='criteriosSeleccion'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='ANÁLISIS DE RIESGO'>ANÁLISIS DE RIESGO</legend>
-            <textarea name='analisisRiesgo' id='analisisRiesgo'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='GARANTÍAS'>GARANTÍAS</legend>
-            <textarea name='garantias' id='garantias'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='LIMITACIONES MYPIMES'>LIMITACIONES MYPIMES</legend>
-            <textarea name='limitacionesMypimes' id='limitacionesMypimes'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='PLAZO DE EJECUCIÓN'>PLAZO DE EJECUCIÓN</legend>
-            <textarea name='plazoEjecucion' id='plazoEjecucion'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='LUGAR DE EJECUCIÓN'>LUGAR DE EJECUCIÓN</legend>
-            <textarea name='lugarEjecucion' id='lugarEjecucion'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='OBLIGACIONES DE LAS PARTES'>OBLIGACIONES DE LAS PARTES</legend>
-            <textarea name='obligacionesPartes' id='obligacionesPartes'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='FORMA DE PAGO'>FORMA DE PAGO</legend>
-            <textarea name='formaPago' id='formaPago'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='CONTROL Y VIGILANCIA DEL CONTRATO'>CONTROL Y VIGILANCIA DEL CONTRATO</legend>
-            <textarea name='controlVigilanciaContrato' id='controlVigilanciaContrato'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='ACUERDOS COMERCIALES'>ACUERDOS COMERCIALES</legend>
-            <textarea name='acuerdosComerciales' id='acuerdosComerciales'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='OTROS ASPECTOS'>OTROS ASPECTOS</legend>
-            <textarea name='otrosAspectos' id='otrosAspectos'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>
-        <fieldset>
-            <legend title='CONCEPTOS TÉCNICOS'>CONCEPTOS TÉCNICOS</legend>
-            <textarea name='conceptosTecnicos' id='conceptosTecnicos'><?= '$convenio->getObjeto()' ?></textarea>
-        </fieldset>
-    </div>
-    <div>     
-        <input type="hidden" value="<?= '$convenio->getId()' ?>" name="idSolicitud" id="idSolicitud">
-        <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
-        <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-        <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "ConveniosDocumentos")'>
-        <input type="reset" name="limpiarU"  value="LIMPIAR"/>
-    </div>
-</div>
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+require_once __DIR__ . "/../../autoload.php";
+//
+// Iniciamos sesion para tener las variables
+if( !isset($_SESSION["user"]) )
+{
+    session_start();
+}
+
+$nombreTilde = array("á", "é", "í", "ó", "ú", "ñ", ".", "", "Á", "É", "Í", "Ó", "Ú", "Ñ", ".", "");
+$nombreSinTilde = array("&Aacute;", "&Eacute;", "&Iacute;", "&Oacute;", "&Uacute;", "&Ntilde;", "", "", "&Aacute;", "&Eacute;", "&Iacute;", "&Oacute;", "&Uacute;", "&Ntilde;", "", "");
+$nombreSinTilde_Nuevo = array("A", "E", "I", "O", "U", "N", "", "", "A", "E", "I", "O", "U", "N", "", "");
+
+date_default_timezone_set("America/Bogota");
+$fecha = date("YmdHis");
+
+// variable variable trae las variables que trae POST
+foreach ($_POST as $key => $value)
+    ${$key} = $value;
+
+
+$session = new Sesion(" identificacion ", "'{$_SESSION["user"]}'");
+$persona = new Persona( " identificacion ", "'{$_SESSION["user"]}'" );
+$token1 = $session->getToken1();
+$token2 = $session->getToken2();
+
+if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOKIE["token2"]) {
+    print_r("NO TIENE PERMISO PARA REALIZAR ESTA ACCION");
+    //header("Location: index");
+} elseif ($_SESSION["token1"] === $_COOKIE["token1"] && $_SESSION["token2"] === $_COOKIE["token2"] && password_verify(md5($token1 . $token2), $session->getToken3())) {
+    if (isset($accion)) {
+        if( $idSolicitud != '' )
+        {
+            $campo = ' id_solicitud ' ;
+            $valor = "'$idSolicitud'" ;
+        }
+        else
+        {
+           $idSolicitud = 0;
+           $campo = null ;
+           $valor = null ; 
+        }
+        $convenioEstudiosPrevios = new ConvenioEstudiosPrevios($campo, $valor);
+        if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
+        {
+            $maximoLetras = INF;
+
+            if(
+                Select::validar( $idSolicitud , 'NUMERIC' , null, 'ID SOLICITUD' )
+            )
+            {
+
+                print_r("<script>console.log($idSolicitud)</script>");
+                $convenioEstudiosPrevios->setIdSolicitud($idSolicitud);
+                print_r("<script>console.log($descripcionNecesidad)</script>");
+                $convenioEstudiosPrevios->setDescripcionNecesidad($descripcionNecesidad) ;
+                print_r("<script>console.log($analisisConveniencia)</script>");
+                $convenioEstudiosPrevios->setAnalisisCoveniencia($analisisConveniencia);
+                print_r("<script>console.log($maduracionProyecto)</script>");
+                $convenioEstudiosPrevios->setMaduracionProyecto($maduracionProyecto);
+                print_r("<script>console.log($especificacionesTecnicas)</script>");
+                $convenioEstudiosPrevios->setEspecificacionesTecnicasObjeto($especificacionesTecnicas);
+                print_r("<script>console.log($analisisSector)</script>");
+                $convenioEstudiosPrevios->setAnalisisSector($analisisSector);
+                print_r("<script>console.log($valorTotalAportes)</script>");
+                $convenioEstudiosPrevios->setValorTotalAportes($valorTotalAportes);
+                print_r("<script>console.log($disponibilidadPresupuestal)</script>");
+                $convenioEstudiosPrevios->setDisponibilidadPresupuestal($disponibilidadPresupuestal);
+                print_r("<script>console.log($modalidadSeleccion)</script>");
+                $convenioEstudiosPrevios->setModalidadSeleccion($modalidadSeleccion);
+                print_r("<script>console.log($criteriosSeleccion)</script>");
+                $convenioEstudiosPrevios->setCriteriosSeleccion($criteriosSeleccion);
+                print_r("<script>console.log($analisisRiesgo)</script>");
+                $convenioEstudiosPrevios->setAnalisisRiesgo($analisisRiesgo);
+                print_r("<script>console.log($garantias)</script>");
+                $convenioEstudiosPrevios->setGarantias($garantias);
+                print_r("<script>console.log($limitacionesMypimes)</script>");
+                $convenioEstudiosPrevios->setLimitacionMipymes($limitacionesMypimes);
+                print_r("<script>console.log($plazoEjecucion)</script>");
+                $convenioEstudiosPrevios->setPlazoEjecucion($plazoEjecucion);
+                print_r("<script>console.log($lugarEjecucion)</script>");
+                $convenioEstudiosPrevios->setLugarEjecucion($lugarEjecucion);
+                print_r("<script>console.log($obligacionesPartes)</script>");
+                $convenioEstudiosPrevios->setObligacionesPartes($obligacionesPartes);
+                print_r("<script>console.log($formaPago)</script>");
+                $convenioEstudiosPrevios->setFormaPago($formaPago);
+                print_r("<script>console.log($controlVigilanciaContrato)</script>");
+                $convenioEstudiosPrevios->setControlVigilanciaContrato($controlVigilanciaContrato);
+                print_r("<script>console.log($acuerdosComerciales)</script>");
+                $convenioEstudiosPrevios->setAcuerdosComerciales($acuerdosComerciales);
+                print_r("<script>console.log($otrosAspectos)</script>");
+                $convenioEstudiosPrevios->setOtrosAspectos($otrosAspectos);
+                print_r("<script>console.log($conceptosTecnicos)</script>");
+                $convenioEstudiosPrevios->setConceptosTecnicos($conceptosTecnicos);
+
+                if ($convenioEstudiosPrevios->guardar()) 
+                {
+                    print_r( "Se ha cargado la solicitud en el módulo convenios <|> nombre convenio $nombre " ) ;
+                } else {
+                    print_r("ERROR INESPERADO, VUELVE A INTENTAR");
+                }
+            }
+        }
+        elseif ($accion == "ELIMINAR")
+        {
+            print_r($idSolicitud);
+            $convenio->setId($idSolicitud);
+            if ($convenio->Borrar()) 
+            {
+                print_r("EL CONVENIO FUE ELIMINADO");
+            } 
+            else 
+            {
+                print_r("EL CONVENIO NO SE PUDO ELIMINAR");
+            }
+        }
+    }
+}

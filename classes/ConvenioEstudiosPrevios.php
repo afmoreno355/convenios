@@ -260,6 +260,7 @@ class ConvenioEstudiosPrevios {
     //organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
     
     private function mapearObjetoSQL($consulta) {
+        print_r($consulta);
 
         $this->setId($consulta[0]);
         $this->setIdSolicitud($consulta[1]);
@@ -281,10 +282,10 @@ class ConvenioEstudiosPrevios {
         $this->setLugarEjecucion($consulta[17]);
         $this->setObligacionesPartes($consulta[18]);
         $this->setFormaPago($consulta[19]);
-        $this->setControlVigilanciaContrato([20]);
-        $this->setAcuerdosComerciales([21]);
-        $this->setOtrosAspectos([22]);
-        $this->setConceptosTecnicos([23]);
+        $this->setControlVigilanciaContrato($consulta[20]);
+        $this->setAcuerdosComerciales($consulta[21]);
+        $this->setOtrosAspectos($consulta[22]);
+        $this->setConceptosTecnicos($consulta[23]);
         $this->setFecha($consulta[24]);
     }
   // metodo magico
@@ -350,77 +351,78 @@ class ConvenioEstudiosPrevios {
                 control_vigilancia_contrato,
                 acuerdos_comerciales,
                 otros_aspectos,
-                conceptos_tecnicos
+                conceptos_tecnicos,
                 fecha_sistema
             ) values (
                 '$this->idSolicitud',
-                '$this->getIdDependenciaRequierente()',
-                '$this->getDescripcionNecesidad()',
-                '$this->getAnalisisCoveniencia()',
-                '$this->getMaduracionProyecto()',
-                '$this->getEspecificacionesTecnicasObjeto()',
-                '$this->getAnalisisSector()',
-                '$this->getValorTotalAportes()',
-                '$this->getDesembolsos()',
-                '$this->getDisponibilidadPresupuestal()',
-                '$this->getModalidadSeleccion()',
-                '$this->getCriteriosSeleccion()',
-                '$this->getAnalisisRiesgo()',
-                '$this->getGarantias()',
-                '$this->getLimitacionMipymes()',
-                '$this->getPlazoEjecucion()',
-                '$this->getLugarEjecucion()',
-                '$this->getObligacionesPartes()',
-                '$this->getFormaPago()',
-                '$this->getControlVigilanciaContrato()',
-                '$this->getAcuerdosComerciales()',
-                '$this->getOtrosAspectos()',
-                '$this->getConceptosTecnicos()',
+                '$this->idDependenciaRequierente',
+                '$this->descripcionNecesidad',
+                '$this->analisisCoveniencia',
+                '$this->maduracionProyecto',
+                '$this->especificacionesTecnicasObjeto',
+                '$this->analisisSector',
+                '$this->valorTotalAportes',
+                '$this->desembolsos',
+                '$this->disponibilidadPresupuestal',
+                '$this->modalidadSeleccion',
+                '$this->criteriosSeleccion',
+                '$this->analisisRiesgo',
+                '$this->garantias',
+                '$this->limitacionMipymes',
+                '$this->plazoEjecucion',
+                '$this->lugarEjecucion',
+                '$this->obligacionesPartes',
+                '$this->formaPago',
+                '$this->controlVigilanciaContrato',
+                '$this->acuerdosComerciales',
+                '$this->otrosAspectos',
+                '$this->conceptosTecnicos',
                 now()
             )";
         } else {
 
             $sql = "update estudios_previos set
-                id_solicitud = '$this->getIdSolicitud()',
-                identificacion_dependencia_requirente = '$this->getIdDependenciaRequierente()',
-                descripcion_necesidad = '$this->getDescripcionNecesidad()',
-                analisis_conveniencia = '$this->getAnalisisCoveniencia()',
-                maduracion_proyecto = '$this->getMaduracionProyecto()',
-                especificaciones_tecnicas_objeto = '$this->getEspecificacionesTecnicasObjeto()',
-                analisis_sector = '$this->getAnalisisSector()',
-                valor_total_aportes = '$this->getValorTotalAportes()',
-                desembolsos = '$this->getDesembolsos()',
-                disponibilidad_presupuestal_vigencias_futuras = '$this->getDisponibilidadPresupuestal()',
-                modalidad_seleccion = '$this->getModalidadSeleccion()',
-                criterios_seleccion_objetiva = '$this->getCriteriosSeleccion()',
-                analisis_riesgo = '$this->getAnalisisRiesgo()',
-                garantias = '$this->getGarantias()',
-                limitacion_mipymes = '$this->getLimitacionMipymes()',
-                plazo_ejecucion = '$this->getPlazoEjecucion()',
-                lugar_ejecucion = '$this->getLugarEjecucion()',
-                obligaciones_partes = '$this->getObligacionesPartes()',
-                forma_pago = '$this->getFormaPago()',
-                control_vigilancia_contrato = '$this->getControlVigilanciaContrato()',
-                acuerdos_comerciales = '$this->getAcuerdosComerciales()',
-                otros_aspectos = '$this->getOtrosAspectos()',
-                conceptos_tecnicos = '$this->getConceptosTecnicos()',
+                id_solicitud = '$this->idSolicitud',
+                identificacion_dependencia_requirente = '$this->idDependenciaRequierente',
+                descripcion_necesidad = '$this->descripcionNecesidad',
+                analisis_conveniencia = '$this->analisisCoveniencia',
+                maduracion_proyecto = '$this->maduracionProyecto',
+                especificaciones_tecnicas_objeto = '$this->especificacionesTecnicasObjeto',
+                analisis_sector = '$this->analisisSector',
+                valor_total_aportes = '$this->valorTotalAportes',
+                desembolsos = '$this->desembolsos',
+                disponibilidad_presupuestal_vigencias_futuras = '$this->disponibilidadPresupuestal',
+                modalidad_seleccion = '$this->modalidadSeleccion',
+                criterios_seleccion_objetiva = '$this->criteriosSeleccion',
+                analisis_riesgo = '$this->analisisRiesgo',
+                garantias = '$this->garantias',
+                limitacion_mipymes = '$this->limitacionMipymes',
+                plazo_ejecucion = '$this->plazoEjecucion',
+                lugar_ejecucion = '$this->lugarEjecucion',
+                obligaciones_partes = '$this->obligacionesPartes',
+                forma_pago = '$this->formaPago',
+                control_vigilancia_contrato = '$this->controlVigilanciaContrato',
+                acuerdos_comerciales = '$this->acuerdosComerciales',
+                otros_aspectos = '$this->otrosAspectos',
+                conceptos_tecnicos = '$this->conceptosTecnicos',
                 fecha_sistema = now()
             where id_estudios_previos = $id";
         }
-        
+        print_r($sql);
+
         if (ConectorBD::ejecutarQuery($sql, 'convenios')) {
             //Historico de las acciones en el sistemas de informacion
+            $nuevo_query = str_replace("'", "|", $sql);
             $historico = new Historico(null, null);
             $historico->setIdentificacion($_SESSION["user"]);
-            $historico->setTipo_historico("GUARDAR");
-            $historico->setHistorico(strtoupper(str_replace("'", "|", $sql)));
+            $historico->setTipo_historico("ELIMINAR");
+            $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
             $historico->setTabla("CONVENIOS.ESTUDIOS_PREVIOS");
-            $historico->grabar();
-            return true;
-        } else {
-            return false;
+            //$historico->grabar();
+            return true;        
         }
+        return false;
     }
 
     // borrar elementos en la base de datos

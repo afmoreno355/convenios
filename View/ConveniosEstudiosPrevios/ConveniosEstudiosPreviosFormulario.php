@@ -186,7 +186,7 @@ if ($permisos)
         </fieldset>
     </div>
     <div>     
-        <input type="hidden" value="<?= $convenioEstudiosPrevios->getIdSolicitud()?>" name="idSolicitud" id="idSolicitud">
+        <input type="hidden" value="<?= $convenio->getId()?>" name="idSolicitud" id="idSolicitud">
         <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
         <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
         <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "ConveniosEstudiosPrevios")'>
