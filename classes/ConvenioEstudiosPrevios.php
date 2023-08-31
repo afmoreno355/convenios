@@ -260,8 +260,7 @@ class ConvenioEstudiosPrevios {
     //organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
     
     private function mapearObjetoSQL($consulta) {
-        print_r($consulta);
-
+        
         $this->setId($consulta[0]);
         $this->setIdSolicitud($consulta[1]);
         $this->setIdDependenciaRequierente($consulta[2]);
@@ -408,9 +407,8 @@ class ConvenioEstudiosPrevios {
                 fecha_sistema = now()
             where id_estudios_previos = $id";
         }
-        print_r($sql);
-
-        if (ConectorBD::ejecutarQuery($sql, 'convenios')) {
+        
+        if(ConectorBD::ejecutarQuery($sql, 'convenios')) {
             //Historico de las acciones en el sistemas de informacion
             $nuevo_query = str_replace("'", "|", $sql);
             $historico = new Historico(null, null);
