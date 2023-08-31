@@ -260,8 +260,32 @@ class ConvenioEstudiosPrevios {
     //organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
     
     private function mapearObjetoSQL($consulta) {
-        print_r($consulta);
-        $this->setIdSolicitud($consulta[0]);
+
+        $this->setId($consulta[0]);
+        $this->setIdSolicitud($consulta[1]);
+        $this->setIdDependenciaRequierente($consulta[2]);
+        $this->setDescripcionNecesidad($consulta[3]);
+        $this->setAnalisisCoveniencia($consulta[4]);
+        $this->setMaduracionProyecto($consulta[5]);
+        $this->setEspecificacionesTecnicasObjeto($consulta[6]);
+        $this->setAnalisisSector($consulta[7]);
+        $this->setValorTotalAportes($consulta[8]);
+        $this->setDesembolsos($consulta[9]);
+        $this->setDisponibilidadPresupuestal($consulta[10]);
+        $this->setModalidadSeleccion($consulta[11]);
+        $this->setCriteriosSeleccion($consulta[12]);
+        $this->setAnalisisRiesgo($consulta[13]);
+        $this->setGarantias($consulta[14]);
+        $this->setLimitacionMipymes($consulta[15]);
+        $this->setPlazoEjecucion($consulta[16]);
+        $this->setLugarEjecucion($consulta[17]);
+        $this->setObligacionesPartes($consulta[18]);
+        $this->setFormaPago($consulta[19]);
+        $this->setControlVigilanciaContrato([20]);
+        $this->setAcuerdosComerciales([21]);
+        $this->setOtrosAspectos([22]);
+        $this->setConceptosTecnicos([23]);
+        $this->setFecha($consulta[24]);
     }
   // metodo magico
     function __toString() {
