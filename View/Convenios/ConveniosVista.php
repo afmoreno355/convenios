@@ -1,6 +1,4 @@
 
-
-
 <h2>INFORMACION DE LA SOLICITUD</h2>
 <div class="carga_Documento">
 <div class="nuevaseccion" >
