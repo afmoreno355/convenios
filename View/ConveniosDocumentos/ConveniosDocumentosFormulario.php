@@ -128,11 +128,3 @@ if ($permisos)
 <?PHP 
 }
 ?>
-
-
-
-
-
-<!--CÓDIGO ORIGINAL-->
-
-

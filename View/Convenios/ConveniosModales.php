@@ -124,17 +124,17 @@ if ($id == 2 && $permisos)
         </div> 
         <div>
             <fieldset>
-                <legend title='FORMULARIO DEL MÓDULO QUE DESEA DILIGENCIAR'>FORMULARIO DEL MÓDULO</legend>
+                <legend title='FORMULARIO DEL MÓDULO QUE DESEA DILIGENCIAR'>FORMULARIO DEL CONVENIO</legend>
                 <select required name=formulario id="formulario" onchange="adicionarTabContenido(this.value , 'I=<?= $I ?>' )">
-                    <option value="">Selección de Formulario</option>
-                    <option value="1">Datos de la Solicitud</option>
-                    <option value="2">Documentos de la Solicitud</option>
-                    <option value="3">Estudios Previos</option>
+                    <option value=''>Selección de Formulario</option>
+                    <option value='View/ConveniosSolicitud/ConveniosSolicitudFormulario.php'>Datos de la Solicitud</option>
+                    <option value='View/ConveniosDocumentos/ConveniosDocumentosFormulario.php'>Documentos de la Solicitud</option>
+                    <option value='View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosFormulario.php'>Estudios Previos</option>
                 </select>
              </fieldset>
         </div>   
     </div>
-    <di id="formularioAdd"></di>
+    <di id="tabContenido"></di>
 <?PHP
 }
 elseif ($id == 3 && $permisos)
@@ -159,26 +159,31 @@ elseif ($id == 3 && $permisos)
     </div> 
 <?PHP
 }
-elseif ($id == 4 && $permisos ) {
-    ?>
+elseif ($id == 4 && $permisos )
+{
+?>
     <!--Modal 4 información-->
     <div class="carga_Documento">
-    <div class="contenido">
-        <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
-            <img src="img/icon/gestionar.png"/>
-            <label class="where">Convenios DFP – Dirección de Formación Profesional</label></div>
-            <br><br> 
+        <div class="contenido">  
+            <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
+                <img src="img/icon/gestionar.png"/><label class="where">Módulo Convenios y Contratos – Dirección de Formación Profesional</label></div>
+            <br><br>
+            <label style="font-size: 1em; " >Tabla Agregar</label>  
             <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
-            <label style="font-size: 1em; " id="aviso2" class="aviso" ><?= $convenio->getId() ?></label> 
-        </div>
+        </div> 
+        <div>
+            <fieldset>
+                <legend title='INFORMACIÓN DEL MÓDULO QUE DESEA CONSULTAR'>INFORMACIÓN DEL CONVENIO</legend>
+                <select required name=informacion id="informacion" onchange="adicionarTabContenido(this.value , 'I=<?= $I ?>')">
+                    <option value=''>Selección de Información</option>
+                    <option value='View/ConveniosSolicitud/ConveniosSolicitudVista.php'>Datos de la Solicitud</option>
+                    <option value='View/ConveniosDocumentos/ConveniosDocumentosVista.php'>Documentos de la Solicitud</option>
+                    <option value='View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosVista.php'>Estudios Previos</option>
+                </select>
+             </fieldset>
+        </div>   
     </div>
-<?php
-    require_once(__DIR__.'/ConveniosVista.php');
-    require_once(__DIR__.'/../ConveniosDocumentos/ConveniosDocumentosVista.php');
-    /**require_once(__DIR__.'/ConveniosEstudiosPreviosSeccionMostrar.php');
-    require_once(__DIR__.'/ConveniosPaaSeccionMostrar.php');
-    require_once(__DIR__.'/ConveniosEstadosSeccionMostrar.php');/** */
-?>
+    <di id="tabContenido"></di>
 </div>
 <?PHP
 }

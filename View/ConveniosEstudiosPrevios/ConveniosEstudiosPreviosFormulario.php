@@ -1,3 +1,48 @@
+<?php
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+// require auntomatico encuentra todas las clases/Model qeu se solicitan en el Controlador
+require_once __DIR__ . "/../../autoload.php";
+
+// Iniciamos sesion para tener las variables
+session_start();
+
+date_default_timezone_set("America/Bogota");
+$fecha = date("Y-m-d");
+$fecha_vigencia = date("Y");
+
+// variable variable trae las variables que trae POST
+foreach ($_POST as $key => $value)
+    ${$key} = $value;
+
+// desencripta las variables
+$nuevo_POST = Http::decryptIt($I);
+// evalua las nuevas variables que vienen ya desencriptadas
+foreach ($nuevo_POST as $key => $value)
+    ${$key} = $value;
+
+// verificamos permisos
+$permisos = new Persona(" identificacion ", "'" . $_SESSION['user'] . "'");
+
+// permisos desde Http validando los permisos de un usuario segun la tabla personamenu
+$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle');
+
+if ($ingreso === false && $permisos->getIdTipo() !== "SA" && $_SESSION["rol"] !== "SA") {
+    $permisos = false;
+}
+
+$llave_Primaria_Contructor = ( $llave_Primaria == "" ) ? "null" : "'$llave_Primaria'";
+
+// llamamos la clase y verificamos si ya existe info de este dato que llega
+$convenioEstudiosPrevios = new ConvenioEstudiosPrevios( ' id_solicitud ' , $llave_Primaria_Contructor);
+if ($permisos)
+{
+?>
+<!--Formulario Estudios Previos-->
 <h2>ESTUDIOS PREVIOS</h2>
 
 <div class="carga_Documento">
@@ -140,10 +185,14 @@
         </fieldset>
     </div>
     <div>     
-        <input type="hidden" value="<?= $convenio->getId()?>" name="idSolicitud" id="idSolicitud">
+        <input type="hidden" value="<?= $convenioEstudiosPrevios->getIdSolicitud()?>" name="idSolicitud" id="idSolicitud">
         <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
         <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
         <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "ConveniosDocumentos")'>
         <input type="reset" name="limpiarU"  value="LIMPIAR"/>
     </div>
 </div>
+    
+<?PHP 
+}
+?>

@@ -109,29 +109,10 @@ function respuestas2( donde = 'aviso' , respuesta )
 });/** */
 
 
-function adicionarTabContenido(valor , potcat)
-{
-    let  donde = '' ;
-    valor = parseInt(valor);
-    switch (valor) 
-    {
-        case 1:
-            donde = 'View/ConveniosSolicitud/ConveniosSolicitudModales.php' ;
-            break;
-        case 2:
-            donde = 'View/ConveniosDocumentos/ConveniosDocumentosModales.php' ;
-            break;
-        case 3:
-            donde = 'View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosModales.php' ;
-            break;
-        case 4:
-            donde = 'View/Contratacion/ContratacionModales.php' ;
-            break;
-            
-        default:
-            return ;
-            break;
+function adicionarTabContenido(donde , potcat) {
+    if(donde === '') {
+        return;
     }
-    idexistentesReCa( '' , potcat , 'formularioAdd' , donde , null , null );
-    cargarLoad( 'formularioAdd' );
+    idexistentesReCa( '' , potcat , 'tabContenido' , donde , null , null );
+    cargarLoad( 'tabContenido' );
 }

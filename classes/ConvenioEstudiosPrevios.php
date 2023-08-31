@@ -14,25 +14,24 @@
 class ConvenioEstudiosPrevios {
     //put your code here
     private $id ;
+    private $idSolicitud ;
+    private $idDependenciaRequierente ;
     private $descripcionNecesidad ;
-    private $justifiacion ;
     private $analisisCoveniencia ;
     private $maduracionProyecto ;
-    private $objeto ;
-    private $alcanceObjeto ;
-    private $especificacionesTecnicas ;
+    private $especificacionesTecnicasObjeto ;
     private $analisisSector ;
     private $valorTotalAportes ;
     private $desembolsos ;
     private $disponibilidadPresupuestal ;
     private $modalidadSeleccion ;
     private $criteriosSeleccion ;
-    private $analisisResgo ;
+    private $analisisRiesgo ;
     private $garantias ;
     private $limitacionMipymes ;
     private $plazoEjecucion ;
     private $lugarEjecucion ;
-    private $obligacionesPartes;
+    private $obligacionesPartes ;
     private $formaPago ;
     private $controlVigilanciaContrato ;
     private $acuerdosComerciales ;
@@ -40,16 +39,22 @@ class ConvenioEstudiosPrevios {
     private $conceptosTecnicos ;
     private $fecha ;
     
+    // Getters y Setters
+  
     public function getId() {
         return $this->id;
     }
 
-    public function getDescripcionNecesidad() {
-        return $this->descripcionNecesidad;
+    public function getIdSolicitud() {
+        return $this->idSolicitud;
     }
 
-    public function getJustifiacion() {
-        return $this->justifiacion;
+    public function getIdDependenciaRequierente() {
+        return $this->idDependenciaRequierente;
+    }
+
+    public function getDescripcionNecesidad() {
+        return $this->descripcionNecesidad;
     }
 
     public function getAnalisisCoveniencia() {
@@ -60,16 +65,8 @@ class ConvenioEstudiosPrevios {
         return $this->maduracionProyecto;
     }
 
-    public function getObjeto() {
-        return $this->objeto;
-    }
-
-    public function getAlcanceObjeto() {
-        return $this->alcanceObjeto;
-    }
-
-    public function getEspecificacionesTecnicas() {
-        return $this->especificacionesTecnicas;
+    public function getEspecificacionesTecnicasObjeto() {
+        return $this->especificacionesTecnicasObjeto;
     }
 
     public function getAnalisisSector() {
@@ -96,8 +93,8 @@ class ConvenioEstudiosPrevios {
         return $this->criteriosSeleccion;
     }
 
-    public function getAnalisisResgo() {
-        return $this->analisisResgo;
+    public function getAnalisisRiesgo() {
+        return $this->analisisRiesgo;
     }
 
     public function getGarantias() {
@@ -148,12 +145,16 @@ class ConvenioEstudiosPrevios {
         $this->id = $id;
     }
 
-    public function setDescripcionNecesidad($descripcionNecesidad): void {
-        $this->descripcionNecesidad = $descripcionNecesidad;
+    public function setIdSolicitud($idSolicitud): void {
+        $this->idSolicitud = $idSolicitud;
     }
 
-    public function setJustifiacion($justifiacion): void {
-        $this->justifiacion = $justifiacion;
+    public function setIdDependenciaRequierente($idDependenciaRequierente): void {
+        $this->idDependenciaRequierente = $idDependenciaRequierente;
+    }
+
+    public function setDescripcionNecesidad($descripcionNecesidad): void {
+        $this->descripcionNecesidad = $descripcionNecesidad;
     }
 
     public function setAnalisisCoveniencia($analisisCoveniencia): void {
@@ -164,16 +165,8 @@ class ConvenioEstudiosPrevios {
         $this->maduracionProyecto = $maduracionProyecto;
     }
 
-    public function setObjeto($objeto): void {
-        $this->objeto = $objeto;
-    }
-
-    public function setAlcanceObjeto($alcanceObjeto): void {
-        $this->alcanceObjeto = $alcanceObjeto;
-    }
-
-    public function setEspecificacionesTecnicas($especificacionesTecnicas): void {
-        $this->especificacionesTecnicas = $especificacionesTecnicas;
+    public function setEspecificacionesTecnicasObjeto($especificacionesTecnicasObjeto): void {
+        $this->especificacionesTecnicasObjeto = $especificacionesTecnicasObjeto;
     }
 
     public function setAnalisisSector($analisisSector): void {
@@ -200,8 +193,8 @@ class ConvenioEstudiosPrevios {
         $this->criteriosSeleccion = $criteriosSeleccion;
     }
 
-    public function setAnalisisResgo($analisisResgo): void {
-        $this->analisisResgo = $analisisResgo;
+    public function setAnalisisRiesgo($analisisRiesgo): void {
+        $this->analisisRiesgo = $analisisRiesgo;
     }
 
     public function setGarantias($garantias): void {
@@ -248,46 +241,29 @@ class ConvenioEstudiosPrevios {
         $this->fecha = $fecha;
     }
 
-    
-    
-    
-
     // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
+    
     function __construct($campo, $valor) {
         if ($campo != NULL) {
             if (is_array($campo)) {
-                $this->cargarObjetoDeVector($campo);
+                $this->mapearObjetoSQL($campo);
             } else {
-                $cadenaSQL = "select * from  radicado , idoneidad where radicado.id_radicado = idoneidad.id_radicado and $campo = $valor";
-                $resultado = ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria');
-                if (count($resultado) > 0) {
-                    $this->cargarObjetoDeVector($resultado[0]);
+                $sql = "select * from estudios_previos where $campo = $valor";
+                $consulta = ConectorBD::ejecutarQuery($sql, 'convenios');
+                if (count($consulta) > 0) {
+                    $this->mapearObjetoSQL($consulta[0]);
                 }
             }
         }
     }
 
     //organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
-    private function cargarObjetoDeVector($vector) {
-        $this->id_radicado = $vector[0];
-        $this->centro = $vector[1];
-        $this->fecha_sistema = $vector[2];
-        $this->responsable = $vector[3];
-        $this->doc_1 = $vector[4];
-        $this->doc_2 = $vector[5];
-        $this->doc_3 = $vector[6];
-        $this->doc_4 = $vector[7];
-        $this->doc_5 = $vector[8];
-        $this->doc_6 = $vector[9];
-        $this->estado = $vector[10];
-        $this->revisor_1 = $vector[11];
-        $this->revisor_2 = $vector[12];
-        $this->contratista = $vector[14];
-    }
-   
     
-           
-    // metodo magico
+    private function mapearObjetoSQL($consulta) {
+        print_r($consulta);
+        $this->setIdSolicitud($consulta[0]);
+    }
+  // metodo magico
     function __toString() {
         //return $this->;
     }
