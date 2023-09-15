@@ -153,7 +153,7 @@ if ($permisos)
                 <?php
                 $URL = "View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosCrud.php" ;
                 $http_des = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=DESCARGAR");
-                $estudiosPreviosRuta =  "archivos/convenios/59/MEMORANDO_59_10-08-2023_09:47:56.pdf"; //ruta provisional
+                $estudiosPreviosRuta =  "View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosDocumento.php"; //ruta provisional
                 ?>
                 <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
                 <input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion">
