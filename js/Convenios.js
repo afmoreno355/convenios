@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 
-
-function descargarConvenio(postcat, donde, accion, ruta, titulo) {    
+function descargarConvenios(postcat, donde, accion, ruta, titulo) {    
         
     xhrConvenio(postcat , `${donde}` ,`${accion}`);
      
