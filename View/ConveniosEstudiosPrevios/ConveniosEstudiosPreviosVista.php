@@ -158,7 +158,7 @@ if ($permisos)
                 <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
                 <input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion">
                 <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-                <input type="button" value='<?= "DESCARGAR PDF" ?>' name='accionU' id='accionU' onclick='descargarConvenios(I=`<?= $http_des ?>`, `formDetalle`, `<?= $URL ?>`, `<?= $estudiosPreviosRuta ?>`, `<?= basename($estudiosPreviosRuta) ?>`)'>
+                <input type="button" value='<?= "DESCARGAR PDF" ?>' name='accionU' id='accionU' onclick='descargarConvenios(I=`<?= $http_des ?>`, `aviso`, `<?= $URL ?>`, `<?= $estudiosPreviosRuta ?>`, `<?= basename($estudiosPreviosRuta) ?>`)'>
             </div> 
         </fieldset>
     </div>

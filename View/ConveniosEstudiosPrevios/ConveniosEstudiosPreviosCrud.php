@@ -99,12 +99,22 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
                 print_r("<script>console.log($conceptosTecnicos)</script>");
                 $convenioEstudiosPrevios->setConceptosTecnicos($conceptosTecnicos);
 
-                if ($convenioEstudiosPrevios->guardar()) 
+                if($convenioEstudiosPrevios->guardar()) 
                 {
                     print_r( "Se ha cargado la solicitud en el módulo convenios <|> nombre convenio $nombre " ) ;
                 } else {
                     print_r("ERROR INESPERADO, VUELVE A INTENTAR");
                 }
+            }
+        }
+        elseif ($accion == "DESCARGAR")
+        {
+            if($convenioEstudiosPrevios->descargar()) {
+
+                print_r("Se ha descargado documento de estudios previos.");
+            } else {
+                
+                print_r("ERROR AL INTENTAR DESCARGAR DOCUMENTO.");
             }
         }
         elseif ($accion == "ELIMINAR")

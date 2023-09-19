@@ -11,6 +11,12 @@
  *
  * @author Dibier
  */
+
+ // importa Html2Pdf
+require_once __DIR__ . '/../Liberias/verdor/autoload.php';
+use \Spipu\Html2Pdf\Html2Pdf;
+
+
 class ConvenioEstudiosPrevios {
     //put your code here
     private $id ;
@@ -320,8 +326,54 @@ class ConvenioEstudiosPrevios {
     public static function count($filtro) {
         $filtro = ( $filtro != "") ? " where $filtro " : "";
         return ConectorBD::ejecutarQuery("select count(*) from  radicado, idoneidad  $filtro", 'secretaria');
-    }   
-    
+    }
+
+    // crea pdf estudios previos
+    public function crearPdf() {
+
+        $rutaDocumento = $this->ruta;
+        $id = $this->idSolicitud;
+        $pdfRuta = __DIR__ . "/../$rutaDocumento/ESTUDIOS PREVIOS_$id.pdf";
+
+        // carga de html plantilla
+        ob_start();
+        require_once __DIR__ . "/../View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosDocumento.php";
+        $html = ob_get_clean();
+
+        // genera pdf de html
+        $html2Pdf = new Html2Pdf();
+        $html2Pdf->writeHtml($html);
+        $html2Pdf->output('estudiosPrevios.pdf');
+
+        // guarda pdf en carpeta
+        $convenioDocumentos = new ConvenioDocumentos('id_solicitud', $this->idSolicitud);
+        $convenioDocumentos->adicionarDocumento($_FILES['estudiosPrevios.pdf'], 'ESTUDIOS PREVIOS');
+    }
+
+    // descargar documento estudios previos
+    public function descargar() {
+
+        $this->crearPDF();
+        $convenioDocumentos = new ConvenioDocumentos('id_solicitud', $this->idSolicitud);
+        $ruta = $convenioDocumentos->getRutas()['estdios_previos'];
+
+        if(file_exists($ruta)) {
+
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($ruta) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($ruta));
+            // Descarga zip temporal
+            readfile($ruta);
+
+            return true;
+        }
+        return false;
+    }
+
     // insertar o actualizar información en la base de datos
     public function guardar() {
         $id = $this->getId();

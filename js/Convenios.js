@@ -26,19 +26,18 @@ function descargarConvenios(postcat, donde, accion, ruta, titulo) {
 
 
 
-function xhrConvenio(postcad, donde, accion, evt, tadId) {
+function xhrConvenio(postcad, donde, accion) {
     var xhr=new XMLHttpRequest();
     xhr.onreadystatechange=function (){
         if(this.readyState==4 && this.status==200){
             var respuesta=this.responseText;  
             console.log(respuesta);
-            respuestas2(donde , respuesta) ;
+            document.getElementById(donde).innerHTML = respuesta;
         }        
     };
     xhr.open('POST',accion, true);
     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xhr.send(postcad); 
-    action2( evt, tadId ) ;
+    xhr.send(postcad);
 }
 
 function tabConvenios() {
@@ -63,36 +62,6 @@ function validarDatosConvenios(id, postcad, donde, accion, eve = null, tab = nul
     document.getElementById("modales").style.transform='translateX(0%)';      
     document.getElementById("modales").style.transition="1s"; 
     document.getElementById("formularioDiv").style.width="";
-}
- 
-function action2( evt = null , tadId = null )
-{
-    if(evt !== null && tadId !== null)
-    {
-    document.getElementById('pag').innerHTML = 1;
-    var i, tablinks;
-    tablinks = document.getElementsByClassName(tadId);
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" color", "");
-    }
-
-    evt.currentTarget.className += " color";
-    }
-}
-
-function respuestas2( donde = 'aviso' , respuesta )
-{
-    if( ( datos = respuesta.split('<|>') ).length >= 2)
-    {
-            for (var i = 0; i < document.getElementsByClassName(donde).length; i++)
-            {
-                document.getElementsByClassName(donde)[i].innerHTML = datos[i];
-            }
-    } 
-    else
-    {
-        document.getElementById(donde).innerHTML = respuesta;
-    }
 }
 
 
