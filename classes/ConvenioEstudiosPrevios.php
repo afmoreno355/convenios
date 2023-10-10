@@ -13,7 +13,7 @@
  */
 
  // importa Html2Pdf
-require_once __DIR__ . '/../Liberias/verdor/autoload.php';
+require __DIR__ . '/../Librerias/vendor/autoload.php';
 use \Spipu\Html2Pdf\Html2Pdf;
 
 
