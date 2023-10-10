@@ -40,6 +40,7 @@ $llave_Primaria_Contructor = ( $llave_Primaria == "" ) ? "null" : "'$llave_Prima
 // llamamos la clase y verificamos si ya existe info de este dato que llega
 $convenio = new Convenio( ' id_solicitud ' , $llave_Primaria_Contructor);
 $convenioEstudiosPrevios= new ConvenioEstudiosPrevios( ' id_solicitud ' , $llave_Primaria_Contructor);
+
 if ($permisos)
 {
 ?>
@@ -153,7 +154,7 @@ if ($permisos)
                 <?php
                 $URL = "View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosCrud.php" ;
                 $http_des = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=DESCARGAR");
-                $estudiosPreviosRuta =  "View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosDocumento.php"; //ruta provisional
+                $estudiosPreviosRuta = "archivos/convenios/" . $convenio->getId() . "/ESTUDIOS_" . $convenio->getId() . ".pdf";
                 ?>
                 <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
                 <input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion">

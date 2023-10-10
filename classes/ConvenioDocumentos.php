@@ -270,7 +270,6 @@ class ConvenioDocumentos {
         $rutaDocumento = $this->ruta;
         $id = $this->idSolicitud;
         $zipRuta = __DIR__ . "/../$rutaDocumento/CONVENIO_$id.zip";
-        print_r($zipRuta);
 
         if(file_exists($zipRuta)) {
 

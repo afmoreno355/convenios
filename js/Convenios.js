@@ -4,26 +4,39 @@
  * and open the template in the editor.
  */
 
-function descargarConvenios(postcat, donde, accion, ruta, titulo) {    
-        
-    xhrConvenio(postcat , `${donde}` ,`${accion}`);
-     
-    var id  =  window.setInterval(function(){
-    
-        if(document.getElementById(donde).innerHTML!=='') { 
+
+/**
+ * Descarga un archivo a partir de un contenido HTML obtenido mediante una solicitud AJAX.
+ *
+ * @param {Object} postcat - Datos que se enviarán al servidor mediante una solicitud AJAX.
+ * @param {string} donde - ID del elemento HTML donde se mostrará el contenido antes de la descarga.
+ * @param {string} accion - URL o ruta del servidor para la solicitud AJAX que obtendrá el contenido HTML.
+ * @param {string} ruta - URL o ruta del archivo a descargar.
+ * @param {string} titulo - Nombre que se asignará al archivo descargado.
+ */
+function descargarConvenios(postcat, donde, accion, ruta, titulo) {
+    // Realiza una solicitud AJAX para obtener el contenido HTML.
+    xhrConvenio(postcat, donde, accion);
+
+    // Espera hasta que el contenido HTML se haya cargado en el elemento especificado.
+    var id = window.setInterval(function () {
+        if (document.getElementById(donde).innerHTML !== '') {
             var tmpElemento = document.getElementById('botonE');
             var tabla_div = document.getElementById(donde).innerHTML;
+            
+            // Asigna la URL del archivo a descargar y su nombre.
             tmpElemento.href = ruta;
-            // Asignamos el nombre a nuestro documento
-            tmpElemento.download= `${titulo}`;
-            // Simulamos el click al elemento creado para descargarlo
+            tmpElemento.download = titulo;
+            
+            // Simula el clic en el elemento creado para descargar el archivo.
             tmpElemento.click();
             clearInterval(id);
         }
-     },100); 
-    document.getElementById(donde).innerHTML='';
+    }, 100);
+    
+    // Limpia el contenido del elemento especificado.
+    document.getElementById(donde).innerHTML = '';
 }
-
 
 
 function xhrConvenio(postcad, donde, accion) {
