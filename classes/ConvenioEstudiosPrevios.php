@@ -328,51 +328,45 @@ class ConvenioEstudiosPrevios {
         return ConectorBD::ejecutarQuery("select count(*) from  radicado, idoneidad  $filtro", 'secretaria');
     }
 
-    // crea pdf estudios previos
+
     public function crearPdf() {
-
-        $rutaDocumento = $this->ruta;
         $id = $this->idSolicitud;
-        $pdfRuta = __DIR__ . "/../$rutaDocumento/ESTUDIOS PREVIOS_$id.pdf";
-
-        // carga de html plantilla
-        ob_start();
+        $carpeta = "/var/www/eagle/convenios/archivos/convenios/$id";
+        $ruta = "$carpeta/ESTUDIOS_$id.pdf";
+    
+        // Verificar si la carpeta existe, si no, crearla con permisos adecuados
+        if (!is_dir($carpeta)) {
+            if (!mkdir($carpeta, 0777, true)) {
+                // No se pudo crear la carpeta
+                die("Error al crear la carpeta: $carpeta");
+            }
+        }
+    
+        // Carga de la plantilla HTML
+        /*ob_start();
         require_once __DIR__ . "/../View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosDocumento.php";
         $html = ob_get_clean();
-
-        // genera pdf de html
+    
+        // Genera el PDF de HTML
         $html2Pdf = new Html2Pdf();
         $html2Pdf->writeHtml($html);
-        $html2Pdf->output('estudiosPrevios.pdf');
-
-        // guarda pdf en carpeta
-        $convenioDocumentos = new ConvenioDocumentos('id_solicitud', $this->idSolicitud);
-        $convenioDocumentos->adicionarDocumento($_FILES['estudiosPrevios.pdf'], 'ESTUDIOS PREVIOS');
+        $pdfContent = $html2Pdf->output('', 'S'); // Captura el contenido del PDF en una variable
+    
+        // Guarda el PDF en la carpeta
+        if (file_put_contents($ruta, $pdfContent) === false) {
+            // Error si no se pudo guardar el archivo
+            die("Error al guardar el archivo PDF: $ruta");
+        }/** */
+    
+        return $ruta; // Retorna la ruta del archivo PDF generado
     }
-
-    // descargar documento estudios previos
+    
+    // Descargar documento estudios previos
     public function descargar() {
-
-        $this->crearPDF();
-        $convenioDocumentos = new ConvenioDocumentos('id_solicitud', $this->idSolicitud);
-        $ruta = $convenioDocumentos->getRutas()['estdios_previos'];
-
-        if(file_exists($ruta)) {
-
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($ruta) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($ruta));
-            // Descarga zip temporal
-            readfile($ruta);
-
-            return true;
-        }
-        return false;
+        
+        return ":)";
     }
+    
 
     // insertar o actualizar información en la base de datos
     public function guardar() {

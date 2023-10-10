@@ -11,6 +11,8 @@ require_once __DIR__ . "/../../autoload.php";
 if( !isset($_SESSION["user"]) )
 {
     session_start();
+} else {
+    print_r("NO HA INICIADO SESIÓN");
 }
 
 $nombreTilde = array("á", "é", "í", "ó", "ú", "ñ", ".", "", "Á", "É", "Í", "Ó", "Ú", "Ñ", ".", "");
@@ -23,6 +25,14 @@ $fecha = date("YmdHis");
 // variable variable trae las variables que trae POST
 foreach ($_POST as $key => $value)
     ${$key} = $value;
+// desencripta las variables
+$I = array_keys($_POST)[0];
+$nuevo_POST = Http::decryptIt($I);
+// evalua las nuevas variables que vienen ya desencriptadas
+foreach ($nuevo_POST as $key => $value)
+   ${$key} = $value;
+
+
 
 
 $session = new Sesion(" identificacion ", "'{$_SESSION["user"]}'");
@@ -109,13 +119,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         }
         elseif ($accion == "DESCARGAR")
         {
-            if($convenioEstudiosPrevios->descargar()) {
-
-                print_r("Se ha descargado documento de estudios previos.");
-            } else {
-                
-                print_r("ERROR AL INTENTAR DESCARGAR DOCUMENTO.");
-            }
+            print_r($convenioEstudiosPrevios->descargar());
         }
         elseif ($accion == "ELIMINAR")
         {

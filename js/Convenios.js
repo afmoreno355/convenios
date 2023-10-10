@@ -16,13 +16,12 @@
  */
 function descargarConvenios(postcat, donde, accion, ruta, titulo) {
     // Realiza una solicitud AJAX para obtener el contenido HTML.
-    xhrConvenio(postcat, donde, accion);
+    xhrConvenios(postcat, donde, accion);
 
     // Espera hasta que el contenido HTML se haya cargado en el elemento especificado.
     var id = window.setInterval(function () {
         if (document.getElementById(donde).innerHTML !== '') {
             var tmpElemento = document.getElementById('botonE');
-            var tabla_div = document.getElementById(donde).innerHTML;
             
             // Asigna la URL del archivo a descargar y su nombre.
             tmpElemento.href = ruta;
@@ -35,11 +34,11 @@ function descargarConvenios(postcat, donde, accion, ruta, titulo) {
     }, 100);
     
     // Limpia el contenido del elemento especificado.
-    document.getElementById(donde).innerHTML = '';
+    //document.getElementById(donde).innerHTML = '';
 }
 
 
-function xhrConvenio(postcad, donde, accion) {
+function xhrConvenios(postcad, donde, accion) {
     var xhr=new XMLHttpRequest();
     xhr.onreadystatechange=function (){
         if(this.readyState==4 && this.status==200){
