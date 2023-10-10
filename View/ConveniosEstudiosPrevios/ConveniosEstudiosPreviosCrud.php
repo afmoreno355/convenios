@@ -33,8 +33,6 @@ foreach ($nuevo_POST as $key => $value)
    ${$key} = $value;
 
 
-
-
 $session = new Sesion(" identificacion ", "'{$_SESSION["user"]}'");
 $persona = new Persona( " identificacion ", "'{$_SESSION["user"]}'" );
 $token1 = $session->getToken1();
@@ -119,7 +117,11 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         }
         elseif ($accion == "DESCARGAR")
         {
-            print_r($convenioEstudiosPrevios->descargar());
+            if ($convenioEstudiosPrevios->descargar()) {
+                print_r(" Se ha descargado el documento de estudios previos. ");
+            } else {
+                print_r(" ERROR, NO SE PUDO DESCARGAR DOCUMENTO. ");
+            }
         }
         elseif ($accion == "ELIMINAR")
         {
