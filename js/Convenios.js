@@ -34,7 +34,7 @@ function descargarConvenios(postcat, donde, accion, ruta, titulo) {
     }, 100);
     
     // Limpia el contenido del elemento especificado.
-    //document.getElementById(donde).innerHTML = '';
+    document.getElementById(donde).innerHTML = '';
 }
 
 

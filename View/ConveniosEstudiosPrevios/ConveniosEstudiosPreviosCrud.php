@@ -55,6 +55,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
            $valor = null ; 
         }
         $convenioEstudiosPrevios = new ConvenioEstudiosPrevios($campo, $valor);
+        $convenioEstudiosPrevios->setIdSolicitud($idSolicitud);
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
             $maximoLetras = INF;

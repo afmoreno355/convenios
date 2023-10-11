@@ -331,21 +331,19 @@ class ConvenioEstudiosPrevios {
 
     public function crearPdf() {
         $id = $this->idSolicitud;
-        $carpeta = "/var/www/eagle/convenios/archivos/convenios/$id";
+        $carpeta = __DIR__ . "/../archivos/convenios/$id";
         $ruta = "$carpeta/ESTUDIOS_$id.pdf";
     
-        // Verificar si la carpeta existe, si no, crearla con permisos adecuados
-        if (!is_dir($carpeta)) {
-            if (!mkdir($carpeta, 0777, true)) {
-                // No se pudo crear la carpeta
-                die("Error al crear la carpeta: $carpeta");
-            }
+        // Verificar si el directorio existe o crearlo
+        if (!is_dir($carpeta) && !mkdir($carpeta, 0777, true)) {
+            die("Error al crear la carpeta: $carpeta");
         }
     
-        // Carga de la plantilla HTML
-        /*ob_start();
-        require_once __DIR__ . "/../View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosDocumento.php";
-        $html = ob_get_clean();
+        // Leer el contenido desde el archivo PHP externo y pasar el idSolicitud como parámetro
+        ob_start();  // Iniciar el almacenamiento en búfer de salida
+        $_GET['idSolicitud'] = $id;  // Establecer el parámetro idSolicitud
+        include(__DIR__ . '/../View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosDocumentos.php');  // Incluir el contenido desde el archivo PHP
+        $html = ob_get_clean();  // Obtener el contenido almacenado en el búfer de salida
     
         // Genera el PDF de HTML
         $html2Pdf = new Html2Pdf();
@@ -356,15 +354,28 @@ class ConvenioEstudiosPrevios {
         if (file_put_contents($ruta, $pdfContent) === false) {
             // Error si no se pudo guardar el archivo
             die("Error al guardar el archivo PDF: $ruta");
-        }/** */
+        }
     
         return $ruta; // Retorna la ruta del archivo PDF generado
     }
     
     // Descargar documento estudios previos
     public function descargar() {
+        $ruta = $this->crearPdf();
         
-        return ":)";
+        if (file_exists($ruta)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($ruta) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($ruta));
+            // Descarga el archivo
+            readfile($ruta);
+            return true;
+        }
+        return false;
     }
     
 
