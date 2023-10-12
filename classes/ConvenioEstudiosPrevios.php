@@ -44,6 +44,8 @@ class ConvenioEstudiosPrevios {
     private $otrosAspectos ;
     private $conceptosTecnicos ;
     private $fecha ;
+
+    private $documentos; // objeto de la clase documentos
     
     // Getters y Setters
   
@@ -250,6 +252,10 @@ class ConvenioEstudiosPrevios {
     // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     
     function __construct($campo, $valor) {
+
+        // Compone la clase documentos
+        $documentos = new Documentos();
+
         if ($campo != NULL) {
             if (is_array($campo)) {
                 $this->mapearObjetoSQL($campo);
