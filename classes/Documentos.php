@@ -123,12 +123,185 @@ class Documentos {
 
         if ($this->descargar($ruta)) {
 
-            sleep($seguntos);
+            sleep($segundos);
             unlink($ruta);
             
             return true;
         }
         return false;
+    }
+
+    // Crea ZIP para descargar documentos
+    public function crearZip($ruta, $documentos) {
+
+        try {
+            // Crea archivo ZIP
+            $zip = $this->getZip($ruta);
+
+            // Adjunta documentos
+            foreach ($documentos as $doc) {
+
+                if (!empty($doc) and is_file($doc)) {
+                    $zip->addFile($doc);
+                }
+            }
+
+            $zip->close();
+           
+
+        } catch (Execption $e) {
+            throw new Exception("No es posible crear el archivo ZIP $ruta." . $e->getMessage());
+        }
+    }
+
+    public function getZip($ruta) {
+
+        try {
+            // Inicializa ZIP
+            $zip = new ZipArchive();
+            $zip->open($ruta, ZipArchive::CREATE);
+
+            return $zip;
+
+        } catch (Exception $e) {
+            throw new Exception("No es posible abrir archivo ZIP $ruta." . $e->getMessage());
+        }
+    }
+    
+    // guardar elementos en la base de datos
+    public function registrar($accion, $sql, $tabla, $baseDatos) {
+        
+        try {
+
+            if (ConectorDB::ejecutarQuery($sql, $baseDatos)) {
+
+                $sqlHistorico = strtoupper(str_replace("'", "|", $sql));
+                $historico = new Historico(null, null);
+                $historico->setIdentificacion($_SESSION["user"]);
+                $historico->setTipo_historico($accion);
+                $historico->setHistorico($sqlHistorico);
+                $historico->setFecha("now()");
+                $historico->setTabla($tabla);
+                $historico->grabar();
+
+                return true;
+            }
+            return false;
+
+        } catch (Exception $e) {
+            throw new Exception("No se pudo registrar la acción $accion, SQL $sql. " . $e->getMessage());
+        }
+    }
+
+    // borrar elementos en la base de datos
+    public function borrar() {  
+        $sql = "delete from documentaciones where id_documentacion = '$this->id'";
+        if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
+            //Historico de las acciones en el sistemas de informacion
+            $sqlFormatted = strtoupper(str_replace("'", "|", $sql));
+            $historico = new Historico(null, null);
+            $historico->setIdentificacion($_SESSION["user"]);
+            $historico->setTipo_historico("ELIMINAR");
+            $historico->setHistorico($sqlFormatted);
+            $historico->setFecha("now()");
+            $historico->setTabla("DOCUMENTACIONES");
+            $historico->grabar();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function adicionarDocumento($documento, $nombre) {
+
+        $cargarDocumento = isset( $documento ) && $documento['name'] != '';
+        $fecha = date("d-m-Y_h:i:s");
+        $direccion = $this->ruta . "/$nombre" . "_$this->idSolicitud"."_$fecha" . ".pdf";
+
+        if ($cargarDocumento) {
+            
+            if (
+                Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
+                copy($documento['tmp_name'], __DIR__ . "/../$direccion")
+               )
+               {
+                $sql = 'update documentaciones set';
+                switch ($nombre) {
+                    case 'MEMORANDO':
+                        $sql .= ' memorando ';
+                        break;
+                    case 'ESTUDIOS PREVIOS':
+                        $sql .= ' estudios_previos ';
+                        break;
+                    case 'ANEXO TÉCNICO':
+                        $sql .= ' anexo_tecnico ';
+                        break;
+                    case 'ANÁLISIS DEL SECTOR':
+                        $sql .= ' analisis_sector ';
+                        break;
+                    case 'CONCEPTO TÉCNICO':
+                        $sql .= ' concepto_tecnico ';
+                        break;
+                    case 'PROPUESTA TÉCNICA ECONÓMICA':
+                        $sql .= ' propuesta_tecnica_economica ';
+                        break;
+                    case 'MATRIZ DE RIESGOS':
+                        $sql .= ' matriz_riesgos ';
+                        break;
+                    case 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL':
+                        $sql .= ' certificado_disponibilidad_presupuestal ';
+                        break;
+                    case 'CERTIFICADO PAA':
+                        $sql .= ' certificado_paa ';
+                        break;
+                    case 'PROYECTO DE AUTORIZACIÓN':
+                        $sql .= ' proyecto_autorizacion ';
+                }
+
+                $sql .= " = '$direccion', fecha_sistema = now() where id_solicitud = $this->idSolicitud";
+
+                ConectorBD::ejecutarQuery($sql, ' convenios ');
+                $historico = new Historico(null, null);
+                $historico->setIdentificacion($_SESSION["user"]);
+                $historico->setTipo_historico("AGREGAR_DOCUMENTO");
+                $historico->setFecha("now()");
+                $historico->grabar();
+                return true;
+               } else {
+                print_r(" No se ha cargado el documento $nombre correctamente. ");
+                return false;
+               }
+        }
+        return true;
+    }
+
+    public function adicionarDocumentacion() {
+        return
+            $this->adicionarDocumento($this->memorando, 'MEMORANDO') &&
+            $this->adicionarDocumento($this->estudiosPrevios, 'ESTUDIOS PREVIOS') &&
+            $this->adicionarDocumento($this->anexoTecnico, 'ANEXO TÉCNICO') &&
+            $this->adicionarDocumento($this->analisisSector, 'ANÁLISIS DEL SECTOR') &&
+            $this->adicionarDocumento($this->solicitudConceptoTecnico, 'CONCEPTO TÉCNICO') &&
+            $this->adicionarDocumento($this->propuestaTecnicaEconomica, 'PROPUESTA TÉCNICA ECONÓMICA') &&
+            $this->adicionarDocumento($this->matrizRiesgos, 'MATRIZ DE RIESGOS') &&
+            $this->adicionarDocumento($this->disponibilidadPresupuestal, 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL') &&
+            $this->adicionarDocumento($this->paa, 'CERTIFICADO PAA') &&
+            $this->adicionarDocumento($this->proyectoAutorizacion, 'PROYECTO DE AUTORIZACIÓN');
+
+    }
+
+    public function adicionarModificar($idSolicitud) {
+        $documentacion = new ConvenioDocumentos(' id_solicitud ', $idSolicitud);
+        if ($documentacion->getId() == null) {
+            $this->registrarDocumentacion($idSolicitud);
+        }
+
+        // crea directorio
+        $destino = __DIR__ . "/../archivos/convenios/$idSolicitud";
+        mkdir($destino, 0777, true);
+
+        return $this->adicionarDocumentacion();
     }
 
 }

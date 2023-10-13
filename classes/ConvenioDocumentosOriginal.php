@@ -229,7 +229,7 @@ class ConvenioDocumentosOriginal {
     }
     
     // retorna rutas de documentos
-    public function getRutasDocumentos() {
+    public function getRutas() {
 
         $sql = " select * from  documentaciones where id_solicitud = '$this->idSolicitud' ";
         return ConectorBD::ejecutarQuery($sql, ' convenios ')[0];
@@ -249,7 +249,7 @@ class ConvenioDocumentosOriginal {
             print_r(" NO ES POSIBLE ABRIR EL ARCHIVO ZIP ");
         } else {
 
-            $rutas = $this->getRutasDocumentos();
+            $rutas = $this->getRutas();
 
             foreach($rutas as $ruta) {
 
@@ -263,7 +263,7 @@ class ConvenioDocumentosOriginal {
         }
     }
 
-    public function descargarZipDocumentos() {
+    public function descargarZip() {
 
         $this->crearZipDocumentos();
 

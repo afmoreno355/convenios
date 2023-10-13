@@ -153,13 +153,17 @@ if ($permisos)
             <div>
                 <?php
                 $URL = "View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosCrud.php" ;
-                $http_des = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=DESCARGAR");
+                $http_gen = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=GENERAR");
+                $http_vis = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=VISUALIZAR");
                 $estudiosPreviosRuta = "archivos/convenios/" . $convenio->getId() . "/ESTUDIOS_" . $convenio->getId() . ".pdf";
                 ?>
                 <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
-                <input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion">
+                <!--input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion"-->
                 <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-                <input type="button" value='<?= "DESCARGAR PDF" ?>' name='accionU' id='accionU' onclick='descargarConvenios(I=`<?= $http_des ?>`, `aviso`, `<?= $URL ?>`, `<?= $estudiosPreviosRuta ?>`, `<?= basename($estudiosPreviosRuta) ?>`)'>
+
+                <input type="button" value='<?= "GENERAR PDF" ?>' name='accionU' id='accionU' onclick='generarConvenios(I=`<?= $http_gen ?>`, `aviso`, `<?= $URL ?>`, `<?= $estudiosPreviosRuta ?>`, `<?= basename($estudiosPreviosRuta) ?>`)'>
+
+                <input type="button" value='<?= "VISUALIZAR PDF" ?>' name='accionU' id='accionU' onclick='visualizarConvenios(I=`<?= $http_vis ?>`, `aviso`, `<?= $URL ?>`, `<?= $estudiosPreviosRuta ?>`, `<?= basename($estudiosPreviosRuta) ?>`)'>
             </div> 
         </fieldset>
     </div>

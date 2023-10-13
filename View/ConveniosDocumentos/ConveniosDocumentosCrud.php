@@ -100,7 +100,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         elseif ($accion == "DESCARGAR")
         {
 
-            if ($convenioDocumentos->descargarZipDocumentos()) {
+            if ($convenioDocumentos->descargarZip()) {
                 print_r("Se ha descargado el archivo ZIP de documentos");
             } else {
                 print_r("NO SE PUDO DESCARGAR LA DOCUMENTACIÓN");

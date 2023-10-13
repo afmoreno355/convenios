@@ -235,69 +235,35 @@ class ConvenioDocumentos {
     }
     
     // retorna rutas de documentos
-    public function getRutasDocumentos() {
+    public function getRutas() {
 
         $sql = " select * from  documentaciones where id_solicitud = '$this->idSolicitud' ";
         return ConectorBD::ejecutarQuery($sql, ' convenios ')[0];
     }
 
-    // crea zip para descargar documentos
-    public function crearZipDocumentos() {
-
+    // Crea zip para descargar documentos
+    public function crearZip() {
+        // Crear parámetros
         $rutaDocumento = $this->ruta;
         $id = $this->idSolicitud;
-        $zipRuta = __DIR__ . "/../$rutaDocumento/CONVENIO_$id.zip";
+        $ruta = __DIR__ . "/../$rutaDocumento/CONVENIO_$id.zip";
+        $documentos = $this->getRutas();
 
-        $zip = new ZipArchive();
+        // Crear archivo ZIP
+        $this->documentos->crearZip($ruta, $documentos);
 
-        if(!$zip->open($zipRuta, ZipArchive::CREATE)) {
-
-            print_r(" NO ES POSIBLE ABRIR EL ARCHIVO ZIP ");
-        } else {
-
-            $rutas = $this->getRutasDocumentos();
-
-            foreach($rutas as $ruta) {
-
-                if($ruta != '') {
-                    
-                    $zip->addFile(__DIR__ . '/../' . $ruta, basename($ruta));
-                }
-            }
-
-            $zip->close();
-        }
+        return $ruta;
     }
 
-    public function descargarZipDocumentos() {
+    public function descargarZip() {
+        // Genera ZIP
+        $ruta = $this->crearZip();
 
-        $this->crearZipDocumentos();
-
-        $rutaDocumento = $this->ruta;
-        $id = $this->idSolicitud;
-        $zipRuta = __DIR__ . "/../$rutaDocumento/CONVENIO_$id.zip";
-
-        if(file_exists($zipRuta)) {
-
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($zipRuta) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($zipRuta));
-            // Descarga zip temporal
-            readfile($zipRuta);
-            sleep(5);
-            unlink($zipRuta);
-
-            return true;
-        }
-        return false;
+        return $this->documentos->descargarTemporal($ruta, 5);
     }
     
     // guardar elementos en la base de datos
-    public function registrarDocumentacion($idSolicitud) {
+    public function registrar($idSolicitud) {
         
         $sql = "insert into documentaciones (
             id_solicitud,
@@ -307,19 +273,7 @@ class ConvenioDocumentos {
             now()
         )";
 
-        if(ConectorBD::ejecutarQuery($sql, ' convenios ')) {
-
-            $historico = new Historico(null, null);
-            $historico->setIdentificacion($_SESSION["user"]);
-            $historico->setTipo_historico("ADICIONAR");
-            $historico->setHistorico(strtoupper(str_replace("'", "|", $sql)));
-            $historico->setFecha("now()");
-            $historico->setTabla("DOCUMENTACIONES");
-            $historico->grabar();
-
-            return true;
-        }
-        return false;
+        return $this->documentos->registrar("ADICIONAR", $sql, ' documentaciones ', ' convenios ');
     }
 
     // borrar elementos en la base de datos

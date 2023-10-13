@@ -40,7 +40,7 @@ $llave_Primaria_Contructor = ( $llave_Primaria == "" ) ? "null" : "'$llave_Prima
 
 // llamamos la clase y verificamos si ya existe info de este dato que llega
 $convenioDocumentos = new ConvenioDocumentos( ' id_solicitud ' , $llave_Primaria_Contructor);
-$rutas = $convenioDocumentos->getRutasDocumentos();
+$rutas = $convenioDocumentos->getRutas();
 if ($permisos)
 {
 ?>
