@@ -45,7 +45,8 @@ class ConvenioEstudiosPrevios {
     private $conceptosTecnicos ;
     private $fecha ;
 
-    private $documentos; // objeto de la clase documentos
+    private $documentos; // Objeto tipo documentos.
+
     
     // Getters y Setters
   
@@ -249,12 +250,12 @@ class ConvenioEstudiosPrevios {
         $this->fecha = $fecha;
     }
 
-    // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
+   // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     
     function __construct($campo, $valor) {
 
         // Compone la clase documentos
-        $documentos = new Documentos();
+        $this->documentos = new Documentos();
 
         if ($campo != NULL) {
             if (is_array($campo)) {
@@ -336,31 +337,14 @@ class ConvenioEstudiosPrevios {
 
 
     public function crearPdf() {
+        // Parámetros
         $id = $this->idSolicitud;
         $carpeta = __DIR__ . "/../archivos/convenios/$id";
         $ruta = "$carpeta/ESTUDIOS_$id.pdf";
-    
-        // Verificar si el directorio existe o crearlo
-        if (!is_dir($carpeta) && !mkdir($carpeta, 0777, true)) {
-            die("Error al crear la carpeta: $carpeta");
-        }
-    
-        // Leer el contenido desde el archivo PHP externo y pasar el idSolicitud como parámetro
-        ob_start();  // Iniciar el almacenamiento en búfer de salida
-        $_GET['idSolicitud'] = $id;  // Establecer el parámetro idSolicitud
-        include(__DIR__ . '/../View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosDocumentos.php');  // Incluir el contenido desde el archivo PHP
-        $html = ob_get_clean();  // Obtener el contenido almacenado en el búfer de salida
-    
-        // Genera el PDF de HTML
-        $html2Pdf = new Html2Pdf();
-        $html2Pdf->writeHtml($html);
-        $pdfContent = $html2Pdf->output('', 'S'); // Captura el contenido del PDF en una variable
-    
-        // Guarda el PDF en la carpeta
-        if (file_put_contents($ruta, $pdfContent) === false) {
-            // Error si no se pudo guardar el archivo
-            die("Error al guardar el archivo PDF: $ruta");
-        }
+        $plantilla = 'View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosDocumentos.php';
+
+        // Crear PDf con los parámetros
+        $this->documentos->crearPdf($ruta, $plantilla);
     
         return $ruta; // Retorna la ruta del archivo PDF generado
     }
@@ -368,26 +352,15 @@ class ConvenioEstudiosPrevios {
     // Descargar documento estudios previos
     public function descargar() {
         $ruta = $this->crearPdf();
-        
-        if (file_exists($ruta)) {
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($ruta) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($ruta));
-            // Descarga el archivo
-            readfile($ruta);
-            return true;
-        }
-        return false;
+
+        return $this->documentos->descargar($ruta);
     }
     
 
     // insertar o actualizar información en la base de datos
     public function guardar() {
         $id = $this->getId();
+
         if($id == null or $id == '' or $id == 0) {
 
             $sql = "insert into estudios_previos (

@@ -30,6 +30,9 @@ class ConvenioDocumentos {
     // ruta directorio convenios
     private $ruta;
 
+    // Objeto documentos
+    private $documentos;
+
 
     // Getters and Setters
     
@@ -147,6 +150,9 @@ class ConvenioDocumentos {
 
     // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     function __construct($campo, $valor) {
+        // Compone objetos documentos
+        $this->docucumentos = new Documentos();
+
         if ($campo != NULL) {
             if (is_array($campo)) {
                 $this->cargarObjetoDeVector($campo);
