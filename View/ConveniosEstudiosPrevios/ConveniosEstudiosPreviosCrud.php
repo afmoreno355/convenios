@@ -56,6 +56,7 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         }
         $convenioEstudiosPrevios = new ConvenioEstudiosPrevios($campo, $valor);
         $convenioEstudiosPrevios->setIdSolicitud($idSolicitud);
+
         if ($accion == "ADICIONAR" || $accion == "MODIFICAR")
         {
             $maximoLetras = INF;
@@ -118,8 +119,10 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
         }
         elseif ($accion == "DESCARGAR")
         {
+            $_POST = $nuevo_POST;
+            print_r($_POST);
             if ($convenioEstudiosPrevios->descargar()) {
-                print_r(" Se ha descargado el documento de estudios previos. ");
+                print_r(" Se ha descargado el documento de estudios previos convenio $idSolicitud.");
             } else {
                 print_r(" ERROR, NO SE PUDO DESCARGAR DOCUMENTO. ");
             }

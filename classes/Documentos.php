@@ -35,7 +35,7 @@ class Documentos {
             $pdf = $this->getContenidoPdf($plantilla);
             $this->crearDirectorio($directorio, 0777);
             
-            //return $this->guardar($pdf, $nombre, $directorio) ? true : false;
+            return $this->guardar($pdf, $nombre, $directorio) ? true : false;
 
         } catch (Exception $e) {
             throw new Exception("Error al crear PDF." . $e->getMessage());
@@ -59,6 +59,7 @@ class Documentos {
         
         try {
             // Obtener contenido HTML de archivo PHP.
+
             ob_start();
             include(__DIR__ . "/../$plantilla");
             $html = ob_get_clean();
@@ -135,41 +136,30 @@ class Documentos {
     public function crearZip($ruta, $documentos) {
 
         try {
-            // Crea archivo ZIP
-            $zip = $this->getZip($ruta);
+
+            $zip = new ZipArchive();
+            $zip->open($ruta, ZipArchive::CREATE);
 
             // Adjunta documentos
             foreach ($documentos as $doc) {
 
                 if (!empty($doc) and is_file($doc)) {
-                    $zip->addFile($doc);
+                    $zip->addFile($doc, basename($doc));
                 }
             }
 
             $zip->close();
            
 
-        } catch (Execption $e) {
+        } catch (Exception $e) {
             throw new Exception("No es posible crear el archivo ZIP $ruta." . $e->getMessage());
         }
     }
 
-    public function getZip($ruta) {
-
-        try {
-            // Inicializa ZIP
-            $zip = new ZipArchive();
-            $zip->open($ruta, ZipArchive::CREATE);
-
-            return $zip;
-
-        } catch (Exception $e) {
-            throw new Exception("No es posible abrir archivo ZIP $ruta." . $e->getMessage());
-        }
-    }
+    
     
     // guardar elementos en la base de datos
-    public function registrar($accion, $sql, $tabla, $baseDatos) {
+    /*public function registrar($accion, $sql, $tabla, $baseDatos) {
         
         try {
 
@@ -302,7 +292,7 @@ class Documentos {
         mkdir($destino, 0777, true);
 
         return $this->adicionarDocumentacion();
-    }
+    } */
 
 }
 

@@ -11,6 +11,11 @@
  *
  * @author Dibier 
  */
+
+// importa Html2Pdf
+require __DIR__ . '/../Librerias/vendor/autoload.php';
+use \Spipu\Html2Pdf\Html2Pdf;
+
 class ConvenioDocumentos {
     //put your code here
     private $id;
@@ -249,8 +254,28 @@ class ConvenioDocumentos {
         $ruta = __DIR__ . "/../$rutaDocumento/CONVENIO_$id.zip";
         $documentos = $this->getRutas();
 
-        // Crear archivo ZIP
-        $this->documentos->crearZip($ruta, $documentos);
+        try {
+
+            $zip = new ZipArchive();
+            $zip->open($ruta, ZipArchive::CREATE);
+
+            // Adjunta documentos
+            foreach ($documentos as $doc) {
+
+                $rutaDoc = __DIR__ . "/../$doc";
+
+                if (!empty($rutaDoc) and is_file($rutaDoc)) {
+                    print_r($rutaDoc);
+                    $zip->addFile($rutaDoc, basename($rutaDoc));
+                }
+            }
+
+            $zip->close();
+           
+
+        } catch (Exception $e) {
+            throw new Exception("No es posible crear el archivo ZIP $ruta." . $e->getMessage());
+        }
 
         return $ruta;
     }
@@ -258,8 +283,34 @@ class ConvenioDocumentos {
     public function descargarZip() {
         // Genera ZIP
         $ruta = $this->crearZip();
+        $segundos = 5;
 
-        return $this->documentos->descargarTemporal($ruta, 5);
+        try {
+
+            if (file_exists($ruta)) {
+
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename="' . basename($ruta) . '"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($ruta));
+
+                // Descarga el archivo
+                readfile($ruta);
+
+                //sleep($segundos);
+                //unlink($ruta);
+                
+                return true;
+            }
+            print_r("No existe el archivo zip");
+            return false;
+
+        } catch (Exception $e) {
+            throw new Exception("No se pudo descargar documento $ruta. " . $e->getMessage());
+        }
     }
     
     // guardar elementos en la base de datos

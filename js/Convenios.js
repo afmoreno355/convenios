@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 
+function generarConvenios(postcad, donde, accion, ruta, titulo) {
+    console.log(":)");
+}
+
+function visualizarConvenios(postcad, donde, accion, ruta, titulo) {
+    console.log(":)");
+}
 
 /**
  * Descarga un archivo a partir de un contenido HTML obtenido mediante una solicitud AJAX.
