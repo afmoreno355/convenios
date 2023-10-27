@@ -40,7 +40,7 @@ $llave_Primaria_Contructor = ( $llave_Primaria == "" ) ? "null" : "'$llave_Prima
 
 // llamamos la clase y verificamos si ya existe info de este dato que llega
 $convenioDocumentos = new ConvenioDocumentos( ' id_solicitud ' , $llave_Primaria_Contructor);
-$rutas = $convenioDocumentos->getRutas();
+$rutas = $convenioDocumentos->getDirecciones();
 if ($permisos)
 {
 ?>
@@ -59,7 +59,7 @@ if ($permisos)
                 <img src="img/icon/pdfg.png" class="zoom" width=70 height=70 />
             <?php } ?>            
         </section>
-        <section>
+        <section style="display: none;">
             <p>ESTUDIOS PREVIOS</p>
             <?php if ($rutas['estudios_previos'] != '') { ?> 
                 <a href="<?= $rutas['estudios_previos']?>" target="_blank">
@@ -152,15 +152,19 @@ if ($permisos)
 
     
         <div>
+            
             <?php
+            $idSolicitud = $convenioDocumentos->getIdSolicitud();
+            $NOMBRE = "CONVENIO_$idSolicitud.zip";
+            $RUTA = "archivos/convenios/$idSolicitud/$NOMBRE";
+            $ID = 'formDetalle'; 
+            $POST = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=DESCARGAR");
             $URL = "View/ConveniosDocumentos/ConveniosDocumentosCrud.php" ;
-            $http_des = Http::encryptIt("idSolicitud={$convenioDocumentos->getIdSolicitud()}&user={$_SESSION["user"]}&accion=DESCARGAR");
-            $zipRuta =  "archivos/convenios/" . $convenioDocumentos->getIdSolicitud() . "/CONVENIO_" . $convenioDocumentos->getIdSolicitud() . ".zip";
             ?>   
             <input type="hidden" value="<?= $convenioDocumentos->getIdSolicitud() ?>" name="idSolicitud" id="idSolicitud">
             <input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion">
             <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-            <input type="button" value='<?= "DESCARGAR ZIP" ?>' name='accionU' id='accionU' onclick='descargarConvenios(I=`<?= $http_des ?>`, `formDetalle`, `<?= $URL ?>`, `<?= $zipRuta ?>`, `<?= basename($zipRuta) ?>`)'>
+            <input type="button" value='<?= "DESCARGAR ZIP" ?>' name='accionU' id='accionU' onclick='descargarConvenios(`<?= $NOMBRE ?>`, `<?= $RUTA ?>`, `<?= $ID ?>`, `I=<?= $POST ?>`, `<?= $URL ?>`)'>
         </div>        
     </fieldset>
 </div>

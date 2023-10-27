@@ -4,59 +4,107 @@
  * and open the template in the editor.
  */
 
-function generarConvenios(postcad, donde, accion, ruta, titulo) {
-    console.log(":)");
+
+
+
+function visualizarConvenios(post, url) {
+    // Datos para enviar al servidor para generar el PDF
+    postConveniosBlob(post, url, (res, err) => {
+        if (res) {
+            var resUrl = URL.createObjectURL(res);
+
+            // Abrir una nueva ventana y cargar la URL del PDF
+            var nuevaVentana = window.open(resUrl, "_blank");
+
+            // Liberar la URL creada cuando la ventana se carga o se cierra
+            if (nuevaVentana) {
+                nuevaVentana.focus(); // Simula clic
+            }
+        } else if (err) {
+            console.log(err);
+            return ;        }
+        
+    });
 }
 
-function visualizarConvenios(postcad, donde, accion, ruta, titulo) {
-    console.log(":)");
-}
 
-/**
- * Descarga un archivo a partir de un contenido HTML obtenido mediante una solicitud AJAX.
- *
- * @param {Object} postcat - Datos que se enviarán al servidor mediante una solicitud AJAX.
- * @param {string} donde - ID del elemento HTML donde se mostrará el contenido antes de la descarga.
- * @param {string} accion - URL o ruta del servidor para la solicitud AJAX que obtendrá el contenido HTML.
- * @param {string} ruta - URL o ruta del archivo a descargar.
- * @param {string} titulo - Nombre que se asignará al archivo descargado.
- */
-function descargarConvenios(postcat, donde, accion, ruta, titulo) {
-    // Realiza una solicitud AJAX para obtener el contenido HTML.
-    xhrConvenios(postcat, donde, accion);
-
-    // Espera hasta que el contenido HTML se haya cargado en el elemento especificado.
-    var id = window.setInterval(function () {
-        if (document.getElementById(donde).innerHTML !== '') {
-            var tmpElemento = document.getElementById('botonE');
-            
-            // Asigna la URL del archivo a descargar y su nombre.
-            tmpElemento.href = ruta;
-            tmpElemento.download = titulo;
-            
-            // Simula el clic en el elemento creado para descargar el archivo.
-            tmpElemento.click();
-            clearInterval(id);
+function postConveniosBlob(datos, url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.responseType = "blob"; // Solicitar la respuesta como Blob
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            try {
+                if (xhr.status === 200) {
+                    if (xhr.response instanceof Blob) {
+                        // La respuesta es un Blob
+                        callback(xhr.response, null);
+                    } else {
+                        // La respuesta no es un Blob
+                        callback(null, new Error("Error: " + xhr.status));
+                    }
+                } else {
+                    // Manejo de error en caso de que la solicitud no sea exitosa
+                    callback(null, new Error("Error: " + xhr.status));
+                }
+            } catch (error) {
+                // Manejo de excepciones en caso de un error inesperado
+                callback(null, error);
+            }
         }
-    }, 100);
-    
-    // Limpia el contenido del elemento especificado.
-    document.getElementById(donde).innerHTML = '';
+    };
+    xhr.send(datos);
+}
+
+function generarConvenios(ruta, id, post, url) {
+    postConvenios(post, url, (res, err) => {
+        if (err) {
+            console.error(err);
+            return; // Detiene la ejecución del código
+        }
+
+        actualizarHtmlPorId(id, res);
+        visualizarArchivo(ruta);
+    });
+}
+
+function visualizarArchivo(ruta) {
+    var nuevaVentana = window.open(ruta, '_blank');
+    if (nuevaVentana) {
+        nuevaVentana.focus(); // Simula clic
+    }
+}
+
+function descargarConvenios(nombre, ruta, id, post, url) {
+    postConvenios(post, url, (res, err) => {
+        if (err) {
+            console.error(err);
+            return; // Detiene la ejecución en caso de error
+        }
+
+        actualizarHtmlPorId(id, res);        
+        descargarArchivo(nombre, ruta);
+    });
 }
 
 
-function xhrConvenios(postcad, donde, accion) {
-    var xhr=new XMLHttpRequest();
-    xhr.onreadystatechange=function (){
-        if(this.readyState==4 && this.status==200){
-            var respuesta=this.responseText;  
-            console.log(respuesta);
-            document.getElementById(donde).innerHTML = respuesta;
-        }        
-    };
-    xhr.open('POST',accion, true);
-    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xhr.send(postcad);
+function descargarArchivo(nombre, ruta) {
+    var elemento = document.createElement('a');
+    elemento.href = ruta;
+    elemento.download = nombre;
+    elemento.style.display = 'none';
+    document.body.appendChild(elemento);
+    elemento.click();
+    document.body.removeChild(elemento);
+}
+
+function actualizarHtmlPorId(id, html) {
+    var elemento = document.getElementById(id);
+    if (elemento) {
+        console.log(html);
+        elemento.innerHTML = html;
+    }
 }
 
 function tabConvenios() {
@@ -83,23 +131,35 @@ function validarDatosConvenios(id, postcad, donde, accion, eve = null, tab = nul
     document.getElementById("formularioDiv").style.width="";
 }
 
-
-
-/*window.addEventListener("load", (event) => {
-
-    let elemento = document.getElementById('formularioDiv');
-    elemento.addEventListener('loadstart', (e) => {
-        alert("Hola mundo");
-    })
-
-    console.log(elemento);
-});/** */
-
-
 function adicionarTabContenido(donde , potcat) {
     if(donde === '') {
         return;
     }
     idexistentesReCa( '' , potcat , 'tabContenido' , donde , null , null );
     cargarLoad( 'tabContenido' );
+}
+
+
+function postConvenios(datos, url, callback) {
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var respuesta = xhr.responseText;
+                callback(respuesta, null); // Llama al callback con la respuesta exitosa
+            } else {
+                callback(null, new Error("Error: " + xhr.status)); // Llama al callback con un error
+            }
+        }
+    };
+
+    xhr.send(datos);
+}
+
+function enviarFormularioConvenios() {
+
 }

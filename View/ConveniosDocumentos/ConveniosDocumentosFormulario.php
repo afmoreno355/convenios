@@ -116,7 +116,11 @@ if ($permisos)
             </fieldset>
         </div>
         
-        <div>     
+        <div>
+            <?php
+            $I = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=GUARDAR");
+            ?>
+            <input type="hidden" value="<?= $I ?>" name="I" id="I">    
             <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
             <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
             <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>

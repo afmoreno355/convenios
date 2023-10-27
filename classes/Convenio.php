@@ -304,6 +304,10 @@ class Convenio {
         return false;
     }
 
+    public function guardar() {
+        $this->AdicionarModificar($this->id);
+    }
+
 }
 
 

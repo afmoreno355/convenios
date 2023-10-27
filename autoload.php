@@ -7,6 +7,6 @@
  */
 function autoload($class)
    {
-       require_once dirname(__FILE__)."/classes/$class.php";
+       require_once __DIR__ . "/classes/$class.php";
    }
    spl_autoload_register('autoload');

@@ -5,44 +5,58 @@
  * @author Dibier
  */
 
- // importa Html2Pdf
- require __DIR__ . '/../Librerias/vendor/autoload.php';
- use \Spipu\Html2Pdf\Html2Pdf;
+namespace Documentos;
 
+require_once __DIR__ . '/../Librerias/vendor/autoload.php';
 
-class Documentos {
+use \Spipu\Html2Pdf\Html2Pdf;
 
-    private $idSolicitud;
-    private $directorio;
-    private $rutas;
-    private $baseDatos;
-    private $tabla;
+function visualizarPdf($plantilla, $post) {
 
-    public function __construct() {
-        // Constructor vacío
+    foreach ($post as $clave => $valor) {
+        $$clave = $valor;
     }
 
-    
+    try {
+        // Activar el búfer de salida
+        ob_start();
 
-    // Otros métodos de la clase para gestionar documentos
+        // Incluir la plantilla PHP
+        require_once __DIR__ . "/../$plantilla";
 
-    public function crearPdf($ruta, $plantilla) {
+        // Obtener la salida generada
+        $html = ob_get_clean();
+
+        $html2pdf = new Html2Pdf();
+        $html2pdf->writeHTML($html);
+
+        // Configurar la cabecera
+        header("Content-Type: application/pdf");
+
+        // Limpiar el buffer de salida
+        ob_clean();
+        $html2pdf->output('about.pdf');
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
+
+function crearPdf($ruta, $plantilla, $post) {
 
         try {
-
             $nombre = basename($ruta);
             $directorio = dirname($ruta);
-            $pdf = $this->getContenidoPdf($plantilla);
-            $this->crearDirectorio($directorio, 0777);
-            
-            return $this->guardar($pdf, $nombre, $directorio) ? true : false;
+            $pdf = getContenidoPdf($plantilla, $post);
+            crearDirectorio($directorio, 0777);
+
+            return guardar($pdf, $nombre, $directorio);
 
         } catch (Exception $e) {
-            throw new Exception("Error al crear PDF." . $e->getMessage());
+            throw new Exception("Error al crear PDF. " . $e->getMessage());
         }
     }
 
-    public function guardar($documento, $nombre, $directorio) {
+    function guardar($documento, $nombre, $directorio) {
         
         try {
 
@@ -55,19 +69,27 @@ class Documentos {
         }
     }
 
-    public function getContenidoPdf($plantilla) {
+    function getContenidoPdf($plantilla, $post) {
         
         try {
             // Obtener contenido HTML de archivo PHP.
-
+             // Activar el búfer de salida
             ob_start();
-            include(__DIR__ . "/../$plantilla");
+
+            // Incluir la plantilla PHP
+            require_once __DIR__ . "/../$plantilla";
+
+            // Obtener la salida generada
             $html = ob_get_clean();
 
-            // Obener contenido PDF de HTML.
-            $html2Pdf = new Html2Pdf();
-            $html2Pdf->writeHtml($html);
-            $pdf = $html2Pdf->output('', 'S');
+            $html2pdf = new Html2Pdf();
+            $html2pdf->writeHTML($html);
+
+
+            // Limpiar el buffer de salida
+            ob_clean();
+
+            $pdf = $html2pdf->output('about.pdf', 'S');
 
             return $pdf;
             
@@ -76,7 +98,7 @@ class Documentos {
         }
     }
 
-    public function crearDirectorio($ruta, $permisos) {
+    function crearDirectorio($ruta, $permisos) {
         try {
             if (!is_dir($ruta)) {
                 if (mkdir($ruta, $permisos, true)) {
@@ -94,7 +116,7 @@ class Documentos {
     }
     
     // Descargar documento estudios previos
-    public function descargar($ruta) {
+    function descargar($ruta) {
 
         try {
 
@@ -120,7 +142,7 @@ class Documentos {
         }
     }
 
-    public function descargarTemporal($ruta, $segundos) {
+    function descargarTemporal($ruta, $segundos) {
 
         if ($this->descargar($ruta)) {
 
@@ -133,7 +155,7 @@ class Documentos {
     }
 
     // Crea ZIP para descargar documentos
-    public function crearZip($ruta, $documentos) {
+    function crearZip($ruta, $documentos) {
 
         try {
 
@@ -159,14 +181,14 @@ class Documentos {
     
     
     // guardar elementos en la base de datos
-    /*public function registrar($accion, $sql, $tabla, $baseDatos) {
+    function registrar($accion, $sql, $tabla, $baseDatos) {
         
         try {
 
-            if (ConectorDB::ejecutarQuery($sql, $baseDatos)) {
+            if (\ConectorBD::ejecutarQuery($sql, $baseDatos)) {
 
                 $sqlHistorico = strtoupper(str_replace("'", "|", $sql));
-                $historico = new Historico(null, null);
+                $historico = new \Historico(null, null);
                 $historico->setIdentificacion($_SESSION["user"]);
                 $historico->setTipo_historico($accion);
                 $historico->setHistorico($sqlHistorico);
@@ -184,7 +206,7 @@ class Documentos {
     }
 
     // borrar elementos en la base de datos
-    public function borrar() {  
+    /*function borrar() {  
         $sql = "delete from documentaciones where id_documentacion = '$this->id'";
         if (ConectorBD::ejecutarQuery($sql, ' convenios ')) {
             //Historico de las acciones en el sistemas de informacion
@@ -203,7 +225,7 @@ class Documentos {
     }
 
 
-    public function adicionarDocumento($documento, $nombre) {
+    function adicionarDocumento($documento, $nombre) {
 
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
         $fecha = date("d-m-Y_h:i:s");
@@ -266,7 +288,7 @@ class Documentos {
         return true;
     }
 
-    public function adicionarDocumentacion() {
+    function adicionarDocumentacion() {
         return
             $this->adicionarDocumento($this->memorando, 'MEMORANDO') &&
             $this->adicionarDocumento($this->estudiosPrevios, 'ESTUDIOS PREVIOS') &&
@@ -281,7 +303,7 @@ class Documentos {
 
     }
 
-    public function adicionarModificar($idSolicitud) {
+    function adicionarModificar($idSolicitud) {
         $documentacion = new ConvenioDocumentos(' id_solicitud ', $idSolicitud);
         if ($documentacion->getId() == null) {
             $this->registrarDocumentacion($idSolicitud);
@@ -294,6 +316,6 @@ class Documentos {
         return $this->adicionarDocumentacion();
     } */
 
-}
+
 
 

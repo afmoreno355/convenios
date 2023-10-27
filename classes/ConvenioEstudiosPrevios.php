@@ -1,21 +1,15 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of Autorizacion
- *
  * @author Dibier
  */
 
- // importa Html2Pdf
-require __DIR__ . '/../Librerias/vendor/autoload.php';
-use \Spipu\Html2Pdf\Html2Pdf;
 
+require_once __DIR__ . '/../Librerias/vendor/autoload.php';
+require_once __DIR__ . '/../utilities/Documentos.php';
+
+use \Spipu\Html2Pdf\Html2Pdf;
+use Documentos;
 
 class ConvenioEstudiosPrevios {
     //put your code here
@@ -44,11 +38,23 @@ class ConvenioEstudiosPrevios {
     private $otrosAspectos ;
     private $conceptosTecnicos ;
     private $fecha ;
-
-    private $documentos; // Objeto tipo documentos.
-
     
-    // Getters y Setters
+    
+    public function __get($atributo) {
+        if (property_exists($this, $atributo)) {
+            return $this->$atributo;
+        } else {
+            throw new Exception("El atributo $atributo no existe en la clase Coche.");
+        }
+    }
+
+    public function __set($atributo, $valor) {
+        if (property_exists($this, $atributo)) {
+            $this->$atributo = $valor;
+        } else {
+            throw new Exception("El atributo $atributo no existe en la clase Coche.");
+        }
+    }
   
     public function getId() {
         return $this->id;
@@ -254,51 +260,22 @@ class ConvenioEstudiosPrevios {
     
     function __construct($campo, $valor) {
 
-        // Compone la clase documentos
-        $this->documentos = new Documentos();
-
         if ($campo != NULL) {
             if (is_array($campo)) {
-                $this->mapearObjetoSQL($campo);
+                $this->mapear($campo);
             } else {
-                $sql = "select * from estudios_previos where $campo = $valor";
-                $consulta = ConectorBD::ejecutarQuery($sql, 'convenios');
-                if (count($consulta) > 0) {
-                    $this->mapearObjetoSQL($consulta[0]);
-                }
+                $this->leer($campo, $valor);
             }
         }
     }
 
     //organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
     
-    private function mapearObjetoSQL($consulta) {
-        
-        $this->setId($consulta[0]);
-        $this->setIdSolicitud($consulta[1]);
-        $this->setIdDependenciaRequierente($consulta[2]);
-        $this->setDescripcionNecesidad($consulta[3]);
-        $this->setAnalisisCoveniencia($consulta[4]);
-        $this->setMaduracionProyecto($consulta[5]);
-        $this->setEspecificacionesTecnicasObjeto($consulta[6]);
-        $this->setAnalisisSector($consulta[7]);
-        $this->setValorTotalAportes($consulta[8]);
-        $this->setDesembolsos($consulta[9]);
-        $this->setDisponibilidadPresupuestal($consulta[10]);
-        $this->setModalidadSeleccion($consulta[11]);
-        $this->setCriteriosSeleccion($consulta[12]);
-        $this->setAnalisisRiesgo($consulta[13]);
-        $this->setGarantias($consulta[14]);
-        $this->setLimitacionMipymes($consulta[15]);
-        $this->setPlazoEjecucion($consulta[16]);
-        $this->setLugarEjecucion($consulta[17]);
-        $this->setObligacionesPartes($consulta[18]);
-        $this->setFormaPago($consulta[19]);
-        $this->setControlVigilanciaContrato($consulta[20]);
-        $this->setAcuerdosComerciales($consulta[21]);
-        $this->setOtrosAspectos($consulta[22]);
-        $this->setConceptosTecnicos($consulta[23]);
-        $this->setFecha($consulta[24]);
+    private function mapear($consulta) {        
+        $campos = $this->getCamposBaseDatos();
+        foreach ($campos as $atributo => $campo) {
+            $this->{$atributo} = $consulta[$campo];
+        }
     }
   // metodo magico
     function __toString() {
@@ -335,31 +312,89 @@ class ConvenioEstudiosPrevios {
         return ConectorBD::ejecutarQuery("select count(*) from  radicado, idoneidad  $filtro", 'secretaria');
     }
 
+    private function leer($campo, $valor) {
+        $sql = "select * from estudios_previos where $campo = $valor";
+        $consulta = ConectorBD::ejecutarQuery($sql, 'convenios');
 
-    public function crearPdf() {
+        if (count($consulta) === 0) {
+            die("Objeto estudios previos no encontrado. $sql");
+        }
+
+        // Seleccionar el primer registro
+        $consulta  = $consulta[0];
+
+        // Mapear objeto
+        $this->mapear($consulta);
+    }
+
+    public function getCamposBaseDatos() {
+        return [
+            'id' => 'id_estudios_previos',
+            'idSolicitud' => 'id_solicitud',
+            'idDependenciaRequierente' => 'identificacion_dependencia_requirente',
+            'descripcionNecesidad' => 'descripcion_necesidad',
+            'analisisCoveniencia' => 'analisis_conveniencia',
+            'maduracionProyecto' => 'maduracion_proyecto',
+            'especificacionesTecnicasObjeto' => 'especificaciones_tecnicas_objeto',
+            'analisisSector' => 'analisis_sector',
+            'valorTotalAportes' => 'valor_total_aportes',
+            'desembolsos' => 'desembolsos',
+            'disponibilidadPresupuestal' => 'disponibilidad_presupuestal_vigencias_futuras',
+            'modalidadSeleccion' => 'modalidad_seleccion',
+            'criteriosSeleccion' => 'criterios_seleccion_objetiva',
+            'analisisRiesgo' => 'analisis_riesgo',
+            'garantias' => 'garantias',
+            'limitacionMipymes' => 'limitacion_mipymes',
+            'plazoEjecucion' => 'plazo_ejecucion',
+            'lugarEjecucion' => 'lugar_ejecucion',
+            'obligacionesPartes' => 'obligaciones_partes',
+            'formaPago' => 'forma_pago',
+            'controlVigilanciaContrato' => 'control_vigilancia_contrato',
+            'acuerdosComerciales' => 'acuerdos_comerciales',
+            'otrosAspectos' => 'otros_aspectos',
+            'conceptosTecnicos' => 'conceptos_tecnicos',
+            'fecha' => 'fecha_sistema'
+        ];
+    }
+
+    public function visualizar() {
+        $post = array(
+            "idSolicitud" => $this->getIdSolicitud()
+        );
+        $plantilla = 'View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosPlantilla.php';
+        Documentos\visualizarPdf($plantilla, $post);
+    }
+
+    public function generar() {
         // Parámetros
         $id = $this->idSolicitud;
         $carpeta = __DIR__ . "/../archivos/convenios/$id";
         $ruta = "$carpeta/ESTUDIOS_$id.pdf";
-        $plantilla = 'View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosDocumentos.php';
-
+        $plantilla = 'View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosPlantilla.php';
+        $post = array(
+            "idSolicitud" => $this->getIdSolicitud()
+        );
         // Crear PDf con los parámetros
-        $this->documentos->crearPdf($ruta, $plantilla);
+        Documentos\crearPdf($ruta, $plantilla, $post);
     
         return $ruta; // Retorna la ruta del archivo PDF generado
     }
     
     // Descargar documento estudios previos
     public function descargar() {
-        $ruta = $this->crearPdf();
+        $ruta = $this->generar();
 
-        return $this->documentos->descargar($ruta);
+        return Documentos\descargar($ruta);
     }
     
 
     // insertar o actualizar información en la base de datos
     public function guardar() {
         $id = $this->getId();
+
+        foreach ($_POST as $clave => $valor) {
+            $$clave = $valor;
+        }
 
         if($id == null or $id == '' or $id == 0) {
 
@@ -417,29 +452,29 @@ class ConvenioEstudiosPrevios {
         } else {
 
             $sql = "update estudios_previos set
-                id_solicitud = '$this->idSolicitud',
-                identificacion_dependencia_requirente = '$this->idDependenciaRequierente',
-                descripcion_necesidad = '$this->descripcionNecesidad',
-                analisis_conveniencia = '$this->analisisCoveniencia',
-                maduracion_proyecto = '$this->maduracionProyecto',
-                especificaciones_tecnicas_objeto = '$this->especificacionesTecnicasObjeto',
-                analisis_sector = '$this->analisisSector',
-                valor_total_aportes = '$this->valorTotalAportes',
-                desembolsos = '$this->desembolsos',
-                disponibilidad_presupuestal_vigencias_futuras = '$this->disponibilidadPresupuestal',
-                modalidad_seleccion = '$this->modalidadSeleccion',
-                criterios_seleccion_objetiva = '$this->criteriosSeleccion',
-                analisis_riesgo = '$this->analisisRiesgo',
-                garantias = '$this->garantias',
-                limitacion_mipymes = '$this->limitacionMipymes',
-                plazo_ejecucion = '$this->plazoEjecucion',
-                lugar_ejecucion = '$this->lugarEjecucion',
-                obligaciones_partes = '$this->obligacionesPartes',
-                forma_pago = '$this->formaPago',
-                control_vigilancia_contrato = '$this->controlVigilanciaContrato',
-                acuerdos_comerciales = '$this->acuerdosComerciales',
-                otros_aspectos = '$this->otrosAspectos',
-                conceptos_tecnicos = '$this->conceptosTecnicos',
+                id_solicitud = '$idSolicitud',
+                identificacion_dependencia_requirente = '$idDependenciaRequierente',
+                descripcion_necesidad = '$descripcionNecesidad',
+                analisis_conveniencia = '$analisisConveniencia',
+                maduracion_proyecto = '$maduracionProyecto',
+                especificaciones_tecnicas_objeto = '$especificacionesTecnicas',
+                analisis_sector = '$analisisSector',
+                valor_total_aportes = '$valorTotalAportes',
+                desembolsos = '$desembolsos',
+                disponibilidad_presupuestal_vigencias_futuras = '$disponibilidadPresupuestal',
+                modalidad_seleccion = '$modalidadSeleccion',
+                criterios_seleccion_objetiva = '$criteriosSeleccion',
+                analisis_riesgo = '$analisisRiesgo',
+                garantias = '$garantias',
+                limitacion_mipymes = '$limitacionesMypimes',
+                plazo_ejecucion = '$plazoEjecucion',
+                lugar_ejecucion = '$lugarEjecucion',
+                obligaciones_partes = '$obligacionesPartes',
+                forma_pago = '$formaPago',
+                control_vigilancia_contrato = '$controlVigilanciaContrato',
+                acuerdos_comerciales = '$acuerdosComerciales',
+                otros_aspectos = '$otrosAspectos',
+                conceptos_tecnicos = '$conceptosTecnicos',
                 fecha_sistema = now()
             where id_estudios_previos = $id";
         }
@@ -462,70 +497,13 @@ class ConvenioEstudiosPrevios {
     // borrar elementos en la base de datos
     public function borrar() {
         $this->unlink($this->id_radicado);  
-        $cadenaSQL = "delete from  radicado where id_radicado = '$this->id_radicado'";
+        $cadenaSQL = "delete from  radicado where id_radicado = '$id_radicado'";
         if (ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria')) {
             //Historico de las acciones en el sistemas de informacion
             $nuevo_query = str_replace("'", "|", $cadenaSQL);
             $historico = new Historico(null, null);
             $historico->setIdentificacion($_SESSION["user"]);
             $historico->setTipo_historico("ELIMINAR");
-            $historico->setHistorico(strtoupper($nuevo_query));
-            $historico->setFecha("now()");
-            $historico->setTabla("SECRETARIA");
-            $historico->grabar();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // asignar elementos en la base de datos
-    public function asignar() {
-        $cadenaSQL = " update radicado set revisor_1 = '$this->revisor_1' , revisor_2= '$this->revisor_2' where id_radicado = '$this->id_radicado'";
-        if (ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria')) {
-            //Historico de las acciones en el sistemas de informacion
-            $nuevo_query = str_replace("'", "|", $cadenaSQL);
-            $historico = new Historico(null, null);
-            $historico->setIdentificacion($_SESSION["user"]);
-            $historico->setTipo_historico("ASIGNAR");
-            $historico->setHistorico(strtoupper($nuevo_query));
-            $historico->setFecha("now()");
-            $historico->setTabla("SECRETARIA");
-            $historico->grabar();
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    public function estado() {
-        $cadenaSQL = "UPDATE RADICADO SET ESTADO='$this->estado' WHERE id_radicado = '$this->id_radicado'";
-        if (ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria')) {
-            //Historico de las acciones en el sistemas de informacion
-            $nuevo_query = str_replace("'", "|", $cadenaSQL);
-            $historico = new Historico(null, null);
-            $historico->setIdentificacion($_SESSION["user"]);
-            $historico->setTipo_historico("ESTADO");
-            $historico->setHistorico(strtoupper($nuevo_query));
-            $historico->setFecha("now()");
-            $historico->setTabla("SECRETARIA");
-            $historico->grabar();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // modificar elementos en la base de datos, identificador es el codigo o llave primaria a modificar 
-    public function modificar($identificador) {
-       // $this->unlink($identificador);  
-        $cadenaSQL = "update  radicado set doc_1 = '$this->doc_1',doc_2 = '$this->doc_2', doc_3 = '$this->doc_3', doc_4 = '$this->doc_4', doc_5 = '$this->doc_5', doc_6 = '$this->doc_6' where id_radicado = '$identificador'";
-        if (ConectorBD::ejecutarQuery($cadenaSQL, 'secretaria')) {
-            //Historico de las acciones en el sistemas de informacion
-            $nuevo_query = str_replace("'", "|", $cadenaSQL);
-            $historico = new Historico(null, null);
-            $historico->setIdentificacion($_SESSION["user"]);
-            $historico->setTipo_historico("MODIFICAR");
             $historico->setHistorico(strtoupper($nuevo_query));
             $historico->setFecha("now()");
             $historico->setTabla("SECRETARIA");

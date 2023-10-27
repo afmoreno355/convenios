@@ -1,11 +1,42 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * 
+ *
+ * @author Dibier
  */
-require_once __DIR__ . "/../../autoload.php";
+
+
+require_once __DIR__ . '/../../autoload.php';
+require_once __DIR__ . '/../../utilities/InicioSesion.php';
+
+use InicioSesion;
+
+// Aceder al CRUD
+$post = InicioSesion\iniciar();
+
+// Traer objeto estudios previos
+$idSolicitud = $post['idSoliciud'] !== '' ? $post['idSolicitud'] : null;
+$campo = $idSolicitud !== null ? ' id_solicitud ' : null;
+$documentos = new ConvenioDocumentos($campo, $idSolicitud);
+
+switch ($post['accion']) {
+
+    case "GUARDAR":
+        $documentos->guardar();
+        break;
+
+    case "DESCARGAR":
+        $documentos->descargar();
+        break;
+
+    default:
+        die("No se reconoce acción.");
+}
+
+
+
+
+/*require_once __DIR__ . "/../../autoload.php";
 //
 // Iniciamos sesion para tener las variables
 if( !isset($_SESSION["user"]) )
@@ -26,7 +57,6 @@ $fecha = date("YmdHis");
 foreach ($_POST as $key => $value)
     ${$key} = $value;
 // desencripta las variables
-$I = array_keys($_POST)[0];
 $nuevo_POST = Http::decryptIt($I);
 // evalua las nuevas variables que vienen ya desencriptadas
 foreach ($nuevo_POST as $key => $value)
@@ -109,4 +139,4 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
     } else {
         print_r("NO SE HA DETECTADO ACCIÓN EN EL POST");
     }
-}
+}*/

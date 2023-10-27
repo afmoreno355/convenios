@@ -1,20 +1,13 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of Autorizacion
- *
+ * 
  * @author Dibier 
  */
 
 // importa Html2Pdf
-require __DIR__ . '/../Librerias/vendor/autoload.php';
-use \Spipu\Html2Pdf\Html2Pdf;
+require __DIR__ . '/../utilities/Documentos.php';
+
+use Documentos;
 
 class ConvenioDocumentos {
     //put your code here
@@ -35,8 +28,8 @@ class ConvenioDocumentos {
     // ruta directorio convenios
     private $ruta;
 
-    // Objeto documentos
-    private $documentos;
+    // url directorio convenios
+    private $url;
 
 
     // Getters and Setters
@@ -97,6 +90,10 @@ class ConvenioDocumentos {
         return $this->ruta;
     }
 
+    public function getUrl() {
+        return $this->url;
+    }
+
     public function setId($id): void {
         $this->id = $id;
     }
@@ -153,10 +150,17 @@ class ConvenioDocumentos {
         $this->ruta = $ruta;
     }
 
+    public function setUrl($url): void {
+        $this->url = $url;
+    }
+
     // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     function __construct($campo, $valor) {
-        // Compone objetos documentos
-        $this->docucumentos = new Documentos();
+        // setear la ruta raiz
+        $this->ruta = $_SERVER['DOCUMENT_ROOT'] . '/convenios/archivos/convenios';
+
+        // setear url servidor
+        $this->url = 'http://127.0.0.1/convenios/archivos/convenios';
 
         if ($campo != NULL) {
             if (is_array($campo)) {
@@ -240,18 +244,42 @@ class ConvenioDocumentos {
     }
     
     // retorna rutas de documentos
+    public function getDirecciones() {
+
+        $sql = " select * from  documentaciones where id_solicitud = '$this->idSolicitud' ";
+        $rutas =  ConectorBD::ejecutarQuery($sql, ' convenios ')[0];
+
+        foreach ($rutas as $clave => $valor) {
+            $doc = $this->ruta . "/$valor";
+            if (!empty($doc) and is_file($doc)) {
+                $rutas[$clave] = $this->url . "/$valor";
+            } else {
+                $rutas[$clave] = '';
+            }  
+        }
+
+        return $rutas;
+    }
+
     public function getRutas() {
 
         $sql = " select * from  documentaciones where id_solicitud = '$this->idSolicitud' ";
-        return ConectorBD::ejecutarQuery($sql, ' convenios ')[0];
+        $rutas =  ConectorBD::ejecutarQuery($sql, ' convenios ')[0];
+
+        foreach ($rutas as $clave => $valor) {
+            $rutas[$clave] = $this->ruta . "/$valor";
+        }
+
+        return $rutas;
     }
+
 
     // Crea zip para descargar documentos
     public function crearZip() {
         // Crear parámetros
         $rutaDocumento = $this->ruta;
         $id = $this->idSolicitud;
-        $ruta = __DIR__ . "/../$rutaDocumento/CONVENIO_$id.zip";
+        $ruta = "$rutaDocumento/$id/CONVENIO_$id.zip";
         $documentos = $this->getRutas();
 
         try {
@@ -262,11 +290,9 @@ class ConvenioDocumentos {
             // Adjunta documentos
             foreach ($documentos as $doc) {
 
-                $rutaDoc = __DIR__ . "/../$doc";
-
-                if (!empty($rutaDoc) and is_file($rutaDoc)) {
-                    print_r($rutaDoc);
-                    $zip->addFile($rutaDoc, basename($rutaDoc));
+                if (!empty($doc) and is_file($doc)) {
+                    print_r($doc);
+                    $zip->addFile($doc, basename($doc));
                 }
             }
 
@@ -305,7 +331,7 @@ class ConvenioDocumentos {
                 
                 return true;
             }
-            print_r("No existe el archivo zip");
+            print_r("No existe el archivo zip. $ruta");
             return false;
 
         } catch (Exception $e) {
@@ -324,7 +350,7 @@ class ConvenioDocumentos {
             now()
         )";
 
-        return $this->documentos->registrar("ADICIONAR", $sql, ' documentaciones ', ' convenios ');
+        Documentos\registrar("ADICIONAR", $sql, ' documentaciones ', ' convenios ');
     }
 
     // borrar elementos en la base de datos
@@ -349,15 +375,19 @@ class ConvenioDocumentos {
 
     public function adicionarDocumento($documento, $nombre) {
 
+        $id = $this->idSolicitud;
         $cargarDocumento = isset( $documento ) && $documento['name'] != '';
         $fecha = date("d-m-Y_h:i:s");
-        $direccion = $this->ruta . "/$nombre" . "_$this->idSolicitud"."_$fecha" . ".pdf";
+        $direccion = "$id/$nombre" . "_$id" . "_$fecha" . ".pdf";
+
+        print_r($direccion);
 
         if ($cargarDocumento) {
             
+            
             if (
                 Select::validar( $documento, 'FILE', null, $nombre, 'PDF' ) &&
-                copy($documento['tmp_name'], __DIR__ . "/../$direccion")
+                copy($documento['tmp_name'], $this->ruta ."/$direccion")
                )
                {
                 $sql = 'update documentaciones set';
@@ -412,30 +442,40 @@ class ConvenioDocumentos {
 
     public function adicionarDocumentacion() {
         return
-            $this->adicionarDocumento($this->memorando, 'MEMORANDO') &&
-            $this->adicionarDocumento($this->estudiosPrevios, 'ESTUDIOS PREVIOS') &&
-            $this->adicionarDocumento($this->anexoTecnico, 'ANEXO TÉCNICO') &&
-            $this->adicionarDocumento($this->analisisSector, 'ANÁLISIS DEL SECTOR') &&
-            $this->adicionarDocumento($this->solicitudConceptoTecnico, 'CONCEPTO TÉCNICO') &&
-            $this->adicionarDocumento($this->propuestaTecnicaEconomica, 'PROPUESTA TÉCNICA ECONÓMICA') &&
-            $this->adicionarDocumento($this->matrizRiesgos, 'MATRIZ DE RIESGOS') &&
-            $this->adicionarDocumento($this->disponibilidadPresupuestal, 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL') &&
-            $this->adicionarDocumento($this->paa, 'CERTIFICADO PAA') &&
-            $this->adicionarDocumento($this->proyectoAutorizacion, 'PROYECTO DE AUTORIZACIÓN');
+            $this->adicionarDocumento($_FILES['memorando'], 'MEMORANDO') &&
+            $this->adicionarDocumento($_FILES['estudiosPrevios'], 'ESTUDIOS PREVIOS') &&
+            $this->adicionarDocumento($_FILES['anexoTecnico'], 'ANEXO TÉCNICO') &&
+            $this->adicionarDocumento($_FILES['analisisSector'], 'ANÁLISIS DEL SECTOR') &&
+            $this->adicionarDocumento($_FILES['solicitudConceptoTecnico'], 'CONCEPTO TÉCNICO') &&
+            $this->adicionarDocumento($_FILES['propuestaTecnicaEconomica'], 'PROPUESTA TÉCNICA ECONÓMICA') &&
+            $this->adicionarDocumento($_FILES['matrizRiesgos'], 'MATRIZ DE RIESGOS') &&
+            $this->adicionarDocumento($_FILES['disponibilidadPresupuestal'], 'CERTIFICADO DISPONIBILIDAD PRESUPUESTAL') &&
+            $this->adicionarDocumento($_FILES['paa'], 'CERTIFICADO PAA') &&
+            $this->adicionarDocumento($_FILES['proyectoAutorizacion'], 'PROYECTO DE AUTORIZACIÓN');
 
     }
 
     public function adicionarModificar($idSolicitud) {
+
         $documentacion = new ConvenioDocumentos(' id_solicitud ', $idSolicitud);
-        if ($documentacion->getId() == null) {
-            $this->registrarDocumentacion($idSolicitud);
+        if (!$documentacion->getId()) {
+            $this->registrar($idSolicitud);
         }
 
         // crea directorio
-        $destino = __DIR__ . "/../archivos/convenios/$idSolicitud";
-        mkdir($destino, 0777, true);
+       $destino = __DIR__ . "/../archivos/convenios/$idSolicitud";
+        Documentos\crearDirectorio($destino, 0777);
 
         return $this->adicionarDocumentacion();
+    }
+
+
+    public function guardar() {
+        $this->adicionarModificar($_POST['idSolicitud']);
+    }
+
+    public function descargar() {
+        $this->descargarZip();
     }
 
 }

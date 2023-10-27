@@ -1,46 +1,34 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * 
+ * @author Dibier
  */
 
-// require auntomatico encuentra todas las clases/Model qeu se solicitan en el Controlador
-require_once __DIR__ . "/../../autoload.php";
 
-// Iniciamos sesion para tener las variables
-session_start();
+require_once __DIR__ . '/../../autoload.php';
+require_once __DIR__ . '/../../utilities/InicioSesion.php';
 
-date_default_timezone_set("America/Bogota");
-$fecha = date("Y-m-d");
-$fecha_vigencia = date("Y");
 
-// variable variable trae las variables que trae POST
-foreach ($_POST as $key => $value)
-    ${$key} = $value;
+use InicioSesion;
 
-// desencripta las variables
-$nuevo_POST = Http::decryptIt($I);
-// evalua las nuevas variables que vienen ya desencriptadas
-foreach ($nuevo_POST as $key => $value)
-    ${$key} = $value;
+// Aceder al CRUD
+$post = InicioSesion\iniciar();
 
-// verificamos permisos
+// Permisos persona
 $permisos = new Persona(" identificacion ", "'" . $_SESSION['user'] . "'");
 
 // permisos desde Http validando los permisos de un usuario segun la tabla personamenu
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle');
+$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle_admin');
 
 if ($ingreso === false && $permisos->getIdTipo() !== "SA" && $_SESSION["rol"] !== "SA") {
     $permisos = false;
 }
 
-$llave_Primaria_Contructor = ( $llave_Primaria == "" ) ? "null" : "'$llave_Primaria'";
-
-// llamamos la clase y verificamos si ya existe info de este dato que llega
-$convenio = new Convenio( ' id_solicitud ' , $llave_Primaria_Contructor);
-$idSolicitud = $convenio->getId();
-$convenioEstudiosPrevios= new ConvenioEstudiosPrevios( ' id_solicitud ' , $llave_Primaria_Contructor);
+// Traer objeto estudios previos
+$idSolicitud = $post['llave_Primaria'] !== '' ? $post['llave_Primaria'] : null;
+$campo = $idSolicitud !== null ? ' id_solicitud ' : null;
+$convenioEstudiosPrevios = new ConvenioEstudiosPrevios($campo, $idSolicitud);
+$convenio = new Convenio($campo , $idSolicitud);
 
 if ($permisos)
 {
@@ -153,25 +141,28 @@ if ($permisos)
             </section>
             <div>
                 <?php
-                $URL = "View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosCrud.php" ;
-                $http_des = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=DESCARGAR");
-                $http_gen = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=GENERAR");
-                $http_vis = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=VISUALIZAR");
-                $estudiosPreviosRuta = "archivos/convenios/" . $convenio->getId() . "/ESTUDIOS_" . $convenio->getId() . ".pdf";
+                $NOMBRE = "ESTUDIOS_$idSolicitud.pdf";
+                $RUTA = "archivos/convenios/$idSolicitud/$NOMBRE";
+                $IDELEMENTO = "documentoDescargar";
+                $POSTDES = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=DESCARGAR");
+                $POSTGEN = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=GENERAR");
+                $POSTVIS = Http::encryptIt("idSolicitud={$convenio->getId()}&user={$_SESSION["user"]}&accion=VISUALIZAR");
+                $URL = "View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosCrud.php";
+                $URLEXP = "View/ConveniosEstudiosPrevios/GenerarPDF.php";
                 ?>
                 <input type="hidden" value="<?= $idSolicitud ?>" name="idSolicitud" id="idSolicitud">
                 <input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion">
                 <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
+                <div style="display: none;" id="documentoDescargar"></div>
 
-                <input type="button" value='<?= "DESCARGAR PDF" ?>' name='accionU' id='accionU' onclick='descargarConvenios(I=`<?= $http_des ?>`, `aviso`, `<?= $URL?>`, `<?= $estudiosPreviosRuta ?>`, `<?= basename($estudiosPreviosRuta) ?>`)'>
+                <input type="button" value='<?= "DESCARGAR PDF" ?>' name='accionU' id='accionUDes' onclick='descargarConvenios(`<?= $NOMBRE ?>`, `<?= $RUTA ?>`, `<?= $IDELEMENTO ?>`, `I=<?= $POSTDES ?>`, `<?= $URL ?>`)'>
 
-                <input type="button" value='<?= "GENERAR PDF" ?>' name='accionU' id='accionUGen' onclick='generarConvenios(I=`<?= $http_gen ?>`, `aviso`, `<?= $URL ?>`, `<?= $estudiosPreviosRuta ?>`, `<?= basename($estudiosPreviosRuta) ?>`)'>
+                <input type="button" value='<?= "GENERAR PDF" ?>' name='accionU' id='accionUGen' onclick='generarConvenios(`<?= $RUTA ?>`, `<?= $IDELEMENTO ?>`, `I=<?= $POSTDES ?>`, `<?= $URL ?>`)'>
 
-                <input type="button" value='<?= "VISUALIZAR PDF" ?>' name='accionU' id='accionUVis' onclick='visualizarConvenios(I=`<?= $http_vis ?>`, `aviso`, `<?= $URL ?>`, `<?= $estudiosPreviosRuta ?>`, `<?= basename($estudiosPreviosRuta) ?>`)'>
+                <input type="button" value='<?= "VISUALIZAR PDF" ?>' name='accionU' id='accionUVis' onclick='visualizarConvenios(`I=<?= $POSTVIS ?>`, `<?= $URL ?>`)'>
             </div> 
         </fieldset>
     </div>
 </div>
 <?php
 }
-?>

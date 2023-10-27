@@ -29,7 +29,7 @@ foreach ($nuevo_POST as $key => $value)
 $permisos = new Persona(" identificacion ", "'" . $_SESSION['user'] . "'");
 
 // permisos desde Http validando los permisos de un usuario segun la tabla personamenu
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle');
+$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle_admin');
 
 if ($ingreso === false && $permisos->getIdTipo() !== "SA" && $_SESSION["rol"] !== "SA") {
     $permisos = false;
@@ -100,11 +100,13 @@ if ($permisos)
                 <textarea name='justificacion' id='justificacion' ><?= $convenio->getJustificacion() ?></textarea>
             </fieldset>
         </div>        
-        <div>     
+        <div>
+            <?php $I = Http::encryptIt("idSolicitud=$llave_Primaria_Contructor&user={$_SESSION["user"]}&accion=GUARDAR");?>
+            <input type="hidden" value="<?= $I ?>" name="I" id="I"> 
             <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
             <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
             <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-            <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "Convenios" )'>
+            <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "ConveniosSolicitud" )'>
             <input type="reset" name="limpiarU"  value="LIMPIAR"/>
         </div>
     </div>

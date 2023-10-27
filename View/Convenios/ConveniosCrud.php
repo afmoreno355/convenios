@@ -1,11 +1,56 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * 
+ * @author Dibier
  */
-require_once __DIR__ . "/../../autoload.php";
+
+
+require_once __DIR__ . '/../../autoload.php';
+require_once __DIR__ . '/../../utilities/InicioSesion.php';
+
+use InicioSesion;
+
+// Aceder al CRUD
+$post = InicioSesion\iniciar();
+
+// Traer objeto estudios previos
+$idSolicitud = $post['idSoliciud'] !== '' ? $post['idSolicitud'] : null;
+$campo = $idSolicitud !== null ? ' id_solicitud ' : null;
+$convenio = new Convenio($campo, $idSolicitud);
+
+$convenio->setNombre( $nombre ) ;
+$convenio->setMes( $mes ) ;
+$convenio->setCodigoArea( $area );
+$convenio->setAbogado( $abogado ) ;
+$convenio->setEstado('NEGOCIACIÓN') ;
+$convenio->setTecnicoExperto( $tecnicoExperto ) ;
+print_r("<script>console.log($tecnicoExperto)</script>");
+$convenio->setObjeto( $objeto ) ;
+print_r("<script>console.log($objeto)</script>");
+$convenio->setAlcance( $alcance ) ;
+print_r("<script>console.log($alcance)</script>");
+$convenio->setJustificacion( $justificacion ) ;
+print_r("<script>console.log($justificacion)</script>");
+
+switch ($post['accion']) {
+    
+    case "GUARDAR":
+        $convenio->guardar();
+        break;
+        
+    default:
+        die("No se reconoce acción.");
+}
+
+
+
+
+
+
+
+
+
+/*require_once __DIR__ . "/../../autoload.php";
 //
 // Iniciamos sesion para tener las variables
 if( !isset($_SESSION["user"]) )
@@ -100,4 +145,4 @@ if ($_SESSION["token1"] !== $_COOKIE["token1"] && $_SESSION["token2"] !== $_COOK
             }
         }
     }
-}
+}*/

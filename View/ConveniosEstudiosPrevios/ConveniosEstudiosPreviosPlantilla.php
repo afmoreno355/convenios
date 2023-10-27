@@ -1,51 +1,13 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author Dibier
  */
 
-// require auntomatico encuentra todas las clases/Model qeu se solicitan en el Controlador
-require_once __DIR__ . "/../../autoload.php";
+$idSolicitud = $post['idSolicitud'];
 
-// Iniciamos sesion para tener las variables
-session_start();
+$convenio = new Convenio(' id_solicitud ', $idSolicitud);
+$convenioEstudiosPrevios = new ConvenioEstudiosPrevios(' id_solicitud ', $idSolicitud);
 
-date_default_timezone_set("America/Bogota");
-$fecha = date("Y-m-d");
-$fecha_vigencia = date("Y");
-
-// variable variable trae las variables que trae POST
-foreach ($_POST as $key => $value)
-    ${$key} = $value;
-
-// desencripta las variables
-$nuevo_POST = Http::decryptIt($I);
-// evalua las nuevas variables que vienen ya desencriptadas
-foreach ($nuevo_POST as $key => $value)
-    ${$key} = $value;
-
-// verificamos permisos
-$permisos = new Persona(" identificacion ", "'" . $_SESSION['user'] . "'");
-
-// permisos desde Http validando los permisos de un usuario segun la tabla personamenu
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle');
-
-if ($ingreso === false && $permisos->getIdTipo() !== "SA" && $_SESSION["rol"] !== "SA") {
-    $permisos = false;
-}
-
-
-// llamamos la clase y verificamos si ya existe info de este dato que llega
-$convenio = new Convenio( ' id_solicitud ' , $idSolicitud);
-$convenioEstudiosPrevios= new ConvenioEstudiosPrevios( ' id_solicitud ' , $idSolicitud);
-
-
-//provisional !!!!!
-$documento = 'ESTUDIOS_PREVIOS';
-
-if ($documento == 'ESTUDIOS_PREVIOS' and $permisos)
-{
 ?>
 
 <!DOCTYPE html>
@@ -193,14 +155,8 @@ if ($documento == 'ESTUDIOS_PREVIOS' and $permisos)
              
                 <h2>CONCEPTOS TÉCNICOS</h2>
                 <p><?php echo $convenioEstudiosPrevios->getConceptosTecnicos(); ?></p>
-             
-
 
 </body>
 </html>
-
-<?php
-}
-?>
 
 
