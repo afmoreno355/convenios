@@ -6,23 +6,22 @@
 
 
 require_once __DIR__ . '/../../autoload.php';
-require_once __DIR__ . '/../../utilities/InicioSesion.php';
+require_once __DIR__ . '/../../utilities/Sesion.php';
 
 
-use InicioSesion;
+use Sesion;
 
-// Aceder al CRUD
-$post = InicioSesion\iniciar();
+// Definir roles
+// CO: Coordinador
+// AB: Abogado Responsable
+// AD: Auxiliar Administrativo
+// EC: Técnico Económico
+// EX: Técnico Experto
+// *: todos
+$roles = ["*"];
 
-// Permisos persona
-$permisos = new Persona(" identificacion ", "'" . $_SESSION['user'] . "'");
-
-// permisos desde Http validando los permisos de un usuario segun la tabla personamenu
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle_admin');
-
-if ($ingreso === false && $permisos->getIdTipo() !== "SA" && $_SESSION["rol"] !== "SA") {
-    $permisos = false;
-}
+// Acceder a la vista
+$post = Sesion\iniciar($roles);
 
 // Traer objeto estudios previos
 $idSolicitud = $post['llave_Primaria'] !== '' ? $post['llave_Primaria'] : null;
@@ -30,8 +29,6 @@ $campo = $idSolicitud !== null ? ' id_solicitud ' : null;
 $convenioEstudiosPrevios = new ConvenioEstudiosPrevios($campo, $idSolicitud);
 $convenio = new Convenio($campo , $idSolicitud);
 
-if ($permisos)
-{
 ?>
 <!--Modal Información-->
 <h2>ESTUDIOS PREVIOS</h2>
@@ -164,5 +161,3 @@ if ($permisos)
         </fieldset>
     </div>
 </div>
-<?php
-}

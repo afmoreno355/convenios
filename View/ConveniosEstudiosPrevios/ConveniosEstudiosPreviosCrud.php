@@ -7,12 +7,13 @@
 
 
 require_once __DIR__ . '/../../autoload.php';
-require_once __DIR__ . '/../../utilities/InicioSesion.php';
+require_once __DIR__ . '/../../utilities/Sesion.php';
 
-use InicioSesion;
+use Sesion;
 
 // Aceder al CRUD
-$post = InicioSesion\iniciar();
+$roles = ["SAD"];
+$post = Sesion\iniciar($roles);
 
 // Traer objeto estudios previos
 $idSolicitud = $post['idSoliciud'] !== '' ? $post['idSolicitud'] : null;

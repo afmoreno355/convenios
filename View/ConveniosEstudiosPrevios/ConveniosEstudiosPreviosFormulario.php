@@ -42,6 +42,9 @@ $convenio = new Convenio(' id_solicitud ', $llave_Primaria_Contructor);
 $convenioEstudiosPrevios = new ConvenioEstudiosPrevios( ' id_solicitud ' , $llave_Primaria_Contructor);
 if ($permisos)
 {
+    $parametros = [
+        
+    ];
 ?>
 <!--Formulario Estudios Previos-->
 <h2>ESTUDIOS PREVIOS</h2>

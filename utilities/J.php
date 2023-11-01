@@ -19,8 +19,8 @@ function enviarCorreoConPlantillaYAdjunto($destinatario, $plantilla, $archivoAdj
         $mail->Host = 'smtp.gmail.com';
         $mail->Port = 587;  // Puerto SMTP
         $mail->SMTPAuth = true;
-        $mail->Username = 'marp@gmail.com'; // Tu dirección de correo
-        $mail->Password = 'xxxx'; // Tu contraseña o contraseña de aplicación
+        $mail->Username = 'dibier.marin.p@gmail.com'; // Tu dirección de correo
+        $mail->Password = 'rpbg uuyu nawi ijag'; // Tu contraseña o contraseña de aplicación
 
         // Configuración del remitente y destinatario
         $mail->setFrom('dibier.marin.p@gmail.com', 'Dibier');
@@ -48,7 +48,7 @@ function enviarCorreoConPlantillaYAdjunto($destinatario, $plantilla, $archivoAdj
 }
 
 // Llama a la función con los parámetros deseados
-$destinatario = 'mar7@gmail.com';
+$destinatario = 'marindibier7@gmail.com';
 $plantilla = __DIR__ . '/../utilities/I.php';
 $archivoAdjunto = __DIR__ . '/../archivos/convenios/57/CONCEPTO TÉCNICO_57_25-10-2023_03:32:27.pdf';
 enviarCorreoConPlantillaYAdjunto($destinatario, $plantilla, $archivoAdjunto);
