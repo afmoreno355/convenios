@@ -81,8 +81,19 @@ function crearPdf($ruta, $plantilla, $post) {
 
             // Obtener la salida generada
             $html = ob_get_clean();
+            // Configurar las opciones de html2pdf, incluyendo los márgenes.
+            $options = array(
+                'margin' => array(
+                    'top' => 20,    // Márgen superior en milímetros
+                    'right' => 20,  // Márgen derecho en milímetros
+                    'bottom' => 20, // Márgen inferior en milímetros
+                    'left' => 20,   // Márgen izquierdo en milímetros
+                ),
+                // Otras opciones de configuración si las necesitas
+            );
 
-            $html2pdf = new Html2Pdf();
+            // Crear una instancia de html2pdf con las opciones configuradas
+            $html2pdf = new Html2Pdf($options);
             $html2pdf->writeHTML($html);
 
 

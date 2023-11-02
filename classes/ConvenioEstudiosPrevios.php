@@ -4,7 +4,7 @@
  * @author Dibier
  */
 
-
+require_once __DIR__ . '/../autoload.php';
 require_once __DIR__ . '/../Librerias/vendor/autoload.php';
 require_once __DIR__ . '/../utilities/Documentos.php';
 
@@ -256,6 +256,164 @@ class ConvenioEstudiosPrevios {
         $this->fecha = $fecha;
     }
 
+   
+    
+    public function getCampos(){
+        $idSolicitud = $this->idSolicitud;
+        $campo = $idSolicitud !== null ? 'id_solicitud' : null;
+
+        try {
+        $convenio = new Convenio($campo, $idSolicitud);
+        //print_r("--->$convenio<---:ooOOoooo");
+
+        return [
+            'id' => [
+                'baseDatos' => 'id_estudios_previos',
+                'nombre' => 'id',
+                'valor' => $this->id
+            ],
+            'idSolicitud' => [
+                'baseDatos' => 'id_solicitud',
+                'nombre' => 'id solicitud',
+                'valor' => $this->idSolicitud
+            ],
+            'idDependenciaRequierente' => [
+                'baseDatos' => 'identificacion_dependencia_requirente',
+                'nombre' => 'identificación de la dependencia requirente',
+                'valor' => $this->idDependenciaRequierente
+            ],
+            'descripcionNecesidad' => [
+                'baseDatos' => 'descripcion_necesidad',
+                'nombre' => 'descripción de la necesidad',
+                'valor' => $this->descripcionNecesidad
+            ],
+            'justificacion' => [
+                'baseDatos' => null,
+                'nombre' => 'justificacion',
+                'valor' => $convenio->getJustificacion()
+            ],
+            'analisisCoveniencia' => [
+                'baseDatos' => 'analisis_conveniencia',
+                'nombre' => 'análisis de conveniencia',
+                'valor' => $this->analisisCoveniencia
+            ],
+            'maduracionProyecto' => [
+                'baseDatos' => 'maduracion_proyecto',
+                'nombre' => 'maduración del proyecto',
+                'valor' => $this->maduracionProyecto
+            ],
+            'objeto' => [
+                'baseDatos' => null,
+                'nombre' => 'objeto',
+                'valor' => $convenio->getObjeto()
+            ],
+            'alcance' => [
+                'baseDatos' => null,
+                'nombre' => 'alcance del objeto',
+                'valor' => $convenio->getAlcance()
+            ],
+            'especificacionesTecnicasObjeto' => [
+                'baseDatos' => 'especificaciones_tecnicas_objeto',
+                'nombre' => 'especificaciones técnicas del objeto',
+                'valor' => $this->especificacionesTecnicasObjeto
+            ],
+            'analisisSector' => [
+                'baseDatos' => 'analisis_sector',
+                'nombre' => 'análisis del sector',
+                'valor' => $this->analisisSector
+            ],
+            'valorTotalAportes' => [
+                'baseDatos' => 'valor_total_aportes',
+                'nombre' => 'valor total de aportes',
+                'valor' => $this->valorTotalAportes
+            ],
+            'desembolsos' => [
+                'baseDatos' => 'desembolsos',
+                'nombre' => 'desembolsos',
+                'valor' => $this->desembolsos
+            ],
+            'disponibilidadPresupuestal' => [
+                'baseDatos' => 'disponibilidad_presupuestal_vigencias_futuras',
+                'nombre' => 'disponibilidad presupuestal de vigencias futuras',
+                'valor' => $this->disponibilidadPresupuestal
+            ],
+            'modalidadSeleccion' => [
+                'baseDatos' => 'modalidad_seleccion',
+                'nombre' => 'modalidad de selección',
+                'valor' => $this->id
+            ],
+            'criteriosSeleccion' => [
+                'baseDatos' => 'criterios_seleccion_objetiva',
+                'nombre' => 'criterios de selección objetiva',
+                'valor' => $this->criteriosSeleccion
+            ],
+            'analisisRiesgo' => [
+                'baseDatos' => 'analisis_riesgo',
+                'nombre' => 'análisis de riesgo',
+                'valor' => $this->analisisRiesgo
+            ],
+            'garantias' => [
+                'baseDatos' => 'garantias',
+                'nombre' => 'garantías',
+                'valor' => $this->garantias
+            ],
+            'limitacionMipymes' => [
+                'baseDatos' => 'limitacion_mipymes',
+                'nombre' => 'limitaciones mipymes',
+                'valor' => $this->limitacionMipymes
+            ],
+            'plazoEjecucion' => [
+                'baseDatos' => 'plazo_ejecucion',
+                'nombre' => 'plazo de ejecución',
+                'valor' => $this->plazoEjecucion
+            ],
+            'lugarEjecucion' => [
+                'baseDatos' => 'lugar_ejecucion',
+                'nombre' => 'lugar de ejecución',
+                'valor' => $this->lugarEjecucion
+            ],
+            'obligacionesPartes' => [
+                'baseDatos' => 'obligaciones_partes',
+                'nombre' => 'obligaciones de las partes',
+                'valor' => $this->obligacionesPartes
+            ],
+            'formaPago' => [
+                'baseDatos' => 'forma_pago',
+                'nombre' => 'forma de pago',
+                'valor' => $this->formaPago
+            ],
+            'controlVigilanciaContrato' => [
+                'baseDatos' => 'control_vigilancia_contrato',
+                'nombre' => 'control y vigilancia del contrato',
+                'valor' => $this->controlVigilanciaContrato
+            ],
+            'acuerdosComerciales' => [
+                'baseDatos' => 'acuerdos_comerciales',
+                'nombre' => 'acuerdos comerciales',
+                'valor' => $this->acuerdosComerciales
+            ],
+            'otrosAspectos' => [
+                'baseDatos' => 'otros_aspectos',
+                'nombre' => 'otros aspectos',
+                'valor' => $this->otrosAspectos
+            ],
+            'conceptosTecnicos' => [
+                'baseDatos' => 'conceptos_tecnicos',
+                'nombre' => 'conceptos técnicos',
+                'valor' => $this->conceptosTecnicos
+            ],
+            'fecha' => [
+                'baseDatos' => 'fecha_sistema',
+                'nombre' => 'fecha de creación:',
+                'valor' => $this->fecha
+            ]
+        ];
+    } catch (Exception $e) {
+        print_r("--->$this->idSolicitud<---");
+    }
+    }
+
+
    // constructor multifuncional segun el tipo de elemento que recibe realiza una busqueda, funciona como constructor vacio o recibe un array.
     
     function __construct($campo, $valor) {
@@ -272,12 +430,15 @@ class ConvenioEstudiosPrevios {
     //organiza el array que recibe el constructor  pero se debe colocar la posicion de la columna en el vector 
     
     private function mapear($consulta) {        
-        $campos = $this->getCamposBaseDatos();
+        $campos = $this->getCampos();
         foreach ($campos as $atributo => $campo) {
-            $this->{$atributo} = $consulta[$campo];
+            if ($campo['baseDatos'] !== null) {
+                $this->{$atributo} = $consulta[$campo['baseDatos']];
+            }            
         }
     }
-  // metodo magico
+    
+    // metodo magico
     function __toString() {
         //return $this->;
     }
@@ -325,36 +486,6 @@ class ConvenioEstudiosPrevios {
 
         // Mapear objeto
         $this->mapear($consulta);
-    }
-
-    public function getCamposBaseDatos() {
-        return [
-            'id' => 'id_estudios_previos',
-            'idSolicitud' => 'id_solicitud',
-            'idDependenciaRequierente' => 'identificacion_dependencia_requirente',
-            'descripcionNecesidad' => 'descripcion_necesidad',
-            'analisisCoveniencia' => 'analisis_conveniencia',
-            'maduracionProyecto' => 'maduracion_proyecto',
-            'especificacionesTecnicasObjeto' => 'especificaciones_tecnicas_objeto',
-            'analisisSector' => 'analisis_sector',
-            'valorTotalAportes' => 'valor_total_aportes',
-            'desembolsos' => 'desembolsos',
-            'disponibilidadPresupuestal' => 'disponibilidad_presupuestal_vigencias_futuras',
-            'modalidadSeleccion' => 'modalidad_seleccion',
-            'criteriosSeleccion' => 'criterios_seleccion_objetiva',
-            'analisisRiesgo' => 'analisis_riesgo',
-            'garantias' => 'garantias',
-            'limitacionMipymes' => 'limitacion_mipymes',
-            'plazoEjecucion' => 'plazo_ejecucion',
-            'lugarEjecucion' => 'lugar_ejecucion',
-            'obligacionesPartes' => 'obligaciones_partes',
-            'formaPago' => 'forma_pago',
-            'controlVigilanciaContrato' => 'control_vigilancia_contrato',
-            'acuerdosComerciales' => 'acuerdos_comerciales',
-            'otrosAspectos' => 'otros_aspectos',
-            'conceptosTecnicos' => 'conceptos_tecnicos',
-            'fecha' => 'fecha_sistema'
-        ];
     }
 
     public function visualizar() {

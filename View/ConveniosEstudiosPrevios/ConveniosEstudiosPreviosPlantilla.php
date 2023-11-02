@@ -16,39 +16,53 @@ $convenioEstudiosPrevios = new ConvenioEstudiosPrevios(' id_solicitud ', $idSoli
     <meta charset="UTF-8">
     <title>Documento de Ejemplo</title>
     <style>
+        /* Estilos globales para todo el documento */
         body {
             font-family: "Times New Roman", serif;
-            margin: 36pt; /* Márgenes de una pulgada */
-            line-height: 1.6; /* Espaciado entre líneas */
+            margin: 72pt; /* Márgenes de una pulgada en todas las direcciones */
+            line-height: 1.5; /* Espaciado entre líneas */
         }
 
         h1 {
-            font-size: 18pt;
+            font-size: 24pt;
             text-align: center;
-            margin-bottom: 12pt;
+            margin-bottom: 18pt;
+        }
+
+        h2 {
+            font-size: 18pt;
+            background-color: yellow;
         }
 
         p {
             font-size: 12pt;
             text-align: justify;
+            margin-bottom: 12pt;
         }
 
-        ul {
-            list-style-type: disc;
-        }
-
-        ol {
-            list-style-type: decimal;
+        ul, ol {
+            margin-left: 36pt; /* Sangría para las listas */
         }
 
         table {
             border-collapse: collapse;
             width: 100%;
+            margin-bottom: 12pt;
         }
 
         th, td {
             border: 1px solid black;
             padding: 8pt;
+        }
+
+        /* Estilos específicos para una clase o elemento */
+        .destacado {
+            background-color: yellow;
+        }
+
+        /* Estilos específicos para un ID o elemento */
+        #encabezado {
+            font-weight: bold;
         }
     </style>
 </head>
