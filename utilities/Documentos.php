@@ -73,7 +73,7 @@ function crearPdf($ruta, $plantilla, $post) {
         
         try {
             // Obtener contenido HTML de archivo PHP.
-             // Activar el búfer de salida
+            // Activar el búfer de salida
             ob_start();
 
             // Incluir la plantilla PHP
@@ -81,26 +81,17 @@ function crearPdf($ruta, $plantilla, $post) {
 
             // Obtener la salida generada
             $html = ob_get_clean();
-            // Configurar las opciones de html2pdf, incluyendo los márgenes.
-            $options = array(
-                'margin' => array(
-                    'top' => 20,    // Márgen superior en milímetros
-                    'right' => 20,  // Márgen derecho en milímetros
-                    'bottom' => 20, // Márgen inferior en milímetros
-                    'left' => 20,   // Márgen izquierdo en milímetros
-                ),
-                // Otras opciones de configuración si las necesitas
-            );
 
             // Crear una instancia de html2pdf con las opciones configuradas
-            $html2pdf = new Html2Pdf($options);
+            $html2pdf = new Html2Pdf();
+            $html2pdf->pdf->setOption('useCssPageSplit', true);
             $html2pdf->writeHTML($html);
 
 
             // Limpiar el buffer de salida
             ob_clean();
 
-            $pdf = $html2pdf->output('about.pdf', 'S');
+            $pdf = $html2pdf->output('', 'S');
 
             return $pdf;
             

@@ -19,8 +19,8 @@ function enviarCorreoConPlantillaYAdjunto($destinatario, $plantilla, $archivoAdj
         $mail->Host = 'smtp.gmail.com';
         $mail->Port = 587;  // Puerto SMTP
         $mail->SMTPAuth = true;
-        $mail->Username = 'dibier.marin.p@gmail.com'; // Tu dirección de correo
-        $mail->Password = 'rpbg uuyu nawi ijag'; // Tu contraseña o contraseña de aplicación
+        $mail->Username = '....@gmail.com'; // Tu dirección de correo
+        $mail->Password = '....'; // Tu contraseña o contraseña de aplicación
 
         // Configuración del remitente y destinatario
         $mail->setFrom('dibier.marin.p@gmail.com', 'Dibier');
