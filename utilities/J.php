@@ -23,7 +23,7 @@ function enviarCorreoConPlantillaYAdjunto($destinatario, $plantilla, $archivoAdj
         $mail->Password = '............'; // Tu contraseña o contraseña de aplicación
 
         // Configuración del remitente y destinatario
-        $mail->setFrom('dibier.marin.p@gmail.com', 'Dibier');
+        $mail->setFrom('......@gmail.com', 'Dibier');
         $mail->addAddress($destinatario, 'Dibier');
 
         // Configuración del correo

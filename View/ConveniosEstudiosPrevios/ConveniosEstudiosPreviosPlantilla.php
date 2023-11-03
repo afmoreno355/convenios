@@ -3,50 +3,42 @@
  * @author Dibier
  */
 
+// Verificar si se envió 'idSolicitud' a través de POST
 $idSolicitud = $post['idSolicitud'] != null ? $post['idSolicitud'] : null;
-$campoId = $idSolicitud != null  ? 'id_solicitud' : null;
 
-$convenio = new Convenio(' id_solicitud ', $idSolicitud);
+// Definir el nombre del campo según si 'idSolicitud' está presente
+$campoId = $idSolicitud !== null ? 'id_solicitud' : null;
+
+// Crear instancias de las clases
 $convenioEstudiosPrevios = new ConvenioEstudiosPrevios($campoId, $idSolicitud);
 
+// Obtener los campos de ConvenioEstudiosPrevios
 $contenido = $convenioEstudiosPrevios->getCampos();
-
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Documento de Ejemplo</title>
-    <link rel="stylesheet" type="text/css" href="../../css/ConvenioEstudiosPrevios.css">
-</head>
-<body>
-
-<page backtop="20mm" backbottom="20mm" backleft="25mm" backright="25mm"> 
+<link rel="stylesheet" type="text/css" href="../../css/ConvenioEstudiosPrevios.css">
+<page backtop="20mm" backbottom="20mm" backleft="25mm" backright="25mm">
     <page_header>
         <div style="text-align: center;">
-            <img width="40" src="../../img/logo/sena.png" alt="Logo Sena">   
+            <img width="40" src="../../img/logo/sena.png" alt="Logo Sena">
         </div>
     </page_header>
 
     <page_footer>
-    <div style="text-align: center;">DIRECCIÓN DE FORMACIÓN PROFESIONA SENA</div>
+        <div style="text-align: center;">DIRECCIÓN DE FORMACIÓN PROFESIONAL SENA</div>
     </page_footer>
-    
-        <h1>ESTUDIOS PREVIOS</h1>
-<?php
-foreach ($contenido as $campo => $parametro) {
-    if (in_array($campo, ['id']) === false) {
-?>
-        <h2><?= mb_strtoupper($parametro['nombre'], 'UTF-8') ?></h2>
-        <p><?=  $parametro['valor'] ?></p>
-<?php
-    }
-}
-?>
+
+    <h1>ESTUDIOS PREVIOS</h1>
+
+    <?php foreach ($contenido as $campo => $parametro) : ?>
+        <?php if (!in_array($campo, ['id'])) : ?>
+            <h2><?= mb_strtoupper($parametro['nombre'], 'UTF-8') ?></h2>
+            <p><?= $parametro['valor'] ?></p>
+        <?php endif; ?>
+    <?php endforeach; ?>
 </page>
-</body>
-</html>
+
+
 
 
 

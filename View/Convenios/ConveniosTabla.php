@@ -105,7 +105,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
                 <td> <?= $object->getEstado() ?></td>
                 <td>
                     <input type="button" id="button" name="1" onclick="tabConvenios(); validarDatosConvenios(``, `I=<?= $http_mod ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="MODIFICAR">
-                    <input type="button" id="button" name="2" onclick="validarDatosConvenios(``, `I=<?= $http_mail ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="MAIL">
+                    <input type="button" id="button" name="2" onclick="validarDatosConvenios(``, `I=<?= $http_mai ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="MAIL">
                     <input type="button" id="button" name="2" onclick="validarDatosConvenios(``, `I=<?= $http_inf ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="INFORMACIÓN">
                     <input type="button" id="button" name="1" onclick="validarDatosConvenios(``, `I=<?= $http_des ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="DESCARGAR">
                     <!--a onclick="sedeGestiones(`<?= $object->getId() ?>`, `Convenio`)" title="Convenio de las direcciones" ><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/></a-->

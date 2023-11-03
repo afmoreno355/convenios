@@ -29,7 +29,7 @@ foreach ($nuevo_POST as $key => $value)
 $permisos = new Persona(" identificacion ", "'" . $_SESSION['user'] . "'");
 
 // permisos desde Http validando los permisos de un usuario segun la tabla personamenu
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle');
+$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle_admin');
 
 if ($ingreso === false && $permisos->getIdTipo() !== "SA" && $_SESSION["rol"] !== "SA") {
     $permisos = false;
@@ -140,23 +140,8 @@ if ($id == 2 && $permisos)
 elseif ($id == 3 && $permisos)
 {
 ?>
-<!--Modal 3 eliminar-->
-    <div class="carga_Documento">
-        <div class="contenido">  
-            <div class="where_title where_modal" style="width: 100%; height: auto; margin-left: 0px;">
-                <img src="img/icon/borrar.png"/>
-                <lablel>
-                    Se realizara la acción "<?= $accion ?>" al convenio <?=$llave_Primaria?> cargado en el modulo de la Dirección de Formación Profesional.
-                </label>
-            </div><br><br>
-            <label style="font-size: 1em; " id="aviso"></label>  
-        </div>  
-        <div>        
-            <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
-            <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
-            <input type="submit" title="ACEPTA <?= $accion ?> EL ITEM ELEGIDO"  value="<?= $accion ?>" name="accionU" id="accionU" onclick="eliminar('aviso')">
-        </div>
-    </div> 
+<!--Modal 3 email-->
+<?php require_once __DIR__ . "/../../View/ConveniosMail/ConveniosMailFormulario.php"; ?>
 <?PHP
 }
 elseif ($id == 4 && $permisos )

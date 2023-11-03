@@ -85,6 +85,7 @@ function crearPdf($ruta, $plantilla, $post) {
             // Crear una instancia de html2pdf con las opciones configuradas
             $html2pdf = new Html2Pdf();
             $html2pdf->pdf->setOption('useCssPageSplit', true);
+            $html2pdf->pdf->setOption('firstPage', false);
             $html2pdf->writeHTML($html);
 
 
