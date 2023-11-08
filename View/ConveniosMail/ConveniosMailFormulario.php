@@ -39,15 +39,24 @@ $post = Sesion\iniciar($roles);
             <input type="email" id="email" name="email" />
         </fieldset>
     </div>
-
     <div>
         <fieldset>
-            <legend title='<?= "MENSAJE" ?>'><?= "MENSAJE" ?></legend>
-            <textarea>Proyectar correo aquí.</textarea>
+            <legend title='<?= "ASUNTO" ?>'><?= "ASUNTO" ?></legend>
+            <textarea id="asunto" name="asunto">Proyectar asunto aquí</textarea>
         </fieldset>
     </div>
     <div>
-        <input type="submit" value='<?= $post['accion'] ?>' name='accionU' id='accionU' onclick='enviarEmailConvenios()' />
+        <fieldset>
+            <legend title='<?= "MENSAJE" ?>'><?= "MENSAJE" ?></legend>
+            <textarea id="mensaje" name="mensaje">Proyectar correo aquí.</textarea>
+        </fieldset>
+    </div>
+    <div>
+        <?php $ID = $post['idSolicitud']; ?>
+        <?php $ACCION = $post['accion']; ?>
+        <?php $I = Http::encryptIt("idSolicitud=$ID&accion=$ACCION"); ?>
+        <input type="hidden" value="<?= $I ?>"name="I" id="I" > 
+        <input type="submit" value='<?= $post['accion'] ?>' name='accionU' id='accionU' onclick='cargar("aviso", "ConveniosMail")' />
         <input type="reset" name="limpiarU"  value="LIMPIAR"/>
     </div>
 </div>

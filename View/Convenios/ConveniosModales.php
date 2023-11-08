@@ -115,9 +115,9 @@ if ($id == 2 && $permisos)
 ?>
 <!--Modal 2 modificar-->
 <div class="carga_Documento">
-        <div class="contenido">  
-            <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
-                <img src="img/icon/gestionar.png"/><label class="where">Módulo Convenios y Contratos – Dirección de Formación Profesional</label></div>
+    <div class="contenido">  
+        <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
+            <img src="img/icon/gestionar.png"/><label class="where">Módulo Convenios y Contratos – Dirección de Formación Profesional</label></div>
             <br><br>
             <label style="font-size: 1em; " >Tabla Agregar</label>  
             <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
@@ -141,7 +141,19 @@ elseif ($id == 3 && $permisos)
 {
 ?>
 <!--Modal 3 email-->
+<div class="carga_Documento">
+    <div class="contenido">  
+        <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
+            <img src="img/icon/gestionar.png"/>
+            <label class="where">Módulo Convenios y Contratos – Dirección de Formación Profesional</label>
+        </div>
+        <br><br>
+        <label style="font-size: 1em; " >Tabla Agregar</label>  
+        <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
+    </div> 
+</div>
 <?php require_once __DIR__ . "/../../View/ConveniosMail/ConveniosMailFormulario.php"; ?>
+
 <?PHP
 }
 elseif ($id == 4 && $permisos )
@@ -169,7 +181,7 @@ elseif ($id == 4 && $permisos )
         </div>   
     </div>
     <di id="tabContenido"></di>
-</div>
+
 <?PHP
 }
 elseif ($id == 5 && $permisos ) {

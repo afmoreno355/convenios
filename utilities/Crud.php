@@ -11,7 +11,14 @@ function hola() {
 }
 
 
-
+function getAtributos($clase) {
+    $reflection = new \ReflectionClass($clase);
+    $properties = $reflection->getProperties(\ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PRIVATE);
+    $attributeNames = array_map(function ($property) {
+        return $property->getName();
+    }, $properties);
+    return $attributeNames;
+} 
 
 
 

@@ -91,7 +91,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
             $name = 1;
         }
         $http_mod = Http::encryptIt("id=2&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=MODIFICAR");
-        $http_mai = Http::encryptIt("id=3&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=MAIL");
+        $http_mai = Http::encryptIt("id=3&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=ENVIAR");
         $http_inf = Http::encryptIt("id=4&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=INFORMACION");
         $http_des = Http::encryptIt("id=6&llave_Primaria={$object->getId()}&user={$_SESSION["user"]}&accion=DESCARGAR");
 ?> 
@@ -105,7 +105,7 @@ if ($ingreso === false && $permisos->getIdTipo() !== "SA" ) {
                 <td> <?= $object->getEstado() ?></td>
                 <td>
                     <input type="button" id="button" name="1" onclick="tabConvenios(); validarDatosConvenios(``, `I=<?= $http_mod ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="MODIFICAR">
-                    <input type="button" id="button" name="2" onclick="validarDatosConvenios(``, `I=<?= $http_mai ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="MAIL">
+                    <input type="button" id="button" name="2" onclick="validarDatosConvenios(``, `I=<?= $http_mai ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="ENVIAR">
                     <input type="button" id="button" name="2" onclick="validarDatosConvenios(``, `I=<?= $http_inf ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="INFORMACIÓN">
                     <input type="button" id="button" name="1" onclick="validarDatosConvenios(``, `I=<?= $http_des ?>`, `modalVentana`, `<?= $URL ?>`)" title="Información Elemento" value="DESCARGAR">
                     <!--a onclick="sedeGestiones(`<?= $object->getId() ?>`, `Convenio`)" title="Convenio de las direcciones" ><img src="img/icon/CONVENIO.png" style="width: 30px; height: 30px"/></a-->
