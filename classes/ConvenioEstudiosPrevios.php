@@ -17,7 +17,7 @@ class ConvenioEstudiosPrevios {
     private $idSolicitud ;
     private $idDependenciaRequierente ;
     private $descripcionNecesidad ;
-    private $analisisCoveniencia ;
+    private $analisisConveniencia ;
     private $maduracionProyecto ;
     private $especificacionesTecnicasObjeto ;
     private $analisisSector ;
@@ -291,10 +291,10 @@ class ConvenioEstudiosPrevios {
                     'nombre' => 'justificacion',
                     'valor' => $convenio->getJustificacion()
                 ],
-                'analisisCoveniencia' => [
+                'analisisConveniencia' => [
                     'baseDatos' => 'analisis_conveniencia',
                     'nombre' => 'análisis de conveniencia',
-                    'valor' => $this->analisisCoveniencia
+                    'valor' => $this->analisisConveniencia
                 ],
                 'maduracionProyecto' => [
                     'baseDatos' => 'maduracion_proyecto',
@@ -496,25 +496,22 @@ class ConvenioEstudiosPrevios {
     }
 
     public function generar() {
-        // Parámetros
         $id = $this->idSolicitud;
-        $carpeta = __DIR__ . "/../archivos/convenios/$id";
-        $ruta = "$carpeta/ESTUDIOS_$id.pdf";
+        $carpeta = "../convenios/archivos/convenios/$id";
+        $ruta = "$carpeta/convenios_$id.pdf";
         $plantilla = 'View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosPlantilla.php';
-        $post = array(
-            "idSolicitud" => $this->getIdSolicitud()
-        );
-        // Crear PDf con los parámetros
-        Documentos\crearPdf($ruta, $plantilla, $post);
-    
-        return $ruta; // Retorna la ruta del archivo PDF generado
+        $post = [
+            "idSolicitud" => $id
+        ];
+        // Crear PDF con los parámetros
+        Documentos\crearPdf(__DIR__ . "/../$ruta", $plantilla, $post);
+
+        echo $ruta;
     }
     
     // Descargar documento estudios previos
     public function descargar() {
-        $ruta = $this->generar();
-
-        return Documentos\descargar($ruta);
+        $this->generar();
     }
     
 
@@ -587,7 +584,7 @@ class ConvenioEstudiosPrevios {
                 descripcion_necesidad = '$descripcionNecesidad',
                 analisis_conveniencia = '$analisisConveniencia',
                 maduracion_proyecto = '$maduracionProyecto',
-                especificaciones_tecnicas_objeto = '$especificacionesTecnicas',
+                especificaciones_tecnicas_objeto = '$especificacionesTecnicasObjeto',
                 analisis_sector = '$analisisSector',
                 valor_total_aportes = '$valorTotalAportes',
                 desembolsos = '$desembolsos',
@@ -596,7 +593,7 @@ class ConvenioEstudiosPrevios {
                 criterios_seleccion_objetiva = '$criteriosSeleccion',
                 analisis_riesgo = '$analisisRiesgo',
                 garantias = '$garantias',
-                limitacion_mipymes = '$limitacionesMypimes',
+                limitacion_mipymes = '$limitacionMipymes',
                 plazo_ejecucion = '$plazoEjecucion',
                 lugar_ejecucion = '$lugarEjecucion',
                 obligaciones_partes = '$obligacionesPartes',

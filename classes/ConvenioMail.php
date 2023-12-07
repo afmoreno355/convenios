@@ -42,7 +42,7 @@ class ConvenioMail {
             'destinatario' => $this->destinatario,
             'asunto' => $this->asunto,
             'mensaje' => $this->mensaje,
-            'adjunto' => __DIR__ . "/../archivos/convenios/$id/CONVENIO_$id.zip"            
+            'adjunto' => "/var/www/eagle/convenios/archivos/convenios/57/CONVENIO_57.zip"            
         ];
         Mail\enviar($correo);
     }

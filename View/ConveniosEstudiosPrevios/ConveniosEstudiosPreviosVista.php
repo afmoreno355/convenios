@@ -43,17 +43,14 @@ $contenido = $convenioEstudiosPrevios->getCampos();
             <?php endforeach; ?>
             <br />
             <div>
-                <?php $NOMBRE = "ESTUDIOS_$idSolicitud.pdf"; ?>
-                <?php $RUTA = "archivos/convenios/$idSolicitud/$NOMBRE"; ?>
                 <?php $POSTDES = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=DESCARGAR"); ?>
                 <?php $POSTGEN = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=GENERAR"); ?>
                 <?php $POSTVIS = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=VISUALIZAR"); ?>
                 <?php $URL = "View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosCrud.php"; ?>
-                <?php $URLEXP = "View/ConveniosEstudiosPrevios/GenerarPDF.php"; ?>
-                <div style="display: none;" id="documentoDescargar"></div>
-                <input type="button" value='<?= "DESCARGAR PDF" ?>' name='accionU' id='accionU' onclick='descargarConvenios(`<?= $NOMBRE ?>`, `<?= $RUTA ?>`, `<?= $IDELEMENTO ?>`, `I=<?= $POSTDES ?>`, `<?= $URL ?>`)'>
-                <input type="button" value='<?= "GENERAR PDF" ?>' name='accionU' id='accionU' onclick='generarConvenios(`<?= $RUTA ?>`, `<?= $IDELEMENTO ?>`, `I=<?= $POSTDES ?>`, `<?= $URL ?>`)'>
-                <input type="button" value='<?= "VISUALIZAR PDF" ?>' name='accionU' id='accionU' onclick='visualizarConvenios(`I=<?= $POSTVIS ?>`, `<?= $URL ?>`)'>
+                <input type="hidden" value="" name="I" id="I">
+                <input type="button" value='<?= "DESCARGAR PDF" ?>' name='accionU' id='accionU' onclick='descargarConvenios(`<?= $POSTDES ?>`, `<?= $URL ?>`)'>
+                <input type="button" value='<?= "GENERAR PDF" ?>' name='accionU' id='accionU' onclick='generarConvenios(`<?= $POSTGEN ?>`, `<?= $URL ?>`)'>
+                <input type="button" value='<?= "VISUALIZAR PDF" ?>' name='accionU' id='accionU' onclick='visualizarConvenios(`<?= $POSTVIS ?>`, `<?= $URL ?>`)'>
             </div> 
         </fieldset>
     </div>

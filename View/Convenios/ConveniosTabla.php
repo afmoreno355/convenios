@@ -1,4 +1,28 @@
-<?PHP 
+<?php
+/**
+ * 
+ * @author Dibier
+ */
+
+require_once __DIR__ . '/../../autoload.php';
+require_once __DIR__ . '/../../utilities/Sesion.php';
+
+use Sesion;
+
+// Definir roles
+// CO: Coordinador
+// AB: Abogado Responsable
+// AD: Auxiliar Administrativo
+// EC: Técnico Económico
+// EX: Técnico Experto
+// *: Todos
+$roles = ["*"];
+
+// Acceder a la vista
+//$post = Sesion\iniciar($roles);
+
+// Traer objeto
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,6 +32,8 @@ session_start();
 
 // require auntomatico encuentra todas las clases/Model qeu se solicitan en el Controlador
 require_once __DIR__ . "/../../autoload.php";
+
+print_r($_POST);
 
 // filtro se usa para realizar las consultas de busqueda 
 $filtro = "";

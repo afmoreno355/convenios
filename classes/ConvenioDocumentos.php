@@ -276,38 +276,34 @@ class ConvenioDocumentos {
 
     // Crea zip para descargar documentos
     public function crearZip() {
-        // Crear parámetros
-        $rutaDocumento = $this->ruta;
-        $id = $this->idSolicitud;
-        $ruta = "$rutaDocumento/$id/CONVENIO_$id.zip";
-        $documentos = $this->getRutas();
-
         try {
+            $id = $this->idSolicitud;
+            $ruta = __DIR__ . "/../../convenios/archivos/tmp/CONVENIO_$id.zip";
+            $documentos = $this->getRutas();
+            
+            Documentos\crearZip($ruta, $documentos);
+            echo "Se ha creado un archivo zip con los documentos.<br>";
 
-            $zip = new ZipArchive();
-            $zip->open($ruta, ZipArchive::CREATE);
-
-            // Adjunta documentos
-            foreach ($documentos as $doc) {
-
-                if (!empty($doc) and is_file($doc)) {
-                    print_r($doc);
-                    $zip->addFile($doc, basename($doc));
-                }
-            }
-
-            $zip->close();
-           
-
+            return $ruta;
         } catch (Exception $e) {
-            throw new Exception("No es posible crear el archivo ZIP $ruta." . $e->getMessage());
+            die("No se ha creado el archivo ZIP con los documentos de la solicitud.<br/>" . $e->getMessage());
         }
 
-        return $ruta;
+    }
+       
+
+    public function descargar() {
+        try {
+            $ruta = $this->crearZip();
+            Documentos\descargar($ruta);
+            echo "Se ha descargado un archivo ZIP con los documentos del convenio.<br>";
+        } catch (Exception $e) {
+            die("No se pudo descargar el archivo ZIP con los documentos del convenio.<br>" . $e->getMessage());
+        }
     }
 
     public function descargarZip() {
-        // Genera ZIP
+        // Generar ZIP
         $ruta = $this->crearZip();
         $segundos = 5;
 
@@ -325,6 +321,7 @@ class ConvenioDocumentos {
 
                 // Descarga el archivo
                 readfile($ruta);
+                exit;
 
                 //sleep($segundos);
                 //unlink($ruta);
@@ -472,10 +469,6 @@ class ConvenioDocumentos {
 
     public function guardar() {
         $this->adicionarModificar($_POST['idSolicitud']);
-    }
-
-    public function descargar() {
-        $this->descargarZip();
     }
 
 }

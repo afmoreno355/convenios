@@ -36,25 +36,24 @@ function visualizarPdf($plantilla, $post) {
         // Limpiar el buffer de salida
         ob_clean();
         $html2pdf->output('about.pdf');
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
         echo $e->getMessage();
     }
 }
 
 function crearPdf($ruta, $plantilla, $post) {
+    try {
+        $nombre = basename($ruta);
+        $directorio = dirname($ruta);
+        $pdf = getContenidoPdf($plantilla, $post);
+        crearDirectorio($directorio, 0777);
 
-        try {
-            $nombre = basename($ruta);
-            $directorio = dirname($ruta);
-            $pdf = getContenidoPdf($plantilla, $post);
-            crearDirectorio($directorio, 0777);
+        return guardar($pdf, $nombre, $directorio);
 
-            return guardar($pdf, $nombre, $directorio);
-
-        } catch (Exception $e) {
-            throw new Exception("Error al crear PDF. " . $e->getMessage());
-        }
+    } catch (\Exception $e) {
+        throw new \Exception("Error al crear PDF. " . $e->getMessage());
     }
+}
 
     function guardar($documento, $nombre, $directorio) {
         
@@ -64,8 +63,8 @@ function crearPdf($ruta, $plantilla, $post) {
 
             return file_put_contents($ruta, $documento) ? true : false;
 
-        } catch (Exception $e) {
-            throw new Exception("Error al guardar documento $nombre. " . $e->getMessage());
+        } catch (\Exception $e) {
+            throw new \Exception("Error al guardar documento $nombre. " . $e->getMessage());
         }
     }
 
@@ -84,8 +83,6 @@ function crearPdf($ruta, $plantilla, $post) {
 
             // Crear una instancia de html2pdf con las opciones configuradas
             $html2pdf = new Html2Pdf();
-            $html2pdf->pdf->setOption('useCssPageSplit', true);
-            $html2pdf->pdf->setOption('firstPage', false);
             $html2pdf->writeHTML($html);
 
 
@@ -96,35 +93,14 @@ function crearPdf($ruta, $plantilla, $post) {
 
             return $pdf;
             
-        } catch (Exception $e) {
-            throw new Exception("Error al obtener contenido PDF. " . $e->getMessage());
-        }
-    }
-
-    function crearDirectorio($ruta, $permisos) {
-        try {
-            if (!is_dir($ruta)) {
-                if (mkdir($ruta, $permisos, true)) {
-                    return true; // Directorio creado exitosamente
-                } else {
-                    return false; // Error al crear el directorio
-                }
-            } else {
-                return false; // El directorio ya existe
-            }
-        } catch (Exception $e) {
-            // Manejo de excepción en caso de error
-            throw new Exception("Error al crear el directorio. " . $e->getMessage());
+        } catch (\Exception $e) {
+            throw new \Exception("Error al obtener contenido PDF. " . $e->getMessage());
         }
     }
     
-    // Descargar documento estudios previos
     function descargar($ruta) {
-
         try {
-
             if (file_exists($ruta)) {
-
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
                 header('Content-Disposition: attachment; filename="' . basename($ruta) . '"');
@@ -134,21 +110,19 @@ function crearPdf($ruta, $plantilla, $post) {
                 header('Content-Length: ' . filesize($ruta));
     
                 // Descarga el archivo
+                ob_clean();
                 readfile($ruta);
-    
-                return true;
+                exit;
+            } else {
+                throw new \Exception("No existe el archivo $ruta. <br />");
             }
-            return false;
-
-        } catch (Exception $e) {
-            throw new Exception("No se pudo descargar documento $ruta. " . $e->getMessage());
+        } catch (\Exception $e) {
+            throw new \Exception("No se pudo descargar documento $ruta. <br />" . $e->getMessage());
         }
     }
 
     function descargarTemporal($ruta, $segundos) {
-
         if ($this->descargar($ruta)) {
-
             sleep($segundos);
             unlink($ruta);
             
@@ -157,31 +131,42 @@ function crearPdf($ruta, $plantilla, $post) {
         return false;
     }
 
-    // Crea ZIP para descargar documentos
     function crearZip($ruta, $documentos) {
-
         try {
+            crearDirectorio(dirname($ruta), 0777);
 
-            $zip = new ZipArchive();
-            $zip->open($ruta, ZipArchive::CREATE);
+            $zip = new \ZipArchive();
+            if ($zip->open($ruta, \ZipArchive::CREATE) !== true) {
+                throw new \Exception("No es posible abrir el archivo ZIP $ruta.");
+            }
 
             // Adjunta documentos
-            foreach ($documentos as $doc) {
-
-                if (!empty($doc) and is_file($doc)) {
-                    $zip->addFile($doc, basename($doc));
+            foreach ($documentos as $documento) {
+                if (!empty($documento) and is_file($documento)) {
+                    $zip->addFile($documento, basename($documento));
                 }
             }
 
             $zip->close();
-           
-
-        } catch (Exception $e) {
-            throw new Exception("No es posible crear el archivo ZIP $ruta." . $e->getMessage());
+        } catch (\Exception $e) {
+            throw new \Exception("No es posible crear el archivo ZIP $ruta." . $e->getMessage());
         }
     }
 
-    
+    function crearDirectorio($ruta, $permisos) {
+        try {
+            if (!is_dir($ruta)) {
+                if (mkdir($ruta, $permisos, true) !== true) {
+                    throw new \Exception("No se pudo crear el directorio $ruta. <br />");
+                }
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\Exception $e) {
+            throw new \Exception("Error al crear el directorio. <br />" . $e->getMessage());
+        }
+    }    
     
     // guardar elementos en la base de datos
     function registrar($accion, $sql, $tabla, $baseDatos) {
@@ -203,8 +188,8 @@ function crearPdf($ruta, $plantilla, $post) {
             }
             return false;
 
-        } catch (Exception $e) {
-            throw new Exception("No se pudo registrar la acción $accion, SQL $sql. " . $e->getMessage());
+        } catch (\Exception $e) {
+            throw new \Exception("No se pudo registrar la acción $accion, SQL $sql. <br />" . $e->getMessage());
         }
     }
 

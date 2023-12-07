@@ -6,11 +6,6 @@
 
 namespace Crud;
 
-function hola() {
-    print_r("¡Hola!");
-}
-
-
 function getAtributos($clase) {
     $reflection = new \ReflectionClass($clase);
     $properties = $reflection->getProperties(\ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PRIVATE);

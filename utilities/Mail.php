@@ -16,10 +16,10 @@ function enviar($correo) {
         $mail->Host = 'smtp.gmail.com';
         $mail->Port = 587;
         $mail->SMTPAuth = true;
-        $mail->Username = "direcciondeformacion@misena.edu.co";
-        $mail->Password = 'Sen@2022*'; // Debes proporcionar tu contraseña aquí
+        $mail->Username = "dibier.marin.p@gmail.com"; //"direcciondeformacion@misena.edu.co";
+        $mail->Password = "moyp gmqs cdoq houv"; //'Sen@2022*'; // Debes proporcionar tu contraseña aquí
 
-        $mail->setFrom('direcciondeformacion@misena.edu.co', 'Dirección de Formación Profesional - SENA');
+        $mail->setFrom('dibier.marin.p@gmail.com', 'Dirección de Formación Profesional - SENA');
         $mail->addAddress($correo['email'], $correo['destinatario']);
 
         $mail->Subject = $correo['asunto'];
@@ -30,7 +30,7 @@ function enviar($correo) {
         $mail->send();
         echo "Correo enviado con éxito.";
 
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
         die("No es posible enviar correo. " . $e->getMessage());
     }
 }

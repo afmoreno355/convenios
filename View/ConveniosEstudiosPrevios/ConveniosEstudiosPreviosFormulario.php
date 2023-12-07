@@ -21,7 +21,7 @@ $roles = ["*"];
 // Acceder a la vista
 $post = Sesion\iniciar($roles);
 
-// Traer objeto estudios previos
+// Traer objeto
 $idSolicitud = $post['llave_Primaria'] !== '' ? $post['llave_Primaria'] : null;
 $campoId = $idSolicitud !== null ? ' id_solicitud ' : null;
 $convenioEstudiosPrevios = new ConvenioEstudiosPrevios($campoId, $idSolicitud);
@@ -43,13 +43,11 @@ $contenido = $convenioEstudiosPrevios->getCampos();
         <?php endif; ?>
     <?php endforeach; ?>
     <div>
-        <?php $accion = $post['accion']; ?>
+        <?php $ACCION= $post['accion']; ?>
         <?php $I = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=GUARDAR"); ?>
-        <input type="hidden" value ="<?= $I ?>" name="I" id="I">  
-        <input type="hidden" value="<?= $idSolicitud?>" name="idSolicitud" id="idSolicitud">
-        <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
-        <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-        <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "ConveniosEstudiosPrevios")'>
+        <?php $URL = "View/ConveniosEstudiosPrevios/ConveniosEstudiosPreviosCrud.php"; ?>
+        <input type="hidden" value ="" name="I" id="I">  
+        <input type="submit" value='<?= $ACCION ?>' name='accionU' id='accionU' onclick='enviarSolicitudConvenios("<?= $I ?>", <?= $URL ?>")'>
         <input type="reset" name="limpiarU"  value="LIMPIAR"/>
     </div>
 </div>

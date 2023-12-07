@@ -2,92 +2,30 @@
  * @author Dibier
  */
 
-
-
-
-function visualizarConvenios(post, url) {
-    // Datos para enviar al servidor para generar el PDF
-    postConveniosBlob(post, url, (res, err) => {
-        if (res) {
-            var resUrl = URL.createObjectURL(res);
-
-            // Abrir una nueva ventana y cargar la URL del PDF
-            var nuevaVentana = window.open(resUrl, "_blank");
-
-            // Liberar la URL creada cuando la ventana se carga o se cierra
-            if (nuevaVentana) {
-                nuevaVentana.focus(); // Simula clic
-            }
-        } else if (err) {
-            console.log(err);
-            return ;        }
-        
-    });
-}
-
-
-function postConveniosBlob(datos, url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.responseType = "blob"; // Solicitar la respuesta como Blob
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            try {
-                if (xhr.status === 200) {
-                    if (xhr.response instanceof Blob) {
-                        // La respuesta es un Blob
-                        callback(xhr.response, null);
-                    } else {
-                        // La respuesta no es un Blob
-                        callback(null, new Error("Error: " + xhr.status));
-                    }
-                } else {
-                    // Manejo de error en caso de que la solicitud no sea exitosa
-                    callback(null, new Error("Error: " + xhr.status));
-                }
-            } catch (error) {
-                // Manejo de excepciones en caso de un error inesperado
-                callback(null, error);
-            }
+function enviarSolicitudConvenios(post, url, idElementoInformacion = 'aviso') {
+    setContenidoEncriptado(post);
+    enviarPostConvenios(url, (res, err) => {
+        if (err) {
+            console.error(`No es posible enviar el formulario. ${err}`);
         }
-    };
-    xhr.send(datos);
+        console.log(res);
+    });   
 }
 
-function generarConvenios(ruta, id, post, url) {
-    postConvenios(post, url, (res, err) => {
+function descargarConvenios(post, url, nombre = 'archivoConvenios', idElementoInformacion = 'aviso') {
+    setContenidoEncriptado(post);
+    enviarPostConvenios(url, (res, err) => {
         if (err) {
             console.error(err);
-            return; // Detiene la ejecución del código
+            return;
         }
-
-        actualizarHtmlPorId(id, res);
-        visualizarArchivo(ruta);
-    });
-}
-
-function visualizarArchivo(ruta) {
-    var nuevaVentana = window.open(ruta, '_blank');
-    if (nuevaVentana) {
-        nuevaVentana.focus(); // Simula clic
-    }
-}
-
-function descargarConvenios(nombre, ruta, id, post, url) {
-    postConvenios(post, url, (res, err) => {
-        if (err) {
-            console.error(err);
-            return; // Detiene la ejecución en caso de error
-        }
-
-        actualizarHtmlPorId(id, res);        
-        descargarArchivo(nombre, ruta);
-    });
+        var blobUrl = URL.createObjectURL(res);
+        descargarArchivo(blobUrl, nombre);
+    }, 'blob');
 }
 
 
-function descargarArchivo(nombre, ruta) {
+function descargarArchivo(ruta, nombre) {
     var elemento = document.createElement('a');
     elemento.href = ruta;
     elemento.download = nombre;
@@ -97,11 +35,40 @@ function descargarArchivo(nombre, ruta) {
     document.body.removeChild(elemento);
 }
 
-function actualizarHtmlPorId(id, html) {
-    var elemento = document.getElementById(id);
-    if (elemento) {
-        console.log(html);
-        elemento.innerHTML = html;
+
+function generarConvenios(post, url) {
+    setContenidoEncriptado(post)
+    enviarPostConvenios(url, (ruta, err) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        visualizarArchivo(ruta);
+    });
+}
+
+function visualizarConvenios(post, url) {
+    setContenidoEncriptado(post);
+    enviarPostConvenios(url, (res, err) => {
+        if (err) {
+            console.log(err);
+            return ;
+        }
+
+        var blobUrl = URL.createObjectURL(res);
+        visualizarArchivo(blobUrl);       
+    }, 'blob');
+}
+
+function setContenidoEncriptado(post) {
+    var elemento = document.getElementById('I');
+    elemento.value = post;
+}
+
+function visualizarArchivo(ruta) {
+    var nuevaVentana = window.open(ruta, '_blank');
+    if (nuevaVentana) {
+        nuevaVentana.focus(); // Simula clic
     }
 }
 
@@ -129,35 +96,63 @@ function validarDatosConvenios(id, postcad, donde, accion, eve = null, tab = nul
     document.getElementById("formularioDiv").style.width="";
 }
 
-function adicionarTabContenido(donde , potcat) {
-    if(donde === '') {
+function adicionarTabContenido(url) {
+    if (url === '') {
         return;
     }
-    idexistentesReCa( '' , potcat , 'tabContenido' , donde , null , null );
-    cargarLoad( 'tabContenido' );
+    enviarPostConvenios(url, (res, err) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        actualizarHtmlPorId('tabContenido', res);
+    });
 }
 
+function actualizarHtmlPorId(id, html) {
+    var elemento = document.getElementById(id);
+    if (elemento) {
+        console.log(html);
+        elemento.innerHTML = html;
+    }
+}
 
-function postConvenios(datos, url, callback) {
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                var respuesta = xhr.responseText;
-                callback(respuesta, null); // Llama al callback con la respuesta exitosa
-            } else {
-                callback(null, new Error("Error: " + xhr.status)); // Llama al callback con un error
-            }
-        }
-    };
-
+function enviarPostConvenios(url, callback, tipoRespuesta = '', tipoContenido = '', formularioId = 'modalesV') {
+    var datos = getDatosPorFormularioId(formularioId);
+    var xhr = getXhrPost(url, callback, tipoRespuesta, tipoContenido);
     xhr.send(datos);
 }
 
-function enviarFormularioConvenios() {
+function getDatosPorFormularioId(formularioId) {
+    var formulario = document.getElementById(formularioId);
+    formulario.addEventListener('submit', (e) => {
+        e.preventDefault();
+    })
+    var datos = new FormData(formulario);
 
+    return datos;
+}
+
+function getXhrPost(url, callback, tipoRespuesta = '', tipoContenido = '') {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.responseType = tipoRespuesta;
+
+    if (tipoContenido) {
+        xhr.setRequestHeader('Content-Type', tipoContenido);
+    }
+
+    xhr.onload = () => {
+        if (xhr.status === 200) {
+            callback(xhr.response, null);
+        } else {
+            callback(null, new Error(`Error: ${xhr.status}.`));
+        }
+    }
+
+    xhr.onerror = () => {
+        callback(null, new Error(`Error de conexión a la red.`));
+    }
+
+    return xhr;
 }

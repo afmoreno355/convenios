@@ -16,7 +16,7 @@ use Sesion;
 // EC: Técnico Económico
 // EX: Técnico Experto
 // *: Todos
-$roles = ["*"];
+$roles = ["CO", "AB", "AD"];
 
 // Acceder a formulario
 $post = Sesion\iniciar($roles);
@@ -55,8 +55,9 @@ $post = Sesion\iniciar($roles);
         <?php $ID = $post['idSolicitud']; ?>
         <?php $ACCION = $post['accion']; ?>
         <?php $I = Http::encryptIt("idSolicitud=$ID&accion=$ACCION"); ?>
-        <input type="hidden" value="<?= $I ?>"name="I" id="I" > 
-        <input type="submit" value='<?= $post['accion'] ?>' name='accionU' id='accionU' onclick='cargar("aviso", "ConveniosMail")' />
+        <?php $URL = "View/ConveniosMail/ConveniosMailCrud.php"; ?>
+        <input type="hidden" value="" name="I" id="I" > 
+        <input type="submit" value='<?= $ACCION ?>' name='accionU' id='accionU' onclick='enviarSolicitudConvenios("<?= $I ?>", "<?= $URL ?>")' />
         <input type="reset" name="limpiarU"  value="LIMPIAR"/>
     </div>
 </div>

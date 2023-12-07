@@ -1,23 +1,30 @@
 <?php
 /**
  * 
- *
  * @author Dibier
  */
-
 
 require_once __DIR__ . '/../../autoload.php';
 require_once __DIR__ . '/../../utilities/Sesion.php';
 
 use Sesion;
 
-// Aceder al CRUD
-$post = Sesion\iniciar();
+// Definir roles
+// CO: Coordinador
+// AB: Abogado Responsable
+// AD: Auxiliar Administrativo
+// EC: Técnico Económico
+// EX: Técnico Experto
+// *: Todos
+$roles = ["*"];
 
-// Traer objeto estudios previos
+// Aceder al CRUD
+$post = Sesion\iniciar($roles);
+
+// Traer objeto estudios
 $idSolicitud = $post['idSoliciud'] !== '' ? $post['idSolicitud'] : null;
-$campo = $idSolicitud !== null ? ' id_solicitud ' : null;
-$documentos = new ConvenioDocumentos($campo, $idSolicitud);
+$campoId = $idSolicitud !== null ? ' id_solicitud ' : null;
+$documentos = new ConvenioDocumentos($campoId, $idSolicitud);
 
 switch ($post['accion']) {
 

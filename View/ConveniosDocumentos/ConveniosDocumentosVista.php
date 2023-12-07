@@ -1,46 +1,32 @@
 
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author Dibier
  */
 
-// require auntomatico encuentra todas las clases/Model qeu se solicitan en el Controlador
-require_once __DIR__ . "/../../autoload.php";
+require_once __DIR__ . '/../../autoload.php';
+require_once __DIR__ . '/../../utilities/Sesion.php';
 
-// Iniciamos sesion para tener las variables
-session_start();
+use Sesion;
 
-date_default_timezone_set("America/Bogota");
-$fecha = date("Y-m-d");
-$fecha_vigencia = date("Y");
+// Definir roles
+// CO: Coordinador
+// AB: Abogado Responsable
+// AD: Auxiliar Administrativo
+// EC: Técnico Económico
+// EX: Técnico Experto
+// *: Todos
+$roles = ["*"];
 
-// variable variable trae las variables que trae POST
-foreach ($_POST as $key => $value)
-    ${$key} = $value;
+// Aceder a la vista
+$post = Sesion\iniciar($roles);
 
-// desencripta las variables
-$nuevo_POST = Http::decryptIt($I);
-// evalua las nuevas variables que vienen ya desencriptadas
-foreach ($nuevo_POST as $key => $value)
-    ${$key} = $value;
-
-// verificamos permisos
-$permisos = new Persona(" identificacion ", "'" . $_SESSION['user'] . "'");
-
-// permisos desde Http validando los permisos de un usuario segun la tabla personamenu
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle');
-
-if ($ingreso === false && $permisos->getIdTipo() !== "SA" && $_SESSION["rol"] !== "SA") {
-    $permisos = false;
-}
-
-$llave_Primaria_Contructor = ( $llave_Primaria == "" ) ? "null" : "'$llave_Primaria'";
-
-// llamamos la clase y verificamos si ya existe info de este dato que llega
-$convenioDocumentos = new ConvenioDocumentos( ' id_solicitud ' , $llave_Primaria_Contructor);
+// Crear objeto
+$idSolicitud = $post['llave_Primaria'] !== '' ? $post['llave_Primaria'] : null;
+$campoId = $idSolicitud !== null ? 'id_solicitud' : null;
+$convenioDocumentos = new ConvenioDocumentos($campoId, $idSolicitud);
 $rutas = $convenioDocumentos->getDirecciones();
+$permisos = true;
 if ($permisos)
 {
 ?>
@@ -153,18 +139,10 @@ if ($permisos)
     
         <div>
             
-            <?php
-            $idSolicitud = $convenioDocumentos->getIdSolicitud();
-            $NOMBRE = "CONVENIO_$idSolicitud.zip";
-            $RUTA = "archivos/convenios/$idSolicitud/$NOMBRE";
-            $ID = 'formDetalle'; 
-            $POST = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=DESCARGAR");
-            $URL = "View/ConveniosDocumentos/ConveniosDocumentosCrud.php" ;
-            ?>   
-            <input type="hidden" value="<?= $convenioDocumentos->getIdSolicitud() ?>" name="idSolicitud" id="idSolicitud">
-            <input type="hidden" value="<?= "DESCARGAR" ?>" name="accion" id="accion">
-            <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-            <input type="button" value='<?= "DESCARGAR ZIP" ?>' name='accionU' id='accionU' onclick='descargarConvenios(`<?= $NOMBRE ?>`, `<?= $RUTA ?>`, `<?= $ID ?>`, `I=<?= $POST ?>`, `<?= $URL ?>`)'>
+            <?php $POST = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=DESCARGAR"); ?>
+            <?php $URL = "View/ConveniosDocumentos/ConveniosDocumentosCrud.php"; ?>   
+            <input type="hidden" value="" name="I" id="I">
+            <input type="button" value='<?= "DESCARGAR ZIP" ?>' name='accionU' id='accionU' onclick='descargarConvenios(`<?= $POST ?>`, `<?= $URL ?>`)'>
         </div>        
     </fieldset>
 </div>

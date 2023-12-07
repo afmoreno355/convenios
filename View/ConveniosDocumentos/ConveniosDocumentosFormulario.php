@@ -1,44 +1,31 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * 
+ * @author Dibier
  */
 
-// require auntomatico encuentra todas las clases/Model qeu se solicitan en el Controlador
-require_once __DIR__ . "/../../autoload.php";
+require_once __DIR__ . '/../../autoload.php';
+require_once __DIR__ . '/../../utilities/Sesion.php';
 
-// Iniciamos sesion para tener las variables
-session_start();
+use Sesion;
 
-date_default_timezone_set("America/Bogota");
-$fecha = date("Y-m-d");
-$fecha_vigencia = date("Y");
+// Definir roles
+// CO: Coordinador
+// AB: Abogado Responsable
+// AD: Auxiliar Administrativo
+// EC: Técnico Económico
+// EX: Técnico Experto
+// *: Todos
+$roles = ["*"];
 
-// variable variable trae las variables que trae POST
-foreach ($_POST as $key => $value)
-    ${$key} = $value;
+// Aceder al CRUD
+$post = Sesion\iniciar($roles);
 
-// desencripta las variables
-$nuevo_POST = Http::decryptIt($I);
-// evalua las nuevas variables que vienen ya desencriptadas
-foreach ($nuevo_POST as $key => $value)
-    ${$key} = $value;
-
-// verificamos permisos
-$permisos = new Persona(" identificacion ", "'" . $_SESSION['user'] . "'");
-
-// permisos desde Http validando los permisos de un usuario segun la tabla personamenu
-$ingreso = Http::permisos($permisos->getId(), $permisos->getIdTipo(), 'eagle');
-
-if ($ingreso === false && $permisos->getIdTipo() !== "SA" && $_SESSION["rol"] !== "SA") {
-    $permisos = false;
-}
-
-$llave_Primaria_Contructor = ( $llave_Primaria == "" ) ? "null" : "'$llave_Primaria'";
-
-// llamamos la clase y verificamos si ya existe info de este dato que llega
-$convenio = new Convenio( ' id_solicitud ' , $llave_Primaria_Contructor);
+// Crear objeto
+$idSolicitud = $post['llave_Primaria'] !== '' ? $post['llave_Primaria'] : null;
+$campoId = $idSolicitud !== null ? 'id_solicitud' : null;
+$convenio = new Convenio($campoId, $idSolicitud);
+$permisos = true;
 if ($permisos)
 {
 ?>
