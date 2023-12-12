@@ -97,6 +97,9 @@ function validarDatosConvenios(id, postcad, donde, accion, eve = null, tab = nul
 }
 
 function adicionarTabContenido(url) {
+
+    //setContenidoEncriptado(post);
+
     if (url === '') {
         return;
     }
@@ -107,6 +110,11 @@ function adicionarTabContenido(url) {
         }
         actualizarHtmlPorId('tabContenido', res);
     });
+}
+
+function setContenidoEncriptado(post) {
+    var elemento = document.getElementById('I');
+    elemento.value = post;
 }
 
 function actualizarHtmlPorId(id, html) {

@@ -26,10 +26,13 @@ $idSolicitud = $post['llave_Primaria'] !== '' ? $post['llave_Primaria'] : null;
 $campo = $idSolicitud !== null ? ' id_solicitud ' : null;
 $convenio = new Convenio($campo, $idSolicitud);
 $id = $post['id'];
+$I = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=GUARDAR");
 
+?>
 
+<input type="hidden" value="<?= $I ?>" name="I" id="I" />
 
-
+<?php
 
 switch ($id) {
     case 1:
@@ -46,8 +49,6 @@ switch ($id) {
             <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
         </div> 
         <div>
-            <?php $I = Http::encryptIt("idSolicitud={$idSolicitud}&user={$_SESSION["user"]}&accion=DESCARGAR"); ?>
-            <input type="hidden" value="<?= $I ?>" id="I" name="I" />
             <fieldset>
                 <legend title='FORMULARIO DEL MÓDULO QUE DESEA DILIGENCIAR'>FORMULARIO DEL CONVENIO</legend>
                 <select required name=formulario id="formulario" onchange="adicionarTabContenido(this.value)">

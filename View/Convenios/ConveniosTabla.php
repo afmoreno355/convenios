@@ -33,7 +33,6 @@ session_start();
 // require auntomatico encuentra todas las clases/Model qeu se solicitan en el Controlador
 require_once __DIR__ . "/../../autoload.php";
 
-print_r($_POST);
 
 // filtro se usa para realizar las consultas de busqueda 
 $filtro = "";
