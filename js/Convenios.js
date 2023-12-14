@@ -97,9 +97,6 @@ function validarDatosConvenios(id, postcad, donde, accion, eve = null, tab = nul
 }
 
 function adicionarTabContenido(url) {
-
-    //setContenidoEncriptado(post);
-
     if (url === '') {
         return;
     }
@@ -136,9 +133,7 @@ function getDatosPorFormularioId(formularioId) {
     formulario.addEventListener('submit', (e) => {
         e.preventDefault();
     })
-    var datos = new FormData(formulario);
-
-    return datos;
+    return new FormData(formulario);
 }
 
 function getXhrPost(url, callback, tipoRespuesta = '', tipoContenido = '') {

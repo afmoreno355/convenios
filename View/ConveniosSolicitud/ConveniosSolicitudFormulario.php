@@ -16,7 +16,7 @@ use Sesion;
 // EC: Técnico Económico
 // EX: Técnico Experto
 // *: Todos
-$roles = ["*"];
+$roles = ["CO", "AB", "AD"];
 
 // Acceder a la vista
 $post = Sesion\iniciar($roles);
@@ -32,14 +32,6 @@ if ($permisos)
 ?>
 
     <div class="carga_Documento">
-        <div class="contenido">  
-            <div class="where_title where_modal tamanio" style="width: 100%; height: auto; margin-left: 0px;">
-                <img src="img/icon/gestionar.png"/><label class="where">Administrador DFP – Dirección de Formación Profesional</label></div>
-            <br><br>
-            <label style="font-size: 1em; " >Tabla Convenios</label>  
-            <label style="font-size: 1em; " id="aviso" class="aviso" ></label> 
-            <label style="font-size: 1em; " id="aviso2" class="aviso" ><?= $convenio->getId() ?></label> 
-        </div>
         <div>
             <fieldset>
                 <legend title='NOMBRE'>NOMBRE CONVENIO</legend>
@@ -90,9 +82,9 @@ if ($permisos)
         </div>        
         <div>
             <input type="hidden" value="<?= $convenio->getId() ?>" name="idSolicitud" id="idSolicitud">
-            <input type="hidden" value="<?= $accion ?>" name="accion" id="accion">
+            <input type="hidden" value="<?= $post['accion'] ?>" name="accion" id="accion">
             <input type='hidden' value='<?=$_SESSION['user']?>' name='personaGestion' id='personaGestion'>
-            <input type="submit" value='<?= $accion ?>' name='accionU' id='accionU' onclick='cargar( "aviso", "ConveniosSolicitud" )'>
+            <input type="submit" value='<?= $post['accion']?>' name='accionU' id='accionU' onclick='cargar( "aviso", "ConveniosSolicitud" )'>
             <input type="reset" name="limpiarU"  value="LIMPIAR"/>
         </div>
     </div>

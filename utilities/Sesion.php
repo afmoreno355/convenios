@@ -105,7 +105,7 @@ function obtenerVariablesPost() {
             die("No se ha proporcionado información encriptada 'I' en la solicitud POST.");
         }
     } catch (\Exception $e) {
-        die("Error al obtener las variables post. " . $e->getMessage());
+        die("Error al obtener las variables POST. " . $e->getMessage());
     }
     
 }
